@@ -108,35 +108,6 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      unsetopt correct_all
    #+END_SRC
 
-** git
-
-   Ancient completion module.
-
-   #+BEGIN_SRC sh
-     source ${ZDOTDIR}/git-completion.zsh
-   #+END_SRC
-
-** [[https://virtualenv.pypa.io/en/latest/][virtualenv]]
-
-   Use Distribute instead of [[https://pythonhosted.org/setuptools/][setuptools]]:
-
-   #+BEGIN_SRC sh
-     # export VIRTUALENV_DISTRIBUTE=1
-   #+END_SRC
-
-   #+BEGIN_QUOTE
-   Since the Setuptools 0.7 release, Setuptools and Distribute have merged and
-   Distribute is no longer being maintained. -- [[https://pythonhosted.org/distribute/][distribute docs]]
-   #+END_QUOTE
-
-** [[https://virtualenvwrapper.readthedocs.org/en/latest/][virtualenvwrapper]]
-
-   #+BEGIN_SRC sh
-     if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
-         source /usr/local/bin/virtualenvwrapper.sh
-     fi
-   #+END_SRC
-
 ** Constants
 
    #+BEGIN_SRC sh
@@ -179,23 +150,6 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      fi
    #+END_SRC
 
-** =PATH=
-
-   #+BEGIN_SRC sh
-     export PATH=\
-     /usr/local/bin:\
-     $PATH:\
-     ${HOME}/bin:\
-     ${FRONTEND}/frontend/bin:\
-     ${HEROKU_HOME}/bin:\
-     ${VLC_HOME}:\
-     ${ANDROID_SDK_HOME}/platform-tools:\
-     ${CASK_HOME}/bin:\
-     ${PACKER_HOME}:\
-     ${EC2_AMITOOL_HOME}/bin:\
-     ${EC2_HOME}/bin
-   #+END_SRC
-
 ** Aliases
 
    #+BEGIN_SRC sh
@@ -216,6 +170,52 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
    #+BEGIN_SRC sh
      if [[ -e ${ZSH_SECRET_ALIASES} ]]; then
          source ${ZSH_SECRET_ALIASES}
+     fi
+   #+END_SRC
+
+** =PATH=
+
+   #+BEGIN_SRC sh
+     export PATH=\
+     /usr/local/bin:\
+     $PATH:\
+     ${HOME}/bin:\
+     ${FRONTEND}/frontend/bin:\
+     ${HEROKU_HOME}/bin:\
+     ${VLC_HOME}:\
+     ${ANDROID_SDK_HOME}/platform-tools:\
+     ${CASK_HOME}/bin:\
+     ${PACKER_HOME}:\
+     ${EC2_AMITOOL_HOME}/bin:\
+     ${EC2_HOME}/bin
+   #+END_SRC
+
+** git
+
+   Ancient completion module.
+
+   #+BEGIN_SRC sh
+     source ${ZDOTDIR}/git-completion.zsh
+   #+END_SRC
+
+** [[https://virtualenv.pypa.io/en/latest/][virtualenv]]
+
+   Use Distribute instead of [[https://pythonhosted.org/setuptools/][setuptools]]:
+
+   #+BEGIN_SRC sh
+     # export VIRTUALENV_DISTRIBUTE=1
+   #+END_SRC
+
+   #+BEGIN_QUOTE
+   Since the Setuptools 0.7 release, Setuptools and Distribute have merged and
+   Distribute is no longer being maintained. -- [[https://pythonhosted.org/distribute/][distribute docs]]
+   #+END_QUOTE
+
+** [[https://virtualenvwrapper.readthedocs.org/en/latest/][virtualenvwrapper]]
+
+   #+BEGIN_SRC sh
+     if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
+         source /usr/local/bin/virtualenvwrapper.sh
      fi
    #+END_SRC
 
