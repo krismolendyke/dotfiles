@@ -108,22 +108,6 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      unsetopt correct_all
    #+END_SRC
 
-** AWS
-
-   Credentials.
-
-   #+BEGIN_SRC sh
-     alias aws-unset="unset AWS_PROFILE AWS_DEFAULT_PROFILE AWS_CREDENTIAL_FILE EC2_CERT EC2_PRIVATE_KEY"
-   #+END_SRC
-
-*** [[http://aws.amazon.com/cli/][aws-cli]]
-
-    #+BEGIN_SRC sh
-      # if [ -e ${CODE_HOME}/aws-cli/bin/aws_zsh_completer.sh ]; then
-      #     source ${CODE_HOME}/aws-cli/bin/aws_zsh_completer.sh
-      # fi
-    #+END_SRC
-
 ** git
 
    Ancient completion module.
@@ -234,6 +218,22 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
          source ${ZSH_SECRET_ALIASES}
      fi
    #+END_SRC
+
+** AWS
+
+   Credentials.
+
+   #+BEGIN_SRC sh
+     alias aws-unset="unset AWS_PROFILE AWS_DEFAULT_PROFILE AWS_CREDENTIAL_FILE EC2_CERT EC2_PRIVATE_KEY"
+   #+END_SRC
+
+*** [[http://aws.amazon.com/cli/][aws-cli]]
+
+    #+BEGIN_SRC sh
+      if [ -e ${CODE_HOME}/aws-cli/bin/aws_zsh_completer.sh ]; then
+          source ${CODE_HOME}/aws-cli/bin/aws_zsh_completer.sh
+      fi
+    #+END_SRC
 
 ** Functions
 
