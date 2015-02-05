@@ -1,0 +1,280 @@
+#+TITLE: Zsh
+#+OPTIONS: toc:nil num:nil
+
+A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[http://www.zsh.org/][Zsh]] configuration created and maintained in [[http://www.gnu.org/software/emacs/][Emacs]] with
+[[http://orgmode.org/][Org mode.]]
+
+#+TOC: headlines 2
+
+* Initial Setup
+
+** Build Configuration Files
+
+   Open this Org document in Emacs and [[http://orgmode.org/manual/tangle.html#tangle][tangle]] it (=C-c C-v t=).  Configuration
+   files, e.g., =.zshrc=, will be generated in this directory.  Zsh will look
+   for them here [[http://zsh.sourceforge.net/Doc/Release/Files.html#Files][by default]].
+
+** Change Default Shell
+
+   #+BEGIN_SRC sh
+     chsh -s /bin/zsh
+   #+END_SRC
+
+* =.zshrc=
+  :PROPERTIES:
+  :header-args: :tangle .zshrc
+  :END:
+
+** Secret Information
+
+   Define a directory to keep secret information in.
+
+   #+BEGIN_SRC sh
+     export ZSH_SECRET_HOME=${ZDOTDIR}/secret
+   #+END_SRC
+
+   Create it if necessary.
+
+   #+BEGIN_SRC sh
+     mkdir -p ${ZSH_SECRET_HOME}
+   #+END_SRC
+
+   Adjust permissions.
+
+   #+BEGIN_SRC sh
+     chmod 0700 ${ZSH_SECRET_HOME}
+     chmod -Rf 0600 ${ZSH_SECRET_HOME}/*.zsh
+   #+END_SRC
+
+   Define files to =source= in the following sections.
+
+   #+BEGIN_SRC sh
+     export ZSH_SECRET_CONSTANTS=${ZSH_SECRET_HOME}/constants.zsh
+     export ZSH_SECRET_VARIABLES=${ZSH_SECRET_HOME}/variables.zsh
+     export ZSH_SECRET_ALIASES=${ZSH_SECRET_HOME}/aliases.zsh
+   #+END_SRC
+
+** [[https://github.com/krismolendyke/oh-my-zsh][oh-my-zsh]]
+
+   #+BEGIN_SRC sh
+     ZSH=${HOME}/.oh-my-zsh
+   #+END_SRC
+
+*** [[https://github.com/krismolendyke/oh-my-zsh/blob/master/themes/k20e.zsh-theme][Theme]]
+
+    #+BEGIN_SRC sh
+      ZSH_THEME="k20e"
+    #+END_SRC
+
+*** Settings
+
+    Use case-sensitive completion.
+
+    #+BEGIN_SRC sh
+      CASE_SENSITIVE="true"
+    #+END_SRC
+
+    Disable weekly auto-update checks.
+
+    #+BEGIN_SRC sh
+      DISABLE_AUTO_UPDATE="true"
+    #+END_SRC
+
+    Disable autosetting terminal title.
+
+    #+BEGIN_SRC sh
+      DISABLE_AUTO_TITLE="true"
+    #+END_SRC
+
+*** [[https://github.com/krismolendyke/oh-my-zsh/tree/master/plugins][Plugins]]
+
+    #+BEGIN_SRC sh
+      plugins=(git osx python pip virtualenvwrapper brew heroku lein vagrant)
+    #+END_SRC
+
+*** Load
+
+    #+BEGIN_SRC sh
+      source $ZSH/oh-my-zsh.sh
+    #+END_SRC
+
+** [[http://zsh.sourceforge.net/Doc/Release/Options-Index.html][Options]]
+
+   #+BEGIN_SRC sh
+     setopt braceccl
+     setopt dvorak
+     setopt emacs
+     setopt no_beep
+     unsetopt correct_all
+   #+END_SRC
+
+** AWS
+
+   Credentials.
+
+   #+BEGIN_SRC sh
+     alias aws-unset="unset AWS_PROFILE AWS_DEFAULT_PROFILE AWS_CREDENTIAL_FILE EC2_CERT EC2_PRIVATE_KEY"
+   #+END_SRC
+
+*** [[http://aws.amazon.com/cli/][aws-cli]]
+
+    #+BEGIN_SRC sh
+      # if [ -e ${CODE_HOME}/aws-cli/bin/aws_zsh_completer.sh ]; then
+      #     source ${CODE_HOME}/aws-cli/bin/aws_zsh_completer.sh
+      # fi
+    #+END_SRC
+
+** git
+
+   Ancient completion module.
+
+   #+BEGIN_SRC sh
+     source ${ZDOTDIR}/git-completion.zsh
+   #+END_SRC
+
+** [[https://virtualenv.pypa.io/en/latest/][virtualenv]]
+
+   Use Distribute instead of [[https://pythonhosted.org/setuptools/][setuptools]]:
+
+   #+BEGIN_SRC sh
+     # export VIRTUALENV_DISTRIBUTE=1
+   #+END_SRC
+
+   #+BEGIN_QUOTE
+   Since the Setuptools 0.7 release, Setuptools and Distribute have merged and
+   Distribute is no longer being maintained. -- [[https://pythonhosted.org/distribute/][distribute docs]]
+   #+END_QUOTE
+
+** [[https://virtualenvwrapper.readthedocs.org/en/latest/][virtualenvwrapper]]
+
+   #+BEGIN_SRC sh
+     if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
+         source /usr/local/bin/virtualenvwrapper.sh
+     fi
+   #+END_SRC
+
+** Constants
+
+   #+BEGIN_SRC sh
+     export CASK_HOME=${HOME}/.cask
+     export CODE_HOME=${HOME}/Code
+     export DESKTOP=${HOME}/Desktop
+     export EC2_AMITOOL_HOME=${HOME}/ec2-ami-tools
+     export EC2_HOME=${HOME}/ec2-api-tools
+     export EDITOR=emacsclient
+     export EMACS_VERSION="HEAD"
+     export HEROKU_HOME=/usr/local/heroku
+     export JAVA_HOME=$(/usr/libexec/java_home)
+     export LANG=en_US.UTF-8
+     export MANPAGER="less -X" # Do not clear man page on quit.
+     export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
+     export PACKER_HOME=${HOME}/packer
+     export POSTGRES_HOME=/Applications/Postgres.app/Contents
+     export TERM=xterm-256color
+     export VLC_HOME=/Applications/VLC.app/Contents/MacOS
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+     if [[ -e ${ZSH_SECRET_CONSTANTS} ]]; then
+         source ${ZSH_SECRET_CONSTANTS}
+     fi
+   #+END_SRC
+
+** Variables
+
+   #+BEGIN_SRC sh
+     export ANDROID_SDK_HOME=${CODE_HOME}/android-sdk
+     export DROPBOX_HOME=${DESKTOP}/Dropbox
+     export HOMEBREW_HOME=${CODE_HOME}/homebrew
+     export HOMEBREW_CELLAR=${HOMEBREW_HOME}/Cellar
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+     if [[ -e ${ZSH_SECRET_VARIABLES} ]]; then
+         source ${ZSH_SECRET_VARIABLES}
+     fi
+   #+END_SRC
+
+** =PATH=
+
+   #+BEGIN_SRC sh
+     export PATH=\
+     /usr/local/bin:\
+     $PATH:\
+     ${HOME}/bin:\
+     ${FRONTEND}/frontend/bin:\
+     ${HEROKU_HOME}/bin:\
+     ${VLC_HOME}:\
+     ${ANDROID_SDK_HOME}/platform-tools:\
+     ${CASK_HOME}/bin:\
+     ${PACKER_HOME}:\
+     ${EC2_AMITOOL_HOME}/bin:\
+     ${EC2_HOME}/bin
+   #+END_SRC
+
+** Aliases
+
+   #+BEGIN_SRC sh
+     alias ....="../../.." # yup
+     alias emacs="${HOMEBREW_CELLAR}/emacs/${EMACS_VERSION}/bin/emacs -nw"
+     alias emacsclient="${HOMEBREW_CELLAR}/emacs/${EMACS_VERSION}/bin/emacsclient --no-wait"
+     alias ec=emacsclient
+     alias g="git"
+     alias gh="github.py"
+     alias j="jobs -l"
+     alias l.l='ls -1A | grep "^\." | xargs ls -lhGF'
+     alias ll="ls -lhF"
+     alias ls="ls -GF"
+     alias top="top -ocpu -Orsize"
+     alias v=vagrant
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+     if [[ -e ${ZSH_SECRET_ALIASES} ]]; then
+         source ${ZSH_SECRET_ALIASES}
+     fi
+   #+END_SRC
+
+** Functions
+
+*** [[https://github.com/krismolendyke/oh-my-zsh/blob/master/themes/k20e.zsh-theme][k20e Zsh Theme]]
+
+    #+BEGIN_SRC sh
+      k20e_aws_is_prod() {
+          echo ${AWS_DEFAULT_PROFILE} | grep '\-prod' &> /dev/null
+      }
+
+      k20e_aws_prompt_info() {
+          INFO=${ZSH_THEME_AWS_PROMPT_PREFIX}
+
+          if [[ -z ${AWS_DEFAULT_PROFILE} ]]; then
+              INFO=${INFO}${ZSH_THEME_AWS_PROMPT_UNSET}
+          elif $(k20e_aws_is_prod); then
+              INFO=${INFO}${ZSH_THEME_AWS_PROMPT_PROD}${AWS_DEFAULT_PROFILE}
+          else
+              INFO=${INFO}${ZSH_THEME_AWS_PROMPT}${AWS_DEFAULT_PROFILE}
+          fi
+
+          echo ${INFO}${ZSH_THEME_AWS_PROMPT_SUFFIX}
+      }
+
+      k20e_venv_prompt_info() {
+          INFO=${ZSH_THEME_VENV_PROMPT_PREFIX}
+
+          if [[ -n ${VIRTUAL_ENV} ]]; then
+              INFO=${INFO}${ZSH_THEME_VENV_PROMPT_ACTIVATED}$(basename ${VIRTUAL_ENV})
+          else
+              INFO=${INFO}${ZSH_THEME_VENV_PROMPT_DEACTIVATED}
+          fi
+
+          echo ${INFO}${ZSH_THEME_VENV_PROMPT_SUFFIX}
+      }
+    #+END_SRC
+
+** [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
+
+   #+BEGIN_SRC sh
+     if [ -e "/Applications/terminal-notifier.app" ]; then
+         alias notify="/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier"
+     fi
+   #+END_SRC
