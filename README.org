@@ -27,7 +27,8 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
 
 ** Secret Information
 
-   Define a directory to keep secret information in.
+   Define a directory to keep secret information in.  Make sure that it exists
+   in [[https://github.com/krismolendyke/.zsh/blob/master/.gitignore][=.gitignore=]].
 
    #+BEGIN_SRC sh
      export ZSH_SECRET_HOME=${ZDOTDIR}/secret
