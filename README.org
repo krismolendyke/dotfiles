@@ -222,19 +222,6 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      fi
    #+END_SRC
 
-** [[https://virtualenv.pypa.io/en/latest/][virtualenv]]
-
-   Use Distribute instead of [[https://pythonhosted.org/setuptools/][setuptools]]:
-
-   #+BEGIN_SRC sh
-     # export VIRTUALENV_DISTRIBUTE=1
-   #+END_SRC
-
-   #+BEGIN_QUOTE
-   Since the Setuptools 0.7 release, Setuptools and Distribute have merged and
-   Distribute is no longer being maintained. -- [[https://pythonhosted.org/distribute/][distribute docs]]
-   #+END_QUOTE
-
 ** [[https://virtualenvwrapper.readthedocs.org/en/latest/][virtualenvwrapper]]
 
    #+BEGIN_SRC sh
