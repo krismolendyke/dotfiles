@@ -125,7 +125,6 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      export MANPAGER="less -X" # Do not clear man page on quit.
      export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
      export PACKER_HOME=${HOME}/packer
-     export POSTGRES_HOME=/Applications/Postgres.app/Contents
      export TERM=xterm-256color
      export VLC_HOME=/Applications/VLC.app/Contents/MacOS
    #+END_SRC
