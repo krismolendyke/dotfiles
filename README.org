@@ -120,6 +120,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      export EDITOR=emacsclient
      export EMACS_VERSION="HEAD"
      export HEROKU_HOME=/usr/local/heroku
+     export HOMEBREW_CELLAR=$(brew --cellar)
      export JAVA_HOME=$(/usr/libexec/java_home)
      export LANG=en_US.UTF-8
      export MANPAGER="less -X" # Do not clear man page on quit.
@@ -140,8 +141,6 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
    #+BEGIN_SRC sh
      export ANDROID_SDK_HOME=${CODE_HOME}/android-sdk
      export DROPBOX_HOME=${DESKTOP}/Dropbox
-     export HOMEBREW_HOME=${CODE_HOME}/homebrew
-     export HOMEBREW_CELLAR=${HOMEBREW_HOME}/Cellar
    #+END_SRC
 
    #+BEGIN_SRC sh
