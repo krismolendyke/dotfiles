@@ -90,7 +90,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
 *** [[https://github.com/krismolendyke/oh-my-zsh/tree/master/plugins][Plugins]]
 
     #+BEGIN_SRC sh
-      plugins=(git osx python pip virtualenvwrapper brew heroku lein vagrant)
+      plugins=(osx python pip virtualenvwrapper brew heroku lein vagrant)
     #+END_SRC
 
 *** Load
@@ -205,14 +205,6 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
           source ${CODE_HOME}/aws-cli/bin/aws_zsh_completer.sh
       fi
     #+END_SRC
-
-** git
-
-   Ancient completion module.
-
-   #+BEGIN_SRC sh
-     source ${ZDOTDIR}/git-completion.zsh
-   #+END_SRC
 
 ** [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
 
