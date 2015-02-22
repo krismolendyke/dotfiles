@@ -125,7 +125,6 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      export LANG=en_US.UTF-8
      export MANPAGER="less -X" # Do not clear man page on quit.
      export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
-     export PACKER_HOME=${HOME}/packer
      export TERM=xterm-256color
      export VLC_HOME=/Applications/VLC.app/Contents/MacOS
    #+END_SRC
@@ -184,7 +183,6 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      ${VLC_HOME}:\
      ${ANDROID_SDK_HOME}/platform-tools:\
      ${CASK_HOME}/bin:\
-     ${PACKER_HOME}:\
      ${EC2_AMITOOL_HOME}/bin:\
      ${EC2_HOME}/bin
    #+END_SRC
