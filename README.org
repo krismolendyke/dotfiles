@@ -53,6 +53,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      export ZSH_SECRET_CONSTANTS=${ZSH_SECRET_HOME}/constants.zsh
      export ZSH_SECRET_VARIABLES=${ZSH_SECRET_HOME}/variables.zsh
      export ZSH_SECRET_ALIASES=${ZSH_SECRET_HOME}/aliases.zsh
+     export ZSH_SECRET_PATH=${ZSH_SECRET_HOME}/path.zsh
    #+END_SRC
 
 ** [[https://github.com/krismolendyke/oh-my-zsh][oh-my-zsh]]
@@ -185,6 +186,12 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      ${CASK_HOME}/bin:\
      ${EC2_AMITOOL_HOME}/bin:\
      ${EC2_HOME}/bin
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+     if [[ -e ${ZSH_SECRET_PATH} ]]; then
+         source ${ZSH_SECRET_PATH}
+     fi
    #+END_SRC
 
 ** AWS
