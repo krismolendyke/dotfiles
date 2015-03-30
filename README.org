@@ -140,6 +140,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
    #+BEGIN_SRC sh
      export ANDROID_SDK_HOME=${CODE_HOME}/android-sdk
      export DROPBOX_HOME=${DESKTOP}/Dropbox
+     export MANPATH=/usr/local/share/man:${MANPATH}
    #+END_SRC
 
    #+BEGIN_SRC sh
