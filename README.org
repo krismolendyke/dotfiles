@@ -65,6 +65,38 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
 *** [[https://github.com/krismolendyke/oh-my-zsh/blob/master/themes/k20e.zsh-theme][Theme]]
 
     #+BEGIN_SRC sh
+      k20e_aws_is_prod() {
+          echo ${AWS_DEFAULT_PROFILE} | grep '\-prod' &> /dev/null
+      }
+
+      k20e_aws_prompt_info() {
+          INFO=${ZSH_THEME_AWS_PROMPT_PREFIX}
+
+          if [[ -z ${AWS_DEFAULT_PROFILE} ]]; then
+              INFO=${INFO}${ZSH_THEME_AWS_PROMPT_UNSET}
+          elif $(k20e_aws_is_prod); then
+              INFO=${INFO}${ZSH_THEME_AWS_PROMPT_PROD}${AWS_DEFAULT_PROFILE}
+          else
+              INFO=${INFO}${ZSH_THEME_AWS_PROMPT}${AWS_DEFAULT_PROFILE}
+          fi
+
+          echo ${INFO}${ZSH_THEME_AWS_PROMPT_SUFFIX}
+      }
+
+      k20e_venv_prompt_info() {
+          INFO=${ZSH_THEME_VENV_PROMPT_PREFIX}
+
+          if [[ -n "${VIRTUAL_ENV}" ]] && [[ -d "${VIRTUAL_ENV}" ]]; then
+              INFO=${INFO}${ZSH_THEME_VENV_PROMPT_ACTIVATED}$(basename ${VIRTUAL_ENV})
+          else
+              INFO=${INFO}${ZSH_THEME_VENV_PROMPT_DEACTIVATED}
+          fi
+
+          echo ${INFO}${ZSH_THEME_VENV_PROMPT_SUFFIX}
+      }
+    #+END_SRC
+
+    #+BEGIN_SRC sh
       ZSH_THEME="k20e"
     #+END_SRC
 
@@ -225,39 +257,3 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
          source /usr/local/bin/virtualenvwrapper.sh
      fi
    #+END_SRC
-
-** Functions
-
-*** [[https://github.com/krismolendyke/oh-my-zsh/blob/master/themes/k20e.zsh-theme][k20e Zsh Theme]]
-
-    #+BEGIN_SRC sh
-      k20e_aws_is_prod() {
-          echo ${AWS_DEFAULT_PROFILE} | grep '\-prod' &> /dev/null
-      }
-
-      k20e_aws_prompt_info() {
-          INFO=${ZSH_THEME_AWS_PROMPT_PREFIX}
-
-          if [[ -z ${AWS_DEFAULT_PROFILE} ]]; then
-              INFO=${INFO}${ZSH_THEME_AWS_PROMPT_UNSET}
-          elif $(k20e_aws_is_prod); then
-              INFO=${INFO}${ZSH_THEME_AWS_PROMPT_PROD}${AWS_DEFAULT_PROFILE}
-          else
-              INFO=${INFO}${ZSH_THEME_AWS_PROMPT}${AWS_DEFAULT_PROFILE}
-          fi
-
-          echo ${INFO}${ZSH_THEME_AWS_PROMPT_SUFFIX}
-      }
-
-      k20e_venv_prompt_info() {
-          INFO=${ZSH_THEME_VENV_PROMPT_PREFIX}
-
-          if [ ! -n "${VIRTUAL_ENV}" ] || [ ! -d "${VIRTUAL_ENV}" ]; then
-              INFO=${INFO}${ZSH_THEME_VENV_PROMPT_DEACTIVATED}
-          else
-              INFO=${INFO}${ZSH_THEME_VENV_PROMPT_ACTIVATED}$(basename ${VIRTUAL_ENV})
-          fi
-
-          echo ${INFO}${ZSH_THEME_VENV_PROMPT_SUFFIX}
-      }
-    #+END_SRC
