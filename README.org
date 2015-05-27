@@ -124,7 +124,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
 *** [[https://github.com/krismolendyke/oh-my-zsh/tree/master/plugins][Plugins]]
 
     #+BEGIN_SRC sh
-      plugins=(osx python pip brew heroku lein vagrant)
+      plugins=(osx python pip brew heroku lein vagrant docker)
     #+END_SRC
 
 *** Load
