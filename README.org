@@ -124,7 +124,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
 *** [[https://github.com/krismolendyke/oh-my-zsh/tree/master/plugins][Plugins]]
 
     #+BEGIN_SRC sh
-      plugins=(osx python pip brew lein vagrant docker)
+      plugins=(osx python pip brew lein vagrant docker golang)
     #+END_SRC
 
 *** Load
@@ -173,6 +173,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
    #+BEGIN_SRC sh
      export ANDROID_SDK_HOME=${CODE_HOME}/android-sdk
      export DROPBOX_HOME=${DESKTOP}/Dropbox
+     export GOPATH=${CODE_HOME}/go
      export MANPATH=/usr/local/share/man:${MANPATH}
    #+END_SRC
 
@@ -214,6 +215,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      ${HOME}/bin:\
      ${FRONTEND}/frontend/bin:\
      ${HEROKU_HOME}/bin:\
+     ${GOPATH}/bin\
      ${VLC_HOME}:\
      ${ANDROID_SDK_HOME}/platform-tools:\
      ${CASK_HOME}/bin:\
