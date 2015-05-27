@@ -208,19 +208,24 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
 
 ** =PATH=
 
+   Avoid [[http://unix.stackexchange.com/questions/62579/is-there-a-way-to-add-a-directory-to-my-path-in-zsh-only-if-its-not-already-pre][duplicating]] =PATH= entries by setting the =path= variable to
+   be /unique/ and operating only on it.
+
    #+BEGIN_SRC sh
-     export PATH=\
-     /usr/local/bin:\
-     $PATH:\
-     ${HOME}/bin:\
-     ${FRONTEND}/frontend/bin:\
-     ${HEROKU_HOME}/bin:\
-     ${GOPATH}/bin\
-     ${VLC_HOME}:\
-     ${ANDROID_SDK_HOME}/platform-tools:\
-     ${CASK_HOME}/bin:\
-     ${EC2_AMITOOL_HOME}/bin:\
-     ${EC2_HOME}/bin
+     typeset -U path
+     path=(
+         /usr/local/bin
+         ${path}
+         ${HOME}/bin
+         ${FRONTEND}/frontend/bin
+         ${HEROKU_HOME}/bin
+         ${GOPATH}/bin
+         ${VLC_HOME}
+         ${ANDROID_SDK_HOME}/platform-tools
+         ${CASK_HOME}/bin
+         ${EC2_AMITOOL_HOME}/bin
+         ${EC2_HOME}/bin
+     )
    #+END_SRC
 
    #+BEGIN_SRC sh
