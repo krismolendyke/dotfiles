@@ -174,7 +174,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      export ANDROID_SDK_HOME=${CODE_HOME}/android-sdk
      export DROPBOX_HOME=${DESKTOP}/Dropbox
      export GOPATH=${CODE_HOME}/go
-     export GOROOT=/usr/local/opt/go
+     export GOROOT=/usr/local/opt/go/libexec
      export MANPATH=/usr/local/share/man:${MANPATH}
    #+END_SRC
 
@@ -221,7 +221,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
          ${FRONTEND}/frontend/bin
          ${HEROKU_HOME}/bin
          ${GOPATH}/bin
-         ${GOROOT}/libexec/bin
+         ${GOROOT}/bin
          ${VLC_HOME}
          ${ANDROID_SDK_HOME}/platform-tools
          ${CASK_HOME}/bin
