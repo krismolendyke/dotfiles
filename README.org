@@ -172,6 +172,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
 
    #+BEGIN_SRC sh
      export ANDROID_SDK_HOME=${CODE_HOME}/android-sdk
+     export DRIVE_HOME=~/Google\ Drive
      export DROPBOX_HOME=${DESKTOP}/Dropbox
      export GOPATH=${CODE_HOME}/go
      export GOROOT=/usr/local/opt/go/libexec
