@@ -55,6 +55,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      export ZSH_SECRET_VARIABLES=${ZSH_SECRET_HOME}/variables.zsh
      export ZSH_SECRET_ALIASES=${ZSH_SECRET_HOME}/aliases.zsh
      export ZSH_SECRET_PATH=${ZSH_SECRET_HOME}/path.zsh
+     export ZSH_SECRET_FUNCTIONS=${ZSH_SECRET_HOME}/functions.zsh
    #+END_SRC
 
 ** [[https://github.com/krismolendyke/oh-my-zsh][oh-my-zsh]]
@@ -235,6 +236,15 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      if [[ -e ${ZSH_SECRET_PATH} ]]; then
          source ${ZSH_SECRET_PATH}
      fi
+   #+END_SRC
+
+** Functions
+
+   #+BEGIN_SRC sh
+     if [[ -e ${ZSH_SECRET_FUNCTIONS} ]]; then
+         source ${ZSH_SECRET_FUNCTIONS}
+     fi
+
    #+END_SRC
 
 ** AWS
