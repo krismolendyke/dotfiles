@@ -137,11 +137,29 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
 ** [[http://zsh.sourceforge.net/Doc/Release/Options-Index.html][Options]]
 
    #+BEGIN_SRC sh
+     setopt histsavenodups
+   #+END_SRC
+
+   #+BEGIN_QUOTE
+   When writing out the history file, older commands that duplicate
+   newer ones are omitted.
+   #+END_QUOTE
+
+   #+BEGIN_SRC sh
      setopt braceccl
      setopt dvorak
      setopt emacs
      setopt no_beep
      unsetopt correct_all
+   #+END_SRC
+
+** History Size
+
+   Perhaps ridiculous.
+
+   #+BEGIN_SRC sh
+     HISTSIZE=100000
+     SAVEHIST=${HISTSIZE}
    #+END_SRC
 
 ** Constants
