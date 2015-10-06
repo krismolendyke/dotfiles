@@ -273,6 +273,59 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      alias aws-unset="unset AWS_PROFILE AWS_DEFAULT_PROFILE AWS_CREDENTIAL_FILE EC2_CERT EC2_PRIVATE_KEY"
    #+END_SRC
 
+   List stacks by name, e.g., =k20e/aws-stacks-list MyStack=:
+
+   #+BEGIN_SRC sh
+     function k20e/aws-stacks-list()
+     {
+         zparseopts -D -E -A opts -- o: p
+         output=${opts[-o]:-"table"}
+
+         name=${1}
+         statuses=(
+             CREATE_IN_PROGRESS
+             CREATE_FAILED
+             CREATE_COMPLETE
+             ROLLBACK_IN_PROGRESS
+             ROLLBACK_FAILED
+             ROLLBACK_COMPLETE
+             # DELETE_COMPLETE
+             DELETE_IN_PROGRESS
+             DELETE_FAILED
+             UPDATE_IN_PROGRESS
+             UPDATE_COMPLETE_CLEANUP_IN_PROGRESS
+             UPDATE_COMPLETE
+             UPDATE_ROLLBACK_IN_PROGRESS
+             UPDATE_ROLLBACK_FAILED
+             UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS
+             UPDATE_ROLLBACK_COMPLETE
+         )
+
+         query=(
+             "StackSummaries[*].StackName"               # Array of stack names
+             "| [?contains(@, \`${name}\`) == \`true\`]" # Select those with the given name
+         )
+
+         # Remove policy stacks if -p is not specified
+         if (( ${+opts[-p]} == 0 )); then
+             query+=("| [?contains(@, \`Policy\`) == \`false\`]")
+         fi
+
+         # Sort results
+         query+=("| sort(@)")
+
+         aws --output ${output} \
+             cloudformation list-stacks \
+             --stack-status-filter ${statuses} \
+             --query "${query}"
+     }
+   #+END_SRC
+*** Credentials
+
+    #+BEGIN_SRC sh
+      alias aws-unset="unset AWS_PROFILE AWS_DEFAULT_PROFILE AWS_CREDENTIAL_FILE EC2_CERT EC2_PRIVATE_KEY"
+    #+END_SRC
+
 *** [[http://aws.amazon.com/cli/][aws-cli]]
 
     #+BEGIN_SRC sh
