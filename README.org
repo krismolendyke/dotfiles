@@ -175,6 +175,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      export HEROKU_HOME=/usr/local/heroku
      export HOMEBREW_CELLAR=$(brew --cellar)
      export JAVA_HOME=$(/usr/libexec/java_home)
+     export JP_UNQUOTED=true
      export LANG=en_US.UTF-8
      export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
      export TERM=xterm-256color
