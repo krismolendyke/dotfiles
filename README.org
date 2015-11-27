@@ -21,10 +21,16 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      chsh -s /bin/zsh
    #+END_SRC
 
-* =.zshrc=
+* =.zshenv=
   :PROPERTIES:
-  :header-args: :tangle .zshrc
+  :header-args: :tangle ~/.zshenv
   :END:
+
+  =.zshenv= is always sourced.
+
+  #+BEGIN_SRC sh
+    export ZDOTDIR=~/.zsh
+  #+END_SRC
 
 ** Secret Information
 
@@ -57,6 +63,85 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      export ZSH_SECRET_PATH=${ZSH_SECRET_HOME}/path.zsh
      export ZSH_SECRET_FUNCTIONS=${ZSH_SECRET_HOME}/functions.zsh
    #+END_SRC
+
+** =PATH=
+
+   Avoid [[http://unix.stackexchange.com/questions/62579/is-there-a-way-to-add-a-directory-to-my-path-in-zsh-only-if-its-not-already-pre][duplicating]] =PATH= entries by setting the =path= variable to
+   be /unique/ and operating only on it.
+
+   #+BEGIN_SRC sh
+     typeset -U path
+     path=(
+         /usr/local/bin
+         ${path}
+         ${HOME}/bin
+         ${FRONTEND}/frontend/bin
+         ${HEROKU_HOME}/bin
+         ${GOPATH}/bin
+         ${GOROOT}/bin
+         ${VLC_HOME}
+         ${ANDROID_SDK_HOME}/platform-tools
+         ${CASK_HOME}/bin
+         ${EC2_AMITOOL_HOME}/bin
+         ${EC2_HOME}/bin
+     )
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+     if [[ -e ${ZSH_SECRET_PATH} ]]; then
+         source ${ZSH_SECRET_PATH}
+     fi
+   #+END_SRC
+
+** Constants
+
+   #+BEGIN_SRC sh
+     export CASK_HOME=${HOME}/.cask
+     export CODE_HOME=${HOME}/Code
+     export DESKTOP=${HOME}/Desktop
+     export EC2_AMITOOL_HOME=${HOME}/ec2-ami-tools
+     export EC2_HOME=${HOME}/ec2-api-tools
+     export EDITOR=emacsclient
+     export EMACS_VERSION="HEAD"
+     export HEROKU_HOME=/usr/local/heroku
+     export HOMEBREW_CELLAR=$(brew --cellar)
+     export JAVA_HOME=$(/usr/libexec/java_home)
+     export JP_UNQUOTED=true
+     export LANG=en_US.UTF-8
+     export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
+     export TERM=xterm-256color
+     export VLC_HOME=/Applications/VLC.app/Contents/MacOS
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+     if [[ -e ${ZSH_SECRET_CONSTANTS} ]]; then
+         source ${ZSH_SECRET_CONSTANTS}
+     fi
+   #+END_SRC
+
+** Variables
+
+   #+BEGIN_SRC sh
+     export ANDROID_SDK_HOME=${CODE_HOME}/android-sdk
+     export DRIVE_HOME=~/Google\ Drive
+     export DROPBOX_HOME=${DESKTOP}/Dropbox
+     export GOPATH=${CODE_HOME}/go
+     export GOROOT=/usr/local/opt/go/libexec
+     export MANPATH=/usr/local/share/man:${MANPATH}
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+     if [[ -e ${ZSH_SECRET_VARIABLES} ]]; then
+         source ${ZSH_SECRET_VARIABLES}
+     fi
+   #+END_SRC
+
+* =.zshrc=
+  :PROPERTIES:
+  :header-args: :tangle .zshrc
+  :END:
+
+  Interactive shell options.
 
 ** [[https://github.com/krismolendyke/oh-my-zsh][oh-my-zsh]]
 
@@ -162,49 +247,6 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
      SAVEHIST=${HISTSIZE}
    #+END_SRC
 
-** Constants
-
-   #+BEGIN_SRC sh
-     export CASK_HOME=${HOME}/.cask
-     export CODE_HOME=${HOME}/Code
-     export DESKTOP=${HOME}/Desktop
-     export EC2_AMITOOL_HOME=${HOME}/ec2-ami-tools
-     export EC2_HOME=${HOME}/ec2-api-tools
-     export EDITOR=emacsclient
-     export EMACS_VERSION="HEAD"
-     export HEROKU_HOME=/usr/local/heroku
-     export HOMEBREW_CELLAR=$(brew --cellar)
-     export JAVA_HOME=$(/usr/libexec/java_home)
-     export JP_UNQUOTED=true
-     export LANG=en_US.UTF-8
-     export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
-     export TERM=xterm-256color
-     export VLC_HOME=/Applications/VLC.app/Contents/MacOS
-   #+END_SRC
-
-   #+BEGIN_SRC sh
-     if [[ -e ${ZSH_SECRET_CONSTANTS} ]]; then
-         source ${ZSH_SECRET_CONSTANTS}
-     fi
-   #+END_SRC
-
-** Variables
-
-   #+BEGIN_SRC sh
-     export ANDROID_SDK_HOME=${CODE_HOME}/android-sdk
-     export DRIVE_HOME=~/Google\ Drive
-     export DROPBOX_HOME=${DESKTOP}/Dropbox
-     export GOPATH=${CODE_HOME}/go
-     export GOROOT=/usr/local/opt/go/libexec
-     export MANPATH=/usr/local/share/man:${MANPATH}
-   #+END_SRC
-
-   #+BEGIN_SRC sh
-     if [[ -e ${ZSH_SECRET_VARIABLES} ]]; then
-         source ${ZSH_SECRET_VARIABLES}
-     fi
-   #+END_SRC
-
 ** Aliases
 
    #+BEGIN_SRC sh
@@ -225,35 +267,6 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
    #+BEGIN_SRC sh
      if [[ -e ${ZSH_SECRET_ALIASES} ]]; then
          source ${ZSH_SECRET_ALIASES}
-     fi
-   #+END_SRC
-
-** =PATH=
-
-   Avoid [[http://unix.stackexchange.com/questions/62579/is-there-a-way-to-add-a-directory-to-my-path-in-zsh-only-if-its-not-already-pre][duplicating]] =PATH= entries by setting the =path= variable to
-   be /unique/ and operating only on it.
-
-   #+BEGIN_SRC sh
-     typeset -U path
-     path=(
-         /usr/local/bin
-         ${path}
-         ${HOME}/bin
-         ${FRONTEND}/frontend/bin
-         ${HEROKU_HOME}/bin
-         ${GOPATH}/bin
-         ${GOROOT}/bin
-         ${VLC_HOME}
-         ${ANDROID_SDK_HOME}/platform-tools
-         ${CASK_HOME}/bin
-         ${EC2_AMITOOL_HOME}/bin
-         ${EC2_HOME}/bin
-     )
-   #+END_SRC
-
-   #+BEGIN_SRC sh
-     if [[ -e ${ZSH_SECRET_PATH} ]]; then
-         source ${ZSH_SECRET_PATH}
      fi
    #+END_SRC
 
@@ -348,6 +361,28 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
               --filters "Name=tag:Name,Values=*${name}*" \
               --query "${query}"
       }
+    #+END_SRC
+
+*** List images by id
+
+    #+BEGIN_SRC sh
+      function k20e/aws-images-describe()
+      {
+          zparseopts -D -E -A opts -- o:
+          output=${opts[-o]:-"table"}
+
+          id=${1:-ami-e3106686}
+          aws --output ${output} \
+              ec2 describe-images \
+              --image-ids "${id}"
+      }
+    #+END_SRC
+
+*** Old Boxes
+
+    #+BEGIN_SRC sh
+      # aws --output text \
+      #     ec2 describe-instances --query 'Reservations[].Instances[].[LaunchTime,Tags[?Key==`Name`].Value|[0]]' | sort | head
     #+END_SRC
 
 *** [[http://aws.amazon.com/cli/][aws-cli Completion]]
