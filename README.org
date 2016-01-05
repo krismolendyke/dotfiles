@@ -394,6 +394,44 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
       }
     #+END_SRC
 
+*** RDS
+
+    Print a =mysql= command to connect to an RDS instance given an
+    instance id:
+
+    #+BEGIN_SRC sh
+      function k20e/rds-mysql-command()
+      {
+          zparseopts -D -E -A opts -- i: # Require db instance id
+          id=${1}
+
+          query=(
+              "DBInstances[0]"        # The first since id is required
+              ".["                    # Select the values mysql requires
+              "Endpoint.Address"      # Host
+              "Endpoint.Port"         # Port
+              "MasterUsername"        # User
+              "]"
+          )
+
+          prog=(
+              '{ print'
+              '"mysql",'
+              '"-h", $1,'             # Host
+              '"-P", $2,'             # Port
+              '"-u", $3,'             # User
+              '"-p"'                  # Ask for password from tty
+              '}'
+          )
+
+          aws --output text \
+              rds describe-db-instances \
+              --db-instance-identifier ${id} \
+              --query "${query}" \
+              | awk "${prog}"
+      }
+    #+END_SRC
+
 *** [[http://aws.amazon.com/cli/][aws-cli Completion]]
 
     #+BEGIN_SRC sh
