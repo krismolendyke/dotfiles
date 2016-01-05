@@ -378,6 +378,30 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
       }
     #+END_SRC
 
+*** List EMR clusters
+
+    #+BEGIN_SRC sh
+      function k20e/aws-emr-list-clusters()
+      {
+          query=(
+              "Clusters[].Id"
+          )
+
+          aws --output text \
+              emr list-clusters \
+              --cluster-states "WAITING" "RUNNING" \
+              --query "${query}"
+      }
+    #+END_SRC
+
+*** [[http://aws.amazon.com/cli/][aws-cli Completion]]
+
+    #+BEGIN_SRC sh
+      if [ -e ${CODE_HOME}/aws-cli/bin/aws_zsh_completer.sh ]; then
+          source ${CODE_HOME}/aws-cli/bin/aws_zsh_completer.sh
+      fi
+    #+END_SRC
+
 ** [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
 
    #+BEGIN_SRC sh
