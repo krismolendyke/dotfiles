@@ -363,6 +363,37 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
       }
     #+END_SRC
 
+*** Terminate instance by tag =name=
+
+    #+BEGIN_SRC sh
+      function k20e/aws-instance-terminate()
+      {
+          zparseopts -D -E -A opts -- : f
+
+          name=${1}
+          query=(
+              "Reservations[].Instances[].InstanceId"
+          )
+
+          id=$(
+              aws --output text \
+                  ec2 describe-instances \
+                  --filters "Name=tag:Name,Values=*${name}*" \
+                  --query "${query}"
+            )
+
+          dry_run="--dry-run"
+          if (( ${+opts[-f]} == 1 )); then
+              dry_run=""
+          fi
+
+          aws --output "text" \
+              ec2 terminate-instances \
+              --instance-ids ${id} \
+              ${dry_run}
+      }
+    #+END_SRC
+
 *** List images by id
 
     #+BEGIN_SRC sh
