@@ -431,7 +431,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
     instance id:
 
     #+BEGIN_SRC sh
-      function k20e/rds-mysql-command()
+      function k20e/aws-rds-mysql-command()
       {
           zparseopts -D -E -A opts -- i: # Require db instance id
           id=${1}
