@@ -439,8 +439,8 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
           query=(
               "DBInstances[0]"        # The first since id is required
               ".["                    # Select the values mysql requires
-              "Endpoint.Address"      # Host
-              "Endpoint.Port"         # Port
+              "Endpoint.Address",     # Host
+              "Endpoint.Port",        # Port
               "MasterUsername"        # User
               "]"
           )
