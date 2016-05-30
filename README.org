@@ -210,7 +210,16 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
 *** [[https://github.com/krismolendyke/oh-my-zsh/tree/master/plugins][Plugins]]
 
     #+BEGIN_SRC sh
-      plugins=(osx python pip brew lein vagrant docker golang)
+      plugins=(
+          brew
+          docker
+          golang
+          lein
+          osx
+          pip
+          python
+          vagrant
+      )
     #+END_SRC
 
 *** Load
