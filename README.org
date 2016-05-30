@@ -218,6 +218,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
           osx
           pip
           python
+          rust
           vagrant
       )
     #+END_SRC
