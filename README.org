@@ -67,6 +67,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
 ** Constants
 
    #+BEGIN_SRC sh
+     export CARGO_HOME=${HOME}/.cargo
      export CASK_HOME=${HOME}/.cask
      export CODE_HOME=${HOME}/Code
      export DESKTOP=${HOME}/Desktop
@@ -118,6 +119,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
          /usr/local/bin
          ${path}
          ${HOME}/bin
+         ${CARGO_HOME}/bin
          ${FRONTEND}/frontend/bin
          ${HEROKU_HOME}/bin
          ${GOPATH}/bin
