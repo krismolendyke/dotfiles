@@ -129,7 +129,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
          ${CASK_HOME}/bin
          ${EC2_AMITOOL_HOME}/bin
          ${EC2_HOME}/bin
-         "$(brew --prefix git)/share/git-core/contrib/diff-highlight"
+         "$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
      )
    #+END_SRC
 
