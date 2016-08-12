@@ -1,19 +1,18 @@
-#+TITLE: Zsh
+#+TITLE: dotfiles
 #+OPTIONS: toc:nil num:nil
 #+STARTUP: showall
 
-A [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]] [[http://www.zsh.org/][Zsh]] configuration created and maintained in [[http://www.gnu.org/software/emacs/][Emacs]] with
-[[http://orgmode.org/][Org mode.]]
+A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]] dotfiles created and maintained
+in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org mode.]]
 
 #+TOC: headlines 2
 
-* Initial Setup
+* Build Configuration Files
 
-** Build Configuration Files
+  Open this Org document in Emacs and [[http://orgmode.org/manual/tangle.html#tangle][tangle]] it (=C-c C-v t=).
+  Configuration files, e.g., =.zshrc=, will be generated.
 
-   Open this Org document in Emacs and [[http://orgmode.org/manual/tangle.html#tangle][tangle]] it (=C-c C-v t=).  Configuration
-   files, e.g., =.zshrc=, will be generated in this directory.  Zsh will look
-   for them here [[http://zsh.sourceforge.net/Doc/Release/Files.html#Files][by default]].
+* [[http://www.zsh.org][Zsh]]
 
 ** Change Default Shell
 
@@ -21,483 +20,581 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]] [[
      chsh -s /bin/zsh
    #+END_SRC
 
-* =.zshenv=
-  :PROPERTIES:
-  :header-args: :tangle ~/.zshenv
-  :END:
+** =.zshenv=
+   :PROPERTIES:
+   :header-args: :tangle ~/.zshenv
+   :END:
 
-  =.zshenv= is always sourced.
-
-  #+BEGIN_SRC sh
-    export ZDOTDIR=~/.zsh
-  #+END_SRC
-
-** Secret Information
-
-   Define a directory to keep secret information in.  Make sure that it exists
-   in [[https://github.com/krismolendyke/.zsh/blob/master/.gitignore][=.gitignore=]].
+   =.zshenv= is always sourced.
 
    #+BEGIN_SRC sh
-     export ZSH_SECRET_HOME=${ZDOTDIR}/secret
+     export ZDOTDIR=~/.zsh
    #+END_SRC
 
-   Create it if necessary.
+*** Secret Information
 
-   #+BEGIN_SRC sh
-     mkdir -p ${ZSH_SECRET_HOME}
-   #+END_SRC
-
-   Adjust permissions.
-
-   #+BEGIN_SRC sh
-     chmod 0700 ${ZSH_SECRET_HOME}
-     chmod -Rf 0600 ${ZSH_SECRET_HOME}/*.zsh
-   #+END_SRC
-
-   Define files to =source= in the following sections.
-
-   #+BEGIN_SRC sh
-     export ZSH_SECRET_CONSTANTS=${ZSH_SECRET_HOME}/constants.zsh
-     export ZSH_SECRET_VARIABLES=${ZSH_SECRET_HOME}/variables.zsh
-     export ZSH_SECRET_ALIASES=${ZSH_SECRET_HOME}/aliases.zsh
-     export ZSH_SECRET_PATH=${ZSH_SECRET_HOME}/path.zsh
-     export ZSH_SECRET_FUNCTIONS=${ZSH_SECRET_HOME}/functions.zsh
-   #+END_SRC
-
-** Constants
-
-   #+BEGIN_SRC sh
-     export CARGO_HOME=${HOME}/.cargo
-     export CASK_HOME=${HOME}/.cask
-     export CHICKEN_HOME=$(/usr/local/bin/csi -print '(chicken-home)' | cut -d/ -f 1-8)
-     export CODE_HOME=${HOME}/Code
-     export DESKTOP=${HOME}/Desktop
-     export EC2_AMITOOL_HOME=${HOME}/ec2-ami-tools
-     export EC2_HOME=${HOME}/ec2-api-tools
-     export EDITOR=emacsclient
-     export EMACS_VERSION="HEAD"
-     export HEROKU_HOME=/usr/local/heroku
-     export HOMEBREW_CELLAR=$(/usr/local/bin/brew --cellar)
-     export JAVA_HOME=$(/usr/libexec/java_home)
-     export JP_UNQUOTED=true
-     export LANG=en_US.UTF-8
-     export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
-     export TERM=xterm-256color
-     export VLC_HOME=/Applications/VLC.app/Contents/MacOS
-   #+END_SRC
-
-   #+BEGIN_SRC sh
-     if [[ -e ${ZSH_SECRET_CONSTANTS} ]]; then
-         source ${ZSH_SECRET_CONSTANTS}
-     fi
-   #+END_SRC
-
-** Variables
-
-   #+BEGIN_SRC sh
-     export ANDROID_SDK_HOME=${CODE_HOME}/android-sdk
-     export DRIVE_HOME=~/Google\ Drive
-     export DROPBOX_HOME=${DESKTOP}/Dropbox
-     export GOPATH=${CODE_HOME}/go
-     export GOROOT=/usr/local/opt/go/libexec
-     export MANPATH=/usr/local/share/man:${MANPATH}
-   #+END_SRC
-
-   #+BEGIN_SRC sh
-     if [[ -e ${ZSH_SECRET_VARIABLES} ]]; then
-         source ${ZSH_SECRET_VARIABLES}
-     fi
-   #+END_SRC
-
-** =PATH=
-
-   Avoid [[http://unix.stackexchange.com/questions/62579/is-there-a-way-to-add-a-directory-to-my-path-in-zsh-only-if-its-not-already-pre][duplicating]] =PATH= entries by setting the =path= variable to
-   be /unique/ and operating only on it.
-
-   #+BEGIN_SRC sh
-     typeset -U path
-     path=(
-         /usr/local/bin
-         ${path}
-         ${HOME}/bin
-         ${CARGO_HOME}/bin
-         ${FRONTEND}/frontend/bin
-         ${HEROKU_HOME}/bin
-         ${GOPATH}/bin
-         ${GOROOT}/bin
-         ${VLC_HOME}
-         ${ANDROID_SDK_HOME}/platform-tools
-         ${CASK_HOME}/bin
-         ${EC2_AMITOOL_HOME}/bin
-         ${EC2_HOME}/bin
-         "$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
-         "${CHICKEN_HOME}/bin"
-     )
-   #+END_SRC
-
-   #+BEGIN_SRC sh
-     if [[ -e ${ZSH_SECRET_PATH} ]]; then
-         source ${ZSH_SECRET_PATH}
-     fi
-   #+END_SRC
-
-* =.zshrc=
-  :PROPERTIES:
-  :header-args: :tangle .zshrc
-  :END:
-
-  Interactive shell options.
-
-** [[https://github.com/krismolendyke/oh-my-zsh][oh-my-zsh]]
-
-   #+BEGIN_SRC sh
-     ZSH=${HOME}/.oh-my-zsh
-   #+END_SRC
-
-*** [[https://github.com/krismolendyke/oh-my-zsh/blob/master/themes/k20e.zsh-theme][Theme]]
+    Define a directory to keep secret information in.  Make sure that it exists
+    in [[https://github.com/krismolendyke/.zsh/blob/master/.gitignore][=.gitignore=]].
 
     #+BEGIN_SRC sh
-      k20e_aws_is_prod() {
-          echo ${AWS_DEFAULT_PROFILE} | grep '\-prod' &> /dev/null
-      }
+      export ZSH_SECRET_HOME=${ZDOTDIR}/secret
+    #+END_SRC
 
-      k20e_aws_prompt_info() {
-          INFO=${ZSH_THEME_AWS_PROMPT_PREFIX}
+    Create it if necessary.
 
-          if [[ -z ${AWS_DEFAULT_PROFILE} ]]; then
-              INFO=${INFO}${ZSH_THEME_AWS_PROMPT_UNSET}
-          elif $(k20e_aws_is_prod); then
-              INFO=${INFO}${ZSH_THEME_AWS_PROMPT_PROD}${AWS_DEFAULT_PROFILE}
-          else
-              INFO=${INFO}${ZSH_THEME_AWS_PROMPT}${AWS_DEFAULT_PROFILE}
-          fi
+    #+BEGIN_SRC sh
+      mkdir -p ${ZSH_SECRET_HOME}
+    #+END_SRC
 
-          echo ${INFO}${ZSH_THEME_AWS_PROMPT_SUFFIX}
-      }
+    Adjust permissions.
 
-      k20e_venv_prompt_info() {
-          INFO=${ZSH_THEME_VENV_PROMPT_PREFIX}
+    #+BEGIN_SRC sh
+      chmod 0700 ${ZSH_SECRET_HOME}
+      chmod -Rf 0600 ${ZSH_SECRET_HOME}/*.zsh
+    #+END_SRC
 
-          if [[ -n "${VIRTUAL_ENV}" ]] && [[ -d "${VIRTUAL_ENV}" ]]; then
-              INFO=${INFO}${ZSH_THEME_VENV_PROMPT_ACTIVATED}$(basename ${VIRTUAL_ENV})
-          else
-              INFO=${INFO}${ZSH_THEME_VENV_PROMPT_DEACTIVATED}
-          fi
+    Define files to =source= in the following sections.
 
-          echo ${INFO}${ZSH_THEME_VENV_PROMPT_SUFFIX}
-      }
+    #+BEGIN_SRC sh
+      export ZSH_SECRET_CONSTANTS=${ZSH_SECRET_HOME}/constants.zsh
+      export ZSH_SECRET_VARIABLES=${ZSH_SECRET_HOME}/variables.zsh
+      export ZSH_SECRET_ALIASES=${ZSH_SECRET_HOME}/aliases.zsh
+      export ZSH_SECRET_PATH=${ZSH_SECRET_HOME}/path.zsh
+      export ZSH_SECRET_FUNCTIONS=${ZSH_SECRET_HOME}/functions.zsh
+    #+END_SRC
+
+*** Constants
+
+    #+BEGIN_SRC sh
+      export CARGO_HOME=${HOME}/.cargo
+      export CASK_HOME=${HOME}/.cask
+      export CHICKEN_HOME=$(/usr/local/bin/csi -print '(chicken-home)' | cut -d/ -f 1-8)
+      export CODE_HOME=${HOME}/Code
+      export DESKTOP=${HOME}/Desktop
+      export EC2_AMITOOL_HOME=${HOME}/ec2-ami-tools
+      export EC2_HOME=${HOME}/ec2-api-tools
+      export EDITOR=emacsclient
+      export EMACS_VERSION="HEAD"
+      export HEROKU_HOME=/usr/local/heroku
+      export HOMEBREW_CELLAR=$(/usr/local/bin/brew --cellar)
+      export JAVA_HOME=$(/usr/libexec/java_home)
+      export JP_UNQUOTED=true
+      export LANG=en_US.UTF-8
+      export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
+      export TERM=xterm-256color
+      export VLC_HOME=/Applications/VLC.app/Contents/MacOS
     #+END_SRC
 
     #+BEGIN_SRC sh
-      ZSH_THEME="k20e"
-    #+END_SRC
-
-*** Settings
-
-    Use case-sensitive completion.
-
-    #+BEGIN_SRC sh
-      CASE_SENSITIVE="true"
-    #+END_SRC
-
-    Disable weekly auto-update checks.
-
-    #+BEGIN_SRC sh
-      DISABLE_AUTO_UPDATE="true"
-    #+END_SRC
-
-    Disable autosetting terminal title.
-
-    #+BEGIN_SRC sh
-      DISABLE_AUTO_TITLE="true"
-    #+END_SRC
-
-*** [[https://github.com/krismolendyke/oh-my-zsh/tree/master/plugins][Plugins]]
-
-    #+BEGIN_SRC sh
-      plugins=(
-          brew
-          docker
-          golang
-          lein
-          osx
-          pip
-          python
-          rust
-          vagrant
-      )
-    #+END_SRC
-
-*** Load
-
-    #+BEGIN_SRC sh
-      source $ZSH/oh-my-zsh.sh
-    #+END_SRC
-
-** [[http://zsh.sourceforge.net/Doc/Release/Options-Index.html][Options]]
-
-   #+BEGIN_SRC sh
-     setopt histsavenodups
-   #+END_SRC
-
-   #+BEGIN_QUOTE
-   When writing out the history file, older commands that duplicate
-   newer ones are omitted.
-   #+END_QUOTE
-
-   #+BEGIN_SRC sh
-     setopt braceccl
-     setopt dvorak
-     setopt emacs
-     setopt no_beep
-     unsetopt correct_all
-   #+END_SRC
-
-** History Size
-
-   Perhaps ridiculous.
-
-   #+BEGIN_SRC sh
-     HISTSIZE=100000
-     SAVEHIST=${HISTSIZE}
-   #+END_SRC
-
-** Aliases
-
-   #+BEGIN_SRC sh
-     alias ....="../../.." # yup
-     alias emacs="${HOMEBREW_CELLAR}/emacs/${EMACS_VERSION}/bin/emacs -nw"
-     alias emacsclient="${HOMEBREW_CELLAR}/emacs/${EMACS_VERSION}/bin/emacsclient --no-wait"
-     alias ec=emacsclient
-     alias g="git"
-     alias gh="github.py"
-     alias j="jobs -l"
-     alias l.l='ls -1A | grep "^\." | xargs ls -lhGF'
-     alias ll="ls -lhF"
-     alias ls="ls -GF"
-     alias top="top -ocpu -Orsize"
-     alias v=vagrant
-   #+END_SRC
-
-   #+BEGIN_SRC sh
-     if [[ -e ${ZSH_SECRET_ALIASES} ]]; then
-         source ${ZSH_SECRET_ALIASES}
-     fi
-   #+END_SRC
-
-** Functions
-
-   #+BEGIN_SRC sh
-     if [[ -e ${ZSH_SECRET_FUNCTIONS} ]]; then
-         source ${ZSH_SECRET_FUNCTIONS}
-     fi
-   #+END_SRC
-
-** AWS
-
-*** Credentials
-
-    #+BEGIN_SRC sh
-      alias aws-unset="unset AWS_PROFILE AWS_DEFAULT_PROFILE AWS_CREDENTIAL_FILE EC2_CERT EC2_PRIVATE_KEY"
-    #+END_SRC
-
-*** List stacks by =StackName=
-
-    #+BEGIN_SRC sh
-      function k20e/aws-stacks-list()
-      {
-          zparseopts -D -E -A opts -- o: p
-          output=${opts[-o]:-"table"}
-
-          name=${1}
-          statuses=(
-              CREATE_IN_PROGRESS
-              CREATE_FAILED
-              CREATE_COMPLETE
-              ROLLBACK_IN_PROGRESS
-              ROLLBACK_FAILED
-              ROLLBACK_COMPLETE
-              # DELETE_COMPLETE
-              DELETE_IN_PROGRESS
-              DELETE_FAILED
-              UPDATE_IN_PROGRESS
-              UPDATE_COMPLETE_CLEANUP_IN_PROGRESS
-              UPDATE_COMPLETE
-              UPDATE_ROLLBACK_IN_PROGRESS
-              UPDATE_ROLLBACK_FAILED
-              UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS
-              UPDATE_ROLLBACK_COMPLETE
-          )
-
-          query=(
-              "StackSummaries[*].StackName"               # Array of stack names
-              "| [?contains(@, \`${name}\`) == \`true\`]" # Select those with the given name
-          )
-
-          # Remove policy stacks if -p is not specified
-          if (( ${+opts[-p]} == 0 )); then
-              query+=("| [?contains(@, \`Policy\`) == \`false\`]")
-          fi
-
-          # Sort results
-          query+=("| sort(@)")
-
-          aws --output ${output} \
-              cloudformation list-stacks \
-              --stack-status-filter ${statuses} \
-              --query "${query}"
-      }
-    #+END_SRC
-
-*** List instances by tag =Name=
-
-    #+BEGIN_SRC sh
-      function k20e/aws-instances-describe()
-      {
-          zparseopts -D -E -A opts -- o:
-          output=${opts[-o]:-"table"}
-
-          name=${1}
-          query=(
-              "Reservations[].Instances[]"
-              ".{"
-              "Name             : Tags[?Key == \`Name\`].Value | [0],"
-              "State            : State.Name,"
-              "LaunchTime       : LaunchTime,"
-              "PublicIpAddress  : PublicIpAddress,"
-              "PrivateIpAddress : PrivateIpAddress,"
-              "ImageId          : ImageId,"
-              "InstanceType     : InstanceType"
-              "}"
-          )
-
-          aws --output ${output} \
-              ec2 describe-instances \
-              --filters "Name=tag:Name,Values=*${name}*" \
-              --query "${query}"
-      }
-    #+END_SRC
-
-*** Terminate instance by tag =name=
-
-    #+BEGIN_SRC sh
-      function k20e/aws-instance-terminate()
-      {
-          zparseopts -D -E -A opts -- : f
-
-          name=${1}
-          query=(
-              "Reservations[].Instances[].InstanceId"
-          )
-
-          id=$(
-              aws --output text \
-                  ec2 describe-instances \
-                  --filters "Name=tag:Name,Values=*${name}*" \
-                  --query "${query}"
-            )
-
-          dry_run="--dry-run"
-          if (( ${+opts[-f]} == 1 )); then
-              dry_run=""
-          fi
-
-          aws --output "text" \
-              ec2 terminate-instances \
-              --instance-ids ${id} \
-              ${dry_run}
-      }
-    #+END_SRC
-
-*** List images by id
-
-    #+BEGIN_SRC sh
-      function k20e/aws-images-describe()
-      {
-          zparseopts -D -E -A opts -- o:
-          output=${opts[-o]:-"table"}
-
-          id=${1:-ami-e3106686}
-          aws --output ${output} \
-              ec2 describe-images \
-              --image-ids "${id}"
-      }
-    #+END_SRC
-
-*** List EMR clusters
-
-    #+BEGIN_SRC sh
-      function k20e/aws-emr-list-clusters()
-      {
-          query=(
-              "Clusters[].Id"
-          )
-
-          aws --output text \
-              emr list-clusters \
-              --cluster-states "WAITING" "RUNNING" \
-              --query "${query}"
-      }
-    #+END_SRC
-
-*** RDS
-
-    Print a =mysql= command to connect to an RDS instance given an
-    instance id:
-
-    #+BEGIN_SRC sh
-      function k20e/aws-rds-mysql-command()
-      {
-          zparseopts -D -E -A opts -- i: # Require db instance id
-          id=${1}
-
-          query=(
-              "DBInstances[0]"        # The first since id is required
-              ".["                    # Select the values mysql requires
-              "Endpoint.Address",     # Host
-              "Endpoint.Port",        # Port
-              "MasterUsername"        # User
-              "]"
-          )
-
-          prog=(
-              '{ print'
-              '"mysql",'
-              '"-h", $1,'             # Host
-              '"-P", $2,'             # Port
-              '"-u", $3,'             # User
-              '"-p"'                  # Ask for password from tty
-              '}'
-          )
-
-          aws --output text \
-              rds describe-db-instances \
-              --db-instance-identifier ${id} \
-              --query "${query}" \
-              | awk "${prog}"
-      }
-    #+END_SRC
-
-*** [[http://aws.amazon.com/cli/][aws-cli Completion]]
-
-    #+BEGIN_SRC sh
-      if [ -e ${CODE_HOME}/aws-cli/bin/aws_zsh_completer.sh ]; then
-          source ${CODE_HOME}/aws-cli/bin/aws_zsh_completer.sh
+      if [[ -e ${ZSH_SECRET_CONSTANTS} ]]; then
+          source ${ZSH_SECRET_CONSTANTS}
       fi
     #+END_SRC
 
-** [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
+*** Variables
 
-   #+BEGIN_SRC sh
-     if [ -e "/Applications/terminal-notifier.app" ]; then
-         alias notify="/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier"
-     fi
+    #+BEGIN_SRC sh
+      export ANDROID_SDK_HOME=${CODE_HOME}/android-sdk
+      export DRIVE_HOME=~/Google\ Drive
+      export DROPBOX_HOME=${DESKTOP}/Dropbox
+      export GOPATH=${CODE_HOME}/go
+      export GOROOT=/usr/local/opt/go/libexec
+      export MANPATH=/usr/local/share/man:${MANPATH}
+    #+END_SRC
+
+    #+BEGIN_SRC sh
+      if [[ -e ${ZSH_SECRET_VARIABLES} ]]; then
+          source ${ZSH_SECRET_VARIABLES}
+      fi
+    #+END_SRC
+
+*** =PATH=
+
+    Avoid [[http://unix.stackexchange.com/questions/62579/is-there-a-way-to-add-a-directory-to-my-path-in-zsh-only-if-its-not-already-pre][duplicating]] =PATH= entries by setting the =path= variable to
+    be /unique/ and operating only on it.
+
+    #+BEGIN_SRC sh
+      typeset -U path
+      path=(
+          /usr/local/bin
+          ${path}
+          ${HOME}/bin
+          ${CARGO_HOME}/bin
+          ${FRONTEND}/frontend/bin
+          ${HEROKU_HOME}/bin
+          ${GOPATH}/bin
+          ${GOROOT}/bin
+          ${VLC_HOME}
+          ${ANDROID_SDK_HOME}/platform-tools
+          ${CASK_HOME}/bin
+          ${EC2_AMITOOL_HOME}/bin
+          ${EC2_HOME}/bin
+          "$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
+          "${CHICKEN_HOME}/bin"
+      )
+    #+END_SRC
+
+    #+BEGIN_SRC sh
+      if [[ -e ${ZSH_SECRET_PATH} ]]; then
+          source ${ZSH_SECRET_PATH}
+      fi
+    #+END_SRC
+
+** =.zshrc=
+   :PROPERTIES:
+   :header-args: :tangle ~/.zsh/.zshrc
+   :END:
+
+   Interactive shell options.
+
+*** [[https://github.com/krismolendyke/oh-my-zsh][oh-my-zsh]]
+
+    #+BEGIN_SRC sh
+      ZSH=${HOME}/.oh-my-zsh
+    #+END_SRC
+
+**** [[https://github.com/krismolendyke/oh-my-zsh/blob/master/themes/k20e.zsh-theme][Theme]]
+
+     #+BEGIN_SRC sh
+       k20e_aws_is_prod() {
+           echo ${AWS_DEFAULT_PROFILE} | grep '\-prod' &> /dev/null
+       }
+
+       k20e_aws_prompt_info() {
+           INFO=${ZSH_THEME_AWS_PROMPT_PREFIX}
+
+           if [[ -z ${AWS_DEFAULT_PROFILE} ]]; then
+               INFO=${INFO}${ZSH_THEME_AWS_PROMPT_UNSET}
+           elif $(k20e_aws_is_prod); then
+               INFO=${INFO}${ZSH_THEME_AWS_PROMPT_PROD}${AWS_DEFAULT_PROFILE}
+           else
+               INFO=${INFO}${ZSH_THEME_AWS_PROMPT}${AWS_DEFAULT_PROFILE}
+           fi
+
+           echo ${INFO}${ZSH_THEME_AWS_PROMPT_SUFFIX}
+       }
+
+       k20e_venv_prompt_info() {
+           INFO=${ZSH_THEME_VENV_PROMPT_PREFIX}
+
+           if [[ -n "${VIRTUAL_ENV}" ]] && [[ -d "${VIRTUAL_ENV}" ]]; then
+               INFO=${INFO}${ZSH_THEME_VENV_PROMPT_ACTIVATED}$(basename ${VIRTUAL_ENV})
+           else
+               INFO=${INFO}${ZSH_THEME_VENV_PROMPT_DEACTIVATED}
+           fi
+
+           echo ${INFO}${ZSH_THEME_VENV_PROMPT_SUFFIX}
+       }
+     #+END_SRC
+
+     #+BEGIN_SRC sh
+       ZSH_THEME="k20e"
+     #+END_SRC
+
+**** Settings
+
+     Use case-sensitive completion.
+
+     #+BEGIN_SRC sh
+       CASE_SENSITIVE="true"
+     #+END_SRC
+
+     Disable weekly auto-update checks.
+
+     #+BEGIN_SRC sh
+       DISABLE_AUTO_UPDATE="true"
+     #+END_SRC
+
+     Disable autosetting terminal title.
+
+     #+BEGIN_SRC sh
+       DISABLE_AUTO_TITLE="true"
+     #+END_SRC
+
+**** [[https://github.com/krismolendyke/oh-my-zsh/tree/master/plugins][Plugins]]
+
+     #+BEGIN_SRC sh
+       plugins=(
+           brew
+           docker
+           golang
+           lein
+           osx
+           pip
+           python
+           rust
+           vagrant
+       )
+     #+END_SRC
+
+**** Load
+
+     #+BEGIN_SRC sh
+       source $ZSH/oh-my-zsh.sh
+     #+END_SRC
+
+*** [[http://zsh.sourceforge.net/Doc/Release/Options-Index.html][Options]]
+
+    #+BEGIN_SRC sh
+      setopt histsavenodups
+    #+END_SRC
+
+    #+BEGIN_QUOTE
+    When writing out the history file, older commands that duplicate
+    newer ones are omitted.
+    #+END_QUOTE
+
+    #+BEGIN_SRC sh
+      setopt braceccl
+      setopt dvorak
+      setopt emacs
+      setopt no_beep
+      unsetopt correct_all
+    #+END_SRC
+
+*** History Size
+
+    Perhaps ridiculous.
+
+    #+BEGIN_SRC sh
+      HISTSIZE=100000
+      SAVEHIST=${HISTSIZE}
+    #+END_SRC
+
+*** Aliases
+
+    #+BEGIN_SRC sh
+      alias ....="../../.." # yup
+      alias emacs="${HOMEBREW_CELLAR}/emacs/${EMACS_VERSION}/bin/emacs -nw"
+      alias emacsclient="${HOMEBREW_CELLAR}/emacs/${EMACS_VERSION}/bin/emacsclient --no-wait"
+      alias ec=emacsclient
+      alias g="git"
+      alias gh="github.py"
+      alias j="jobs -l"
+      alias l.l='ls -1A | grep "^\." | xargs ls -lhGF'
+      alias ll="ls -lhF"
+      alias ls="ls -GF"
+      alias top="top -ocpu -Orsize"
+      alias v=vagrant
+    #+END_SRC
+
+    #+BEGIN_SRC sh
+      if [[ -e ${ZSH_SECRET_ALIASES} ]]; then
+          source ${ZSH_SECRET_ALIASES}
+      fi
+    #+END_SRC
+
+*** Functions
+
+    #+BEGIN_SRC sh
+      if [[ -e ${ZSH_SECRET_FUNCTIONS} ]]; then
+          source ${ZSH_SECRET_FUNCTIONS}
+      fi
+    #+END_SRC
+
+*** AWS
+
+**** Credentials
+
+     #+BEGIN_SRC sh
+       alias aws-unset="unset AWS_PROFILE AWS_DEFAULT_PROFILE AWS_CREDENTIAL_FILE EC2_CERT EC2_PRIVATE_KEY"
+     #+END_SRC
+
+**** List stacks by =StackName=
+
+     #+BEGIN_SRC sh
+       function k20e/aws-stacks-list()
+       {
+           zparseopts -D -E -A opts -- o: p
+           output=${opts[-o]:-"table"}
+
+           name=${1}
+           statuses=(
+               CREATE_IN_PROGRESS
+               CREATE_FAILED
+               CREATE_COMPLETE
+               ROLLBACK_IN_PROGRESS
+               ROLLBACK_FAILED
+               ROLLBACK_COMPLETE
+               # DELETE_COMPLETE
+               DELETE_IN_PROGRESS
+               DELETE_FAILED
+               UPDATE_IN_PROGRESS
+               UPDATE_COMPLETE_CLEANUP_IN_PROGRESS
+               UPDATE_COMPLETE
+               UPDATE_ROLLBACK_IN_PROGRESS
+               UPDATE_ROLLBACK_FAILED
+               UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS
+               UPDATE_ROLLBACK_COMPLETE
+           )
+
+           query=(
+               "StackSummaries[*].StackName"               # Array of stack names
+               "| [?contains(@, \`${name}\`) == \`true\`]" # Select those with the given name
+           )
+
+           # Remove policy stacks if -p is not specified
+           if (( ${+opts[-p]} == 0 )); then
+               query+=("| [?contains(@, \`Policy\`) == \`false\`]")
+           fi
+
+           # Sort results
+           query+=("| sort(@)")
+
+           aws --output ${output} \
+               cloudformation list-stacks \
+               --stack-status-filter ${statuses} \
+               --query "${query}"
+       }
+     #+END_SRC
+
+**** List instances by tag =Name=
+
+     #+BEGIN_SRC sh
+       function k20e/aws-instances-describe()
+       {
+           zparseopts -D -E -A opts -- o:
+           output=${opts[-o]:-"table"}
+
+           name=${1}
+           query=(
+               "Reservations[].Instances[]"
+               ".{"
+               "Name             : Tags[?Key == \`Name\`].Value | [0],"
+               "State            : State.Name,"
+               "LaunchTime       : LaunchTime,"
+               "PublicIpAddress  : PublicIpAddress,"
+               "PrivateIpAddress : PrivateIpAddress,"
+               "ImageId          : ImageId,"
+               "InstanceType     : InstanceType"
+               "}"
+           )
+
+           aws --output ${output} \
+               ec2 describe-instances \
+               --filters "Name=tag:Name,Values=*${name}*" \
+               --query "${query}"
+       }
+     #+END_SRC
+
+**** Terminate instance by tag =name=
+
+     #+BEGIN_SRC sh
+       function k20e/aws-instance-terminate()
+       {
+           zparseopts -D -E -A opts -- : f
+
+           name=${1}
+           query=(
+               "Reservations[].Instances[].InstanceId"
+           )
+
+           id=$(
+               aws --output text \
+                   ec2 describe-instances \
+                   --filters "Name=tag:Name,Values=*${name}*" \
+                   --query "${query}"
+             )
+
+           dry_run="--dry-run"
+           if (( ${+opts[-f]} == 1 )); then
+               dry_run=""
+           fi
+
+           aws --output "text" \
+               ec2 terminate-instances \
+               --instance-ids ${id} \
+               ${dry_run}
+       }
+     #+END_SRC
+
+**** List images by id
+
+     #+BEGIN_SRC sh
+       function k20e/aws-images-describe()
+       {
+           zparseopts -D -E -A opts -- o:
+           output=${opts[-o]:-"table"}
+
+           id=${1:-ami-e3106686}
+           aws --output ${output} \
+               ec2 describe-images \
+               --image-ids "${id}"
+       }
+     #+END_SRC
+
+**** List EMR clusters
+
+     #+BEGIN_SRC sh
+       function k20e/aws-emr-list-clusters()
+       {
+           query=(
+               "Clusters[].Id"
+           )
+
+           aws --output text \
+               emr list-clusters \
+               --cluster-states "WAITING" "RUNNING" \
+               --query "${query}"
+       }
+     #+END_SRC
+
+**** RDS
+
+     Print a =mysql= command to connect to an RDS instance given an
+     instance id:
+
+     #+BEGIN_SRC sh
+       function k20e/aws-rds-mysql-command()
+       {
+           zparseopts -D -E -A opts -- i: # Require db instance id
+           id=${1}
+
+           query=(
+               "DBInstances[0]"        # The first since id is required
+               ".["                    # Select the values mysql requires
+               "Endpoint.Address",     # Host
+               "Endpoint.Port",        # Port
+               "MasterUsername"        # User
+               "]"
+           )
+
+           prog=(
+               '{ print'
+               '"mysql",'
+               '"-h", $1,'             # Host
+               '"-P", $2,'             # Port
+               '"-u", $3,'             # User
+               '"-p"'                  # Ask for password from tty
+               '}'
+           )
+
+           aws --output text \
+               rds describe-db-instances \
+               --db-instance-identifier ${id} \
+               --query "${query}" \
+               | awk "${prog}"
+       }
+     #+END_SRC
+
+**** Old Boxes
+
+     #+BEGIN_SRC sh
+       # aws --output text ec2 describe-instances --query 'Reservations[].Instances[].[LaunchTime,Tags[?Key==`Name`].Value|[0]]' | sort | head
+     #+END_SRC
+
+**** [[http://aws.amazon.com/cli/][aws-cli Completion]]
+
+     #+BEGIN_SRC sh
+       if [ -e ${CODE_HOME}/aws-cli/bin/aws_zsh_completer.sh ]; then
+           source ${CODE_HOME}/aws-cli/bin/aws_zsh_completer.sh
+       fi
+     #+END_SRC
+
+*** [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
+
+    #+BEGIN_SRC sh
+      if [ -e "/Applications/terminal-notifier.app" ]; then
+          alias notify="/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier"
+      fi
+    #+END_SRC
+
+*** [[https://virtualenvwrapper.readthedocs.org/en/latest/][virtualenvwrapper]]
+
+    #+BEGIN_SRC sh
+      if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
+          source /usr/local/bin/virtualenvwrapper.sh
+      fi
+    #+END_SRC
+
+* [[https://git-scm.com/][Git]]
+
+** =.gitconfig=
+   :PROPERTIES:
+   :header-args: :tangle ~/.gitconfig
+   :END:
+
+   #+BEGIN_SRC gitconfig
+     [user]
+           name = Kris
+           email = krismolendyke@users.noreply.github.com
+           useconfigonly = true
+     [color]
+           ui = auto
+     [core]
+           excludesfile = ~/.gitignore-global
+           whitespace = -trailing-space,-space-before-tab
+           editor = emacsclient
+     [apply]
+           whitespace = nowarn
+     [alias]
+           stache = stash
+           st = status -sb
+           a = add -p
+           l = log --stat --no-merges
+           lp = log --patch --stat --no-merges
+           wlp = log --patch --stat --color-words --no-merges
+           lo = log --oneline --decorate --no-merges
+           lf = log --pretty=format: --name-only -z --max-count 1 --no-merges
+           co = checkout
+           br = branch -v
+           wdiff = diff --color-words
+           ds = diff --staged
+     [advice]
+           statusHints = true
+     [rebase]
+           autosquash = true
+     [diff]
+           algorithm = histogram
+           compactionHeuristic = 1
+     [help]
+           autocorrect = 1
+     [pager]
+           diff = diff-highlight | less
+           log = diff-highlight | less
+           show = diff-highlight | less
+     [interactive]
+           diffFilter = diff-highlight
    #+END_SRC
 
-** [[https://virtualenvwrapper.readthedocs.org/en/latest/][virtualenvwrapper]]
+** =.gitignore-global=
+   :PROPERTIES:
+   :header-args: :tangle ~/.gitignore-global
+   :END:
 
-   #+BEGIN_SRC sh
-     if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
-         source /usr/local/bin/virtualenvwrapper.sh
-     fi
+   #+BEGIN_SRC gitignore
+     # -*- mode: gitignore; -*-
+
+     ##################################################################################
+     # Below from:                                                                    #
+     #                                                                                #
+     # https://raw.githubusercontent.com/github/gitignore/master/Global/OSX.gitignore #
+     ##################################################################################
+
+     .DS_Store
+     .AppleDouble
+     .LSOverride
+
+     # Icon must end with two \r
+     Icon
+
+
+     # Thumbnails
+     ._*
+
+     # Files that might appear in the root of a volume
+     .DocumentRevisions-V100
+     .fseventsd
+     .Spotlight-V100
+     .TemporaryItems
+     .Trashes
+     .VolumeIcon.icns
+
+     # Directories potentially created on remote AFP share
+     .AppleDB
+     .AppleDesktop
+     Network Trash Folder
+     Temporary Items
+     .apdisk
+
    #+END_SRC
