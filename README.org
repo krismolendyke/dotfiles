@@ -130,7 +130,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           ${EC2_AMITOOL_HOME}/bin
           ${EC2_HOME}/bin
           "$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
-          "${CHICKEN_HOME}/bin"
+          ${CHICKEN_HOME}/bin
       )
     #+END_SRC
 
