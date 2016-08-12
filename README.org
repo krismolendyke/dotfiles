@@ -69,6 +69,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
    #+BEGIN_SRC sh
      export CARGO_HOME=${HOME}/.cargo
      export CASK_HOME=${HOME}/.cask
+     export CHICKEN_HOME=$(/usr/local/bin/csi -print '(chicken-home)' | cut -d/ -f 1-8)
      export CODE_HOME=${HOME}/Code
      export DESKTOP=${HOME}/Desktop
      export EC2_AMITOOL_HOME=${HOME}/ec2-ami-tools
@@ -130,6 +131,7 @@ A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[
          ${EC2_AMITOOL_HOME}/bin
          ${EC2_HOME}/bin
          "$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
+         "${CHICKEN_HOME}/bin"
      )
    #+END_SRC
 
