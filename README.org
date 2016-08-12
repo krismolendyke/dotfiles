@@ -2,7 +2,7 @@
 #+OPTIONS: toc:nil num:nil
 #+STARTUP: showall
 
-A [[http://en.wikipedia.org/wiki/Literate_programming][literage programming]] [[http://www.zsh.org/][Zsh]] configuration created and maintained in [[http://www.gnu.org/software/emacs/][Emacs]] with
+A [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]] [[http://www.zsh.org/][Zsh]] configuration created and maintained in [[http://www.gnu.org/software/emacs/][Emacs]] with
 [[http://orgmode.org/][Org mode.]]
 
 #+TOC: headlines 2
