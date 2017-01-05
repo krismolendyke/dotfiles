@@ -117,6 +117,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+BEGIN_SRC sh
       typeset -U path
       path=(
+          /usr/local/sbin
           /usr/local/bin
           ${path}
           ${HOME}/bin
