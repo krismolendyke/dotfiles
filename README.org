@@ -76,7 +76,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       export EDITOR=emacsclient
       export EMACS_VERSION="HEAD"
       export HEROKU_HOME=/usr/local/heroku
-      export HOMEBREW_CELLAR=$(/usr/local/bin/brew --cellar)
+      export HOMEBREW_CELLAR=$(/usr/local/bin/brew --prefix)/Cellar
       export JAVA_HOME=$(/usr/libexec/java_home)
       export JP_UNQUOTED=true
       export LANG=en_US.UTF-8
