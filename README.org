@@ -266,8 +266,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+BEGIN_SRC sh
       alias ....="../../.." # yup
-      alias emacs="${HOMEBREW_CELLAR}/emacs/${EMACS_VERSION}/bin/emacs -nw"
-      alias emacsclient="${HOMEBREW_CELLAR}/emacs/${EMACS_VERSION}/bin/emacsclient --no-wait"
+      alias emacs="/usr/local/bin/emacs --no-window-system"
+      alias emacsclient="/usr/local/bin/emacsclient --no-wait"
       alias ec=emacsclient
       alias g="git"
       alias gh="github.py"
