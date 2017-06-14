@@ -121,7 +121,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           ${path}
           ${HOME}/bin
           ${CARGO_HOME}/bin
-          ${FRONTEND}/frontend/bin
+          ${FRONTEND_TOOL}/bin
           ${HEROKU_HOME}/bin
           ${GOPATH}/bin
           ${GOROOT}/bin
