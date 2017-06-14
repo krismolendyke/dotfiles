@@ -95,8 +95,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 *** Variables
 
     #+BEGIN_SRC sh
-      export ANDROID_SDK_HOME=${CODE_HOME}/android-sdk
       export GOOGLE=~/Google
+      export ANDROID_SDK_HOME=${GOOGLE}/org/nexus
       export GOPATH=${CODE_HOME}/go
       export GOROOT=/usr/local/opt/go/libexec
       export MANPATH=/usr/local/share/man:${MANPATH}
