@@ -378,7 +378,39 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        }
      #+END_SRC
 
-**** Terminate instance by tag =name=
+**** Get instance public IP by tag =Name=
+
+     #+BEGIN_SRC sh
+       function k20e/aws-instance-public-ip()
+       {
+           name=${1}
+           query="Reservations[].Instances[].PublicIpAddress"
+
+           aws --output text \
+               ec2 describe-instances \
+               --filters "Name=tag:Name,Values=*${name}*" \
+               --query "${query}"
+       }
+
+     #+END_SRC
+
+**** Get instance private IP by tag =Name=
+
+     #+BEGIN_SRC sh
+       function k20e/aws-instance-private-ip()
+       {
+           name=${1}
+           query="Reservations[].Instances[].PrivateIpAddress"
+
+           aws --output text \
+               ec2 describe-instances \
+               --filters "Name=tag:Name,Values=*${name}*" \
+               --query "${query}"
+       }
+
+     #+END_SRC
+
+**** Terminate instance by tag =Name=
 
      #+BEGIN_SRC sh
        function k20e/aws-instance-terminate()
