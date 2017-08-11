@@ -564,6 +564,19 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        fi
      #+END_SRC
 
+*** Python
+
+    #+BEGIN_SRC sh
+      function k20e/pip-upgrade() {
+          if [[ $(whence -w deactivate) == "deactivate: function" && -n ${VIRTUAL_ENV} ]]; then
+              echo "Deactivating current virtual environment ${VIRTUAL_ENV}"
+              deactivate
+          fi
+          pip install --upgrade --requirement ${CODE_HOME}/requirements-to-freeze.txt
+          pip freeze > ${CODE_HOME}/requirements.txt
+      }
+    #+END_SRC
+
 *** [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
 
     #+BEGIN_SRC sh
@@ -670,4 +683,18 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      Temporary Items
      .apdisk
 
+   #+END_SRC
+
+** Python
+   :PROPERTIES:
+   :header-args: :tangle ~/Code/requirements-to-freeze.txt
+   :END:
+
+   #+BEGIN_SRC python
+     # System packages
+     awscli
+     boto3
+     pipdeptree
+     requests[security]
+     virtualenvwrapper
    #+END_SRC
