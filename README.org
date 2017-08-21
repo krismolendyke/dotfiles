@@ -589,6 +589,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      #+END_SRC
 
 *** Python
+    :PROPERTIES:
+    :CUSTOM_ID: functions-python
+    :END:
 
     #+BEGIN_SRC sh
       function k20e/pip-upgrade() {
@@ -709,16 +712,18 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
    #+END_SRC
 
-** Python
-   :PROPERTIES:
-   :header-args: :tangle ~/Code/requirements-to-freeze.txt
-   :END:
+* Python
+  :PROPERTIES:
+  :header-args: :tangle ~/Code/requirements-to-freeze.txt
+  :END:
 
-   #+BEGIN_SRC python
-     # System packages
-     awscli
-     boto3
-     pipdeptree
-     requests[security]
-     virtualenvwrapper
-   #+END_SRC
+  See also [[#functions-python][Python functions]].
+
+  #+BEGIN_SRC python
+    # System packages
+    awscli
+    boto3
+    pipdeptree
+    requests[security]
+    virtualenvwrapper
+  #+END_SRC
