@@ -719,11 +719,16 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
   See also [[#functions-python][Python functions]].
 
-  #+BEGIN_SRC python
-    # System packages
-    awscli
-    boto3
-    pipdeptree
-    requests[security]
-    virtualenvwrapper
-  #+END_SRC
+** =requirements-to-freeze.txt=
+
+   Use [[https://www.kennethreitz.org/essays/a-better-pip-workflow][A Better Pip Workflow™]] to specify packages that I do actually
+   want installed to the system's site packages.
+
+   #+BEGIN_SRC python
+     # System packages
+     awscli
+     boto3
+     pipdeptree
+     requests[security]
+     virtualenvwrapper
+   #+END_SRC
