@@ -56,50 +56,63 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     Define files to =source= in the following sections.
 
     #+BEGIN_SRC sh
-      export ZSH_SECRET_CONSTANTS=${ZSH_SECRET_HOME}/constants.zsh
       export ZSH_SECRET_VARIABLES=${ZSH_SECRET_HOME}/variables.zsh
       export ZSH_SECRET_ALIASES=${ZSH_SECRET_HOME}/aliases.zsh
       export ZSH_SECRET_PATH=${ZSH_SECRET_HOME}/path.zsh
       export ZSH_SECRET_FUNCTIONS=${ZSH_SECRET_HOME}/functions.zsh
     #+END_SRC
 
-*** Constants
+*** Variables
+
+    Base variables that I use to organize the file system.
 
     #+BEGIN_SRC sh
+      export CODE_HOME=${HOME}/Code
+      export GOOGLE=${HOME}/Google
+    #+END_SRC
+
+    File system variables.
+
+    #+BEGIN_SRC sh
+      export ANDROID_SDK_HOME=${GOOGLE}/org/nexus
       export CARGO_HOME=${HOME}/.cargo
       export CASK_HOME=${HOME}/.cask
       export CHICKEN_HOME=$(/usr/local/bin/csi -print '(chicken-home)' | cut -d/ -f 1-8)
-      export CODE_HOME=${HOME}/Code
+      export GROOVY_HOME=/usr/local/opt/groovy/libexec
+      export JAVA_HOME=$(/usr/libexec/java_home)
+      export VLC_HOME=/Applications/VLC.app/Contents/MacOS
+
       export DESKTOP=${HOME}/Desktop
-      export EC2_AMITOOL_HOME=${HOME}/ec2-ami-tools
-      export EC2_HOME=${HOME}/ec2-api-tools
+      export DOWNLOADS=${HOME}/Downloads
+      export GOROOT=/usr/local/opt/go/libexec
+      export HOMEBREW_CELLAR=$(/usr/local/bin/brew --prefix)/Cellar
+
+      export GOPATH=${CODE_HOME}/go
+      export MANPATH=/usr/local/share/man:${MANPATH}
+      export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
+    #+END_SRC
+
+    Non file system variables.
+
+    #+BEGIN_SRC sh
       export EDITOR=emacsclient
       export EMACS_VERSION="HEAD"
-      export GROOVY_HOME=/usr/local/opt/groovy/libexec
-      export HEROKU_HOME=/usr/local/heroku
-      export HOMEBREW_CELLAR=$(/usr/local/bin/brew --prefix)/Cellar
-      export JAVA_HOME=$(/usr/libexec/java_home)
-      export JP_UNQUOTED=true
       export LANG=en_US.UTF-8
-      export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
       export TERM=xterm-256color
-      export VLC_HOME=/Applications/VLC.app/Contents/MacOS
     #+END_SRC
 
-    #+BEGIN_SRC sh
-      if [[ -e ${ZSH_SECRET_CONSTANTS} ]]; then
-          source ${ZSH_SECRET_CONSTANTS}
-      fi
-    #+END_SRC
+    #+BEGIN_QUOTE
+    ... use the =-u/--unquoted= option to specify that any result that
+    is a string will be printed without quotes. ... If this is a
+    common enough occurance for you, you can set the =JP_UNQUOTED=
+    environment variable to make this the default behavior
 
-*** Variables
+    -- https://github.com/jmespath/jp
+
+    #+END_QUOTE
 
     #+BEGIN_SRC sh
-      export GOOGLE=~/Google
-      export ANDROID_SDK_HOME=${GOOGLE}/org/nexus
-      export GOPATH=${CODE_HOME}/go
-      export GOROOT=/usr/local/opt/go/libexec
-      export MANPATH=/usr/local/share/man:${MANPATH}
+      export JP_UNQUOTED=true
     #+END_SRC
 
     #+BEGIN_SRC sh
@@ -137,15 +150,11 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           ${path}
           ${HOME}/bin
           ${CARGO_HOME}/bin
-          ${FRONTEND_TOOL}/bin
-          ${HEROKU_HOME}/bin
           ${GOPATH}/bin
           ${GOROOT}/bin
           ${VLC_HOME}
           ${ANDROID_SDK_HOME}/platform-tools
           ${CASK_HOME}/bin
-          ${EC2_AMITOOL_HOME}/bin
-          ${EC2_HOME}/bin
           "$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
           ${CHICKEN_HOME}/bin
       )
