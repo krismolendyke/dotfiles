@@ -108,6 +108,21 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       fi
     #+END_SRC
 
+*** =CDPATH=
+
+    #+BEGIN_QUOTE
+    The =cdpath= variable sets the search path for the cd command. If
+    you do not specify =.= somewhere in the path, it is assumed to be
+    the first component.
+    #+END_QUOTE
+
+    #+BEGIN_SRC sh
+      cdpath=(
+          ${CODE_HOME}
+          ${GOOGLE}
+      )
+    #+END_SRC
+
 *** =PATH=
 
     Avoid [[http://unix.stackexchange.com/questions/62579/is-there-a-way-to-add-a-directory-to-my-path-in-zsh-only-if-its-not-already-pre][duplicating]] =PATH= entries by setting the =path= variable to
