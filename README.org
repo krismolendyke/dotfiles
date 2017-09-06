@@ -827,6 +827,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "lz4"
      brew "make"
      brew "makedepend"
+     brew "mas"
      brew "maven"
      brew "mysql"
      brew "ninja"
@@ -858,4 +859,23 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      cask "racket"
      cask "vagrant"
      cask "virtualbox"
+     mas "GarageBand", id: 682658836
+     mas "iMovie", id: 408981434
+     mas "iPhoto", id: 408981381
+     mas "Keynote", id: 409183694
+     mas "Marked", id: 448925439
+     mas "Numbers", id: 409203825
+     mas "Pages", id: 409201541
+     mas "Pixelmator", id: 407963104
+     mas "The Unarchiver", id: 425424353
    #+END_SRC
+
+** [[https://github.com/mas-cli/mas][mas]]
+
+   #+BEGIN_QUOTE
+   A simple command line interface for the Mac App Store. Designed for
+   scripting and automation.
+   #+END_QUOTE
+
+   The =Bundlefile= above should install the App Store programs listed
+   with in it using =mas=.
