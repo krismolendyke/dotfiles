@@ -732,3 +732,130 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      requests[security]
      virtualenvwrapper
    #+END_SRC
+
+* [[https://brew.sh/][Homebrew]]
+
+  =brew= doesn't have a great way to manage dependencies that I've
+  found outside of a =Brewfile= and the =bundle= subcommand.
+
+** [[https://github.com/Homebrew/homebrew-bundle][Bundle]]
+
+   Install:
+
+   #+BEGIN_SRC sh
+     brew tap Homebrew/bundle
+   #+END_SRC
+
+   Programs currently installed by =brew= can be dumped to a global
+   =Brewfile=, which defaults to =${HOME}/.Brewfile=:
+
+   #+BEGIN_SRC sh
+     brew bundle dump --global
+   #+END_SRC
+
+   Install all programs specified in the global =${HOME}./Brewfile=:
+
+   #+BEGIN_SRC sh
+     brew bundle --global
+   #+END_SRC
+
+** =${HOME}/.Bundlefile=
+   :PROPERTIES:
+   :header-args: :tangle ~/.Brewfile
+   :END:
+
+   #+BEGIN_SRC sh
+     tap "caskroom/cask"
+     tap "caskroom/versions"
+     tap "homebrew/bundle"
+     tap "homebrew/core"
+     tap "homebrew/dupes"
+     tap "homebrew/games"
+     tap "homebrew/python"
+     tap "homebrew/services"
+     tap "homebrew/versions"
+     cask "xquartz"
+     brew "apr"
+     brew "openssl"
+     brew "apr-util"
+     brew "aspell"
+     brew "autoconf"
+     brew "automake"
+     brew "bash-completion"
+     brew "bison"
+     brew "freetype"
+     brew "fontconfig"
+     brew "gettext"
+     brew "pixman"
+     brew "cairo"
+     brew "git"
+     brew "emacs", args: ["HEAD", "with-cocoa", "with-gnutls"]
+     brew "cask"
+     brew "chicken"
+     brew "cmake"
+     brew "faac"
+     brew "lame"
+     brew "xvid"
+     brew "ffmpeg"
+     brew "figlet"
+     brew "flex"
+     brew "fortune"
+     brew "gawk"
+     brew "gd"
+     brew "gdbm"
+     brew "gobject-introspection"
+     brew "gdk-pixbuf"
+     brew "gflags"
+     brew "gnutls"
+     brew "go"
+     brew "gradle"
+     brew "grafana"
+     brew "libyaml"
+     brew "graphviz", args: ["with-bindings"]
+     brew "groovy"
+     brew "harfbuzz"
+     brew "hunspell"
+     brew "imagemagick"
+     brew "influxdb"
+     brew "ipcalc"
+     brew "ispell"
+     brew "less"
+     brew "libav"
+     brew "libcroco"
+     brew "librsvg"
+     brew "libssh"
+     brew "lz4"
+     brew "make"
+     brew "makedepend"
+     brew "maven"
+     brew "mysql"
+     brew "ninja"
+     brew "node"
+     brew "oniguruma"
+     brew "packer"
+     brew "parallel"
+     brew "privoxy"
+     brew "python3"
+     brew "protobuf"
+     brew "pstree"
+     brew "pv"
+     brew "rocksdb"
+     brew "scons"
+     brew "sshtrix"
+     brew "subversion"
+     brew "terminal-notifier"
+     brew "texi2html"
+     brew "the_silver_searcher"
+     brew "tree"
+     brew "watch"
+     brew "wget"
+     brew "yarn"
+     brew "yasm"
+     brew "youtube-dl"
+     brew "zsh"
+     cask "inkscape"
+     cask "keepingyouawake"
+     cask "racket"
+     cask "vagrant"
+     cask "virtualbox"
+   #+END_SRC
