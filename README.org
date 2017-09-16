@@ -98,6 +98,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       export EDITOR=emacsclient
       export EMACS_VERSION="HEAD"
       export LANG=en_US.UTF-8
+      export PIPENV_COLORBLIND=1
       export TERM=xterm-256color
     #+END_SRC
 
@@ -742,6 +743,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      awscli
      boto3
      pipdeptree[graphviz]
+     pipenv
      requests[security]
      virtualenvwrapper
    #+END_SRC
