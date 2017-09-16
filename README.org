@@ -160,6 +160,19 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       )
     #+END_SRC
 
+    Add Python 2 =site.USER_BASE= for user site-packages and =pip
+    install --user= installations.
+
+    - https://docs.python.org/3/install/index.html#inst-alt-install-user
+    - http://docs.pipenv.org/en/latest/basics.html#installing-pipenv
+
+    #+BEGIN_SRC sh
+      path=(
+          "$(python2 -m site --user-base)/bin"
+          ${path}
+      )
+    #+END_SRC
+
     #+BEGIN_SRC sh
       if [[ -e ${ZSH_SECRET_PATH} ]]; then
           source ${ZSH_SECRET_PATH}
@@ -599,8 +612,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
               echo "Deactivating current virtual environment ${VIRTUAL_ENV}"
               deactivate
           fi
-          pip install --upgrade --requirement ${CODE_HOME}/requirements-to-freeze.txt
-          pip freeze > ${CODE_HOME}/requirements.txt
+          pip install --user --upgrade --requirement ${HOME}/requirements-to-freeze.txt
+          pip freeze > ${HOME}/requirements.txt
       }
     #+END_SRC
 
@@ -713,13 +726,13 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    #+END_SRC
 
 * Python
-  :PROPERTIES:
-  :header-args: :tangle ~/Code/requirements-to-freeze.txt
-  :END:
 
   See also [[#functions-python][Python functions]].
 
 ** =requirements-to-freeze.txt=
+   :PROPERTIES:
+   :header-args: :tangle ~/requirements-to-freeze.txt
+   :END:
 
    Use [[https://www.kennethreitz.org/essays/a-better-pip-workflow][A Better Pip Workflow™]] to specify packages that I do actually
    want installed to the system's site packages.
