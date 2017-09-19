@@ -629,8 +629,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 *** [[https://virtualenvwrapper.readthedocs.org/en/latest/][virtualenvwrapper]]
 
     #+BEGIN_SRC sh
-      if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
-          source /usr/local/bin/virtualenvwrapper.sh
+      if (( ${PIPENV_ACTIVE:-0} != 1 )); then
+         source virtualenvwrapper.sh
       fi
     #+END_SRC
 
