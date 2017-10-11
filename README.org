@@ -616,6 +616,15 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           pip install --user --upgrade --requirement ${HOME}/requirements-to-freeze.txt
           pip freeze > ${HOME}/requirements.txt
       }
+
+      function k20e/pip3-upgrade() {
+          if [[ $(whence -w deactivate) == "deactivate: function" && -n ${VIRTUAL_ENV} ]]; then
+              echo "Deactivating current virtual environment ${VIRTUAL_ENV}"
+              deactivate
+          fi
+          pip3 install --user --upgrade --requirement ${HOME}/requirements-to-freeze.txt
+          pip3 freeze > ${HOME}/requirements.txt
+      }
     #+END_SRC
 
 *** [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
