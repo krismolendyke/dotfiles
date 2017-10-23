@@ -774,7 +774,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    =Brewfile=, which defaults to =${HOME}/.Brewfile=:
 
    #+BEGIN_SRC sh
-     brew bundle dump --global
+     brew bundle dump --force --global
    #+END_SRC
 
    Install all programs specified in the global =${HOME}./Brewfile=:
