@@ -771,7 +771,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    =Brewfile=, which defaults to =${HOME}/.Brewfile=:
 
    #+BEGIN_SRC sh
-     brew bundle dump --force --global
+     brew bundle dump --force --global --verbose
    #+END_SRC
 
    Install all programs specified in the global =${HOME}./Brewfile=:
@@ -881,6 +881,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "youtube-dl"
      brew "yubico-piv-tool"
      brew "zsh"
+     cask "amethyst"
      cask "inkscape"
      cask "keepingyouawake"
      cask "keybase"
@@ -893,7 +894,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      mas "Keynote", id: 409183694
      mas "Marked", id: 448925439
      mas "Numbers", id: 409203825
-     mas "Pages", id: 409201541
      mas "Pixelmator", id: 407963104
      mas "The Unarchiver", id: 425424353
    #+END_SRC
