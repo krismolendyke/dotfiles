@@ -74,7 +74,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     File system variables.
 
     #+BEGIN_SRC sh
-      export ANDROID_SDK_HOME=${GOOGLE}/org/nexus
       export CARGO_HOME=${HOME}/.cargo
       export CASK_HOME=${HOME}/.cask
       export CHICKEN_HOME=$(/usr/local/bin/csi -print '(chicken-home)' | cut -d/ -f 1-8)
@@ -154,7 +153,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           ${GOPATH}/bin
           ${GOROOT}/bin
           ${VLC_HOME}
-          ${ANDROID_SDK_HOME}/platform-tools
           ${CASK_HOME}/bin
           "$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
           ${CHICKEN_HOME}/bin
@@ -882,6 +880,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "yubico-piv-tool"
      brew "zsh"
      cask "amethyst"
+     cask "android-platform-tools"
      cask "inkscape"
      cask "keepingyouawake"
      cask "keybase"
@@ -894,6 +893,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      mas "Keynote", id: 409183694
      mas "Marked", id: 448925439
      mas "Numbers", id: 409203825
+     mas "Pages", id: 409201541
      mas "Pixelmator", id: 407963104
      mas "The Unarchiver", id: 425424353
    #+END_SRC
