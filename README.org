@@ -312,6 +312,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       alias l.l='ls -1A | grep "^\." | xargs ls -lhGF'
       alias ll="ls -lhF"
       alias ls="ls -GF"
+      alias pipsi="pipsi --bin-dir $(python2 -m site --user-base)/bin --home ${HOME}/.virtualenvs"
       alias top="top -ocpu -Orsize"
       alias v="TERM=ansi vagrant"
     #+END_SRC
@@ -600,6 +601,30 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        fi
      #+END_SRC
 
+*** [[https://github.com/mitsuhiko/pipsi][pipsi]]
+    :PROPERTIES:
+    :CUSTOM_ID: pipsi
+    :END:
+
+    Install Python programs into their own virtual environments.  Only
+    CLI programs should be installed this way, no libraries.
+
+    #+BEGIN_SRC sh
+      function k20e/pipsi-upgrade() {
+          local command=${1:-upgrade}
+
+          local packages=(
+              'awscli'
+              'pipdeptree[graphviz]'
+              'pipenv'
+          )
+
+          for package in ${packages}; do
+              pipsi "${command}" "${package}"
+          done
+      }
+    #+END_SRC
+
 *** Python
     :PROPERTIES:
     :CUSTOM_ID: functions-python
@@ -743,15 +768,13 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :END:
 
    Use [[https://www.kennethreitz.org/essays/a-better-pip-workflow][A Better Pip Workflow™]] to specify packages that I do actually
-   want installed to the system's site packages.
+   want installed to the system's site packages.  Everything else
+   should be installed with [[id:pipsi][pipsi]] to discrete virtual environments.
 
    #+BEGIN_SRC python
      # System packages
-     awscli
-     boto3
-     pipdeptree[graphviz]
-     pipenv
-     requests[security]
+     pipsi
+     virtualenv
      virtualenvwrapper
    #+END_SRC
 
