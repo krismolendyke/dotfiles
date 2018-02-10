@@ -75,6 +75,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+BEGIN_SRC sh
       export CARGO_HOME=${HOME}/.cargo
+
+      # https://github.com/rust-lang-nursery/rustfmt#tips
+      export DYLD_LIBRARY_PATH=$(${CARGO_HOME}/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
+
       export CASK_HOME=${HOME}/.cask
       export CHICKEN_HOME=$(/usr/local/bin/csi -print '(chicken-home)' | cut -d/ -f 1-8)
       export GROOVY_HOME=/usr/local/opt/groovy/libexec
