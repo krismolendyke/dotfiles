@@ -16,8 +16,26 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Change Default Shell
 
+   This should be the Homebrew installed =zsh= /not/ the system =zsh=
+   path.
+
    #+BEGIN_SRC sh
-     chsh -s /bin/zsh
+     chsh -s /usr/local/bin/zsh
+     export SHELL=/usr/local/bin/zsh
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+     echo ${SHELL}
+   #+END_SRC
+
+   On OS X:
+
+   #+BEGIN_SRC sh
+     sudo dscl . -create ${HOME} UserShell /usr/local/bin/zsh
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+     dscl . -read ${HOME} UserShell
    #+END_SRC
 
 ** =.zshenv=
