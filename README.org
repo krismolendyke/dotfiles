@@ -677,15 +677,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       fi
     #+END_SRC
 
-*** virtualenv
-
-    Hack to cleanup because I can't track down where this is getting
-    set on a login shell right now.
-
-    #+BEGIN_SRC sh
-      unset VIRTUAL_ENV
-    #+END_SRC
-
 *** [[https://virtualenvwrapper.readthedocs.org/en/latest/][virtualenvwrapper]]
 
     #+BEGIN_SRC sh
