@@ -288,7 +288,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+BEGIN_SRC sh
       function k20e_working_directory() {
           local YELLOW='\[\e[0;33m\]'
-          local RESET='\[\033[0m\]'
+          local RESET='\[\e[0m\]'
           echo "${YELLOW}\w${RESET}"
       }
     #+END_SRC
@@ -296,15 +296,25 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+BEGIN_SRC sh
       function k20e_virtual_env() {
           if [ -n "${VIRTUAL_ENV}" ] && [ -d "${VIRTUAL_ENV}" ]; then
-              local CYAN='\[\033[0;36m\]'
-              local RESET='\[\033[0m\]'
+              local CYAN='\[\e[0;36m\]'
+              local RESET='\[\e[0m\]'
               echo "${CYAN}"$(basename "${VIRTUAL_ENV}")"${RESET}"
           fi
       }
     #+END_SRC
 
     #+BEGIN_SRC sh
-      PROMPT_COMMAND='__git_ps1 "$(k20e_working_directory)" \
+      function k20e_prompt_command_aws_profile() {
+          local BLUE='\[\e[0;34m\]'
+          local RESET='\[\e[0m\]'
+          echo "${BLUE}${AWS_PROFILE}${RESET}"
+      }
+    #+END_SRC
+
+    #+BEGIN_SRC sh
+      PROMPT_COMMAND='__git_ps1 \
+      "$(k20e_working_directory) \
+      $(k20e_prompt_command_aws_profile)" \
       " $(k20e_virtual_env)\
       \n\$ " \
       " %s"'
