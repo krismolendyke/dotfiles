@@ -56,7 +56,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      set completion-ignore-case off
      set convert-meta off
      set expand-tilde on
-     set history-size 100000
      set input-meta on
      set output-meta on
      set show-all-if-ambiguous on
@@ -125,6 +124,16 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+END_SRC
 
 *** Variables
+
+    Bash variables.
+
+    #+BEGIN_SRC sh
+      LANG=en_US.UTF-8
+
+      HISTSIZE=100000
+      HISTCONTROL=erasedups
+      HISTTIMEFORMAT='%F %T '
+    #+END_SRC
 
     Base variables that I use to organize the file system.
 
@@ -295,16 +304,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       $(k20e_working_directory)" \
       "\n\$ " \
       " %s"'
-    #+END_SRC
-
-*** History Size
-
-    Perhaps ridiculous.
-
-    #+BEGIN_SRC sh
-      HISTSIZE=100000
-      HISTCONTROL=ignoreboth
-      SAVEHIST=${HISTSIZE}
     #+END_SRC
 
 *** Aliases
