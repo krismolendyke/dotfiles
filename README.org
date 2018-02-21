@@ -238,42 +238,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       fi
     #+END_SRC
 
-*** [[https://github.com/krismolendyke/oh-my-zsh/blob/master/themes/k20e.zsh-theme][Theme]]
+*** =PROMPT_COMMAND=
 
-    - [ ] Just call this =PROMPT_COMMAND= since that's what it is now
-    - [ ] https://github.com/magicmonty/bash-git-prompt
-
-    #+BEGIN_SRC sh
-      k20e_aws_is_prod() {
-          echo ${AWS_PROFILE} | grep '\-prod' &> /dev/null
-      }
-
-      k20e_aws_prompt_info() {
-          INFO=${ZSH_THEME_AWS_PROMPT_PREFIX}
-
-          if [[ -z ${AWS_PROFILE} ]]; then
-              INFO=${INFO}${ZSH_THEME_AWS_PROMPT_UNSET}
-          elif $(k20e_aws_is_prod); then
-              INFO=${INFO}${ZSH_THEME_AWS_PROMPT_PROD}${AWS_PROFILE}
-          else
-              INFO=${INFO}${ZSH_THEME_AWS_PROMPT}${AWS_PROFILE}
-          fi
-
-          echo ${INFO}${ZSH_THEME_AWS_PROMPT_SUFFIX}
-      }
-
-      k20e_venv_prompt_info() {
-          INFO=${ZSH_THEME_VENV_PROMPT_PREFIX}
-
-          if [[ -n "${VIRTUAL_ENV}" ]] && [[ -d "${VIRTUAL_ENV}" ]]; then
-              INFO=${INFO}${ZSH_THEME_VENV_PROMPT_ACTIVATED}$(basename ${VIRTUAL_ENV})
-          else
-              INFO=${INFO}${ZSH_THEME_VENV_PROMPT_DEACTIVATED}
-          fi
-
-          echo ${INFO}${ZSH_THEME_VENV_PROMPT_SUFFIX}
-      }
-    #+END_SRC
+    TODO try out https://github.com/magicmonty/bash-git-prompt
 
     #+BEGIN_SRC sh
       if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
@@ -295,28 +262,34 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+BEGIN_SRC sh
       function k20e_virtual_env() {
+          local CYAN='\[\e[0;36m\]'
+          local RESET='\[\e[0m\]'
+          local UNDERLINE='\[\e[4m\]'
+          local venv='∅'
           if [ -n "${VIRTUAL_ENV}" ] && [ -d "${VIRTUAL_ENV}" ]; then
-              local CYAN='\[\e[0;36m\]'
-              local RESET='\[\e[0m\]'
-              echo "${CYAN}"$(basename "${VIRTUAL_ENV}")"${RESET}"
+              venv=$(basename "${VIRTUAL_ENV}")
           fi
+          echo "${CYAN}venv ${venv}${RESET}"
       }
     #+END_SRC
 
     #+BEGIN_SRC sh
       function k20e_prompt_command_aws_profile() {
-          local BLUE='\[\e[0;34m\]'
+          local PURPLE='\[\e[0;35m\]'
           local RESET='\[\e[0m\]'
-          echo "${BLUE}${AWS_PROFILE}${RESET}"
+          local profile="${AWS_PROFILE}"
+          if [ "${profile}" = 'default' ]; then
+              profile="✔"
+          fi
+          echo "${PURPLE}aws ${profile}${RESET}"
       }
     #+END_SRC
 
     #+BEGIN_SRC sh
       PROMPT_COMMAND='__git_ps1 \
-      "$(k20e_working_directory) \
-      $(k20e_prompt_command_aws_profile)" \
-      " $(k20e_virtual_env)\
-      \n\$ " \
+      "\n$(k20e_prompt_command_aws_profile) $(k20e_virtual_env)
+      $(k20e_working_directory)" \
+      "\n\$ " \
       " %s"'
     #+END_SRC
 
