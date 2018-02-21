@@ -10,18 +10,18 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 * Build Configuration Files
 
   Open this Org document in Emacs and [[http://orgmode.org/manual/tangle.html#tangle][tangle]] it (=C-c C-v t=).
-  Configuration files, e.g., =.zshrc=, will be generated.
+  Configuration files, e.g., =.bashrc=, will be generated.
 
-* [[http://www.zsh.org][Zsh]]
+* Shell
 
 ** Change Default Shell
 
-   This should be the Homebrew installed =zsh= /not/ the system =zsh=
-   path.
+   This should be the Homebrew installed =bash= /not/ the system
+   =bash= path.
 
    #+BEGIN_SRC sh
-     chsh -s /usr/local/bin/zsh
-     export SHELL=/usr/local/bin/zsh
+     chsh -s /usr/local/bin/bash
+     export SHELL=/usr/local/bin/bash
    #+END_SRC
 
    #+BEGIN_SRC sh
@@ -31,23 +31,63 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    On OS X:
 
    #+BEGIN_SRC sh
-     sudo dscl . -create ${HOME} UserShell /usr/local/bin/zsh
+     sudo dscl . -create ${HOME} UserShell /usr/local/bin/bash
    #+END_SRC
 
    #+BEGIN_SRC sh
      dscl . -read ${HOME} UserShell
    #+END_SRC
 
-** =.zshenv=
-   :PROPERTIES:
-   :header-args: :tangle ~/.zshenv
-   :END:
-
-   =.zshenv= is always sourced.
+   Make the Bash configuration directory:
 
    #+BEGIN_SRC sh
-     export ZDOTDIR=~/.zsh
+     mkdir -p "${HOME}/.bashrc.d"
    #+END_SRC
+
+** =.inputrc=
+   :PROPERTIES:
+   :header-args: :tangle ~/.inputrc
+   :END:
+
+   #+BEGIN_SRC sh
+     set completion-ignore-case off
+     set convert-meta off
+     set expand-tilde on
+     set input-meta on
+     set output-meta on
+     set show-all-if-ambiguous on
+     set visible-stats on
+   #+END_SRC
+
+** =.bash_profile=
+   :PROPERTIES:
+   :header-args: :tangle ~/.bash_profile
+   :END:
+
+   #+BEGIN_SRC sh
+     source "${HOME}/.bashrc"
+   #+END_SRC
+
+** =.bashrc=
+   :PROPERTIES:
+   :header-args: :tangle ~/.bashrc
+   :END:
+
+   Load all configuration:
+
+   #+BEGIN_SRC sh
+     for f in "${HOME}/.bashrc.d/"*.bash; do
+         source "${f}"
+     done
+     unset -v config
+   #+END_SRC
+
+** Custom
+   :PROPERTIES:
+   :header-args: :tangle ~/.bashrc.d/main.bash
+   :END:
+
+   Interactive shell options.
 
 *** Secret Information
 
@@ -55,29 +95,29 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     in [[https://github.com/krismolendyke/.zsh/blob/master/.gitignore][=.gitignore=]].
 
     #+BEGIN_SRC sh
-      export ZSH_SECRET_HOME=${ZDOTDIR}/secret
+      export K20E_SECRET_HOME=${HOME}/.bashrc.d/secret
     #+END_SRC
 
     Create it if necessary.
 
     #+BEGIN_SRC sh
-      mkdir -p ${ZSH_SECRET_HOME}
+      mkdir -p ${K20E_SECRET_HOME}
     #+END_SRC
 
     Adjust permissions.
 
     #+BEGIN_SRC sh
-      chmod 0700 ${ZSH_SECRET_HOME}
-      chmod -Rf 0600 ${ZSH_SECRET_HOME}/*.zsh
+      chmod 0700 ${K20E_SECRET_HOME}
+      chmod -Rf 0600 ${K20E_SECRET_HOME}/*.sh
     #+END_SRC
 
     Define files to =source= in the following sections.
 
     #+BEGIN_SRC sh
-      export ZSH_SECRET_VARIABLES=${ZSH_SECRET_HOME}/variables.zsh
-      export ZSH_SECRET_ALIASES=${ZSH_SECRET_HOME}/aliases.zsh
-      export ZSH_SECRET_PATH=${ZSH_SECRET_HOME}/path.zsh
-      export ZSH_SECRET_FUNCTIONS=${ZSH_SECRET_HOME}/functions.zsh
+      export K20E_SECRET_VARIABLES=${K20E_SECRET_HOME}/variables.sh
+      export K20E_SECRET_ALIASES=${K20E_SECRET_HOME}/aliases.sh
+      export K20E_SECRET_PATH=${K20E_SECRET_HOME}/path.sh
+      export K20E_SECRET_FUNCTIONS=${K20E_SECRET_HOME}/functions.sh
     #+END_SRC
 
 *** Variables
@@ -138,8 +178,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+END_SRC
 
     #+BEGIN_SRC sh
-      if [[ -e ${ZSH_SECRET_VARIABLES} ]]; then
-          source ${ZSH_SECRET_VARIABLES}
+      if [ -f ${K20E_SECRET_VARIABLES} ]; then
+          source ${K20E_SECRET_VARIABLES}
       fi
     #+END_SRC
 
@@ -152,10 +192,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+END_QUOTE
 
     #+BEGIN_SRC sh
-      cdpath=(
-          ${CODE_HOME}
-          ${GOOGLE}
-      )
+      export CDPATH="${CODE_HOME}:${GOOGLE}"
     #+END_SRC
 
 *** =PATH=
@@ -164,12 +201,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     be /unique/ and operating only on it.
 
     #+BEGIN_SRC sh
-      typeset -U path
       path=(
           /usr/local/opt/python/libexec/bin
           /usr/local/sbin
           /usr/local/bin
-          ${path}
           ${HOME}/bin
           ${CARGO_HOME}/bin
           ${GOPATH}/bin
@@ -179,6 +214,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           "$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
           ${CHICKEN_HOME}/bin
       )
+
+      for p in "${path[@]}"; do
+          PATH="${p}:${PATH}"
+      done
     #+END_SRC
 
     Add Python 2 =site.USER_BASE= for user site-packages and =pip
@@ -188,124 +227,118 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     - http://docs.pipenv.org/en/latest/basics.html#installing-pipenv
 
     #+BEGIN_SRC sh
-      path=(
-          "$(python2 -m site --user-base)/bin"
-          ${path}
-      )
+      export PYTHON_USER_BASE=$(python2 -m site --user-base)
+      export PATH="${PYTHON_USER_BASE}/bin":"${PATH}"
+
     #+END_SRC
 
     #+BEGIN_SRC sh
-      if [[ -e ${ZSH_SECRET_PATH} ]]; then
-          source ${ZSH_SECRET_PATH}
+      if [ -f ${K20E_SECRET_PATH} ]; then
+          source ${K20E_SECRET_PATH}
       fi
     #+END_SRC
 
-** =.zshrc=
-   :PROPERTIES:
-   :header-args: :tangle ~/.zsh/.zshrc
-   :END:
+*** [[https://github.com/krismolendyke/oh-my-zsh/blob/master/themes/k20e.zsh-theme][Theme]]
 
-   Interactive shell options.
-
-*** [[https://github.com/krismolendyke/oh-my-zsh][oh-my-zsh]]
+    - [ ] Just call this =PROMPT_COMMAND= since that's what it is now
+    - [ ] https://github.com/magicmonty/bash-git-prompt
 
     #+BEGIN_SRC sh
-      ZSH=${HOME}/.oh-my-zsh
+      k20e_aws_is_prod() {
+          echo ${AWS_PROFILE} | grep '\-prod' &> /dev/null
+      }
+
+      k20e_aws_prompt_info() {
+          INFO=${ZSH_THEME_AWS_PROMPT_PREFIX}
+
+          if [[ -z ${AWS_PROFILE} ]]; then
+              INFO=${INFO}${ZSH_THEME_AWS_PROMPT_UNSET}
+          elif $(k20e_aws_is_prod); then
+              INFO=${INFO}${ZSH_THEME_AWS_PROMPT_PROD}${AWS_PROFILE}
+          else
+              INFO=${INFO}${ZSH_THEME_AWS_PROMPT}${AWS_PROFILE}
+          fi
+
+          echo ${INFO}${ZSH_THEME_AWS_PROMPT_SUFFIX}
+      }
+
+      k20e_venv_prompt_info() {
+          INFO=${ZSH_THEME_VENV_PROMPT_PREFIX}
+
+          if [[ -n "${VIRTUAL_ENV}" ]] && [[ -d "${VIRTUAL_ENV}" ]]; then
+              INFO=${INFO}${ZSH_THEME_VENV_PROMPT_ACTIVATED}$(basename ${VIRTUAL_ENV})
+          else
+              INFO=${INFO}${ZSH_THEME_VENV_PROMPT_DEACTIVATED}
+          fi
+
+          echo ${INFO}${ZSH_THEME_VENV_PROMPT_SUFFIX}
+      }
     #+END_SRC
 
-**** [[https://github.com/krismolendyke/oh-my-zsh/blob/master/themes/k20e.zsh-theme][Theme]]
+    #+BEGIN_SRC sh
+      if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
+          source /usr/local/etc/bash_completion.d/git-prompt.sh
+      fi
 
-     #+BEGIN_SRC sh
-       k20e_aws_is_prod() {
-           echo ${AWS_DEFAULT_PROFILE} | grep '\-prod' &> /dev/null
-       }
+      GIT_PS1_SHOWCOLORHINTS=1
+      GIT_PS1_SHOWDIRTYSTATE=1
+      GIT_PS1_SHOWUNTRACKEDFILES=1
+    #+END_SRC
 
-       k20e_aws_prompt_info() {
-           INFO=${ZSH_THEME_AWS_PROMPT_PREFIX}
+    #+BEGIN_SRC sh
+      function k20e_working_directory() {
+          local YELLOW='\[\e[0;33m\]'
+          local RESET='\[\033[0m\]'
+          echo "${YELLOW}\w${RESET}"
+      }
+    #+END_SRC
 
-           if [[ -z ${AWS_DEFAULT_PROFILE} ]]; then
-               INFO=${INFO}${ZSH_THEME_AWS_PROMPT_UNSET}
-           elif $(k20e_aws_is_prod); then
-               INFO=${INFO}${ZSH_THEME_AWS_PROMPT_PROD}${AWS_DEFAULT_PROFILE}
-           else
-               INFO=${INFO}${ZSH_THEME_AWS_PROMPT}${AWS_DEFAULT_PROFILE}
-           fi
+    #+BEGIN_SRC sh
+      function k20e_virtual_env() {
+          if [ -n "${VIRTUAL_ENV}" ] && [ -d "${VIRTUAL_ENV}" ]; then
+              local CYAN='\[\033[0;36m\]'
+              local RESET='\[\033[0m\]'
+              echo "${CYAN}"$(basename "${VIRTUAL_ENV}")"${RESET}"
+          fi
+      }
+    #+END_SRC
 
-           echo ${INFO}${ZSH_THEME_AWS_PROMPT_SUFFIX}
-       }
+    #+BEGIN_SRC sh
+      PROMPT_COMMAND='__git_ps1 "$(k20e_working_directory)" \
+      " $(k20e_virtual_env)\
+      \n\$ " \
+      " %s"'
+    #+END_SRC
 
-       k20e_venv_prompt_info() {
-           INFO=${ZSH_THEME_VENV_PROMPT_PREFIX}
+*** Settings
 
-           if [[ -n "${VIRTUAL_ENV}" ]] && [[ -d "${VIRTUAL_ENV}" ]]; then
-               INFO=${INFO}${ZSH_THEME_VENV_PROMPT_ACTIVATED}$(basename ${VIRTUAL_ENV})
-           else
-               INFO=${INFO}${ZSH_THEME_VENV_PROMPT_DEACTIVATED}
-           fi
+    Use case-sensitive completion.
 
-           echo ${INFO}${ZSH_THEME_VENV_PROMPT_SUFFIX}
-       }
-     #+END_SRC
+    #+BEGIN_SRC sh
+      CASE_SENSITIVE="true"
+    #+END_SRC
 
-     #+BEGIN_SRC sh
-       ZSH_THEME="k20e"
-     #+END_SRC
+    Disable weekly auto-update checks.
 
-**** Settings
+    #+BEGIN_SRC sh
+      DISABLE_AUTO_UPDATE="true"
+    #+END_SRC
 
-     Use case-sensitive completion.
+    Disable autosetting terminal title.
 
-     #+BEGIN_SRC sh
-       CASE_SENSITIVE="true"
-     #+END_SRC
-
-     Disable weekly auto-update checks.
-
-     #+BEGIN_SRC sh
-       DISABLE_AUTO_UPDATE="true"
-     #+END_SRC
-
-     Disable autosetting terminal title.
-
-     #+BEGIN_SRC sh
-       DISABLE_AUTO_TITLE="true"
-     #+END_SRC
-
-**** [[https://github.com/krismolendyke/oh-my-zsh/tree/master/plugins][Plugins]]
-
-     #+BEGIN_SRC sh
-       plugins=(
-           brew
-           osx
-           pip
-           python
-           vagrant
-       )
-     #+END_SRC
-
-**** Load
-
-     #+BEGIN_SRC sh
-       source $ZSH/oh-my-zsh.sh
-     #+END_SRC
+    #+BEGIN_SRC sh
+      DISABLE_AUTO_TITLE="true"
+    #+END_SRC
 
 *** [[http://zsh.sourceforge.net/Doc/Release/Options-Index.html][Options]]
 
     #+BEGIN_SRC sh
-      setopt histsavenodups
-    #+END_SRC
-
-    #+BEGIN_QUOTE
-    When writing out the history file, older commands that duplicate
-    newer ones are omitted.
-    #+END_QUOTE
-
-    #+BEGIN_SRC sh
-      setopt braceccl
-      setopt dvorak
-      setopt emacs
-      setopt no_beep
-      unsetopt correct_all
+      set bell-style none
+      set colored-completion-prefix on
+      set colored-stats on
+      set history-size 100000
+      set show-all-if-ambiguous on
+      set visible-stas on
     #+END_SRC
 
 *** History Size
@@ -314,13 +347,16 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+BEGIN_SRC sh
       HISTSIZE=100000
+      HISTCONTROL=ignoreboth
       SAVEHIST=${HISTSIZE}
     #+END_SRC
 
 *** Aliases
 
     #+BEGIN_SRC sh
-      alias ....="../../.." # yup
+      alias ..="cd ../"
+      alias ...="cd ../../"
+      alias ....="cd ../../.."
       alias emacs="/usr/local/bin/emacs --no-window-system"
       alias emacsclient="/usr/local/bin/emacsclient --no-wait"
       alias ec=emacsclient
@@ -330,14 +366,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       alias l.l='ls -1A | grep "^\." | xargs ls -lhGF'
       alias ll="ls -lhF"
       alias ls="ls -GF"
-      alias pipsi="pipsi --bin-dir $(python2 -m site --user-base)/bin --home ${HOME}/.virtualenvs"
+      alias pipsi="pipsi --bin-dir ${PYTHON_USER_BASE}/bin --home ${HOME}/.virtualenvs"
       alias top="top -ocpu -Orsize"
       alias v="TERM=ansi vagrant"
     #+END_SRC
 
     #+BEGIN_SRC sh
-      if [[ -e ${ZSH_SECRET_ALIASES} ]]; then
-          source ${ZSH_SECRET_ALIASES}
+      if [ -f ${K20E_SECRET_ALIASES} ]; then
+          source ${K20E_SECRET_ALIASES}
       fi
     #+END_SRC
 
@@ -380,11 +416,37 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        alias ssh="TERM=ansi ssh"
      #+END_SRC
 
+*** Completions
+
+**** Bash Builtins
+
+     For things like aliases, exports, function, etc.
+
+     #+BEGIN_SRC sh
+       if [ -e /usr/local/etc/bash_completion.d/bash-builtins ]; then
+           source /usr/local/etc/bash_completion.d/bash-builtins
+       fi
+     #+END_SRC
+
+**** Git
+
+     #+BEGIN_SRC sh
+       if [ -e /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+           source /usr/local/etc/bash_completion.d/git-completion.bash
+       fi
+     #+END_SRC
+
+     Add completion for my muscle memory alias of =g= for =git=:
+
+     #+BEGIN_SRC sh
+        __git_complete g __git_main
+     #+END_SRC
+
 *** Functions
 
     #+BEGIN_SRC sh
-      if [[ -e ${ZSH_SECRET_FUNCTIONS} ]]; then
-          source ${ZSH_SECRET_FUNCTIONS}
+      if [ -f ${K20E_SECRET_FUNCTIONS} ]; then
+          source ${K20E_SECRET_FUNCTIONS}
       fi
     #+END_SRC
 
@@ -392,14 +454,23 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 **** Credentials
 
+     Unset the many current and legacy AWS CLI environment variables:
+
      #+BEGIN_SRC sh
-       alias aws-unset="unset AWS_PROFILE AWS_DEFAULT_PROFILE AWS_CREDENTIAL_FILE EC2_CERT EC2_PRIVATE_KEY"
+       alias aws-unset="unset AWS_PROFILE AWS_PROFILE AWS_CREDENTIAL_FILE EC2_CERT EC2_PRIVATE_KEY"
+       aws-unset
+     #+END_SRC
+
+     Set default profile:
+
+     #+BEGIN_SRC sh
+       export AWS_PROFILE="default"
      #+END_SRC
 
 **** List stacks by =StackName=
 
      #+BEGIN_SRC sh
-       function k20e/aws-stacks-list()
+       function k20e-aws-stacks-list()
        {
            zparseopts -D -E -A opts -- o: p
            output=${opts[-o]:-"table"}
@@ -447,7 +518,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 **** List instances by tag =Name=
 
      #+BEGIN_SRC sh
-       function k20e/aws-instances-describe()
+       function k20e-aws-instances-describe()
        {
            zparseopts -D -E -A opts -- o:
            output=${opts[-o]:-"table"}
@@ -476,7 +547,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 **** Get instance public IP by tag =Name=
 
      #+BEGIN_SRC sh
-       function k20e/aws-instance-public-ip()
+       function k20e-aws-instance-public-ip()
        {
            name=${1}
            query="Reservations[].Instances[].PublicIpAddress"
@@ -492,7 +563,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 **** Get instance private IP by tag =Name=
 
      #+BEGIN_SRC sh
-       function k20e/aws-instance-private-ip()
+       function k20e-aws-instance-private-ip()
        {
            name=${1}
            query="Reservations[].Instances[].PrivateIpAddress"
@@ -508,7 +579,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 **** Terminate instance by tag =Name=
 
      #+BEGIN_SRC sh
-       function k20e/aws-instance-terminate()
+       function k20e-aws-instance-terminate()
        {
            zparseopts -D -E -A opts -- : f
 
@@ -539,7 +610,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 **** List images by id
 
      #+BEGIN_SRC sh
-       function k20e/aws-images-describe()
+       function k20e-aws-images-describe()
        {
            zparseopts -D -E -A opts -- o:
            output=${opts[-o]:-"table"}
@@ -554,7 +625,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 **** List EMR clusters
 
      #+BEGIN_SRC sh
-       function k20e/aws-emr-list-clusters()
+       function k20e-aws-emr-list-clusters()
        {
            query=(
                "Clusters[].Id"
@@ -573,7 +644,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      instance id:
 
      #+BEGIN_SRC sh
-       function k20e/aws-rds-mysql-command()
+       function k20e-aws-rds-mysql-command()
        {
            zparseopts -D -E -A opts -- i: # Require db instance id
            id=${1}
@@ -614,8 +685,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 **** [[http://aws.amazon.com/cli/][aws-cli Completion]]
 
      #+BEGIN_SRC sh
-       if [ -e ${CODE_HOME}/aws-cli/bin/aws_zsh_completer.sh ]; then
-           source ${CODE_HOME}/aws-cli/bin/aws_zsh_completer.sh
+       if [ -e ${PYTHON_USER_BASE}/bin/aws_bash_completer ]; then
+           source ${PYTHON_USER_BASE}/bin/aws_bash_completer
        fi
      #+END_SRC
 
@@ -628,7 +699,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     CLI programs should be installed this way, no libraries.
 
     #+BEGIN_SRC sh
-      function k20e/pipsi-upgrade() {
+      function k20e-pipsi-upgrade() {
           local command=${1:-upgrade}
 
           local packages=(
@@ -650,8 +721,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     :END:
 
     #+BEGIN_SRC sh
-      function k20e/pip-upgrade() {
-          if [[ $(whence -w deactivate) == "deactivate: function" && -n ${VIRTUAL_ENV} ]]; then
+      function k20e-pip-upgrade() {
+          if [[ $(which deactivate) == "deactivate: function" && -n ${VIRTUAL_ENV} ]]; then
               echo "Deactivating current virtual environment ${VIRTUAL_ENV}"
               deactivate
           fi
@@ -659,8 +730,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           pip freeze > ${HOME}/requirements.txt
       }
 
-      function k20e/pip3-upgrade() {
-          if [[ $(whence -w deactivate) == "deactivate: function" && -n ${VIRTUAL_ENV} ]]; then
+      function k20e-pip3-upgrade() {
+          if [[ $(which deactivate) == "deactivate: function" && -n ${VIRTUAL_ENV} ]]; then
               echo "Deactivating current virtual environment ${VIRTUAL_ENV}"
               deactivate
           fi
