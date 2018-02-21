@@ -50,9 +50,13 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :END:
 
    #+BEGIN_SRC sh
+     set bell-style none
+     set colored-completion-prefix on
+     set colored-stats on
      set completion-ignore-case off
      set convert-meta off
      set expand-tilde on
+     set history-size 100000
      set input-meta on
      set output-meta on
      set show-all-if-ambiguous on
@@ -291,17 +295,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       $(k20e_working_directory)" \
       "\n\$ " \
       " %s"'
-    #+END_SRC
-
-*** [[http://zsh.sourceforge.net/Doc/Release/Options-Index.html][Options]]
-
-    #+BEGIN_SRC sh
-      set bell-style none
-      set colored-completion-prefix on
-      set colored-stats on
-      set history-size 100000
-      set show-all-if-ambiguous on
-      set visible-stas on
     #+END_SRC
 
 *** History Size
