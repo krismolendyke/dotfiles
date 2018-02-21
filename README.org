@@ -293,26 +293,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       " %s"'
     #+END_SRC
 
-*** Settings
-
-    Use case-sensitive completion.
-
-    #+BEGIN_SRC sh
-      CASE_SENSITIVE="true"
-    #+END_SRC
-
-    Disable weekly auto-update checks.
-
-    #+BEGIN_SRC sh
-      DISABLE_AUTO_UPDATE="true"
-    #+END_SRC
-
-    Disable autosetting terminal title.
-
-    #+BEGIN_SRC sh
-      DISABLE_AUTO_TITLE="true"
-    #+END_SRC
-
 *** [[http://zsh.sourceforge.net/Doc/Release/Options-Index.html][Options]]
 
     #+BEGIN_SRC sh
