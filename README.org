@@ -123,6 +123,18 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       export K20E_SECRET_FUNCTIONS=${K20E_SECRET_HOME}/functions.sh
     #+END_SRC
 
+*** Options
+
+    #+BEGIN_SRC sh
+      shopt -s \
+            autocd \
+            cdspell \
+            checkjobs \
+            checkwinsize \
+            dirspell \
+            no_empty_cmd_completion
+    #+END_SRC
+
 *** Variables
 
     Bash variables.
