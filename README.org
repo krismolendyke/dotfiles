@@ -279,17 +279,16 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+BEGIN_SRC sh
       function k20e_working_directory() {
-          local YELLOW='\[\e[0;33m\]'
-          local RESET='\[\e[0m\]'
+          declare -r YELLOW='\[\e[0;33m\]'
+          declare -r RESET='\[\e[0m\]'
           echo "${YELLOW}\w${RESET}"
       }
     #+END_SRC
 
     #+BEGIN_SRC sh
       function k20e_virtual_env() {
-          local CYAN='\[\e[0;36m\]'
-          local RESET='\[\e[0m\]'
-          local UNDERLINE='\[\e[4m\]'
+          declare -r CYAN='\[\e[0;36m\]'
+          declare -r RESET='\[\e[0m\]'
           local venv='∅'
           if [ -n "${VIRTUAL_ENV}" ] && [ -d "${VIRTUAL_ENV}" ]; then
               venv=$(basename "${VIRTUAL_ENV}")
@@ -300,11 +299,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+BEGIN_SRC sh
       function k20e_prompt_command_aws_profile() {
-          local PURPLE='\[\e[0;35m\]'
-          local RESET='\[\e[0m\]'
+          declare -r PURPLE='\[\e[0;35m\]'
+          declare -r RED='\[\e[0;31m\]'
+          declare -r RESET='\[\e[0m\]'
           local profile="${AWS_PROFILE}"
           if [ "${profile}" = 'default' ]; then
               profile="✔"
+          elif [ "${profile}" = 'prod' ]; then
+              profile="${RED}⚠ ${AWS_PROFILE}"
           fi
           echo "${PURPLE}aws ${profile}${RESET}"
       }
