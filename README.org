@@ -305,7 +305,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           local profile="${AWS_PROFILE}"
           if [ "${profile}" = 'default' ]; then
               profile="✔"
-          elif [ "${profile}" = 'prod' ]; then
+          elif [[ "${profile}" =~ ^prod.* ]]; then
               profile="${RED}⚠ ${AWS_PROFILE}"
           fi
           echo "${PURPLE}aws ${profile}${RESET}"
