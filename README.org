@@ -222,39 +222,17 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 *** =PATH=
 
-    Avoid [[http://unix.stackexchange.com/questions/62579/is-there-a-way-to-add-a-directory-to-my-path-in-zsh-only-if-its-not-already-pre][duplicating]] =PATH= entries by setting the =path= variable to
-    be /unique/ and operating only on it.
-
     #+BEGIN_SRC sh
-      path=(
-          /usr/local/opt/python/libexec/bin
-          /usr/local/sbin
-          /usr/local/bin
-          ${HOME}/bin
-          ${CARGO_HOME}/bin
-          ${GOPATH}/bin
-          ${GOROOT}/bin
-          ${VLC_HOME}
-          ${CASK_HOME}/bin
-          "$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
-          ${CHICKEN_HOME}/bin
-      )
-
-      for p in "${path[@]}"; do
-          PATH="${p}:${PATH}"
-      done
-    #+END_SRC
-
-    Add Python 2 =site.USER_BASE= for user site-packages and =pip
-    install --user= installations.
-
-    - https://docs.python.org/3/install/index.html#inst-alt-install-user
-    - http://docs.pipenv.org/en/latest/basics.html#installing-pipenv
-
-    #+BEGIN_SRC sh
-      export PYTHON_USER_BASE=$(python2 -m site --user-base)
-      export PATH="${PYTHON_USER_BASE}/bin":"${PATH}"
-
+      PATH=/usr/local/sbin:"${PATH}"
+      PATH=/usr/local/bin:"${PATH}"
+      PATH="${HOME}/bin":"${PATH}"
+      PATH="${CARGO_HOME}/bin":"${PATH}"
+      PATH="${GOPATH}/bin":"${PATH}"
+      PATH="${GOROOT}/bin":"${PATH}"
+      PATH="${VLC_HOME}":"${PATH}"
+      PATH="${CASK_HOME}/bin":"${PATH}"
+      PATH="$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight":"${PATH}"
+      PATH="${CHICKEN_HOME}/bin":"${PATH}"
     #+END_SRC
 
     #+BEGIN_SRC sh
