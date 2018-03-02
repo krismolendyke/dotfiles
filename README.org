@@ -309,7 +309,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+BEGIN_SRC sh
       PROMPT_COMMAND='__git_ps1 \
-      "\n$(k20e_prompt_command_aws_profile) $(k20e_virtual_env)
+      "\n$(k20e_prompt_command_aws_profile)  $(k20e_virtual_env)
       $(k20e_working_directory)" \
       "\n\$ " \
       " %s"'
