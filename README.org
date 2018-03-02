@@ -387,15 +387,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 *** Completions
 
-**** Bash Builtins
-
-     For things like aliases, exports, function, etc.
-
-     #+BEGIN_SRC sh
-       if [ -e /usr/local/etc/bash_completion.d/bash-builtins ]; then
-           source /usr/local/etc/bash_completion.d/bash-builtins
-       fi
-     #+END_SRC
+    #+BEGIN_SRC sh
+      [ -e /usr/local/share/bash-completion/bash_completion ] && source /usr/local/share/bash-completion/bash_completion
+    #+END_SRC
 
 **** Git
 
@@ -887,7 +881,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "aspell"
      brew "autoconf"
      brew "automake"
-     brew "bash-completion"
+     brew "bash-completion@2"
      brew "bison"
      brew "freetype"
      brew "fontconfig"
