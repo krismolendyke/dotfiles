@@ -287,19 +287,19 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+BEGIN_SRC sh
       function k20e_virtual_env() {
-          declare -r CYAN='\[\e[0;36m\]'
+          declare -r BLUE='\[\e[0;34m\]'
           declare -r RESET='\[\e[0m\]'
           local venv='∅'
           if [ -n "${VIRTUAL_ENV}" ] && [ -d "${VIRTUAL_ENV}" ]; then
               venv=$(basename "${VIRTUAL_ENV}")
           fi
-          echo "${CYAN}venv ${venv}${RESET}"
+          echo "${BLUE}venv ${venv}${RESET}"
       }
     #+END_SRC
 
     #+BEGIN_SRC sh
       function k20e_prompt_command_aws_profile() {
-          declare -r PURPLE='\[\e[0;35m\]'
+          declare -r CYAN='\[\e[0;36m\]'
           declare -r RED='\[\e[0;31m\]'
           declare -r RESET='\[\e[0m\]'
           local profile="${AWS_PROFILE}"
@@ -308,7 +308,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           elif [[ "${profile}" =~ ^prod.* ]]; then
               profile="${RED}⚠ ${AWS_PROFILE}"
           fi
-          echo "${PURPLE}aws ${profile}${RESET}"
+          echo "${CYAN}aws ${profile}${RESET}"
       }
     #+END_SRC
 
