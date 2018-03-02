@@ -667,7 +667,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
               'pipenv'
           )
 
-          for package in ${packages}; do
+          for package in ${packages[@]}; do
               pipsi "${command}" "${package}"
           done
       }
