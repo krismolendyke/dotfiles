@@ -263,6 +263,25 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       fi
     #+END_SRC
 
+*** =pyenv=
+
+    #+BEGIN_SRC sh
+      if command -v pyenv 1>/dev/null 2>&1; then
+        eval "$(pyenv init -)"
+      fi
+    #+END_SRC
+
+    Add Python =site.USER_BASE= for user site-packages and =pip
+    install --user= installations.
+
+    - https://docs.python.org/3/install/index.html#inst-alt-install-user
+    - http://docs.pipenv.org/en/latest/basics.html#installing-pipenv
+
+    #+BEGIN_SRC sh
+      export PYTHON_USER_BASE=$(python -m site --user-base)
+      PATH="${PYTHON_USER_BASE}/bin":"${PATH}"
+    #+END_SRC
+
 *** =PROMPT_COMMAND=
 
     TODO try out https://github.com/magicmonty/bash-git-prompt
@@ -692,15 +711,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           pip install --user --upgrade --requirement ${HOME}/requirements-to-freeze.txt
           pip freeze > ${HOME}/requirements.txt
       }
-
-      function k20e-pip3-upgrade() {
-          if [[ $(which deactivate) == "deactivate: function" && -n ${VIRTUAL_ENV} ]]; then
-              echo "Deactivating current virtual environment ${VIRTUAL_ENV}"
-              deactivate
-          fi
-          pip3 install --user --upgrade --requirement ${HOME}/requirements-to-freeze.txt
-          pip3 freeze > ${HOME}/requirements.txt
-      }
     #+END_SRC
 
 *** [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
@@ -910,7 +920,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "go"
      brew "gradle"
      brew "grafana"
-     brew "python"
      brew "ruby"
      brew "graphviz", args: ["with-bindings"]
      brew "groovy"
@@ -942,7 +951,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "protobuf"
      brew "pstree"
      brew "pv"
-     brew "python3"
      brew "rocksdb"
      brew "rustup-init"
      brew "scons"
