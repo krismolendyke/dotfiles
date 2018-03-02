@@ -391,9 +391,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 **** Git
 
      #+BEGIN_SRC sh
-       if [ -e /usr/local/etc/bash_completion.d/git-completion.bash ]; then
-           source /usr/local/etc/bash_completion.d/git-completion.bash
-       fi
+       [ -e /usr/local/etc/bash_completion.d/git-completion.bash ] && source /usr/local/etc/bash_completion.d/git-completion.bash
      #+END_SRC
 
      Add completion for my muscle memory alias of =g= for =git=:
