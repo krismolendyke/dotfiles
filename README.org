@@ -265,9 +265,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     TODO try out https://github.com/magicmonty/bash-git-prompt
 
     #+BEGIN_SRC sh
-      if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
-          source /usr/local/etc/bash_completion.d/git-prompt.sh
-      fi
+      [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ] && source /usr/local/etc/bash_completion.d/git-prompt.sh
 
       GIT_PS1_SHOWCOLORHINTS=1
       GIT_PS1_SHOWDIRTYSTATE=1
