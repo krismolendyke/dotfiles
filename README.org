@@ -424,7 +424,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      Unset the many current and legacy AWS CLI environment variables:
 
      #+BEGIN_SRC sh
-       alias aws-unset="unset AWS_PROFILE AWS_PROFILE AWS_CREDENTIAL_FILE AWS_SECURITY_TOKEN EC2_CERT EC2_PRIVATE_KEY"
+       alias aws-list="env | grep AWS_"
+       alias aws-unset="unset AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID AWS_PROFILE AWS_PROFILE AWS_CREDENTIAL_FILE AWS_SECURITY_TOKEN EC2_CERT EC2_PRIVATE_KEY"
        aws-unset
      #+END_SRC
 
