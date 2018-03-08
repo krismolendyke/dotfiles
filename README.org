@@ -297,11 +297,16 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           declare -r CYAN='\[\e[0;36m\]'
           declare -r RED='\[\e[0;31m\]'
           declare -r RESET='\[\e[0m\]'
-          local profile="${AWS_PROFILE}"
+          declare profile="${AWS_PROFILE}"
+          declare token="${AWS_SECURITY_TOKEN}"
           if [ "${profile}" = 'default' ]; then
-              profile="✔"
+              profile='✔'
           elif [[ "${profile}" =~ ^prod.* ]]; then
               profile="${RED}⚠ ${AWS_PROFILE}"
+          elif [ -n "${token}" ]; then
+              profile='🔑'
+          else
+              profile='∅'
           fi
           echo "${CYAN}aws ${profile}${RESET}"
       }
