@@ -348,7 +348,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 **** =ssh TERM=
 
-     My Emacs =multi-term= with =zsh= has =TERM=xterm-256color=.  On
+     My Emacs =multi-term= with =bash= has =TERM=xterm-256color=.  On
      many remote hosts, primarily Amazon Linux, any =xterm= sets
      =PROMPT_COMMAND= and garbles the prompt by attempting to set the
      window title.  =/etc/bashrc= usually contains something like
@@ -955,7 +955,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "yasm"
      brew "youtube-dl"
      brew "yubico-piv-tool"
-     brew "zsh"
      cask "amethyst"
      cask "android-platform-tools"
      cask "etcher"
