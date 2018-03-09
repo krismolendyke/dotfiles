@@ -440,46 +440,55 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      #+BEGIN_SRC sh
        function k20e-aws-stacks-list()
        {
-           zparseopts -D -E -A opts -- o: p
-           output=${opts[-o]:-"table"}
+           declare output='table'
+           declare show_policies=false
 
-           name=${1}
-           statuses=(
-               CREATE_IN_PROGRESS
-               CREATE_FAILED
-               CREATE_COMPLETE
-               ROLLBACK_IN_PROGRESS
-               ROLLBACK_FAILED
-               ROLLBACK_COMPLETE
-               # DELETE_COMPLETE
-               DELETE_IN_PROGRESS
-               DELETE_FAILED
-               UPDATE_IN_PROGRESS
-               UPDATE_COMPLETE_CLEANUP_IN_PROGRESS
-               UPDATE_COMPLETE
-               UPDATE_ROLLBACK_IN_PROGRESS
-               UPDATE_ROLLBACK_FAILED
-               UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS
-               UPDATE_ROLLBACK_COMPLETE
+           declare OPTIND OPTARG opt
+           while getopts ':o:p' opt; do
+               case ${opt} in
+                   o)
+                       output="${OPTARG}"
+                       ;;
+                   p)
+                       show_policies=true
+                       ;;
+               esac
+           done
+           shift $((OPTIND-1))
+
+           declare -r NAME="${1}"
+
+           # DELETE_COMPLETE
+           declare -ar STATUSES=(
+               'CREATE_IN_PROGRESS'
+               'CREATE_FAILED'
+               'CREATE_COMPLETE'
+               'ROLLBACK_IN_PROGRESS'
+               'ROLLBACK_FAILED'
+               'ROLLBACK_COMPLETE'
+               'DELETE_IN_PROGRESS'
+               'DELETE_FAILED'
+               'UPDATE_IN_PROGRESS'
+               'UPDATE_COMPLETE_CLEANUP_IN_PROGRESS'
+               'UPDATE_COMPLETE'
+               'UPDATE_ROLLBACK_IN_PROGRESS'
+               'UPDATE_ROLLBACK_FAILED'
+               'UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS'
+               'UPDATE_ROLLBACK_COMPLETE'
            )
 
-           query=(
-               "StackSummaries[*].StackName"               # Array of stack names
-               "| [?contains(@, \`${name}\`) == \`true\`]" # Select those with the given name
+           declare -a query=(
+               'StackSummaries[*].StackName'
+               "| [?contains(@, \`${NAME}\`) == \`true\`]"
            )
 
-           # Remove policy stacks if -p is not specified
-           if (( ${+opts[-p]} == 0 )); then
-               query+=("| [?contains(@, \`Policy\`) == \`false\`]")
+           if [ "${show_policies}" = false ]; then
+               query+=('| [?contains(@, `Policy`) == `false`]')
            fi
 
-           # Sort results
-           query+=("| sort(@)")
+           query+=('| sort(@)')
 
-           aws --output ${output} \
-               cloudformation list-stacks \
-               --stack-status-filter ${statuses} \
-               --query "${query}"
+           aws --output "${output}" cloudformation list-stacks --stack-status-filter "${STATUSES[@]}" --query "'${query[@]}'"
        }
      #+END_SRC
 
