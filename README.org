@@ -488,7 +488,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
            query+=('| sort(@)')
 
-           aws --output "${output}" cloudformation list-stacks --stack-status-filter "${STATUSES[@]}" --query "'${query[@]}'"
+           aws --output "${output}" cloudformation list-stacks --stack-status-filter "${STATUSES[@]}" --query "'${query[*]}'"
        }
      #+END_SRC
 
