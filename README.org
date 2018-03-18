@@ -313,8 +313,19 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+END_SRC
 
     #+BEGIN_SRC sh
+      function k20e_python_version() {
+          if command -v pyenv 1>/dev/null 2>&1; then
+              declare -r PURPLE='\[\e[0;35m\]'
+              declare -r RESET='\[\e[0m\]'
+              declare -r PYTHON_VERSION=$(pyenv version-name)
+              echo "${PURPLE}🐍 ${PYTHON_VERSION}${RESET}"
+          fi
+      }
+    #+END_SRC
+
+    #+BEGIN_SRC sh
       PROMPT_COMMAND='__git_ps1 \
-      "\n$(k20e_prompt_command_aws_profile)  $(k20e_virtual_env)
+      "\n$(k20e_python_version)  $(k20e_prompt_command_aws_profile)  $(k20e_virtual_env)
       $(k20e_working_directory)" \
       "\n\$ " \
       " %s"'
