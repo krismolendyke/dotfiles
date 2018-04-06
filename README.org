@@ -756,18 +756,19 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      [apply]
            whitespace = nowarn
      [alias]
+           diff = diff --color-moved
            stache = stash
            st = status -sb
            a = add -p
-           l = log --stat --no-merges
-           lp = log --patch --stat --no-merges
-           wlp = log --patch --stat --color-words --no-merges
-           lo = log --oneline --decorate --no-merges
-           lf = log --pretty=format: --name-only -z --max-count 1 --no-merges
+           l = log --color-moved --stat --no-merges
+           lp = log --color-moved --patch --stat --no-merges
+           wlp = log --color-moved --patch --stat --color-words --no-merges
+           lo = log --color-moved --oneline --decorate --no-merges
+           lf = log --color-moved --pretty=format: --name-only -z --max-count 1 --no-merges
            co = checkout
            br = branch -v
-           wdiff = diff --color-words
-           ds = diff --staged
+           wdiff = diff --color-moved --color-words
+           ds = diff --color-moved --staged
      [advice]
            statusHints = true
      [rebase]
@@ -775,6 +776,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      [diff]
            algorithm = histogram
            compactionHeuristic = 1
+           colorMoved = zebra
      [help]
            autocorrect = 1
      [pager]
