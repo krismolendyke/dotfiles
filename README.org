@@ -979,6 +979,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "yubico-piv-tool"
      cask "amethyst"
      cask "android-platform-tools"
+     cask "devdocs"
      cask "etcher"
      cask "inkscape"
      cask "keepingyouawake"
