@@ -883,17 +883,17 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :END:
 
    #+BEGIN_SRC sh
-     tap "caskroom/cask"
-     tap "caskroom/versions"
-     tap "homebrew/bundle"
      tap "homebrew/core"
+     tap "homebrew/bundle"
      tap "homebrew/services"
+     tap "caskroom/versions"
+     tap "caskroom/cask"
      cask "xquartz"
+     cask "caskroom/versions/java8"
      brew "apr"
      brew "openssl"
      brew "apr-util"
      brew "aspell"
-     brew "autoconf"
      brew "automake"
      brew "bash"
      brew "bash-completion@2"
@@ -919,12 +919,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "gdk-pixbuf"
      brew "gflags"
      brew "git"
-     brew "p11-kit"
-     brew "gnutls"
      brew "go"
-     brew "libyaml"
-     brew "ruby"
-     brew "graphviz", args: ["with-bindings"]
      brew "gprof2dot"
      brew "gradle"
      brew "grafana"
@@ -941,6 +936,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "libdvdcss"
      brew "librsvg"
      brew "libssh"
+     brew "libyaml"
      brew "lz4"
      brew "make"
      brew "makedepend"
@@ -959,6 +955,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "pv"
      brew "pyenv"
      brew "rocksdb"
+     brew "ruby"
      brew "rustup-init"
      brew "scons"
      brew "shared-mime-info"
@@ -974,18 +971,33 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "yasm"
      brew "youtube-dl"
      brew "yubico-piv-tool"
+     cask "1password"
+     cask "alfred"
      cask "amethyst"
      cask "android-platform-tools"
      cask "devdocs"
      cask "etcher"
+     cask "google-backup-and-sync"
+     cask "google-chrome"
+     cask "google-featured-photos"
      cask "inkscape"
+     cask "iterm2"
      cask "keepingyouawake"
      cask "keybase"
      cask "racket"
+     cask "slack"
      cask "vagrant"
      cask "virtualbox"
+     cask "viscosity"
      cask "vlc"
+     cask "zoomus"
+     cask "caskroom/versions/istat-menus5"
+     mas "GarageBand", id: 682658836
+     mas "iMovie", id: 408981434
+     mas "Keynote", id: 409183694
      mas "Marked", id: 448925439
+     mas "Numbers", id: 409203825
+     mas "Pages", id: 409201541
      mas "Pixelmator", id: 407963104
      mas "The Unarchiver", id: 425424353
    #+END_SRC
