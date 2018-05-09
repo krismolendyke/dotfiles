@@ -885,11 +885,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      tap "caskroom/versions"
      tap "homebrew/bundle"
      tap "homebrew/core"
-     tap "homebrew/dupes"
-     tap "homebrew/games"
-     tap "homebrew/python"
      tap "homebrew/services"
-     tap "homebrew/versions"
      cask "xquartz"
      brew "apr"
      brew "openssl"
@@ -970,7 +966,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "texi2html"
      brew "the_silver_searcher"
      brew "tree"
-     brew "valgrind"
      brew "watch"
      brew "wget"
      brew "yarn"
@@ -988,13 +983,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      cask "vagrant"
      cask "virtualbox"
      cask "vlc"
-     mas "GarageBand", id: 682658836
-     mas "iMovie", id: 408981434
-     mas "iPhoto", id: 408981381
-     mas "Keynote", id: 409183694
      mas "Marked", id: 448925439
-     mas "Numbers", id: 409203825
-     mas "Pages", id: 409201541
      mas "Pixelmator", id: 407963104
      mas "The Unarchiver", id: 425424353
    #+END_SRC
