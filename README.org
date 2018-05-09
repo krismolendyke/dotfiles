@@ -753,6 +753,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
            excludesfile = ~/.gitignore-global
            whitespace = -trailing-space,-space-before-tab
            editor = emacsclient
+     [credential]
+           helper = osxkeychain
      [apply]
            whitespace = nowarn
      [alias]
