@@ -768,7 +768,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
            lo = log --color-moved --oneline --decorate --no-merges
            lf = log --color-moved --pretty=format: --name-only -z --max-count 1 --no-merges
            co = checkout
-           br = branch -v
+           br = branch -vv
            wdiff = diff --color-moved --color-words
            ds = diff --color-moved --staged
      [advice]
