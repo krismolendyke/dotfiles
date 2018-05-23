@@ -707,6 +707,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
           local packages=(
               'awscli'
+              'keyring'
               'pew'
               'pipdeptree[graphviz]'
               'pipenv'
