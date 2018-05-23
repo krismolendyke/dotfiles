@@ -223,16 +223,31 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 *** =PATH=
 
     #+BEGIN_SRC sh
-      PATH=/usr/local/sbin:"${PATH}"
-      PATH=/usr/local/bin:"${PATH}"
-      PATH="${HOME}/bin":"${PATH}"
-      PATH="${CARGO_HOME}/bin":"${PATH}"
-      PATH="${GOPATH}/bin":"${PATH}"
-      PATH="${GOROOT}/bin":"${PATH}"
-      PATH="${VLC_HOME}":"${PATH}"
-      PATH="${CASK_HOME}/bin":"${PATH}"
-      PATH="$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight":"${PATH}"
-      PATH="${CHICKEN_HOME}/bin":"${PATH}"
+      pathmunge () {
+          case ":${PATH}:" in
+              ,*:"$1":*)
+                  ;;
+              ,*)
+                  if [ "$2" = "after" ] ; then
+                      PATH=$PATH:$1
+                  else
+                      PATH=$1:$PATH
+                  fi
+          esac
+      }
+    #+END_SRC
+
+    #+BEGIN_SRC sh
+      pathmunge /usr/local/sbin
+      pathmunge /usr/local/bin
+      pathmunge "${HOME}/bin"
+      pathmunge "${CARGO_HOME}/bin"
+      pathmunge "${GOPATH}/bin"
+      pathmunge "${GOROOT}/bin"
+      pathmunge "${VLC_HOME}"
+      pathmunge "${CASK_HOME}/bin"
+      pathmunge "$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
+      pathmunge "${CHICKEN_HOME}/bin"
     #+END_SRC
 
     #+BEGIN_SRC sh
@@ -257,7 +272,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+BEGIN_SRC sh
       export PYTHON_USER_BASE=$(python -m site --user-base)
-      PATH="${PYTHON_USER_BASE}/bin":"${PATH}"
+      pathmunge "${PYTHON_USER_BASE}/bin"
     #+END_SRC
 
 *** =PROMPT_COMMAND=
