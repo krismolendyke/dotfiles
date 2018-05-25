@@ -900,14 +900,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :END:
 
    #+BEGIN_SRC sh
+     tap "homebrew/cask-versions"
      tap "homebrew/core"
+     tap "homebrew/cask"
      tap "homebrew/bundle"
      tap "homebrew/services"
-     tap "caskroom/versions"
-     tap "caskroom/cask"
      tap "jmespath/jmespath"
      cask "xquartz"
-     cask "caskroom/versions/java8"
+     cask "homebrew/cask-versions/java8"
      brew "apr"
      brew "openssl"
      brew "apr-util"
@@ -999,6 +999,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      cask "google-backup-and-sync"
      cask "google-chrome"
      cask "google-featured-photos"
+     cask "handbrake"
      cask "inkscape"
      cask "iterm2"
      cask "keepingyouawake"
@@ -1011,7 +1012,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      cask "viscosity"
      cask "vlc"
      cask "zoomus"
-     cask "caskroom/versions/istat-menus5"
+     cask "homebrew/cask-versions/istat-menus5"
      mas "GarageBand", id: 682658836
      mas "iMovie", id: 408981434
      mas "Keynote", id: 409183694
