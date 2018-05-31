@@ -921,7 +921,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "gettext", link: true
      brew "pixman"
      brew "cairo"
-     brew "emacs", args: ["HEAD", "with-cocoa", "with-gnutls"]
+     brew "emacs", args: ["HEAD", "with-cocoa"]
      brew "cask"
      brew "chicken"
      brew "cmake"
@@ -1003,7 +1003,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      cask "inkscape"
      cask "iterm2"
      cask "keepingyouawake"
-     cask "keybase"
      cask "mactex-no-gui"
      cask "racket"
      cask "slack"
