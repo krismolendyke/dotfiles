@@ -858,11 +858,11 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :END:
 
    Use [[https://www.kennethreitz.org/essays/a-better-pip-workflow][A Better Pip Workflow™]] to specify packages that I do actually
-   want installed to the system's site packages.  Everything else
-   should be installed with [[id:pipsi][pipsi]] to discrete virtual environments.
+   want installed to the user's packages.  Everything else should be
+   installed with [[id:pipsi][pipsi]] to discrete virtual environments.
 
    #+BEGIN_SRC python
-     # System packages
+     # User packages
      pipsi
      virtualenv
      virtualenvwrapper
