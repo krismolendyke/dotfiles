@@ -1005,6 +1005,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      cask "iterm2"
      cask "keepingyouawake"
      cask "mactex-no-gui"
+     cask "pocket-casts"
      cask "racket"
      cask "slack"
      cask "vagrant"
