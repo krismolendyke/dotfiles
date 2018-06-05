@@ -874,6 +874,15 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
   =brew= doesn't have a great way to manage dependencies that I've
   found outside of a =Brewfile= and the =bundle= subcommand.
 
+** Security
+
+   From https://www.davd.eu/securing-macos/#homebrew
+
+   #+BEGIN_SRC sh
+     export HOMEBREW_NO_INSECURE_REDIRECT=1
+     export HOMEBREW_CASK_OPTS=--require-sha
+   #+END_SRC
+
 ** [[https://github.com/Homebrew/homebrew-bundle][Bundle]]
 
    Install:
