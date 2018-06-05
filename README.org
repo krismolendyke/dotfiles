@@ -1006,6 +1006,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      cask "android-platform-tools"
      cask "devdocs"
      cask "etcher"
+     cask "firefox"
      cask "google-backup-and-sync"
      cask "google-chrome"
      cask "google-featured-photos"
