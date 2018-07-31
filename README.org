@@ -162,7 +162,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       # https://github.com/rust-lang-nursery/rustfmt#tips
       export DYLD_LIBRARY_PATH=$(${CARGO_HOME}/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
 
-      export CASK_HOME=${HOME}/.cask
       export CHICKEN_HOME=$(/usr/local/bin/csi -print '(chicken-home)' | cut -d/ -f 1-8)
       export GROOVY_HOME=/usr/local/opt/groovy/libexec
       export JAVA_HOME=$(/usr/libexec/java_home)
@@ -245,7 +244,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       pathmunge "${GOPATH}/bin"
       pathmunge "${GOROOT}/bin"
       pathmunge "${VLC_HOME}"
-      pathmunge "${CASK_HOME}/bin"
       pathmunge "$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
       pathmunge "${CHICKEN_HOME}/bin"
     #+END_SRC
