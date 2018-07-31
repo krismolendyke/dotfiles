@@ -237,6 +237,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+END_SRC
 
     #+BEGIN_SRC sh
+      pathmunge /usr/local/opt/python/libexec/bin
       pathmunge /usr/local/sbin
       pathmunge /usr/local/bin
       pathmunge "${HOME}/bin"
@@ -254,13 +255,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       fi
     #+END_SRC
 
-*** =pyenv=
-
-    #+BEGIN_SRC sh
-      if command -v pyenv 1>/dev/null 2>&1; then
-        eval "$(pyenv init -)"
-      fi
-    #+END_SRC
+*** =PYTHON_USER_BASE=
 
     Add Python =site.USER_BASE= for user site-packages and =pip
     install --user= installations.
@@ -326,19 +321,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+END_SRC
 
     #+BEGIN_SRC sh
-      function k20e_python_version() {
-          if command -v pyenv 1>/dev/null 2>&1; then
-              declare -r PURPLE='\[\e[0;35m\]'
-              declare -r RESET='\[\e[0m\]'
-              declare -r PYTHON_VERSION=$(pyenv version-name)
-              echo "${PURPLE}🐍 ${PYTHON_VERSION}${RESET}"
-          fi
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC sh
       PROMPT_COMMAND='__git_ps1 \
-      "\n$(k20e_python_version)  $(k20e_prompt_command_aws_profile)  $(k20e_virtual_env)
+      "\n$(k20e_prompt_command_aws_profile)  $(k20e_virtual_env)
       $(k20e_working_directory)" \
       "\n\$ " \
       " %s"'
@@ -359,7 +343,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       alias l.l='ls -1A | grep "^\." | xargs ls -lhGF'
       alias ll="ls -lhF"
       alias ls="ls -GF"
-      alias pipsi="pipsi --bin-dir ${PYTHON_USER_BASE}/bin --home ${HOME}/.virtualenvs"
       alias top="top -ocpu -Orsize"
       alias v="TERM=ansi vagrant"
     #+END_SRC
@@ -691,34 +674,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        fi
      #+END_SRC
 
-*** [[https://github.com/mitsuhiko/pipsi][pipsi]]
-    :PROPERTIES:
-    :CUSTOM_ID: pipsi
-    :END:
-
-    Install Python programs into their own virtual environments.  Only
-    CLI programs should be installed this way, no libraries.
-
-    #+BEGIN_SRC sh
-      function k20e-pipsi-upgrade() {
-          local command=${1:-upgrade}
-
-          local packages=(
-              'awscli'
-              'keyring'
-              'pew'
-              'pipdeptree[graphviz]'
-              'pipenv'
-              'restview'
-              'twine'
-          )
-
-          for package in ${packages[@]}; do
-              pipsi "${command}" "${package}"
-          done
-      }
-    #+END_SRC
-
 *** Python
     :PROPERTIES:
     :CUSTOM_ID: functions-python
@@ -857,12 +812,18 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :END:
 
    Use [[https://www.kennethreitz.org/essays/a-better-pip-workflow][A Better Pip Workflow™]] to specify packages that I do actually
-   want installed to the user's packages.  Everything else should be
-   installed with [[id:pipsi][pipsi]] to discrete virtual environments.
+   want installed to the user's packages.
 
    #+BEGIN_SRC python
      # User packages
-     pipsi
+     awscli
+     jmespath-terminal
+     keyring
+     pew
+     pipdeptree[graphviz]
+     pipenv
+     restview
+     twine
      virtualenv
      virtualenvwrapper
    #+END_SRC
