@@ -1002,3 +1002,28 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
    The =Bundlefile= above should install the App Store programs listed
    with in it using =mas=.
+
+* SSH
+
+  Create a configuration directory:
+
+  #+BEGIN_SRC sh
+    mkdir -p ${HOME}/.ssh/config.d
+  #+END_SRC
+
+** =config=
+   :PROPERTIES:
+   :header-args: :tangle ~/.ssh/config
+   :END:
+
+   #+BEGIN_SRC conf
+     ServerAliveCountMax 5
+     ServerAliveInterval 60
+     UseKeychain yes
+
+     Host *
+         IdentityFile ~/.ssh/id_rsa
+         PreferredAuthentications publickey,password
+
+     Include config.d/*
+   #+END_SRC
