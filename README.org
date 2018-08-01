@@ -1025,5 +1025,5 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
          IdentityFile ~/.ssh/id_rsa
          PreferredAuthentications publickey,password
 
-     Include config.d/*
+     Include ~/.ssh/config.d/*
    #+END_SRC
