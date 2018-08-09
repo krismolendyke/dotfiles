@@ -398,6 +398,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       [ -e /usr/local/share/bash-completion/bash_completion ] && source /usr/local/share/bash-completion/bash_completion
     #+END_SRC
 
+**** =ag=
+
+     #+BEGIN_SRC sh
+       [ -e /usr/local/etc/bash_completion.d/ag.bashcomp.sh ] && source /usr/local/etc/bash_completion.d/ag.bashcomp.sh
+     #+END_SRC
+
 **** Git
 
      #+BEGIN_SRC sh
