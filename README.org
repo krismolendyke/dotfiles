@@ -7,6 +7,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 #+TOC: headlines 3
 
+* Prerequisites
+
+  #+BEGIN_SRC sh
+    mkdir -p ~/.bashrc.d/secret
+    # TODO: fix the fact that something below this needs a file to exist in the secrets dir
+    mkdir -p ~/.ssh/config
+  #+END_SRC
+
 * Build Configuration Files
 
   Open this Org document in Emacs and [[http://orgmode.org/manual/tangle.html#tangle][tangle]] it (=C-c C-v t=).
