@@ -177,10 +177,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
       export DESKTOP=${HOME}/Desktop
       export DOWNLOADS=${HOME}/Downloads
+      export GOPATH=${HOME}/go
       export GOROOT=/usr/local/opt/go/libexec
       export HOMEBREW_CELLAR=$(/usr/local/bin/brew --prefix)/Cellar
 
-      export GOPATH=${CODE_HOME}/go
       export MANPATH=/usr/local/share/man:${MANPATH}
       export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
     #+END_SRC
