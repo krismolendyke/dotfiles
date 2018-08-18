@@ -883,14 +883,13 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :END:
 
    #+BEGIN_SRC sh
+     tap "homebrew/bundle"
+     tap "homebrew/cask"
      tap "homebrew/cask-versions"
      tap "homebrew/core"
-     tap "homebrew/cask"
-     tap "homebrew/bundle"
      tap "homebrew/services"
      tap "jmespath/jmespath"
      cask "xquartz"
-     cask "homebrew/cask-versions/java8"
      brew "apr"
      brew "openssl"
      brew "apr-util"
@@ -985,26 +984,17 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      cask "google-featured-photos"
      cask "handbrake"
      cask "inkscape"
+     cask "istat-menus5"
      cask "iterm2"
+     cask "java8"
      cask "keepingyouawake"
      cask "mactex-no-gui"
      cask "pocket-casts"
      cask "racket"
      cask "slack"
-     cask "vagrant"
-     cask "virtualbox"
      cask "viscosity"
      cask "vlc"
      cask "zoomus"
-     cask "homebrew/cask-versions/istat-menus5"
-     mas "GarageBand", id: 682658836
-     mas "iMovie", id: 408981434
-     mas "Keynote", id: 409183694
-     mas "Marked", id: 448925439
-     mas "Numbers", id: 409203825
-     mas "Pages", id: 409201541
-     mas "Pixelmator", id: 407963104
-     mas "The Unarchiver", id: 425424353
    #+END_SRC
 
 ** [[https://github.com/mas-cli/mas][mas]]
