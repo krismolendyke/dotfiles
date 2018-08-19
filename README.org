@@ -833,12 +833,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      awscli
      jmespath-terminal
      keyring
-     pew
      pipdeptree[graphviz]
-     pipenv
-     restview
      twine
-     virtualenv
      virtualenvwrapper
    #+END_SRC
 
