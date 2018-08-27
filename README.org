@@ -917,6 +917,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "git"
      brew "go"
      brew "gprof2dot"
+     brew "gradle"
      brew "grafana"
      brew "groovy"
      brew "harfbuzz"
