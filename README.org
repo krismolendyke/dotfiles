@@ -179,7 +179,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       export DOWNLOADS=${HOME}/Downloads
       export GOPATH=${HOME}/go
       export GOROOT=/usr/local/opt/go/libexec
-      export HOMEBREW_CELLAR=$(/usr/local/bin/brew --prefix)/Cellar
+      export HOMEBREW_CASK_HOME=/usr/local/Caskroom
+      export HOMEBREW_CELLAR=$(/usr/local/bin/brew --cellar)
 
       export MANPATH=/usr/local/share/man:${MANPATH}
       export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
@@ -688,6 +689,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        fi
      #+END_SRC
 
+*** Google Cloud SDK
+
+    Completion:
+
+    #+BEGIN_SRC sh
+      [ -e ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc ] && source ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
+    #+END_SRC
+
 *** Python
     :PROPERTIES:
     :CUSTOM_ID: functions-python
@@ -926,6 +935,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "ipcalc"
      brew "ispell"
      brew "kotlin"
+     brew "kubernetes-cli"
      brew "less"
      brew "libav"
      brew "libcroco"
@@ -975,6 +985,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      cask "firefox"
      cask "google-backup-and-sync"
      cask "google-chrome"
+     cask "google-cloud-sdk"
      cask "google-featured-photos"
      cask "handbrake"
      cask "inkscape"
