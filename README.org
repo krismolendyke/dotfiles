@@ -911,6 +911,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "cask"
      brew "chicken"
      brew "cmake"
+     brew "docker-completion"
      brew "faac"
      brew "lame"
      brew "xvid"
