@@ -995,12 +995,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      cask "java8"
      cask "keepingyouawake"
      cask "mactex-no-gui"
+     cask "minikube"
      cask "pocket-casts"
      cask "racket"
      cask "slack"
      cask "vanilla"
      cask "viscosity"
      cask "vlc"
+     mas "Pixelmator", id: 407963104
    #+END_SRC
 
 ** [[https://github.com/mas-cli/mas][mas]]
