@@ -1002,6 +1002,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      cask "vanilla"
      cask "viscosity"
      cask "vlc"
+     mas "Pages", id: 409201541
      mas "Pixelmator", id: 407963104
    #+END_SRC
 
