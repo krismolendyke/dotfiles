@@ -301,11 +301,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       function k20e_virtual_env() {
           declare -r BLUE='\[\e[0;34m\]'
           declare -r RESET='\[\e[0m\]'
-          local venv='∅'
+          local venv=''
           if [ -n "${VIRTUAL_ENV}" ] && [ -d "${VIRTUAL_ENV}" ]; then
               venv=$(basename "${VIRTUAL_ENV}")
+              venv="${venv} "
           fi
-          echo "${BLUE}venv ${venv}${RESET}"
+          echo "${BLUE}${venv}${RESET}"
       }
     #+END_SRC
 
@@ -331,8 +332,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+BEGIN_SRC sh
       PROMPT_COMMAND='__git_ps1 \
-      "\n$(k20e_prompt_command_aws_profile)  $(k20e_virtual_env)
-      $(k20e_working_directory)" \
+      "$(k20e_virtual_env)$(k20e_working_directory)" \
       "\n\$ " \
       " %s"'
     #+END_SRC
