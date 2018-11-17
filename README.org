@@ -941,7 +941,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      chunkc set desktop_gap_step_size         5.0
 
      chunkc set bsp_spawn_left                1
-     chunkc set bsp_optimal_ratio             1.618
+     chunkc set bsp_optimal_ratio             1.0
      chunkc set bsp_split_mode                optimal
      chunkc set bsp_split_ratio               0.5
 
