@@ -980,9 +980,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      #       1 = true, outline border
      #
 
-     chunkc set focused_border_color          0xff0f6288
+     chunkc set focused_border_color          0xfff74902
      chunkc set focused_border_width          5
-     chunkc set focused_border_radius         0
+     chunkc set focused_border_radius         6
      chunkc set focused_border_outline        0
      chunkc set focused_border_skip_floating  0
      chunkc set focused_border_skip_monocle   0
