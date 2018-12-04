@@ -429,6 +429,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     Completion:
 
     #+BEGIN_SRC sh
+      [ -e ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc ] && source ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
       [ -e ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc ] && source ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
     #+END_SRC
 
