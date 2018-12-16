@@ -1136,28 +1136,28 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      shift + alt - w : chunkc tiling::window --close
 
      # focus window
-     # shift + alt - w : chunkc tiling::window --focus west
-     # shift + alt - s : chunkc tiling::window --focus south
-     # shift + alt - n : chunkc tiling::window --focus north
-     # shift + alt - e : chunkc tiling::window --focus east
+     ctrl + alt - h : chunkc tiling::window --focus west
+     ctrl + alt - t : chunkc tiling::window --focus south
+     ctrl + alt - c : chunkc tiling::window --focus north
+     ctrl + alt - n : chunkc tiling::window --focus east
 
-     shift + alt - n : chunkc tiling::window --focus next
-     shift + alt - p : chunkc tiling::window --focus prev
+     # move window
+     ctrl + alt + cmd - h : chunkc tiling::window --warp west
+     ctrl + alt + cmd - t : chunkc tiling::window --warp south
+     ctrl + alt + cmd - c : chunkc tiling::window --warp north
+     ctrl + alt + cmd - n : chunkc tiling::window --warp east
+
+     # shift + alt - n : chunkc tiling::window --focus next
+     # shift + alt - p : chunkc tiling::window --focus prev
 
      # equalize size of windows
-     shift + alt - 0 : chunkc tiling::desktop --equalize
+     ctrl + alt - 0 : chunkc tiling::desktop --equalize
 
      # swap window
      # shift + alt - h : chunkc tiling::window --swap west
      # shift + alt - j : chunkc tiling::window --swap south
      # shift + alt - k : chunkc tiling::window --swap north
      # shift + alt - l : chunkc tiling::window --swap east
-
-     # move window
-     # shift + cmd - h : chunkc tiling::window --warp west
-     # shift + cmd - j : chunkc tiling::window --warp south
-     # shift + cmd - k : chunkc tiling::window --warp north
-     # shift + cmd - l : chunkc tiling::window --warp east
 
      # make floating window fill screen
      # shift + alt - up     : chunkc tiling::window --grid-layout 1:1:0:0:1:1
