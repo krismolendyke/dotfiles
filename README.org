@@ -393,7 +393,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        [ -e /usr/local/etc/bash_completion.d/ag.bashcomp.sh ] && source /usr/local/etc/bash_completion.d/ag.bashcomp.sh
      #+END_SRC
 
-**** =kubectl=, =k=
+**** =kubectl=, =k=, =kctl=, =kns=
 
      #+BEGIN_SRC sh
        [ -e /usr/local/etc/bash_completion.d/kubectl ] && source /usr/local/etc/bash_completion.d/kubectl
@@ -403,6 +403,19 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
      #+BEGIN_SRC sh
        complete -o default -F __start_kubectl k
+     #+END_SRC
+
+     Completion for helper tools =kctl=, =kns=:
+
+     #+BEGIN_SRC sh
+       [ -e /usr/local/etc/bash_completion.d/kubectx ] && source /usr/local/etc/bash_completion.d/kubectx
+       [ -e /usr/local/etc/bash_completion.d/kubens ] && source /usr/local/etc/bash_completion.d/kubens
+     #+END_SRC
+
+     Change currently selected color:
+
+     #+BEGIN_SRC sh
+       export KUBECTX_CURRENT_FGCOLOR=$(tput setaf 2)
      #+END_SRC
 
 **** Git
