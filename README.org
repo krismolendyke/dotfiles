@@ -300,19 +300,54 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+BEGIN_SRC sh
       function k20e_virtual_env() {
           declare -r BLUE='\[\e[0;34m\]'
+          declare -r YELLOW='\[\e[0;33m\]'
           declare -r RESET='\[\e[0m\]'
-          local venv=''
+          declare -r PREFIX="${BLUE}p${YELLOW}y${RESET}  "
+          declare -r SUFFIX="\n${RESET}"
+          local value=''
           if [ -n "${VIRTUAL_ENV}" ] && [ -d "${VIRTUAL_ENV}" ]; then
-              venv=$(basename "${VIRTUAL_ENV}")
-              venv="${venv} "
+              value=$(basename "${VIRTUAL_ENV}")
+              value="${PREFIX}${value}${SUFFIX}"
           fi
-          echo "${BLUE}${venv}${RESET}"
+          echo "${value}"
+      }
+    #+END_SRC
+
+    #+BEGIN_SRC sh
+      function k20e_gcp_project() {
+          declare -r BLUE='\[\e[0;34m\]'
+          declare -r RED='\[\e[0;31m\]'
+          declare -r YELLOW='\[\e[0;33m\]'
+          declare -r RESET='\[\e[0m\]'
+          declare -r PREFIX="${BLUE}g${RED}c${YELLOW}p${RESET} "
+          declare -r SUFFIX="\n${RESET}"
+          local value=''
+          if [ -e ${HOME}/.config/gcloud/active_config ]; then
+              value=$(cat ${HOME}/.config/gcloud/active_config)
+              value="${PREFIX}${value}${SUFFIX}"
+          fi
+          echo "${value}"
+      }
+    #+END_SRC
+
+    #+BEGIN_SRC sh
+      function k20e_kubectx() {
+          declare -r BLUE='\[\e[0;34m\]'
+          declare -r RESET='\[\e[0m\]'
+          declare -r PREFIX="${BLUE}k8s${RESET} "
+          declare -r SUFFIX="\n${RESET}"
+          local value=''
+          if [ -e ${HOME}/.kube/config ]; then
+              value=$(cat ${HOME}/.kube/config | grep current-context | cut -d ' ' -f 2)
+              value="${PREFIX}${value}${SUFFIX}"
+          fi
+          echo "${value}"
       }
     #+END_SRC
 
     #+BEGIN_SRC sh
       PROMPT_COMMAND='__git_ps1 \
-      "$(k20e_virtual_env)$(k20e_working_directory)" \
+      "\n$(k20e_gcp_project)$(k20e_kubectx)$(k20e_virtual_env)$(k20e_working_directory)" \
       "\n\$ " \
       " %s"'
     #+END_SRC
