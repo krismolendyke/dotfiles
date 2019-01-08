@@ -440,7 +440,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        complete -o default -F __start_kubectl k
      #+END_SRC
 
-     Completion for helper tools =kctl=, =kns=:
+     Install [[https://github.com/ahmetb/kubectx][kubectx]] (via [[#brewfile][=${HOME}/.Brewfile=]]), completion for helper
+     tools =kctl=, =kns=:
 
      #+BEGIN_SRC sh
        [ -e /usr/local/etc/bash_completion.d/kubectx ] && source /usr/local/etc/bash_completion.d/kubectx
@@ -753,6 +754,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =${HOME}/.Brewfile=
    :PROPERTIES:
+   :CUSTOM_ID: brewfile
    :header-args: :tangle ~/.Brewfile
    :END:
 
