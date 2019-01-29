@@ -427,7 +427,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        [ -e /usr/local/etc/bash_completion.d/ag.bashcomp.sh ] && source /usr/local/etc/bash_completion.d/ag.bashcomp.sh
      #+END_SRC
 
-**** =kubectl=, =k=, =kctl=, =kns=
+**** =kubectl=, =k=, =kctx=, =kns=
 
      #+BEGIN_SRC sh
        [ -e /usr/local/etc/bash_completion.d/kubectl ] && source /usr/local/etc/bash_completion.d/kubectl
@@ -440,9 +440,11 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      #+END_SRC
 
      Install [[https://github.com/ahmetb/kubectx][kubectx]] (via [[#brewfile][=${HOME}/.Brewfile=]]), completion for helper
-     tools =kctl=, =kns=:
+     tools =kctx=, =kns=:
 
      #+BEGIN_SRC sh
+       alias kctx=kubectx \
+             kns=kubens
        [ -e /usr/local/etc/bash_completion.d/kubectx ] && source /usr/local/etc/bash_completion.d/kubectx
        [ -e /usr/local/etc/bash_completion.d/kubens ] && source /usr/local/etc/bash_completion.d/kubens
      #+END_SRC
