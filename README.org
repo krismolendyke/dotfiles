@@ -180,6 +180,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       export GOROOT=/usr/local/opt/go/libexec
       export HOMEBREW_CASK_HOME=/usr/local/Caskroom
       export HOMEBREW_CELLAR=$(/usr/local/bin/brew --cellar)
+      export HOMEBREW_INSTALL_CLEANUP=1
 
       export MANPATH=/usr/local/share/man:${MANPATH}
       export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
