@@ -171,7 +171,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       export DYLD_LIBRARY_PATH=$(${CARGO_HOME}/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
 
       export GROOVY_HOME=/usr/local/opt/groovy/libexec
-      export JAVA_HOME=$(/usr/libexec/java_home)
       export VLC_HOME=/Applications/VLC.app/Contents/MacOS
 
       export DESKTOP=${HOME}/Desktop
@@ -181,6 +180,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       export HOMEBREW_CASK_HOME=/usr/local/Caskroom
       export HOMEBREW_CELLAR=$(/usr/local/bin/brew --cellar)
       export HOMEBREW_INSTALL_CLEANUP=1
+
+      export JENV_HOME=${HOME}/.jenv
 
       export MANPATH=/usr/local/share/man:${MANPATH}
       export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
@@ -247,6 +248,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+BEGIN_SRC sh
       pathmunge /usr/local/opt/python/libexec/bin
+      pathmunge "${JENV_HOME}/bin"
       pathmunge /usr/local/sbin
       pathmunge /usr/local/bin
       pathmunge "${HOME}/bin"
@@ -261,6 +263,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       if [ -f ${K20E_SECRET_PATH} ]; then
           source ${K20E_SECRET_PATH}
       fi
+    #+END_SRC
+
+*** jEnv
+
+    For managing multiple Java installations.
+
+    #+BEGIN_SRC sh
+      eval "$(jenv init -)"
     #+END_SRC
 
 *** =PYTHON_USER_BASE=
@@ -771,6 +781,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      tap "koekeishiya/formulae"
      cask "java"
      cask "xquartz"
+     cask "java8"
      brew "apr"
      brew "openssl"
      brew "apr-util"
@@ -815,6 +826,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      brew "influxdb"
      brew "ipcalc"
      brew "ispell"
+     brew "jenv"
      brew "jid"
      brew "kafka"
      brew "lz4"
@@ -882,7 +894,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      cask "intellij-idea"
      cask "istat-menus5"
      cask "iterm2"
-     cask "java8"
      cask "keepingyouawake"
      cask "mactex-no-gui"
      cask "plex-media-player"
