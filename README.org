@@ -338,6 +338,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           local value=''
           if [ -e ${HOME}/.kube/config ]; then
               value=$(cat ${HOME}/.kube/config | grep current-context | cut -d ' ' -f 2)
+              value="${value} $(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${value}\")].context.namespace}")"
               value="${PREFIX}${value}${SUFFIX}"
           fi
           echo "${value}"
