@@ -326,13 +326,17 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       function k20e_gcp_project() {
           declare -r BLUE='\[\e[0;34m\]'
           declare -r RED='\[\e[0;31m\]'
+          declare -r RED_BG='\[\e[0;41m\]'
           declare -r YELLOW='\[\e[0;33m\]'
           declare -r RESET='\[\e[0m\]'
           declare -r PREFIX="${BLUE}g${RED}c${YELLOW}p${RESET} "
-          declare -r SUFFIX=" ${RESET}"
+          declare -r SUFFIX="${RESET} "
           local value=''
           if [ -e ${HOME}/.config/gcloud/active_config ]; then
               value=$(cat ${HOME}/.config/gcloud/active_config)
+              if [[ "${value}" =~ .*prod.* ]]; then
+                  value="${RED_BG}${value}"
+              fi
               value="${PREFIX}${value}${SUFFIX}"
           fi
           echo "${value}"
