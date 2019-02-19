@@ -346,13 +346,17 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+BEGIN_SRC sh
       function k20e_kubectx() {
           declare -r BLUE='\[\e[0;34m\]'
+          declare -r RED_BG='\[\e[0;41m\]'
           declare -r RESET='\[\e[0m\]'
           declare -r PREFIX="${BLUE}k8s${RESET} "
-          declare -r SUFFIX=" ${RESET}"
+          declare -r SUFFIX="${RESET} "
           local value=''
           if [ -e ${HOME}/.kube/config ]; then
               value=$(cat ${HOME}/.kube/config | grep current-context | cut -d ' ' -f 2)
-              value="${value} $(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${value}\")].context.namespace}")"
+              value="${value}${RESET} $(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${value}\")].context.namespace}")"
+              if [[ "${value}" =~ .*prod.* ]]; then
+                  value="${RED_BG}${value}"
+              fi
               value="${PREFIX}${value}${SUFFIX}"
           fi
           echo "${value}"
