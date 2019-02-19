@@ -353,7 +353,11 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           local value=''
           if [ -e ${HOME}/.kube/config ]; then
               value=$(cat ${HOME}/.kube/config | grep current-context | cut -d ' ' -f 2)
-              value="${value}${RESET} $(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${value}\")].context.namespace}")"
+              fullname=${value}
+              if [[ "${value}" =~ ^gke_ ]]; then
+                  value=$(echo "${value}" | cut -d _ -f 4)
+              fi
+              value="${value}${RESET} $(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${fullname}\")].context.namespace}")"
               if [[ "${value}" =~ .*prod.* ]]; then
                   value="${RED_BG}${value}"
               fi
