@@ -357,7 +357,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
               if [[ "${value}" =~ ^gke_ ]]; then
                   value=$(echo "${value}" | cut -d _ -f 4)
               fi
-              value="${value}${RESET} $(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${fullname}\")].context.namespace}")"
+              value="${value}${RESET}·$(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${fullname}\")].context.namespace}")"
               if [[ "${value}" =~ .*prod.* ]]; then
                   value="${RED_BG}${value}"
               fi
