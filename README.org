@@ -1195,23 +1195,27 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      #     "finder"      : false
      # ]
 
+     .blacklist [
+         "emacs"
+     ]
+
      # close focused window
      shift + alt - w : chunkc tiling::window --close
 
      # focus window
-     ctrl + alt - h : chunkc tiling::window --focus west
-     ctrl + alt - t : chunkc tiling::window --focus south
-     ctrl + alt - c : chunkc tiling::window --focus north
-     ctrl + alt - n : chunkc tiling::window --focus east
+     alt - down : chunkc tiling::window --focus south
+     alt - left : chunkc tiling::window --focus west
+     alt - right : chunkc tiling::window --focus east
+     alt - up : chunkc tiling::window --focus north
+
+     alt - space : chunkc tiling::window --focus next
+     shift + alt - space : chunkc tiling::window --focus prev
 
      # move window
-     ctrl + alt + cmd - h : chunkc tiling::window --warp west
-     ctrl + alt + cmd - t : chunkc tiling::window --warp south
-     ctrl + alt + cmd - c : chunkc tiling::window --warp north
-     ctrl + alt + cmd - n : chunkc tiling::window --warp east
-
-     # shift + alt - n : chunkc tiling::window --focus next
-     # shift + alt - p : chunkc tiling::window --focus prev
+     shift + alt - down : chunkc tiling::window --warp south
+     shift + alt - left : chunkc tiling::window --warp west
+     shift + alt - right : chunkc tiling::window --warp east
+     shift + alt - up : chunkc tiling::window --warp north
 
      # equalize size of windows
      ctrl + alt - 0 : chunkc tiling::desktop --equalize
