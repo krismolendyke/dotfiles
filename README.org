@@ -381,16 +381,20 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       alias ...="cd ../../"
       alias ....="cd ../../.."
       alias brewdump="brew bundle dump --force --global --verbose && pbcopy < ${HOME}/.Brewfile"
+      alias dirs="dirs -v"
       alias emacs="/usr/local/bin/emacs --no-window-system"
       alias emacsclient="/usr/local/bin/emacsclient --no-wait"
-      alias ec=emacsclient
+      alias ec="emacsclient"
       alias g="git"
       alias j="jobs -l"
       alias k="kubectl"
       alias l.l='ls -1A | grep "^\." | xargs ls -lhGF'
       alias ll="ls -lhF"
+      alias lll="ll"
       alias ls="ls -GF"
+      alias l="ls"
       alias top="top -ocpu -Orsize"
+      alias tree="tree -C"
     #+END_SRC
 
     #+BEGIN_SRC sh
