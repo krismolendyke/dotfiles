@@ -959,6 +959,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      Include ~/.ssh/config.d/*
    #+END_SRC
 
+* MacOS Junk
+
+  =defaults write com.apple.Accessibility ReduceMotionEnabled -bool true=
+
 * ChunkWM
 
 ** =.chunkwm=
