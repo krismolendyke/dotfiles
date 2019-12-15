@@ -24,8 +24,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Change Default Shell
 
-   This should be the Homebrew installed =bash= /not/ the system
-   =bash= path.
+   For MacOS this should be the Homebrew installed =bash= /not/ the
+   system =bash= path.
 
    #+BEGIN_SRC sh
      chsh -s /usr/local/bin/bash
@@ -36,7 +36,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      echo ${SHELL}
    #+END_SRC
 
-   On OS X:
+   On MacOS:
 
    #+BEGIN_SRC sh
      sudo dscl . -create ${HOME} UserShell /usr/local/bin/bash
@@ -168,7 +168,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       export CARGO_HOME=${HOME}/.cargo
 
       # https://github.com/rust-lang-nursery/rustfmt#tips
-      export DYLD_LIBRARY_PATH=$(${CARGO_HOME}/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
+      if [[ -x ${CARGO_HOME}/bin/rustc ]]; then
+	  export DYLD_LIBRARY_PATH=$(${CARGO_HOME}/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
+      fi
 
       export GROOVY_HOME=/usr/local/opt/groovy/libexec
       export VLC_HOME=/Applications/VLC.app/Contents/MacOS
@@ -177,9 +179,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       export DOWNLOADS=${HOME}/Downloads
       export GOPATH=${HOME}/go
       export GOROOT=/usr/local/opt/go/libexec
-      export HOMEBREW_CASK_HOME=/usr/local/Caskroom
-      export HOMEBREW_CELLAR=$(/usr/local/bin/brew --cellar)
-      export HOMEBREW_INSTALL_CLEANUP=1
+
+      if [[ "$OSTYPE" == darwin* ]]; then
+	  export HOMEBREW_CASK_HOME=/usr/local/Caskroom
+	  export HOMEBREW_CELLAR=$(/usr/local/bin/brew --cellar)
+	  export HOMEBREW_INSTALL_CLEANUP=1
+      fi    
 
       export JENV_HOME=${HOME}/.jenv
 
@@ -193,7 +198,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       export EDITOR=emacsclient
       export EMACS_VERSION="HEAD"
       export LANG=en_US.UTF-8
-      export PIPENV_SHELL_FANCY=1
       export TERM=xterm-256color
     #+END_SRC
 
@@ -256,7 +260,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       pathmunge "${GOPATH}/bin"
       pathmunge "${GOROOT}/bin"
       pathmunge "${VLC_HOME}"
-      pathmunge "$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
+
+      if [[ "$OSTYPE" == darwin* ]]; then
+	  pathmunge "$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
+      fi
+
+      if [[ -x /usr/share/doc/git/contrib/diff-highlight ]]; then
+	  pathmunge /usr/share/doc/git/contrib/diff-highlight
+      fi
     #+END_SRC
 
     #+BEGIN_SRC sh
@@ -270,7 +281,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     For managing multiple Java installations.
 
     #+BEGIN_SRC sh
-      eval "$(jenv init -)"
+      if [[ -x jenv ]]; then
+	  eval "$(jenv init -)"
+      fi
     #+END_SRC
 
 *** =PYTHON_USER_BASE=
@@ -279,7 +292,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     install --user= installations.
 
     - https://docs.python.org/3/install/index.html#inst-alt-install-user
-    - http://docs.pipenv.org/en/latest/basics.html#installing-pipenv
 
     #+BEGIN_SRC sh
       export PYTHON_USER_BASE=$(python -m site --user-base)
@@ -287,8 +299,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+END_SRC
 
 *** =PROMPT_COMMAND=
-
-    TODO try out https://github.com/magicmonty/bash-git-prompt
 
     #+BEGIN_SRC sh
       [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ] && source /usr/local/etc/bash_completion.d/git-prompt.sh
@@ -367,7 +377,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       }
     #+END_SRC
 
+    For Ubuntu, I had to copy [[https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh][git-prompt.sh]] to
+    =/usr/share/bash-completion/completions/=.
+
     #+BEGIN_SRC sh
+      [ -e /usr/share/bash-completion/completions/git-prompt.sh ] && source /usr/share/bash-completion/completions/git-prompt.sh
+
       PROMPT_COMMAND='__git_ps1 \
       "\n$(k20e_gcp_project)$(k20e_kubectx)$(k20e_virtual_env)\n$(k20e_working_directory)" \
       "\n\$ " \
@@ -389,10 +404,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       alias j="jobs -l"
       alias k="kubectl"
       alias l.l='ls -1A | grep "^\." | xargs ls -lhGF'
-      alias ll="ls -lhF"
-      alias lll="ll"
-      alias ls="ls -GF"
-      alias l="ls"
+      alias ll="ls --color=always -lhF"
+      alias lll="ll --color=always"
+      alias ls="ls --color=always -GF"
+      alias l="ls --color=always"
       alias top="top -ocpu -Orsize"
       alias tree="tree -C"
     #+END_SRC
@@ -484,6 +499,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
      #+BEGIN_SRC sh
        [ -e /usr/local/etc/bash_completion.d/git-completion.bash ] && source /usr/local/etc/bash_completion.d/git-completion.bash
+       [ -e /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
      #+END_SRC
 
      Add completion for my muscle memory alias of =g= for =git=:
@@ -501,7 +517,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 **** =pip=
 
      #+BEGIN_SRC sh
-       eval "$(pip completion --bash)"
+       if [[ -x pip ]]; then
+	   eval "$(pip completion --bash)"
+       fi
      #+END_SRC
 
 *** Functions
@@ -542,14 +560,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+BEGIN_SRC sh
       if [ -e "/Applications/terminal-notifier.app" ]; then
           alias notify="/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier"
-      fi
-    #+END_SRC
-
-*** [[https://virtualenvwrapper.readthedocs.org/en/latest/][virtualenvwrapper]]
-
-    #+BEGIN_SRC sh
-      if (( ${PIPENV_ACTIVE:-0} != 1 )); then
-         source virtualenvwrapper.sh
       fi
     #+END_SRC
 
