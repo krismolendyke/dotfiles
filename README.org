@@ -169,22 +169,18 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
       # https://github.com/rust-lang-nursery/rustfmt#tips
       if [[ -x ${CARGO_HOME}/bin/rustc ]]; then
-	  export DYLD_LIBRARY_PATH=$(${CARGO_HOME}/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
+          export DYLD_LIBRARY_PATH=$(${CARGO_HOME}/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
       fi
 
-      export GROOVY_HOME=/usr/local/opt/groovy/libexec
-      export VLC_HOME=/Applications/VLC.app/Contents/MacOS
-
-      export DESKTOP=${HOME}/Desktop
-      export DOWNLOADS=${HOME}/Downloads
-      export GOPATH=${HOME}/go
-      export GOROOT=/usr/local/opt/go/libexec
+      if [[ "$OSTYPE" == darwin* ]]; then
+          export VLC_HOME=/Applications/VLC.app/Contents/MacOS
+      fi
 
       if [[ "$OSTYPE" == darwin* ]]; then
-	  export HOMEBREW_CASK_HOME=/usr/local/Caskroom
-	  export HOMEBREW_CELLAR=$(/usr/local/bin/brew --cellar)
-	  export HOMEBREW_INSTALL_CLEANUP=1
-      fi    
+          export HOMEBREW_CASK_HOME=/usr/local/Caskroom
+          export HOMEBREW_CELLAR=$(/usr/local/bin/brew --cellar)
+          export HOMEBREW_INSTALL_CLEANUP=1
+      fi
 
       export JENV_HOME=${HOME}/.jenv
 
@@ -581,8 +577,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
            excludesfile = ~/.gitignore-global
            whitespace = -trailing-space,-space-before-tab
            editor = emacsclient
-     [credential]
-           helper = osxkeychain
      [apply]
            whitespace = nowarn
      [alias]
@@ -960,11 +954,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    #+BEGIN_SRC conf
      ServerAliveCountMax 5
      ServerAliveInterval 60
-     UseKeychain yes
 
      Host *
-         IdentityFile ~/.ssh/id_rsa
-         PreferredAuthentications publickey,password
+	 IdentityFile ~/.ssh/id_rsa
+	 PreferredAuthentications publickey,password
 
      Include ~/.ssh/config.d/*
    #+END_SRC
