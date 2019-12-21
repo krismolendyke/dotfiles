@@ -165,7 +165,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     File system variables.
 
     #+BEGIN_SRC sh
-      export CARGO_HOME=${HOME}/.cargo
+      if [ -d "${HOME}/.cargo" ]; then
+          export CARGO_HOME=${HOME}/.cargo
+      fi
 
       # https://github.com/rust-lang-nursery/rustfmt#tips
       if [[ -x ${CARGO_HOME}/bin/rustc ]]; then
@@ -182,7 +184,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           export HOMEBREW_INSTALL_CLEANUP=1
       fi
 
-      export JENV_HOME=${HOME}/.jenv
+      if [[ -x jenv ]]; then
+          export JENV_HOME=${HOME}/.jenv
+      fi
 
       export MANPATH=/usr/local/share/man:${MANPATH}
       export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
@@ -192,7 +196,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+BEGIN_SRC sh
       export EDITOR=emacsclient
-      export EMACS_VERSION="HEAD"
       export LANG=en_US.UTF-8
       export TERM=xterm-256color
     #+END_SRC
@@ -247,22 +250,34 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+END_SRC
 
     #+BEGIN_SRC sh
-      pathmunge /usr/local/opt/python/libexec/bin
-      pathmunge "${JENV_HOME}/bin"
+      if [ -v ${JENV_HOME} ]; then
+          pathmunge "${JENV_HOME}/bin"
+      fi
+
       pathmunge /usr/local/sbin
       pathmunge /usr/local/bin
       pathmunge "${HOME}/bin"
-      pathmunge "${CARGO_HOME}/bin"
-      pathmunge "${GOPATH}/bin"
-      pathmunge "${GOROOT}/bin"
-      pathmunge "${VLC_HOME}"
+
+      if [ -v ${CARGO_HOME} ]; then
+          pathmunge "${CARGO_HOME}/bin"
+      fi
+
+      if [ -v ${VLC_HOME} ]; then
+          pathmunge "${VLC_HOME}"
+      fi
 
       if [[ "$OSTYPE" == darwin* ]]; then
-	  pathmunge "$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
+          pathmunge /usr/local/opt/python/libexec/bin
+          pathmunge "$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
       fi
 
       if [[ -x /usr/share/doc/git/contrib/diff-highlight ]]; then
-	  pathmunge /usr/share/doc/git/contrib/diff-highlight
+          pathmunge /usr/share/doc/git/contrib/diff-highlight
+      fi
+
+      if [[ -x /usr/local/go/bin/go ]]; then
+          pathmunge /usr/local/go/bin
+          pathmunge "$(/usr/local/go/bin/go env GOPATH)/bin"
       fi
     #+END_SRC
 
