@@ -1,0 +1,6 @@
+#+TITLE: dotfiles for Linux
+#+OPTIONS: toc:nil num:nil
+#+STARTUP: showall
+
+In addition to the base =README.org= file, this document describes and
+creates Linux specific configuration.

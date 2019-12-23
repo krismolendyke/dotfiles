@@ -1,0 +1,615 @@
+#+TITLE: dotfiles for MacOS
+#+OPTIONS: toc:nil num:nil
+#+STARTUP: showall
+
+In addition to the base =README.org= file, this document describes and
+creates MacOS specific configuration.
+
+* MacOS Junk
+
+  =defaults write com.apple.Accessibility ReduceMotionEnabled -bool true=
+
+* ChunkWM
+
+** =.chunkwm=
+   :PROPERTIES:
+   :header-args: :tangle ~/.chunkwmrc
+   :END:
+
+   #+BEGIN_SRC shell :shebang #!/bin/bash
+     #
+     # NOTE: any 'chunkc' command that is run from this config file
+     #       that is NOT 'chunkc core::<..>' or 'chunkc set ..'
+     #       MUST be put in the background using &
+     #
+     #       e.g:
+     #       chunkc tiling::rule --owner Finder --name Copy --state float &
+     #
+
+     #
+     # NOTE: specify the absolutepath of the file to use for logging.
+     #       'stdout' or 'stderr' can be used instead of an actual filepath.
+     #
+
+     chunkc core::log_file stdout
+
+     #
+     # NOTE: specify the desired level of logging.
+     #
+     #       - none, debug, profile, warn, error
+     #
+
+     chunkc core::log_level warn
+
+     #
+     # NOTE: specify the absolutepath to the directory to use when loading a plugin.
+     #
+
+     chunkc core::plugin_dir /usr/local/opt/chunkwm/share/chunkwm/plugins
+
+     #
+     # NOTE: if enabled, chunkwm will monitor the specified plugin_dir
+     #       and automatically reload any '.so' file that is changed.
+     #
+
+     chunkc core::hotload 0
+
+     #
+     # NOTE: the following are config variables for the chunkwm-tiling plugin.
+     #
+
+     chunkc set custom_bar_enabled            0
+     chunkc set custom_bar_all_monitors       0
+     chunkc set custom_bar_offset_top         22
+     chunkc set custom_bar_offset_bottom      0
+     chunkc set custom_bar_offset_left        0
+     chunkc set custom_bar_offset_right       0
+
+     chunkc set global_desktop_mode           bsp
+     chunkc set global_desktop_offset_top     20
+     chunkc set global_desktop_offset_bottom  20
+     chunkc set global_desktop_offset_left    20
+     chunkc set global_desktop_offset_right   20
+     chunkc set global_desktop_offset_gap     15
+
+     #
+     # NOTE: syntax for desktop-specific settings
+     #
+     # chunkc set 2_desktop_mode                monocle
+     # chunkc set 5_desktop_mode                float
+     # chunkc set 3_desktop_offset_top          190
+     # chunkc set 3_desktop_offset_bottom       190
+     # chunkc set 3_desktop_offset_left         190
+     # chunkc set 3_desktop_offset_right        190
+     # chunkc set 3_desktop_offset_gap          30
+     #
+
+     chunkc set desktop_padding_step_size     10.0
+     chunkc set desktop_gap_step_size         5.0
+
+     chunkc set bsp_spawn_left                1
+     chunkc set bsp_optimal_ratio             1.0
+     chunkc set bsp_split_mode                optimal
+     chunkc set bsp_split_ratio               0.5
+
+     chunkc set monitor_focus_cycle           1
+     chunkc set window_focus_cycle            monitor
+
+     chunkc set mouse_follows_focus           intrinsic
+     chunkc set window_float_next             0
+     chunkc set window_region_locked          1
+
+     chunkc set mouse_move_window             \"fn 1\"
+     chunkc set mouse_resize_window           \"fn 2\"
+     chunkc set mouse_motion_interval         35
+
+     chunkc set preselect_border_color        0xffd75f5f
+     chunkc set preselect_border_width        5
+     chunkc set preselect_border_radius       0
+     chunkc set preselect_border_outline      0
+
+     #
+     # NOTE: these settings require chwm-sa.
+     #       (https://github.com/koekeishiya/chwm-sa)
+     #
+
+     chunkc set window_float_topmost          0
+     chunkc set window_fade_inactive          0
+     chunkc set window_fade_alpha             0.85
+     chunkc set window_fade_duration          0.25
+     chunkc set window_use_cgs_move           0
+
+     #
+     # NOTE: the following are config variables for the chunkwm-border plugin.
+     #
+     # NOTE: syntax for `focused_border_outline` setting
+     #       0 = false, inline border
+     #       1 = true, outline border
+     #
+
+     chunkc set focused_border_color          0xfff74902
+     chunkc set focused_border_width          5
+     chunkc set focused_border_radius         6
+     chunkc set focused_border_outline        0
+     chunkc set focused_border_skip_floating  0
+     chunkc set focused_border_skip_monocle   0
+
+     #
+     # NOTE: the following are config variables for the chunkwm-ffm plugin.
+     #
+
+     chunkc set ffm_bypass_modifier           fn
+     chunkc set ffm_standby_on_float          1
+
+     #
+     # NOTE: specify plugins to load when chunkwm starts.
+     #
+
+     chunkc core::load border.so
+     chunkc core::load tiling.so
+     chunkc core::load ffm.so
+
+     #
+     # NOTE: sample rules for the tiling plugin
+     #
+
+     chunkc tiling::rule --owner Finder --name Copy --state float &
+     chunkc tiling::rule --owner \"App Store\" --state float &
+     chunkc tiling::rule --owner Emacs --except "^$" --state tile &
+   #+END_SRC
+
+** =~/.skhdrc=
+   :PROPERTIES:
+   :header-args: :tangle ~/.skhdrc
+   :END:
+
+   #+BEGIN_SRC shell :shebang #!/bin/bash
+     #  NOTE(koekeishiya): A list of all built-in modifier and literal keywords can
+     #                     be found at https://github.com/koekeishiya/skhd/issues/1
+     #
+     #                     A hotkey is written according to the following rules:
+     #
+     #                       hotkey       = <mode> '<' <action> | <action>
+     #
+     #                       mode         = 'name of mode' | <mode> ',' <mode>
+     #
+     #                       action       = <keysym> '[' <proc_map_lst> ']' | <keysym> '->' '[' <proc_map_lst> ']'
+     #                                      <keysym> ':' <command>          | <keysym> '->' ':' <command>
+     #                                      <keysym> ';' <mode>             | <keysym> '->' ';' <mode>
+     #
+     #                       keysym       = <mod> '-' <key> | <key>
+     #
+     #                       mod          = 'modifier keyword' | <mod> '+' <mod>
+     #
+     #                       key          = <literal> | <keycode>
+     #
+     #                       literal      = 'single letter or built-in keyword'
+     #
+     #                       keycode      = 'apple keyboard kVK_<Key> values (0x3C)'
+     #
+     #                       proc_map_lst = * <proc_map>
+     #
+     #                       proc_map     = <string> ':' <command>
+     #
+     #                       string       = '"' 'sequence of characters' '"'
+     #
+     #                       command      = command is executed through '$SHELL -c' and
+     #                                      follows valid shell syntax. if the $SHELL environment
+     #                                      variable is not set, it will default to '/bin/bash'.
+     #                                      when bash is used, the ';' delimeter can be specified
+     #                                      to chain commands.
+     #
+     #                                      to allow a command to extend into multiple lines,
+     #                                      prepend '\' at the end of the previous line.
+     #
+     #                                      an EOL character signifies the end of the bind.
+     #
+     #                       ->           = keypress is not consumed by skhd
+     #
+     #  NOTE(koekeishiya): A mode is declared according to the following rules:
+     #
+     #                       mode_decl = '::' <name> '@' ':' <command> | '::' <name> ':' <command> |
+     #                                   '::' <name> '@'               | '::' <name>
+     #
+     #                       name      = desired name for this mode,
+     #
+     #                       @         = capture keypresses regardless of being bound to an action
+     #
+     #                       command   = command is executed through '$SHELL -c' and
+     #                                   follows valid shell syntax. if the $SHELL environment
+     #                                   variable is not set, it will default to '/bin/bash'.
+     #                                   when bash is used, the ';' delimeter can be specified
+     #                                   to chain commands.
+     #
+     #                                   to allow a command to extend into multiple lines,
+     #                                   prepend '\' at the end of the previous line.
+     #
+     #                                   an EOL character signifies the end of the bind.
+
+     # add an on_enter command to the default mode
+     # :: default : chunkc border::color 0xff775759
+     #
+     # defines a new mode 'test' with an on_enter command, that captures keypresses
+     # :: test @ : chunkc border::color 0xff24ccaa
+     #
+     # from 'default' mode, activate mode 'test'
+     # cmd - x ; test
+     #
+     # from 'test' mode, activate mode 'default'
+     # test < cmd - x ; default
+     #
+     # launch a new terminal instance when in either 'default' or 'test' mode
+     # default, test < cmd - return : open -na /Applications/Terminal.app
+
+     # application specific bindings
+     #
+     # cmd - n [
+     #     "kitty"       : echo "hello kitty"
+     #     "qutebrowser" : echo "hello qutebrowser"
+     #     "finder"      : false
+     # ]
+
+     .blacklist [
+         "emacs"
+     ]
+
+     # close focused window
+     shift + alt - w : chunkc tiling::window --close
+
+     # focus window
+     alt - down : chunkc tiling::window --focus south
+     alt - left : chunkc tiling::window --focus west
+     alt - right : chunkc tiling::window --focus east
+     alt - up : chunkc tiling::window --focus north
+
+     alt - space : chunkc tiling::window --focus next
+     shift + alt - space : chunkc tiling::window --focus prev
+
+     # move window
+     shift + alt - down : chunkc tiling::window --warp south
+     shift + alt - left : chunkc tiling::window --warp west
+     shift + alt - right : chunkc tiling::window --warp east
+     shift + alt - up : chunkc tiling::window --warp north
+
+     # equalize size of windows
+     ctrl + alt - 0 : chunkc tiling::desktop --equalize
+
+     # swap window
+     # shift + alt - h : chunkc tiling::window --swap west
+     # shift + alt - j : chunkc tiling::window --swap south
+     # shift + alt - k : chunkc tiling::window --swap north
+     # shift + alt - l : chunkc tiling::window --swap east
+
+     # make floating window fill screen
+     # shift + alt - up     : chunkc tiling::window --grid-layout 1:1:0:0:1:1
+
+     # make floating window fill left-half of screen
+     # shift + alt - left   : chunkc tiling::window --grid-layout 1:2:0:0:1:1
+
+     # make floating window fill right-half of screen
+     # shift + alt - right  : chunkc tiling::window --grid-layout 1:2:1:0:1:1
+
+     # create desktop, move window and follow focus
+     # shift + cmd - n : chunkc tiling::desktop --create;\
+     #                   id=$(chunkc tiling::query --desktops-for-monitor $(chunkc tiling::query --monitor-for-desktop $(chunkc tiling::query --desktop id)));\
+     #                   chunkc tiling::window --send-to-desktop $(echo ${id##* });\
+     #                   chunkc tiling::desktop --focus $(echo ${id##* })
+
+     # create desktop and follow focus
+     # cmd + alt - n : chunkc tiling::desktop --create;\
+     #                 id=$(chunkc tiling::query --desktops-for-monitor $(chunkc tiling::query --monitor-for-desktop $(chunkc tiling::query --desktop id)));\
+     #                 chunkc tiling::desktop --focus $(echo ${id##* })
+
+     # destroy desktop
+     # cmd + alt - w : chunkc tiling::desktop --annihilate
+
+     # fast focus desktop
+     # cmd + alt - x : chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
+     # cmd + alt - z : chunkc tiling::desktop --focus prev
+     # cmd + alt - c : chunkc tiling::desktop --focus next
+     # cmd + alt - 1 : chunkc tiling::desktop --focus 1
+     # cmd + alt - 2 : chunkc tiling::desktop --focus 2
+     # cmd + alt - 3 : chunkc tiling::desktop --focus 3
+     # cmd + alt - 4 : chunkc tiling::desktop --focus 4
+     # cmd + alt - 5 : chunkc tiling::desktop --focus 5
+     # cmd + alt - 6 : chunkc tiling::desktop --focus 6
+     # cmd + alt - 7 : chunkc tiling::desktop --focus 7
+
+     # send window to desktop
+     # shift + alt - x : chunkc tiling::window --send-to-desktop $(chunkc get _last_active_desktop)
+     # shift + alt - z : chunkc tiling::window --send-to-desktop prev
+     # shift + alt - c : chunkc tiling::window --send-to-desktop next
+     # shift + alt - 1 : chunkc tiling::window --send-to-desktop 1
+     # shift + alt - 2 : chunkc tiling::window --send-to-desktop 2
+     # shift + alt - 3 : chunkc tiling::window --send-to-desktop 3
+     # shift + alt - 4 : chunkc tiling::window --send-to-desktop 4
+     # shift + alt - 5 : chunkc tiling::window --send-to-desktop 5
+     # shift + alt - 6 : chunkc tiling::window --send-to-desktop 6
+     # shift + alt - 7 : chunkc tiling::window --send-to-desktop 7
+
+     # send window to desktop and follow focus
+     # shift + cmd - x : chunkc tiling::window --send-to-desktop $(chunkc get _last_active_desktop); chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
+     # shift + cmd - z : chunkc tiling::window --send-to-desktop prev; chunkc tiling::desktop --focus prev
+     # shift + cmd - c : chunkc tiling::window --send-to-desktop next; chunkc tiling::desktop --focus next
+     # shift + cmd - 1 : chunkc tiling::window --send-to-desktop 1; chunkc tiling::desktop --focus 1
+     # shift + cmd - 2 : chunkc tiling::window --send-to-desktop 2; chunkc tiling::desktop --focus 2
+     # shift + cmd - 3 : chunkc tiling::window --send-to-desktop 3; chunkc tiling::desktop --focus 3
+     # shift + cmd - 4 : chunkc tiling::window --send-to-desktop 4; chunkc tiling::desktop --focus 4
+     # shift + cmd - 5 : chunkc tiling::window --send-to-desktop 5; chunkc tiling::desktop --focus 5
+     # shift + cmd - 6 : chunkc tiling::window --send-to-desktop 6; chunkc tiling::desktop --focus 6
+     # shift + cmd - 7 : chunkc tiling::window --send-to-desktop 7; chunkc tiling::desktop --focus 7
+
+     # focus monitor
+     # ctrl + alt - z  : chunkc tiling::monitor -f prev
+     # ctrl + alt - c  : chunkc tiling::monitor -f next
+     # ctrl + alt - 1  : chunkc tiling::monitor -f 1
+     # ctrl + alt - 2  : chunkc tiling::monitor -f 2
+     # ctrl + alt - 3  : chunkc tiling::monitor -f 3
+
+     # send window to monitor and follow focus
+     # ctrl + cmd - z  : chunkc tiling::window --send-to-monitor prev; chunkc tiling::monitor -f prev
+     # ctrl + cmd - c  : chunkc tiling::window --send-to-monitor next; chunkc tiling::monitor -f next
+     # ctrl + cmd - 1  : chunkc tiling::window --send-to-monitor 1; chunkc tiling::monitor -f 1
+     # ctrl + cmd - 2  : chunkc tiling::window --send-to-monitor 2; chunkc tiling::monitor -f 2
+     # ctrl + cmd - 3  : chunkc tiling::window --send-to-monitor 3; chunkc tiling::monitor -f 3
+
+     # increase region size
+     # shift + alt - a : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge west
+     # shift + alt - s : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge south
+     # shift + alt - w : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge north
+     # shift + alt - d : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge east
+
+     # decrease region size
+     # shift + cmd - a : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge west
+     # shift + cmd - s : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge south
+     # shift + cmd - w : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge north
+     # shift + cmd - d : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge east
+
+     # set insertion point for focused container
+     # ctrl + alt - f : chunkc tiling::window --use-insertion-point cancel
+     # ctrl + alt - h : chunkc tiling::window --use-insertion-point west
+     # ctrl + alt - j : chunkc tiling::window --use-insertion-point south
+     # ctrl + alt - k : chunkc tiling::window --use-insertion-point north
+     # ctrl + alt - l : chunkc tiling::window --use-insertion-point east
+
+     # rotate tree
+     # alt - r : chunkc tiling::desktop --rotate 90
+
+     # mirror tree y-axis
+     # alt - y : chunkc tiling::desktop --mirror vertical
+
+     # mirror tree x-axis
+     # alt - x : chunkc tiling::desktop --mirror horizontal
+
+     # toggle desktop offset
+     # alt - a : chunkc tiling::desktop --toggle offset
+
+     # toggle window fullscreen
+     # alt - f : chunkc tiling::window --toggle fullscreen
+
+     # toggle window native fullscreen
+     # shift + alt - f : chunkc tiling::window --toggle native-fullscreen
+
+     # toggle window parent zoom
+     # alt - d : chunkc tiling::window --toggle parent
+
+     # toggle window split type
+     # alt - e : chunkc tiling::window --toggle split
+
+     # toggle window fade
+     # alt - q : chunkc tiling::window --toggle fade
+
+     # float / unfloat window and center on screen
+     # alt - t : chunkc tiling::window --toggle float;\
+     #           chunkc tiling::window --grid-layout 4:4:1:1:2:2
+
+     # toggle sticky
+     # alt - s : chunkc tiling::window --toggle sticky
+
+     # toggle sticky, float and resize to picture-in-picture size
+     # alt - p : chunkc tiling::window --toggle sticky;\
+     #           chunkc tiling::window --grid-layout 5:5:4:0:1:1
+
+     # float next window to be tiled
+     # shift + alt - t : chunkc set window_float_next 1
+
+     # change layout of desktop
+     shift + alt - 1 : chunkc tiling::desktop --layout bsp
+     shift + alt - 2 : chunkc tiling::desktop --layout monocle
+     shift + alt - 3 : chunkc tiling::desktop --layout float
+
+     # ctrl + alt - w : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
+   #+END_SRC
+
+* [[https://brew.sh/][Homebrew]]
+
+  =brew= doesn't have a great way to manage dependencies that I've
+  found outside of a =Brewfile= and the =bundle= subcommand.
+
+** Security
+
+   From https://www.davd.eu/securing-macos/#homebrew
+
+   #+BEGIN_SRC sh
+     export HOMEBREW_NO_INSECURE_REDIRECT=1
+     export HOMEBREW_CASK_OPTS=--require-sha
+   #+END_SRC
+
+** [[https://github.com/Homebrew/homebrew-bundle][Bundle]]
+
+   Install:
+
+   #+BEGIN_SRC sh
+     brew tap Homebrew/bundle
+   #+END_SRC
+
+   Programs currently installed by =brew= can be dumped to a global
+   =Brewfile=, which defaults to =${HOME}/.Brewfile=:
+
+   #+BEGIN_SRC sh
+     brew bundle dump --force --global --verbose
+   #+END_SRC
+
+   Install all programs specified in the global =${HOME}./Brewfile=:
+
+   #+BEGIN_SRC sh
+     brew bundle --global
+   #+END_SRC
+
+** =${HOME}/.Brewfile=
+   :PROPERTIES:
+   :CUSTOM_ID: brewfile
+   :header-args: :tangle ~/.Brewfile
+   :END:
+
+   #+BEGIN_SRC sh
+     tap "crisidev/chunkwm"
+     tap "homebrew/bundle"
+     tap "homebrew/cask"
+     tap "homebrew/cask-drivers"
+     tap "homebrew/cask-fonts"
+     tap "homebrew/cask-versions"
+     tap "homebrew/core"
+     tap "homebrew/services"
+     tap "jmespath/jmespath"
+     tap "koekeishiya/formulae"
+     cask "java"
+     cask "xquartz"
+     cask "java8"
+     brew "apr"
+     brew "openssl"
+     brew "apr-util"
+     brew "aspell"
+     brew "automake"
+     brew "bash"
+     brew "bash-completion@2"
+     brew "bison"
+     brew "freetype"
+     brew "fontconfig"
+     brew "font-input"
+     brew "gettext", link: true
+     brew "pixman"
+     brew "cairo"
+     brew "emacs", args: ["HEAD", "with-cocoa"]
+     brew "cask"
+     brew "chicken"
+     brew "cmake"
+     brew "docker-completion"
+     brew "faac"
+     brew "lame"
+     brew "xvid"
+     brew "ffmpeg"
+     brew "flex"
+     brew "gawk"
+     brew "gcc"
+     brew "gd"
+     brew "gdk-pixbuf"
+     brew "gdub"
+     brew "gflags"
+     brew "git"
+     brew "go"
+     brew "python"
+     brew "gprof2dot"
+     brew "gradle"
+     brew "grafana"
+     brew "groovy"
+     brew "harfbuzz"
+     brew "hugo"
+     brew "hunspell"
+     brew "imagemagick"
+     brew "influxdb"
+     brew "ipcalc"
+     brew "ispell"
+     brew "jenv"
+     brew "jid"
+     brew "kafka"
+     brew "lz4"
+     brew "kafkacat"
+     brew "kotlin"
+     brew "kubernetes-cli"
+     brew "kubectx", args: ["with-short-names"]
+     brew "less"
+     brew "libav"
+     brew "libcroco"
+     brew "libdvdcss"
+     brew "librsvg"
+     brew "libssh"
+     brew "libyaml"
+     brew "make"
+     brew "makedepend"
+     brew "mariadb"
+     brew "mas"
+     brew "maven"
+     brew "ninja"
+     brew "node"
+     brew "oniguruma"
+     brew "parallel"
+     brew "perl"
+     brew "protobuf"
+     brew "prototool"
+     brew "pstree"
+     brew "pv"
+     brew "rocksdb"
+     brew "ruby", link: true
+     brew "rustup-init"
+     brew "scons"
+     brew "shared-mime-info"
+     brew "shellcheck"
+     brew "sshtrix"
+     brew "subversion"
+     brew "terminal-notifier"
+     brew "texi2html"
+     brew "the_silver_searcher"
+     brew "tree"
+     brew "watch"
+     brew "wget"
+     brew "yarn"
+     brew "yasm"
+     brew "youtube-dl"
+     brew "jmespath/jmespath/jp"
+     cask "1password"
+     brew "koekeishiya/formulae/chunkwm"
+     brew "koekeishiya/formulae/skhd"
+     cask "alacritty"
+     cask "alfred"
+     cask "android-platform-tools"
+     cask "charles"
+     cask "devdocs"
+     cask "docker"
+     cask "etcher"
+     cask "firefox"
+     cask "flux"
+     cask "google-backup-and-sync"
+     cask "google-chrome"
+     cask "google-cloud-sdk"
+     cask "google-featured-photos"
+     cask "handbrake"
+     cask "inkscape"
+     cask "intellij-idea"
+     cask "istat-menus5"
+     cask "iterm2"
+     cask "keepingyouawake"
+     cask "mactex-no-gui"
+     cask "plex-media-player"
+     cask "pocket-casts"
+     cask "racket"
+     cask "slack"
+     cask "vanilla"
+     cask "viscosity"
+     cask "vlc"
+     cask "zoomus"
+     mas "Pages", id: 409201541
+     mas "Pixelmator", id: 407963104
+   #+END_SRC
+
+   #+RESULTS:
+
+** [[https://github.com/mas-cli/mas][mas]]
+
+   #+BEGIN_QUOTE
+   A simple command line interface for the Mac App Store. Designed for
+   scripting and automation.
+   #+END_QUOTE
+
+   The =Bundlefile= above should install the App Store programs listed
+   with in it using =mas=.
