@@ -119,7 +119,7 @@ creates Linux specific configuration.
   :header-args: :tangle ~/.dwm/autostart.sh
   :END:
 
-  TODO make user that the tangled file has executable bit set!
+  TODO make sure that the tangled file has executable bit set!
 
   This depends on the [[https://dwm.suckless.org/patches/autostart/][autostart]] patch!
 
@@ -129,16 +129,17 @@ creates Linux specific configuration.
     mkdir -p ~/.dwm/
   #+END_SRC
 
+  Caps Lock, GTFO of my keyboard.  Very specifically run =xmodmap=
+  /after/ =setxkbmap= to make sure that this sticks.  I want to blame
+  Ubuntu and then Gnome for this but I don't have enough time right
+  now to properly assign blame and then help to fix it.
+
   #+BEGIN_SRC sh
     #!/usr/bin/env bash
 
     setxkbmap -option caps:ctrl_modifier
-
-    # NB Very specifically run /after/ setxkbmap
     [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
-
     st &
-
   #+END_SRC
 
 * =.Xmodmap=
