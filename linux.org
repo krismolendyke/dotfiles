@@ -114,10 +114,46 @@ creates Linux specific configuration.
      screen=0
    #+END_SRC
 
+* =.dwm=
+  :PROPERTIES:
+  :header-args: :tangle ~/.dwm/autostart.sh
+  :END:
+
+  TODO make user that the tangled file has executable bit set!
+
+  This depends on the [[https://dwm.suckless.org/patches/autostart/][autostart]] patch!
+
+  Prerequisite:
+
+  #+BEGIN_SRC sh
+    mkdir -p ~/.dwm/
+  #+END_SRC
+
+  #+BEGIN_SRC sh
+    #!/usr/bin/env bash
+
+    setxkbmap -option caps:ctrl_modifier
+
+    # NB Very specifically run /after/ setxkbmap
+    [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
+
+    st &
+
+  #+END_SRC
+
 * =.Xmodmap=
   :PROPERTIES:
   :header-args: :tangle ~/.Xmodmap
   :END:
+
+  [2019-12-27 Fri]
+
+  Apparently the =setxkbmap= suite of tooling now conflicts with
+  =xmodmap= in mysterious ways and it's a tire fire of mappings.
+  Remapping keys should be easy but having at least two different ways
+  to remap keys makes it difficult at best.
+
+  Previously:
 
   Dumped first from =xmodmap -pke > ~/.Xmodmap=, then added [[https://wiki.archlinux.org/index.php/xmodmap#Reverse_scrolling][natural
   scrolling]].
@@ -125,6 +161,11 @@ creates Linux specific configuration.
   #+BEGIN_SRC sh
     ! "Natural" scolling, i.e., inverse scroll
     pointer     = 1 2 3 5 4 7 6 8 9 10
+
+    ! Map right Alt to Mod3 for dwm to avoid Emacs collision
+    remove Mod1 = Alt_R
+    add Mod3    = Alt_R
+
     keycode   8 =
     keycode   9 = Escape NoSymbol Escape
     keycode  10 = 1 exclam 1 exclam
