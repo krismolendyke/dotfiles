@@ -5,25 +5,61 @@
 In addition to the base =README.org= file, this document describes and
 creates Linux specific configuration.
 
-* =.console-setup=
-  :PROPERTIES:
-  :header-args: :tangle ~/.console-setup
-  :END:
+* Fonts
 
-  This is currently empty but needs to exist for =.keyboard= to be
-  read properly.
+  - https://askubuntu.com/questions/3697/how-do-i-install-fonts
+  - Copied all to =/usr/local/share/fonts=
+  - =fc-list=, =fc-cache=
 
-  #+BEGIN_SRC sh
-  #+END_SRC
+* Display Manager
 
-* =.keyboard=
-  :PROPERTIES:
-  :header-args: :tangle ~/.keyboard
-  :END:
+  GDM3 and Gnome 3 is stock on the Dell XPS 13 7930.  They are
+  occasionally convenient but I don't want GDM to start by default.
+  Console login is good.
 
-  #+BEGIN_SRC sh
-    XKBOPTIONS="ctrl:swapcaps"
-  #+END_SRC
+  Disable GDM at boot, use console login
+
+  - =sudo systemctl get-default=
+  - =sudo systemctl set-default multi-user.target=
+
+* Disable Canonical Tracking
+
+  Bummer,
+  https://www.howtogeek.com/349844/how-to-stop-ubuntu-from-collecting-data-about-your-pc/.
+
+* Dell Stupid Super Key
+
+  Boy, is this stupid:
+  https://askubuntu.com/questions/751661/dell-developer-edition-ubuntu-14-04-super-key-not-working
+
+* Console & Keyboard
+
+  [[https://askubuntu.com/questions/485454/how-to-remap-keys-on-a-user-level-both-with-and-without-x][This didn't work]], I had to edit the =/etc/= files and I'm not sure
+  why.
+
+** =.console-setup=
+   :PROPERTIES:
+   :header-args: :tangle ~/.console-setup
+   :END:
+
+   This is currently empty but needs to exist for =.keyboard= to be
+   read properly.
+
+   =man 5 console-setup=
+
+   #+BEGIN_SRC sh
+   #+END_SRC
+
+** =.keyboard=
+   :PROPERTIES:
+   :header-args: :tangle ~/.keyboard
+   :END:
+
+   =man 5 keyboard=
+
+   #+BEGIN_SRC sh
+     XKBOPTIONS="ctrl:swapcaps"
+   #+END_SRC
 
 * TODO =xrandr=
 
@@ -141,6 +177,11 @@ creates Linux specific configuration.
     [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
     st &
   #+END_SRC
+
+* DWM Backlight
+
+  Gonna write a custom Go program for this like my stupid battery
+  meter.
 
 * =.Xmodmap=
   :PROPERTIES:
