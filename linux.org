@@ -61,6 +61,10 @@ creates Linux specific configuration.
      XKBOPTIONS="ctrl:swapcaps"
    #+END_SRC
 
+** TODO =kmscon=
+
+   https://www.freedesktop.org/wiki/Software/kmscon/
+
 * TODO =xrandr=
 
   https://gist.github.com/ryanpcmcquen/14adac20e6dd57a51b96
