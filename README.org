@@ -384,13 +384,13 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           declare -r PREFIX="${BLUE}k8s${RESET} "
           declare -r SUFFIX="${RESET} "
           local value=''
-          if [ -e ${HOME}/.kube/config ]; then
-              value=$(cat ${HOME}/.kube/config | grep current-context | cut -d ' ' -f 2)
+          if command -v k > /dev/null 2>&1; then
+              value=$(k config view --output go-template='{{ index . "current-context" }}')
               fullname=${value}
               if [[ "${value}" =~ ^gke_ ]]; then
                   value=$(echo "${value}" | cut -d _ -f 4)
               fi
-              value="${value}${RESET}·$(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${fullname}\")].context.namespace}")"
+              value="${value}${RESET}·$(k config view -o=jsonpath="{.contexts[?(@.name==\"${fullname}\")].context.namespace}")"
               if [[ "${value}" =~ .*prod.* ]]; then
                   value="${RED_BG}${value}"
               fi
@@ -497,14 +497,19 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 **** =kubectl=, =k=, =kctx=, =kns=
 
+     Using MicroK8s in Ubuntu at the moment.
+
      #+BEGIN_SRC sh
-       [ -e /usr/local/etc/bash_completion.d/kubectl ] && source /usr/local/etc/bash_completion.d/kubectl
+       if command -v microk8s.kubectl > /dev/null 2>&1; then
+           alias k='microk8s.kubectl'
+           source <(microk8s.kubectl completion $(basename ${SHELL}) | sed 's/kubectl/k/g')
+       fi
      #+END_SRC
 
-     Add completion for my =k= alias:
+     MacOS completion with completion for my =k= alias:
 
      #+BEGIN_SRC sh
-       complete -o default -F __start_kubectl k
+       [ -e /usr/local/etc/bash_completion.d/kubectl ] && source /usr/local/etc/bash_completion.d/kubectl && complete -o default -F __start_kubectl k
      #+END_SRC
 
      Install [[https://github.com/ahmetb/kubectx][kubectx]] (via [[#brewfile][=${HOME}/.Brewfile=]]), completion for helper
@@ -513,6 +518,13 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      #+BEGIN_SRC sh
        [ -e /usr/local/etc/bash_completion.d/kubectx ] && source /usr/local/etc/bash_completion.d/kubectx && alias kctx="kubectx"
        [ -e /usr/local/etc/bash_completion.d/kubens ] && source /usr/local/etc/bash_completion.d/kubens && alias kns="kubens"
+     #+END_SRC
+
+     Linux =kubectx= install manually, completion to =pkg-config
+     --variable=completionsdir bash-completion= dir.
+
+     #+BEGIN_SRC sh
+       [ -e "$(pkg-config --variable=completionsdir bash-completion)/kubens" ] && source "$(pkg-config --variable=completionsdir bash-completion)/kubens" && alias kns="kubens"
      #+END_SRC
 
      Change currently selected color:
