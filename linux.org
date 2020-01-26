@@ -13,7 +13,7 @@ creates Linux specific configuration.
 
 * Display Manager
 
-  GDM3 and Gnome 3 is stock on the Dell XPS 13 7930.  They are
+  GDM3 and Gnome 3 is stock on the Dell XPS 13 7390.  They are
   occasionally convenient but I don't want GDM to start by default.
   Console login is good.
 
