@@ -177,6 +177,7 @@ creates Linux specific configuration.
   #+BEGIN_SRC sh
     #!/usr/bin/env bash
 
+    cd
     setxkbmap -option caps:ctrl_modifier
     [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
     st &
