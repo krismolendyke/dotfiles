@@ -407,7 +407,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       [ -e /usr/share/bash-completion/completions/git-prompt.sh ] && source /usr/share/bash-completion/completions/git-prompt.sh
 
       PROMPT_COMMAND='__git_ps1 \
-      "\n$(k20e_gcp_project)$(k20e_kubectx)$(k20e_virtual_env)\n$(k20e_working_directory)" \
+      "\n$(k20e_gcp_project)$(k20e_virtual_env)\n$(k20e_working_directory)" \
       "\n\$ " \
       " %s"'
     #+END_SRC
@@ -500,8 +500,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
      Using MicroK8s in Ubuntu at the moment.
 
+     Instead of =snap= below, maybe =microk8s.status --yaml= parsing?
+
      #+BEGIN_SRC sh
-       if command -v microk8s.kubectl > /dev/null 2>&1; then
+       if snap services microk8s.daemon-apiserver | tr -s ' ' | tail -1 | cut -d ' ' -f 2 | grep --quiet ^active; then
            alias k='microk8s.kubectl'
            source <(microk8s.kubectl completion $(basename ${SHELL}) | sed 's/kubectl/k/g')
        fi
