@@ -404,7 +404,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     =/usr/share/bash-completion/completions/=.
 
     #+BEGIN_SRC sh
-      [ -e /usr/share/bash-completion/completions/git-prompt.sh ] && source /usr/share/bash-completion/completions/git-prompt.sh
+      [ -e /usr/share/git/completion/git-prompt.sh ] && source //usr/share/git/completion/git-prompt.sh
 
       PROMPT_COMMAND='__git_ps1 \
       "\n$(k20e_gcp_project)$(k20e_virtual_env)\n$(k20e_working_directory)" \
@@ -419,8 +419,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       alias ...="cd ../../"
       alias ....="cd ../../.."
       alias dirs="dirs -v"
-      alias emacs="/usr/local/bin/emacs --no-window-system"
-      alias emacsclient="/usr/local/bin/emacsclient --no-wait"
+      alias emacs="/usr/bin/emacs --no-window-system"
+      alias emacsclient="/usr/bin/emacsclient --no-wait"
       alias ec="emacsclient"
       alias g="git"
       alias j="jobs -l"
@@ -503,10 +503,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      Instead of =snap= below, maybe =microk8s.status --yaml= parsing?
 
      #+BEGIN_SRC sh
-       if snap services microk8s.daemon-apiserver | tr -s ' ' | tail -1 | cut -d ' ' -f 2 | grep --quiet ^active; then
-           alias k='microk8s.kubectl'
-           source <(microk8s.kubectl completion $(basename ${SHELL}) | sed 's/kubectl/k/g')
-       fi
      #+END_SRC
 
      MacOS completion with completion for my =k= alias:
@@ -527,7 +523,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      --variable=completionsdir bash-completion= dir.
 
      #+BEGIN_SRC sh
-       [ -e "$(pkg-config --variable=completionsdir bash-completion)/kubens" ] && source "$(pkg-config --variable=completionsdir bash-completion)/kubens" && alias kns="kubens"
      #+END_SRC
 
      Change currently selected color:
@@ -649,11 +644,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      [help]
            autocorrect = 1
      [pager]
-           diff = diff-highlight | less
-           log = diff-highlight | less
-           show = diff-highlight | less
-     [interactive]
-           diffFilter = diff-highlight
+           diff = diff-so-fancy | less
+           log = diff-so-fancy | less
+           show = diff-so-fancy | less
    #+END_SRC
 
 ** =.gitignore-global=
