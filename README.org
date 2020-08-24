@@ -558,6 +558,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        fi
      #+END_SRC
 
+**** =systemd=
+
+     #+BEGIN_SRC sh
+       [ -e /usr/share/bash-completion/completions/systemctl ] && source /usr/share/bash-completion/completions/systemctl
+     #+END_SRC
+
 *** Functions
 
     #+BEGIN_SRC sh
