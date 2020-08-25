@@ -73,7 +73,7 @@ creates Linux specific configuration.
 
 ** =alacritty/alacritty.yml=
    :PROPERTIES:
-   :header-args: :tangle ~/.config/alactritty/alacritty.yml
+   :header-args: :tangle ~/.config/alacritty/alacritty.yml
    :END:
 
    #+BEGIN_SRC yaml
