@@ -1306,3 +1306,30 @@ creates Linux specific configuration.
     exec dwm
     [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
   #+END_SRC
+
+* Arch, Wayland & Sway
+
+  Doing my best to avoid using X (see XWayland below…).
+
+  https://wiki.archlinux.org/index.php/Sway has great info on
+  configuring Sway.
+
+** [1/8] TODO
+
+   - [ ] https://github.com/swaywm/sway/wiki
+   - [ ] https://github.com/Alexays/Waybar
+   - [ ] A good list of things in this thread:
+     https://www.reddit.com/r/swaywm/comments/bke1od/found_a_sway_config_that_rocks/
+   - [ ] Clipboards
+     - [ ] https://github.com/yory8/clipman
+     - [ ] https://github.com/bugaevc/wl-clipboard
+   - [ ] https://gitlab.com/chinstrap/gammastep supports Wayland (a
+     Redshift fork)
+   - [X] X compatibility layer (this was required by Zoom but also
+     makes Emacs outside of term happy)
+     https://wiki.archlinux.org/index.php/Sway#Xwayland
+   - [ ] See also X support page
+     https://wayland.freedesktop.org/docs/html/ch05.html
+   - [ ] Fonts
+     - [ ] https://wiki.archlinux.org/index.php/fonts#Tips_and_tricks
+     - [ ] https://github.com/alacritty/alacritty/wiki/Changing-the-default-font
