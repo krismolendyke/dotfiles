@@ -65,7 +65,12 @@ creates Linux specific configuration.
 
    https://www.freedesktop.org/wiki/Software/kmscon/
 
-* TODO =xrandr=
+* CANCELED =xrandr=
+  CLOSED: [2020-08-26 Wed 09:26]
+  :LOGBOOK:
+  - State "CANCELED"   from "TODO"       [2020-08-26 Wed 09:26] \\
+    Sway manages monitors.  =xandr= should not be used with Sway.
+  :END:
 
   https://gist.github.com/ryanpcmcquen/14adac20e6dd57a51b96
 
