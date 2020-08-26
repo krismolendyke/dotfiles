@@ -763,6 +763,9 @@ creates Linux specific configuration.
      #
      # You can get the names of your outputs by running: swaymsg -t get_outputs
 
+     output eDP-1 mode 1920x1080 position 0,0
+     output 'Dell Inc. DELL U3818DW 97F8P77D0E3L' mode 3840x1600 position 1920,0
+
      ### Idle configuration
      #
      # Example configuration:
