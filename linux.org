@@ -1319,7 +1319,7 @@ creates Linux specific configuration.
   https://wiki.archlinux.org/index.php/Sway has great info on
   configuring Sway.
 
-** [1/8] TODO
+** [1/9] TODO
 
    - [ ] https://github.com/swaywm/sway/wiki
    - [ ] https://github.com/Alexays/Waybar
@@ -1338,3 +1338,6 @@ creates Linux specific configuration.
    - [ ] Fonts
      - [ ] https://wiki.archlinux.org/index.php/fonts#Tips_and_tricks
      - [ ] https://github.com/alacritty/alacritty/wiki/Changing-the-default-font
+   - [ ] Bluetooth
+     - [ ] https://wiki.archlinux.org/index.php/Bluetooth
+     - [ ] https://grimoire.science/working-with-wayland-and-sway/#bluetooth-managers
