@@ -1029,7 +1029,6 @@ creates Linux specific configuration.
      }
 
      include /etc/sway/config.d/*
-
    #+END_SRC
 
 ** =sway/swaybar.sh=
@@ -1057,7 +1056,6 @@ creates Linux specific configuration.
      uptime="↑ $(uptime | cut -d , -f 1 | cut -d ' ' -f 4,5)"
 
      echo "${volume}  ${brightness_current}  ${wifi}  ${battery}  ${uptime}  ${date}"
-
    #+END_SRC
 
 * =.dwm=
