@@ -1036,6 +1036,8 @@ creates Linux specific configuration.
    :header-args: :tangle ~/.config/sway/swaybar.sh
    :END:
 
+   TODO make sure that the tangled file has executable bit set!
+
    #+BEGIN_SRC sh
      #!/usr/bin/env bash
 
