@@ -1470,7 +1470,7 @@ creates Linux specific configuration.
   https://wiki.archlinux.org/index.php/Sway has great info on
   configuring Sway.
 
-** [1/9] TODO
+** [2/10] TODO
 
    - [ ] https://github.com/swaywm/sway/wiki
    - [ ] https://github.com/Alexays/Waybar
@@ -1492,3 +1492,4 @@ creates Linux specific configuration.
    - [ ] Bluetooth
      - [ ] https://wiki.archlinux.org/index.php/Bluetooth
      - [ ] https://grimoire.science/working-with-wayland-and-sway/#bluetooth-managers
+   - [X] Network time https://wiki.archlinux.org/index.php/Systemd-timesyncd
