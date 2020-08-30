@@ -919,10 +919,10 @@ creates Linux specific configuration.
      # resumed. It will also lock your screen before your computer goes to sleep.
 
      exec swayidle -w \
-              timeout 300 'swaylock -f -c 000000' \
+              timeout 300 'swaylock -e -f -c 000000' \
               timeout 600 'swaymsg "output * dpms off"' \
                    resume 'swaymsg "output * dpms on"' \
-              before-sleep 'swaylock -f -c 000000'
+              before-sleep 'swaylock -e -f -c 000000'
 
      ### Input configuration
      #
