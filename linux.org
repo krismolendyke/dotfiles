@@ -984,6 +984,7 @@ creates Linux specific configuration.
          bindsym $mod+$down focus down
          bindsym $mod+$up focus up
          bindsym $mod+$right focus right
+         bindsym $mod+space focus right
          # Or use $mod+[up|down|left|right]
          bindsym $mod+Left focus left
          bindsym $mod+Down focus down
@@ -1048,7 +1049,7 @@ creates Linux specific configuration.
          bindsym $mod+Shift+space floating toggle
 
          # Swap focus between the tiling area and the floating area
-         bindsym $mod+space focus mode_toggle
+         # bindsym $mod+space focus mode_toggle
 
          # Move focus to the parent container
          bindsym $mod+a focus parent
