@@ -948,6 +948,9 @@ creates Linux specific configuration.
          natural_scroll enabled
      }
 
+     input type:mouse {
+     }
+
      ### Key bindings
      #
      # Basics:
