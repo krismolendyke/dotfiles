@@ -572,6 +572,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       fi
     #+END_SRC
 
+*** AWS CLI
+
+    #+BEGIN_SRC sh
+      complete -C '/usr/bin/aws_completer' aws
+    #+END_SRC
+
 *** Google Cloud SDK
 
     Completion:
