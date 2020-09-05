@@ -1094,6 +1094,8 @@ creates Linux specific configuration.
      bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
      bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
      bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+     bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+     bindsym XF86MonBrightnessUp exec brightnessctl set +5%
 
      font PragmataPro Mono Liga 14
 
@@ -1132,9 +1134,7 @@ creates Linux specific configuration.
 
      battery="🔋$(cat /sys/class/power_supply/BAT0/capacity)%"
 
-     brightness=$(cat /sys/class/backlight/intel_backlight/brightness)
-     brightness_max=$(cat /sys/class/backlight/intel_backlight/max_brightness)
-     brightness_current="🌖 $(printf '%.0f' $(echo "scale=1; ${brightness} / ${brightness_max} * 100.0" | bc))%"
+     brightness="🌖 $(brightnessctl info -m | cut -d, -f 4)"
 
      # wifi="📶 $(nmcli --get-values GENERAL.CONNECTION device show wlan0)"
      # shellcheck disable=SC2063
@@ -1146,7 +1146,7 @@ creates Linux specific configuration.
 
      uptime="↑ $(uptime | cut -d , -f 1 | cut -d ' ' -f 4,5)"
 
-     echo "${volume}  ${brightness_current}  ${wifi}  ${battery}  ${uptime}  ${date}"
+     echo "${volume}  ${brightness}  ${wifi}  ${battery}  ${uptime}  ${date}"
    #+END_SRC
 
 * =.dwm=
@@ -1475,7 +1475,7 @@ creates Linux specific configuration.
   https://wiki.archlinux.org/index.php/Sway has great info on
   configuring Sway.
 
-** [3/11] TODO
+** [5/12] TODO
 
    - [ ] https://github.com/swaywm/sway/wiki
    - [ ] https://github.com/Alexays/Waybar
@@ -1493,13 +1493,14 @@ creates Linux specific configuration.
      https://wiki.archlinux.org/index.php/Sway#Xwayland
    - [ ] See also X support page
      https://wayland.freedesktop.org/docs/html/ch05.html
-   - [ ] Fonts
+   - [-] Fonts
      - [ ] https://wiki.archlinux.org/index.php/fonts#Tips_and_tricks
-     - [ ] https://github.com/alacritty/alacritty/wiki/Changing-the-default-font
-   - [ ] Bluetooth
-     - [ ] https://wiki.archlinux.org/index.php/Bluetooth
+     - [X] https://github.com/alacritty/alacritty/wiki/Changing-the-default-font
+   - [-] Bluetooth
+     - [X] https://wiki.archlinux.org/index.php/Bluetooth
      - [ ] https://grimoire.science/working-with-wayland-and-sway/#bluetooth-managers
    - [X] Network time https://wiki.archlinux.org/index.php/Systemd-timesyncd
-   - [ ] Audio control
-     - [ ] =pavucontrol= for graphical volume adjustments
-     - [ ] https://wiki.archlinux.org/index.php/Sway#Custom_keybindings
+   - [X] Audio control
+     - [X] =pavucontrol= for graphical volume adjustments
+     - [X] https://wiki.archlinux.org/index.php/Sway#Custom_keybindings
+   - [X] =brightnessctl= & special key bindings like for audio
