@@ -1470,7 +1470,7 @@ creates Linux specific configuration.
   https://wiki.archlinux.org/index.php/Sway has great info on
   configuring Sway.
 
-** [2/10] TODO
+** [3/11] TODO
 
    - [ ] https://github.com/swaywm/sway/wiki
    - [ ] https://github.com/Alexays/Waybar
@@ -1479,8 +1479,10 @@ creates Linux specific configuration.
    - [ ] Clipboards
      - [ ] https://github.com/yory8/clipman
      - [ ] https://github.com/bugaevc/wl-clipboard
-   - [ ] https://gitlab.com/chinstrap/gammastep supports Wayland (a
-     Redshift fork)
+   - [X] Blue light
+     - [X] https://gitlab.com/chinstrap/gammastep supports Wayland (a
+       Redshift fork)
+     - [X] [[https://blog.victormendonca.com/2018/05/14/creating-a-simple-systemd-user-service/][Automatically run]] gammastep
    - [X] X compatibility layer (this was required by Zoom but also
      makes Emacs outside of term happy)
      https://wiki.archlinux.org/index.php/Sway#Xwayland
@@ -1493,3 +1495,6 @@ creates Linux specific configuration.
      - [ ] https://wiki.archlinux.org/index.php/Bluetooth
      - [ ] https://grimoire.science/working-with-wayland-and-sway/#bluetooth-managers
    - [X] Network time https://wiki.archlinux.org/index.php/Systemd-timesyncd
+   - [ ] Audio control
+     - [ ] =pavucontrol= for graphical volume adjustments
+     - [ ] https://wiki.archlinux.org/index.php/Sway#Custom_keybindings
