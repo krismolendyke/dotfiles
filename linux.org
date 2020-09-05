@@ -361,7 +361,7 @@ creates Linux specific configuration.
          cyan:    '0x54ced6'
          white:   '0x2a2a2a'
 
-     # # Colors (Tomorrow Night Bright)
+     # # Colors (Tomorrow Day)
      # colors:
      #   # Default colors
      #   primary:
