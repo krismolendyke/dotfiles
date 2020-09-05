@@ -657,6 +657,27 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      ##########################################################################
      # Below from:                                                            #
      #                                                                        #
+     # https://github.com/github/gitignore/blob/master/Global/Linux.gitignore #
+     ##########################################################################
+
+     ,*~
+
+     # temporary files which can be created if a process still has a handle open of a deleted file
+     .fuse_hidden*
+
+     # KDE directory preferences
+     .directory
+
+     # Linux trash folder which might appear on any partition or disk
+     .Trash-*
+
+     # .nfs files are created when an open file is removed but is still being accessed
+     .nfs*
+
+
+     ##########################################################################
+     # Below from:                                                            #
+     #                                                                        #
      # https://github.com/github/gitignore/blob/master/Global/macOS.gitignore #
      ##########################################################################
 
