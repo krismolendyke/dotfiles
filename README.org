@@ -486,16 +486,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 *** Completions
 
+    [2020-09-05 Sat]
+
+    For Arch need to update to https://wiki.archlinux.org/index.php/Bash#Tab_completion.
+
     #+BEGIN_SRC sh
       [ -e /usr/local/share/bash-completion/bash_completion ] && source /usr/local/share/bash-completion/bash_completion
       [ -e /etc/bash_completion ] && source /etc/bash_completion
     #+END_SRC
-
-**** =ag=
-
-     #+BEGIN_SRC sh
-       [ -e /usr/local/etc/bash_completion.d/ag.bashcomp.sh ] && source /usr/local/etc/bash_completion.d/ag.bashcomp.sh
-     #+END_SRC
 
 **** =kubectl=, =k=, =kctx=, =kns=
 
@@ -516,8 +514,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      tools =kctx=, =kns=:
 
      #+BEGIN_SRC sh
-       [ -e /usr/local/etc/bash_completion.d/kubectx ] && source /usr/local/etc/bash_completion.d/kubectx && alias kctx="kubectx"
-       [ -e /usr/local/etc/bash_completion.d/kubens ] && source /usr/local/etc/bash_completion.d/kubens && alias kns="kubens"
+       [ -e /usr/share/bash-completion/completions/kubectx ] && source /usr/share/bash-completion/completions/kubectx && alias kctx="kubectx"
+       [ -e /usr/share/bash-completion/completions/kubens ] && source /usr/share/bash-completion/completions/kubens && alias kns="kubens"
      #+END_SRC
 
      Linux =kubectx= install manually, completion to =pkg-config
@@ -543,20 +541,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
      #+BEGIN_SRC sh
         __git_complete g __git_main
-     #+END_SRC
-
-**** Gradle
-
-     #+BEGIN_SRC sh
-       [ -e /usr/local/etc/bash_completion.d/gradle-completion.bash ] && source /usr/local/etc/bash_completion.d/gradle-completion.bash
-     #+END_SRC
-
-**** =pip=
-
-     #+BEGIN_SRC sh
-       if [[ -x pip ]]; then
-	   eval "$(pip completion --bash)"
-       fi
      #+END_SRC
 
 **** =systemd=
