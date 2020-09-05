@@ -979,6 +979,7 @@ creates Linux specific configuration.
      #
          # Move your focus around
          bindsym $mod+$left focus left
+         bindsym $mod+Shift+space focus left
          bindsym $mod+$down focus down
          bindsym $mod+$up focus up
          bindsym $mod+$right focus right
@@ -1044,7 +1045,7 @@ creates Linux specific configuration.
          bindsym $mod+f fullscreen
 
          # Toggle the current focus between tiling and floating mode
-         bindsym $mod+Shift+space floating toggle
+         bindsym $mod+Shift+f floating toggle
 
          # Swap focus between the tiling area and the floating area
          # bindsym $mod+space focus mode_toggle
