@@ -171,7 +171,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     Base variables that I use to organize the file system.
 
     #+BEGIN_SRC sh
-      export CODE_HOME=${HOME}/Code
+      export CODE_HOME=${HOME}/code
       export GOOGLE=${HOME}/Google
     #+END_SRC
 
