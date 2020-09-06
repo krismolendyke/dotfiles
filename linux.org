@@ -1474,7 +1474,7 @@ creates Linux specific configuration.
   https://wiki.archlinux.org/index.php/Sway has great info on
   configuring Sway.
 
-** [5/12] TODO
+** [5/13] TODO
 
    - [ ] https://github.com/swaywm/sway/wiki
    - [ ] https://github.com/Alexays/Waybar
@@ -1503,3 +1503,11 @@ creates Linux specific configuration.
      - [X] =pavucontrol= for graphical volume adjustments
      - [X] https://wiki.archlinux.org/index.php/Sway#Custom_keybindings
    - [X] =brightnessctl= & special key bindings like for audio
+   - [-] Rootless containers
+     - [X] =podman= https://www.redhat.com/sysadmin/rootless-podman
+     - [ ] =buildah=
+       - [ ] https://github.com/containers/buildah/blob/master/docs/tutorials/01-intro.md
+       - [ ] https://wiki.archlinux.org/index.php/Buildah
+     - [X] https://wiki.archlinux.org/index.php/Kernel_parameters#GRUB
+     - [X] https://wiki.archlinux.org/index.php/Cgroups#Switching_to_cgroups_v2
+     - [ ] https://developers.redhat.com/blog/2019/02/21/podman-and-buildah-for-docker-users/
