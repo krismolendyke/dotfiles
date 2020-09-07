@@ -644,6 +644,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
            diff = diff-so-fancy | less
            log = diff-so-fancy | less
            show = diff-so-fancy | less
+     [pull]
+           rebase = false
    #+END_SRC
 
 ** =.gitignore-global=
