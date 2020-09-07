@@ -1474,7 +1474,7 @@ creates Linux specific configuration.
   https://wiki.archlinux.org/index.php/Sway has great info on
   configuring Sway.
 
-** [5/13] TODO
+** [6/14] TODO
 
    - [ ] https://github.com/swaywm/sway/wiki
    - [ ] https://github.com/Alexays/Waybar
@@ -1503,11 +1503,22 @@ creates Linux specific configuration.
      - [X] =pavucontrol= for graphical volume adjustments
      - [X] https://wiki.archlinux.org/index.php/Sway#Custom_keybindings
    - [X] =brightnessctl= & special key bindings like for audio
-   - [-] Rootless containers
+   - [X] Rootless containers
      - [X] =podman= https://www.redhat.com/sysadmin/rootless-podman
-     - [ ] =buildah=
-       - [ ] https://github.com/containers/buildah/blob/master/docs/tutorials/01-intro.md
-       - [ ] https://wiki.archlinux.org/index.php/Buildah
+     - [X] =buildah=
+       - [X] https://github.com/containers/buildah/blob/master/docs/tutorials/01-intro.md
+       - [X] https://wiki.archlinux.org/index.php/Buildah
      - [X] https://wiki.archlinux.org/index.php/Kernel_parameters#GRUB
      - [X] https://wiki.archlinux.org/index.php/Cgroups#Switching_to_cgroups_v2
-     - [ ] https://developers.redhat.com/blog/2019/02/21/podman-and-buildah-for-docker-users/
+     - [X] https://developers.redhat.com/blog/2019/02/21/podman-and-buildah-for-docker-users/
+   - [ ] PDF https://wiki.archlinux.org/index.php/PDF,_PS_and_DjVu
+
+** Rootless Containers
+
+   #+BEGIN_SRC sh
+     cat /proc/cmdline
+     BOOT_IMAGE=/boot/vmlinuz-linux root=UUID=848e68bc-2cf3-4532-a7ea-32fb8fa99c2d rw loglevel=3 quiet
+   #+END_SRC
+
+   Need to add =systemd.unified_cgroup_hierarchy=1= to enable mounting
+   of =/sys/fs/cgroup= w/ v2.  I am running GRUB right now.
