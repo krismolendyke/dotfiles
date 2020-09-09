@@ -507,7 +507,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      MacOS completion with completion for my =k= alias:
 
      #+BEGIN_SRC sh
-       [ -e /usr/local/etc/bash_completion.d/kubectl ] && source /usr/local/etc/bash_completion.d/kubectl && complete -o default -F __start_kubectl k
+       [ -e /usr/share/bash-completion/completions/kubectl ] && source /usr/share/bash-completion/completions/kubectl && complete -o default -F __start_kubectl k
      #+END_SRC
 
      Install [[https://github.com/ahmetb/kubectx][kubectx]] (via [[#brewfile][=${HOME}/.Brewfile=]]), completion for helper
