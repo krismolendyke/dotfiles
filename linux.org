@@ -81,6 +81,9 @@ creates Linux specific configuration.
    :header-args: :tangle ~/.config/alacritty/alacritty.yml
    :END:
 
+   - Work on page up/down etc., with =showkey=
+     https://github.com/alacritty/alacritty/issues/1593
+
    #+BEGIN_SRC yaml
      # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
