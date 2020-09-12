@@ -1477,7 +1477,7 @@ creates Linux specific configuration.
   https://wiki.archlinux.org/index.php/Sway has great info on
   configuring Sway.
 
-** [6/15] TODO
+** [6/18] TODO
 
    - [ ] https://github.com/swaywm/sway/wiki
    - [ ] https://github.com/Alexays/Waybar
@@ -1516,6 +1516,15 @@ creates Linux specific configuration.
      - [X] https://developers.redhat.com/blog/2019/02/21/podman-and-buildah-for-docker-users/
    - [ ] PDF https://wiki.archlinux.org/index.php/PDF,_PS_and_DjVu
    - [ ] WOB https://github.com/francma/wob
+   - [ ] =showkey= for debugging keyboard codes
+   - [-] Screenshots
+     - [X] https://github.com/emersion/grim
+     - [X] https://github.com/emersion/slurp
+     - [ ] https://www.reddit.com/r/swaywm/comments/9q5a5l/taking_screenshot_with_selected_area/
+   - [ ] Screen sharing
+     - [ ] https://www.reddit.com/r/swaywm/comments/fiwg9a/zoom_screen_share_is_right_around_the_corner/
+     - [ ] https://gitlab.com/jamedjo/gnome-dbus-emulation-wlr/blob/master/README.md
+     - [ ] https://github.com/emersion/xdg-desktop-portal-wlr/pull/11
 
 ** Rootless Containers
 
