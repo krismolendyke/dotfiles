@@ -388,8 +388,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           if command -v k > /dev/null 2>&1; then
               value=$(k config view --output go-template='{{ index . "current-context" }}')
               fullname=${value}
-              if [[ "${value}" =~ ^gke_ ]]; then
-                  value=$(echo "${value}" | cut -d _ -f 4)
+              if [[ "${value}" =~ ^arn ]]; then
+                  value=$(echo "${value}" | cut -d / -f 2)
               fi
               value="${value}${RESET}·$(k config view -o=jsonpath="{.contexts[?(@.name==\"${fullname}\")].context.namespace}")"
               if [[ "${value}" =~ .*prod.* ]]; then
@@ -408,7 +408,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       [ -e /usr/share/git/completion/git-prompt.sh ] && source //usr/share/git/completion/git-prompt.sh
 
       PROMPT_COMMAND='__git_ps1 \
-      "\n$(k20e_gcp_project)$(k20e_virtual_env)\n$(k20e_working_directory)" \
+      "\n$(k20e_gcp_project)$(k20e_kubectx)$(k20e_virtual_env)\n$(k20e_working_directory)" \
       "\n\$ " \
       " %s"'
     #+END_SRC
