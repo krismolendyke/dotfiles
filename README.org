@@ -378,6 +378,22 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+END_SRC
 
     #+BEGIN_SRC sh
+      function k20e_aws_profile() {
+          declare -r YELLOW='\[\e[0;33m\]'
+          declare -r RESET='\[\e[0m\]'
+          declare -r PREFIX="${YELLOW}aws${RESET} "
+          declare -r SUFFIX="${RESET} "
+          local value=''
+          if [[ -v AWS_DEFAULT_PROFILE ]]; then
+              value="${AWS_DEFAULT_PROFILE}"
+          else
+              value="∅"
+          fi
+          echo "${PREFIX}${value}${SUFFIX}"
+      }
+    #+END_SRC
+
+    #+BEGIN_SRC sh
       function k20e_kubectx() {
           declare -r BLUE='\[\e[0;34m\]'
           declare -r RED_BG='\[\e[0;41m\]'
@@ -408,7 +424,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       [ -e /usr/share/git/completion/git-prompt.sh ] && source //usr/share/git/completion/git-prompt.sh
 
       PROMPT_COMMAND='__git_ps1 \
-      "\n$(k20e_gcp_project)$(k20e_kubectx)$(k20e_virtual_env)\n$(k20e_working_directory)" \
+      "\n$(k20e_aws_profile)$(k20e_kubectx)$(k20e_virtual_env)\n$(k20e_working_directory)" \
       "\n\$ " \
       " %s"'
     #+END_SRC
