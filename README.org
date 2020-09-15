@@ -397,6 +397,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       function k20e_kubectx() {
           declare -r BLUE='\[\e[0;34m\]'
           declare -r RED_BG='\[\e[0;41m\]'
+          declare -r YELLOW='\[\e[0;33m\]'
           declare -r RESET='\[\e[0m\]'
           declare -r PREFIX="${BLUE}k8s${RESET} "
           declare -r SUFFIX="${RESET} "
@@ -410,6 +411,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
               value="${value}${RESET}·$(k config view -o=jsonpath="{.contexts[?(@.name==\"${fullname}\")].context.namespace}")"
               if [[ "${value}" =~ .*prod.* ]]; then
                   value="${RED_BG}${value}"
+              fi
+              if [[ "${value}" =~ .*stage.* ]]; then
+                  value="${YELLOW}${value}"
               fi
               value="${PREFIX}${value}${SUFFIX}"
           fi
