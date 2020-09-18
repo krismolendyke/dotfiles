@@ -1860,6 +1860,7 @@ creates Linux specific configuration.
      - [ ] https://github.com/emersion/xdg-desktop-portal-wlr/pull/11
    - [ ] Notifications
      - [ ] https://github.com/emersion/mako
+       - [ ] Dismiss all w/ mako https://git.sr.ht/~emersion/dotfiles/commit/3d27eae7c01f8486fa88c01fe889c75d3bd74de3
 
 ** Rootless Containers
 
