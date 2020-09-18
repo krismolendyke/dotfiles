@@ -1118,7 +1118,7 @@ creates Linux specific configuration.
    An alternative to the built-in =swaybar=.  This is configured over
    the built-in above in the Sway config =bar= block.
 
-*** Config
+*** =config=
    :PROPERTIES:
    :header-args: :tangle ~/.config/waybar/config
    :END:
@@ -1247,7 +1247,7 @@ creates Linux specific configuration.
      }
    #+END_SRC
 
-*** Style
+*** =style.css=
    :PROPERTIES:
    :header-args: :tangle ~/.config/waybar/style.css
    :END:
