@@ -1136,9 +1136,10 @@ creates Linux specific configuration.
              "idle_inhibitor",
              "pulseaudio",
              "network",
+             "temperature",
              "cpu",
              "memory",
-             "temperature",
+             "disk",
              "backlight",
              "battery",
              "battery#bat2",
@@ -1179,6 +1180,11 @@ creates Linux specific configuration.
              // "timezone": "America/New_York",
              "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
              "format-alt": "{:%Y-%m-%d}"
+         },
+         "disk": {
+             "interval": 30,
+             "format": "{path} {percentage_used}%",
+             "path": "/"
          },
          "cpu": {
              "format": "{usage}% ",
@@ -1335,6 +1341,7 @@ creates Linux specific configuration.
       #clock,
       #battery,
       #cpu,
+      #disk,
       #memory,
       #temperature,
       #backlight,
