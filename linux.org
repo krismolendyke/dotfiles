@@ -1105,20 +1105,9 @@ creates Linux specific configuration.
      # Status Bar:
      #
      # Read `man 5 sway-bar` for more information about this section.
+     # Read https://github.com/Alexays/Waybar/wiki/Configuration for waybar
      bar {
-         position top
-
-         font PragmataPro Mono Liga 14
-
-         # When the status_command prints a new line to stdout, swaybar updates.
-         # The default just shows the current date and time.
-         status_command while ${HOME}/.config/sway/swaybar.sh; do sleep 1; done
-
-         colors {
-             statusline #ffffff
-             background #323232
-             inactive_workspace #32323200 #32323200 #5c5c5c
-         }
+         swaybar_command waybar
      }
 
      include /etc/sway/config.d/*
