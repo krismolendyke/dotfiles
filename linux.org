@@ -1810,7 +1810,7 @@ creates Linux specific configuration.
   https://wiki.archlinux.org/index.php/Sway has great info on
   configuring Sway.
 
-** [6/18] TODO
+** [6/19] TODO
 
    - [ ] https://github.com/swaywm/sway/wiki
    - [ ] https://github.com/Alexays/Waybar
@@ -1858,6 +1858,8 @@ creates Linux specific configuration.
      - [ ] https://www.reddit.com/r/swaywm/comments/fiwg9a/zoom_screen_share_is_right_around_the_corner/
      - [ ] https://gitlab.com/jamedjo/gnome-dbus-emulation-wlr/blob/master/README.md
      - [ ] https://github.com/emersion/xdg-desktop-portal-wlr/pull/11
+   - [ ] Notifications
+     - [ ] https://github.com/emersion/mako
 
 ** Rootless Containers
 
