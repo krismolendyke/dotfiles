@@ -384,8 +384,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           declare -r PREFIX="${YELLOW}aws${RESET} "
           declare -r SUFFIX="${RESET} "
           local value=''
-          if [[ -v AWS_DEFAULT_PROFILE ]]; then
-              value="${AWS_DEFAULT_PROFILE}"
+          if [[ -v AWS_PROFILE ]]; then
+              value="${AWS_PROFILE}"
           else
               value="∅"
           fi
