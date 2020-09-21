@@ -1885,3 +1885,30 @@ creates Linux specific configuration.
 
    Need to add =systemd.unified_cgroup_hierarchy=1= to enable mounting
    of =/sys/fs/cgroup= w/ v2.  I am running GRUB right now.
+
+*** =k3s=
+
+    Apparently this is screwing with =k3s=.  It fails with something
+    about not being able to find memory cgroup.
+
+    So maybe I need to add =cgroup_memory=1 cgroup_enable=memory= to
+    the boot params?  I was using the AUR =k3s-bin= install w/ its
+    systemd service and it was mad about this but it was running as
+    =root=, too, which I really don't want to do.  I'm gonna try the
+    regular install described in the Rancher docs and see what I get.
+
+    https://rancher.com/docs/k3s/latest/en/advanced/#running-k3s-with-rootlesskit-experimental
+
+    #+BEGIN_QUOTE
+    Cgroups are not supported.
+    #+END_QUOTE
+
+    ☹
+
+    Well, let's see WTF that manifests as:
+
+    #+BEGIN_SRC sh
+      curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
+    #+END_SRC
+
+    Closer but now the networking is netfailing.
