@@ -1134,13 +1134,13 @@ creates Linux specific configuration.
          "modules-center": ["sway/window"],
          "modules-right": [
              "idle_inhibitor",
-             "pulseaudio",
-             "network",
-             "temperature",
              "cpu",
              "memory",
              "disk",
+             "temperature",
+             "pulseaudio",
              "backlight",
+             "network",
              "battery",
              "clock",
              "tray"
