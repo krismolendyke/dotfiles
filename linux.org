@@ -893,6 +893,9 @@ creates Linux specific configuration.
      #set $menu dmenu_path | dmenu | xargs swaymsg exec --
      set $menu dmenu_path | wofi --show drun -i | xargs swaymsg exec --
 
+     exec mako
+     bindsym $mod+Escape exec makoctl dismiss -a
+
      ### Output configuration
      #
      # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
