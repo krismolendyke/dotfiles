@@ -1915,3 +1915,12 @@ creates Linux specific configuration.
     #+END_SRC
 
     Closer but now the networking is netfailing.
+
+    [2020-09-21 Mon]
+
+    I had to ditch =podman= and the dream of rootless containers to
+    run k8s locally.  There are a bunch of in-work issues across
+    =k3s=, =kind=, etc. about supporting rootless and cgroup v2 but
+    it's just not working right now and this isn't my fight today.
+
+    Looks like it's working w/ Docker...
