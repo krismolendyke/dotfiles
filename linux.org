@@ -1474,6 +1474,19 @@ creates Linux specific configuration.
       }
     #+END_SRC
 
+** =[[https://wayland.emersion.fr/mako/][mako]]=
+
+*** =config=
+   :PROPERTIES:
+   :header-args: :tangle ~/.config/mako/config
+   :END:
+
+   #+BEGIN_SRC conf
+     background-color = #00000088
+
+     border-radius = 10
+   #+END_SRC
+
 ** =sway/swaybar.sh=
    :PROPERTIES:
    :header-args: :tangle ~/.config/sway/swaybar.sh
