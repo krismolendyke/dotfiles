@@ -1113,8 +1113,8 @@ creates Linux specific configuration.
              "format": "MEM {}%"
          },
          "temperature": {
-             // "thermal-zone": 2,
              // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+             "thermal-zone": 8,
              "critical-threshold": 80,
              "format": "{temperatureC}°C",
              "format-critical": "{temperatureC}°C 🔥"
