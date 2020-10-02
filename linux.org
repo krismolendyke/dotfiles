@@ -1760,9 +1760,9 @@ creates Linux specific configuration.
    - [ ] https://github.com/Alexays/Waybar
    - [ ] A good list of things in this thread:
      https://www.reddit.com/r/swaywm/comments/bke1od/found_a_sway_config_that_rocks/
-   - [ ] Clipboards
+   - [-] Clipboards
+     - [X] https://github.com/bugaevc/wl-clipboard
      - [ ] https://github.com/yory8/clipman
-     - [ ] https://github.com/bugaevc/wl-clipboard
    - [X] Blue light
      - [X] https://gitlab.com/chinstrap/gammastep supports Wayland (a
        Redshift fork)
