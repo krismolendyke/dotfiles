@@ -1108,7 +1108,7 @@ creates Linux specific configuration.
          },
          "cpu": {
              "format": "CPU {usage}%",
-             "tooltip": false
+             "tooltip": true
          },
          "memory": {
              "format": "MEM {}%"
