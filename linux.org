@@ -1399,9 +1399,6 @@ creates Linux specific configuration.
    :END:
 
    #+BEGIN_SRC conf
-     background-color = #00000088
-
-     border-radius = 10
    #+END_SRC
 
 ** =sway/swaybar.sh=
