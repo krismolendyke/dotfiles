@@ -1755,6 +1755,22 @@ creates Linux specific configuration.
   https://wiki.archlinux.org/index.php/Sway has great info on
   configuring Sway.
 
+** Zoom Screen Sharing
+
+   This was a big pain in the ass.  Zoom sucks.  WebRTC was easy.
+
+   #+BEGIN_SRC sh
+     wf-recorder --muxer=v4l2 --codec=rawvideo --pixel-format=yuv420p --file=/dev/video0
+   #+END_SRC
+
+   Then tell Zoom to share the second "camera" which is just the
+   virtual video loopback. I can't get any other pixel format to work
+   so I'm stuck w/ =420p= but it's better than nothing.
+
+   - https://github.com/umlaeute/v4l2loopback
+   - https://github.com/ammen99/wf-recorder
+   - https://hugo.barrera.io/journal/2020/06/14/zoom-screensharing-on-archlinux/
+
 ** [6/19] TODO
 
    - [ ] https://github.com/swaywm/sway/wiki
