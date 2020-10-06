@@ -1771,7 +1771,7 @@ creates Linux specific configuration.
    - https://github.com/ammen99/wf-recorder
    - https://hugo.barrera.io/journal/2020/06/14/zoom-screensharing-on-archlinux/
 
-** [6/19] TODO
+** [6/20] TODO
 
    - [ ] https://github.com/swaywm/sway/wiki
    - [ ] https://github.com/Alexays/Waybar
@@ -1822,6 +1822,12 @@ creates Linux specific configuration.
    - [ ] Notifications
      - [ ] https://github.com/emersion/mako
        - [ ] Dismiss all w/ mako https://git.sr.ht/~emersion/dotfiles/commit/3d27eae7c01f8486fa88c01fe889c75d3bd74de3
+   - [ ] Printing
+     - [ ] https://gorauskas.org/linux/arch/ArchPrintingSetup
+     - [ ] https://wiki.archlinux.org/index.php/Packaging_Brother_printer_drivers
+     - [ ] https://aur.archlinux.org/packages/brother-hl-l2380dw/
+     - [ ] https://www.brother-usa.com/products/hll2350dw
+     - [ ] https://www.reddit.com/r/archlinux/comments/c9xddz/help_me_figure_out_cups/
 
 ** Rootless Containers
 
