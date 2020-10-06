@@ -335,63 +335,63 @@ creates Linux specific configuration.
        #
        #indexed_colors: []
 
-     # # Colors (Tomorrow Night Bright)
-     # colors:
-     #   # Default colors
-     #   primary:
-     #     background: '0x000000'
-     #     foreground: '0xeaeaea'
-
-     #   # Normal colors
-     #   normal:
-     #     black:   '0x000000'
-     #     red:     '0xd54e53'
-     #     green:   '0xb9ca4a'
-     #     yellow:  '0xe6c547'
-     #     blue:    '0x7aa6da'
-     #     magenta: '0xc397d8'
-     #     cyan:    '0x70c0ba'
-     #     white:   '0x424242'
-
-     #   # Bright colors
-     #   bright:
-     #     black:   '0x666666'
-     #     red:     '0xff3334'
-     #     green:   '0x9ec400'
-     #     yellow:  '0xe7c547'
-     #     blue:    '0x7aa6da'
-     #     magenta: '0xb77ee0'
-     #     cyan:    '0x54ced6'
-     #     white:   '0x2a2a2a'
-
-     # Colors (Tomorrow Day)
+     # Colors (Tomorrow Night Bright)
      colors:
        # Default colors
        primary:
-         background: '0xffffff'
-         foreground: '0x4d4d4c'
+         background: '0x000000'
+         foreground: '0xeaeaea'
 
        # Normal colors
        normal:
          black:   '0x000000'
-         red:     '0xc82829'
-         green:   '0x718c00'
-         yellow:  '0xeab700'
-         blue:    '0x4271ae'
-         magenta: '0x8959a8'
-         cyan:    '0x3e999f'
-         white:   '0xefefef'
+         red:     '0xd54e53'
+         green:   '0xb9ca4a'
+         yellow:  '0xe6c547'
+         blue:    '0x7aa6da'
+         magenta: '0xc397d8'
+         cyan:    '0x70c0ba'
+         white:   '0x424242'
 
        # Bright colors
        bright:
-         black:   '0x000000'
-         red:     '0xc82829'
+         black:   '0x666666'
+         red:     '0xff3334'
          green:   '0x9ec400'
-         yellow:  '0xeab700'
-         blue:    '0x4271ae'
-         magenta: '0x8959a8'
-         cyan:    '0x3e999f'
-         white:   '0xefefef'
+         yellow:  '0xe7c547'
+         blue:    '0x7aa6da'
+         magenta: '0xb77ee0'
+         cyan:    '0x54ced6'
+         white:   '0x2a2a2a'
+
+     # # Colors (Tomorrow Day)
+     # colors:
+     #   # Default colors
+     #   primary:
+     #     background: '0xffffff'
+     #     foreground: '0x4d4d4c'
+
+     #   # Normal colors
+     #   normal:
+     #     black:   '0x000000'
+     #     red:     '0xc82829'
+     #     green:   '0x718c00'
+     #     yellow:  '0xeab700'
+     #     blue:    '0x4271ae'
+     #     magenta: '0x8959a8'
+     #     cyan:    '0x3e999f'
+     #     white:   '0xefefef'
+
+     #   # Bright colors
+     #   bright:
+     #     black:   '0x000000'
+     #     red:     '0xc82829'
+     #     green:   '0x9ec400'
+     #     yellow:  '0xeab700'
+     #     blue:    '0x4271ae'
+     #     magenta: '0x8959a8'
+     #     cyan:    '0x3e999f'
+     #     white:   '0xefefef'
 
      # Visual Bell
      #
@@ -423,7 +423,7 @@ creates Linux specific configuration.
      #
      # Window opacity as a floating point number from `0.0` to `1.0`.
      # The value `0.0` is completely transparent and `1.0` is opaque.
-     background_opacity: 0.9
+     background_opacity: 0.0
 
      #selection:
        #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
