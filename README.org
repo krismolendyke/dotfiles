@@ -314,7 +314,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+BEGIN_SRC sh
       if [[ -x jenv ]]; then
-	  eval "$(jenv init -)"
+          eval "$(jenv init -)"
       fi
     #+END_SRC
 
@@ -851,8 +851,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      ServerAliveInterval 60
 
      Host *
-	 IdentityFile ~/.ssh/id_rsa
-	 PreferredAuthentications publickey,password
+         IdentityFile ~/.ssh/id_rsa
+         PreferredAuthentications publickey,password
 
      Include ~/.ssh/config.d/*
    #+END_SRC
