@@ -899,7 +899,7 @@ https://wiki.archlinux.org/index.php/Security#Lock_out_user_after_three_failed_l
      ### Output configuration
      #
      # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-     output * bg /home/kris/img/linen.jpg fill
+     output * background /home/kris/img/linen.jpg fill
      #
      # Example configuration:
      #
