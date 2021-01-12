@@ -5,6 +5,8 @@
 In addition to the base =README.org= file, this document describes and
 creates Linux specific configuration.
 
+https://wiki.archlinux.org/index.php/Security#Lock_out_user_after_three_failed_login_attempts
+
 * Fonts
 
   - https://askubuntu.com/questions/3697/how-do-i-install-fonts
@@ -83,6 +85,7 @@ creates Linux specific configuration.
 
    - Work on page up/down etc., with =showkey=
      https://github.com/alacritty/alacritty/issues/1593
+   - https://github.com/arcticicestudio/nord-alacritty
 
    #+BEGIN_SRC yaml
      # Configuration for Alacritty, the GPU enhanced terminal emulator.
@@ -2100,7 +2103,7 @@ creates Linux specific configuration.
    This cuts off the right and left sides of my ultra-wide monitor.
    Maybe I'm doing it wrong, need to look at
    https://github.com/ammen99/wf-recorder/search?q=geometry&type=issues.
-   
+
    Then tell Zoom to share the second "camera" which is just the
    virtual video loopback. I can't get any other pixel format to work
    so I'm stuck w/ =420p= but it's better than nothing.
@@ -2118,6 +2121,7 @@ creates Linux specific configuration.
    - [-] Clipboards
      - [X] https://github.com/bugaevc/wl-clipboard
      - [ ] https://github.com/yory8/clipman
+     - [ ] https://hack.org/mc/blog/no-more-x11.html
    - [X] Blue light
      - [X] https://gitlab.com/chinstrap/gammastep supports Wayland (a
        Redshift fork)
