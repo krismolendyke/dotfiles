@@ -300,6 +300,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       fi
     #+END_SRC
 
+*** =.dir_colors=
+
+    https://www.nordtheme.com/docs/ports/dircolors
+
+    #+BEGIN_SRC sh
+      [ -e "${HOME}/.dir_colors" ] && eval $(dircolors "${HOME}/.dir_colors")
+    #+END_SRC
+
 *** jEnv
 
     For managing multiple Java installations.
