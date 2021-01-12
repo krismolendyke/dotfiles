@@ -2075,7 +2075,9 @@ https://wiki.archlinux.org/index.php/Security#Lock_out_user_after_three_failed_l
   :END:
 
   #+BEGIN_SRC sh
-    exec dwm
+    export XDG_SESSION_TYPE=x11
+    export GDK_BACKEND=x11
+    exec gnome-session
     [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
   #+END_SRC
 
