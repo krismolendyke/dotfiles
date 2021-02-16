@@ -633,47 +633,49 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
    #+BEGIN_SRC gitconfig
      [user]
-           name = Kris
-           email = krismolendyke@users.noreply.github.com
-           useconfigonly = true
+             name = Kris
+             email = krismolendyke@users.noreply.github.com
+             useconfigonly = true
      [color]
-           ui = auto
+             ui = auto
      [core]
-           excludesfile = ~/.gitignore-global
-           whitespace = -trailing-space,-space-before-tab
-           editor = emacsclient
+             excludesfile = ~/.gitignore-global
+             whitespace = -trailing-space,-space-before-tab
+             editor = emacsclient
      [apply]
-           whitespace = nowarn
+             whitespace = nowarn
      [alias]
-           diff = diff --color-moved
-           stache = stash
-           st = status -sb
-           a = add -p
-           l = log --color-moved --stat --no-merges
-           lp = log --color-moved --patch --stat --no-merges
-           wlp = log --color-moved --patch --stat --color-words --no-merges
-           lo = log --color-moved --oneline --decorate --no-merges
-           lf = log --color-moved --pretty=format: --name-only -z --max-count 1 --no-merges
-           co = checkout
-           br = branch -vv
-           wdiff = diff --color-moved --color-words
-           ds = diff --color-moved --staged
+             diff = diff --color-moved
+             stache = stash
+             st = status -sb
+             a = add -p
+             l = log --color-moved --stat --no-merges
+             lp = log --color-moved --patch --stat --no-merges
+             wlp = log --color-moved --patch --stat --color-words --no-merges
+             lo = log --color-moved --oneline --decorate --no-merges
+             lf = log --color-moved --pretty=format: --name-only -z --max-count 1 --no-merges
+             co = checkout
+             br = branch -vv
+             wdiff = diff --color-moved --color-words
+             ds = diff --color-moved --staged
      [advice]
-           statusHints = true
+             statusHints = true
      [rebase]
-           autosquash = true
+             autosquash = true
      [diff]
-           algorithm = histogram
-           compactionHeuristic = 1
-           colorMoved = zebra
+             algorithm = histogram
+             compactionHeuristic = 1
+             colorMoved = zebra
      [help]
-           autocorrect = 1
+             autocorrect = 1
      [pager]
-           diff = diff-so-fancy | less
-           log = diff-so-fancy | less
-           show = diff-so-fancy | less
+             diff = diff-so-fancy | less
+             log = diff-so-fancy | less
+             show = diff-so-fancy | less
      [pull]
-           rebase = false
+             rebase = false
+     [init]
+             defaultBranch = main
    #+END_SRC
 
 ** =.gitignore-global=
