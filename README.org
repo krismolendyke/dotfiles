@@ -621,6 +621,28 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       fi
     #+END_SRC
 
+    #+BEGIN_SRC sh
+      function k20e_exif_strip() {
+          local path="$1"
+
+          if [ ! -e "${path}" ]; then
+              echo "Image at path \"${path}\" does not exist"
+              return
+          fi
+
+          echo "Before:"
+          echo
+          identify -verbose "${path}" | rg exif
+
+          mogrify -strip "${path}"
+
+          echo
+          echo "After:"
+          echo
+          identify -verbose "${path}" | rg exif
+      }
+    #+END_SRC
+
 *** AWS CLI
 
     #+BEGIN_SRC sh
