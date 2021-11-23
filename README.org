@@ -897,6 +897,17 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      virtualenvwrapper
    #+END_SRC
 
+* =ripgrep=
+   :PROPERTIES:
+   :header-args: :tangle ~/.ripgreprc
+   :END:
+
+  See =RIPGREP_CONFIG_PATH= above.
+
+  #+BEGIN_SRC sh
+    --sort-files
+  #+END_SRC
+
 * SSH
 
   Create a configuration directory:
