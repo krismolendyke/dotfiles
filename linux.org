@@ -897,6 +897,11 @@ https://wiki.archlinux.org/index.php/Security#Lock_out_user_after_three_failed_l
      # on the original workspace that the command was run on.
      #set $menu dmenu_path | dmenu | xargs swaymsg exec --
      set $menu dmenu_path | wofi --show drun -i | xargs swaymsg exec --
+     # set $menu BEMENU_SCALE=2 bemenu-run | xargs swaymsg exec --
+
+     # exec wl-paste --type text --watch clipman store
+     exec wl-paste --type text --primary --watch clipman store --no-persist --histpath="~/.local/share/clipman-primary.json
+     bindsym $mod+c exec clipman pick -t wofi
 
      exec mako
      bindsym $mod+Escape exec makoctl dismiss -a
@@ -1189,7 +1194,7 @@ https://wiki.archlinux.org/index.php/Security#Lock_out_user_after_three_failed_l
              // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
              "thermal-zone": 8,
              "critical-threshold": 80,
-             "format": "{temperatureC}°C",
+             "format": "{temperatureC}°C {temperatureF}°F",
              "format-critical": "{temperatureC}°C 🔥"
          },
          "backlight": {
