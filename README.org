@@ -324,6 +324,20 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       fi
     #+END_SRC
 
+*** [[https://www.nomadproject.io/][Nomad]]
+
+    #+BEGIN_SRC sh
+      [ -x /usr/bin/nomad ] && complete -C /usr/bin/nomad nomad
+    #+END_SRC
+
+*** [[https://github.com/nvm-sh/nvm][nvm]]
+
+    For managing multiple ... Node installations.  Installed [[https://aur.archlinux.org/packages/nvm/][from AUR]].
+
+    #+BEGIN_SRC sh
+      [ -e /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
+    #+END_SRC
+
 *** =PYTHON_USER_BASE=
 
     Add Python =site.USER_BASE= for user site-packages and =pip
