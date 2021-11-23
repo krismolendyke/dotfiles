@@ -734,6 +734,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
              rebase = false
      [init]
              defaultBranch = main
+     [credential]
+             helper = cache --timeout=3600
+     [tag]
+             sort = version:refname
    #+END_SRC
 
 ** =.gitignore-global=
