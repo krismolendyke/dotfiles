@@ -233,6 +233,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       fi
     #+END_SRC
 
+    https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
+
+    #+BEGIN_SRC sh
+      export RIPGREP_CONFIG_PATH=${HOME}/.ripgreprc
+    #+END_SRC
+
 *** =CDPATH=
 
     #+BEGIN_QUOTE
