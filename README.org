@@ -399,6 +399,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
               if [[ "${value}" =~ .*prod.* ]]; then
                   value="${RED_BG}${value}"
               fi
+              if [[ "${value}" =~ .*apac.* ]]; then
+                  value="${RED_BG}${value}"
+              fi
               value="${PREFIX}${value}${SUFFIX}"
           fi
           echo "${value}"
@@ -407,6 +410,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+BEGIN_SRC sh
       function k20e_aws_profile() {
+          declare -r RED_BG='\[\e[0;41m\]'
           declare -r YELLOW='\[\e[0;33m\]'
           declare -r RESET='\[\e[0m\]'
           declare -r PREFIX="${YELLOW}aws${RESET} "
@@ -416,6 +420,15 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
               value="${AWS_PROFILE}"
           else
               value="∅"
+          fi
+          if [[ "${value}" =~ .*prod.* ]]; then
+              value="${RED_BG}${value}"
+          fi
+          if [[ "${value}" =~ .*apac.* ]]; then
+              value="${RED_BG}${value}"
+          fi
+          if [[ "${value}" =~ .*stage.* ]]; then
+              value="${YELLOW}${value}"
           fi
           echo "${PREFIX}${value}${SUFFIX}"
       }
@@ -438,6 +451,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
               fi
               value="${value}${RESET}·$(k config view -o=jsonpath="{.contexts[?(@.name==\"${fullname}\")].context.namespace}")"
               if [[ "${value}" =~ .*prod.* ]]; then
+                  value="${RED_BG}${value}"
+              fi
+              if [[ "${value}" =~ .*apac.* ]]; then
                   value="${RED_BG}${value}"
               fi
               if [[ "${value}" =~ .*stage.* ]]; then
