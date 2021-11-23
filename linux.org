@@ -24,6 +24,11 @@ https://wiki.archlinux.org/index.php/Security#Lock_out_user_after_three_failed_l
   - =sudo systemctl get-default=
   - =sudo systemctl set-default multi-user.target=
 
+  For Gnome extensions, disable the stupid validate check that breaks
+  stuff every time a new minor point release is published:
+
+  =gsettings set org.gnome.shell "disable-extension-version-validation" true=
+
 * Disable Canonical Tracking
 
   Bummer,
