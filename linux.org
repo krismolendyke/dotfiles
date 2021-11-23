@@ -2119,8 +2119,9 @@ https://wiki.archlinux.org/index.php/Security#Lock_out_user_after_three_failed_l
    - https://github.com/ammen99/wf-recorder
    - https://hugo.barrera.io/journal/2020/06/14/zoom-screensharing-on-archlinux/
 
-** [6/20] TODO
+** [6/21] TODO
 
+   - [ ] Aura as =pacman= replacement w/ AUR https://fosskers.github.io/aura/
    - [ ] https://github.com/swaywm/sway/wiki
    - [ ] https://github.com/Alexays/Waybar
    - [ ] A good list of things in this thread:
