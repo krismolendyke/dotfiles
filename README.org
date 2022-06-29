@@ -1,5 +1,5 @@
 #+TITLE: dotfiles
-#+OPTIONS: toc:nil num:nil
+#+OPTIONS: toc:nil num:nil ^:nil
 #+STARTUP: showall
 
 A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]] dotfiles created and maintained
@@ -201,8 +201,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           export JENV_HOME=${HOME}/.jenv
       fi
 
-      export MANPATH=/usr/local/share/man:${MANPATH}
-      export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
+      if [[ "$OSTYPE" == darwin* ]]; then
+          export MANPATH=/usr/local/share/man:${MANPATH}
+          export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
+      fi
     #+END_SRC
 
     Non file system variables.
