@@ -31,7 +31,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    Tangling of those files must be done manually on the correct
    system.
 
-
 * Shell
 
 ** Change Default Shell

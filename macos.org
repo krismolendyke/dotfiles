@@ -11,6 +11,8 @@ creates MacOS specific configuration.
 
 * ChunkWM
 
+[2022-08-18 Thu] https://github.com/koekeishiya/yabai is the new project
+
 ** =.chunkwm=
    :PROPERTIES:
    :header-args: :tangle ~/.chunkwmrc
@@ -431,8 +433,9 @@ creates MacOS specific configuration.
    From https://www.davd.eu/securing-macos/#homebrew
 
    #+BEGIN_SRC sh
-     export HOMEBREW_NO_INSECURE_REDIRECT=1
      export HOMEBREW_CASK_OPTS=--require-sha
+     export HOMEBREW_NO_ANALYTICS=1
+     export HOMEBREW_NO_INSECURE_REDIRECT=1
    #+END_SRC
 
 ** [[https://github.com/Homebrew/homebrew-bundle][Bundle]]
@@ -601,8 +604,6 @@ creates MacOS specific configuration.
      mas "Pages", id: 409201541
      mas "Pixelmator", id: 407963104
    #+END_SRC
-
-   #+RESULTS:
 
 ** [[https://github.com/mas-cli/mas][mas]]
 
