@@ -35,7 +35,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Change Default Shell
 
-   For MacOS this should be the Homebrew installed =bash= /not/ the
+   For macOS this should be the Homebrew installed =bash= /not/ the
    system =bash= path.
 
    #+BEGIN_SRC sh
@@ -47,7 +47,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      echo ${SHELL}
    #+END_SRC
 
-   On MacOS:
+   On macOS:
 
    #+BEGIN_SRC sh
      sudo dscl . -create ${HOME} UserShell /usr/local/bin/bash
@@ -569,7 +569,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      #+BEGIN_SRC sh
      #+END_SRC
 
-     MacOS completion with completion for my =k= alias:
+     macOS completion with completion for my =k= alias:
 
      #+BEGIN_SRC sh
        [ -e /usr/share/bash-completion/completions/kubectl ] && source /usr/share/bash-completion/completions/kubectl && complete -o default -F __start_kubectl k

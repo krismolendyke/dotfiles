@@ -1,11 +1,11 @@
-#+TITLE: dotfiles for MacOS
+#+TITLE: dotfiles for macOS
 #+OPTIONS: toc:nil num:nil
 #+STARTUP: showall
 
 In addition to the base =README.org= file, this document describes and
-creates MacOS specific configuration.
+creates macOS specific configuration.
 
-* MacOS Junk
+* macOS Junk
 
   =defaults write com.apple.Accessibility ReduceMotionEnabled -bool true=
 
