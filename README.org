@@ -446,21 +446,20 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           local value=''
           if command -v k > /dev/null 2>&1; then
               value=$(k config view --output go-template='{{ index . "current-context" }}')
-              fullname=${value}
-              if [[ "${value}" =~ ^arn ]]; then
-                  value=$(echo "${value}" | cut -d / -f 2)
+              if [ ! -z "$value" ]; then
+                  fullname=${value}
+                  if [[ "${value}" =~ ^arn ]]; then
+                      value=$(echo "${value}" | cut -d / -f 2)
+                  fi
+                  value="${value}${RESET}·$(k config view -o=jsonpath="{.contexts[?(@.name==\"${fullname}\")].context.namespace}")"
+                  if [[ "${value}" =~ .*prod.* ]]; then
+                      value="${RED_BG}${value}"
+                  fi
+                  if [[ "${value}" =~ .*stage.* ]]; then
+                      value="${YELLOW}${value}"
+                  fi
+                  value="${PREFIX}${value}${SUFFIX}"
               fi
-              value="${value}${RESET}·$(k config view -o=jsonpath="{.contexts[?(@.name==\"${fullname}\")].context.namespace}")"
-              if [[ "${value}" =~ .*prod.* ]]; then
-                  value="${RED_BG}${value}"
-              fi
-              if [[ "${value}" =~ .*apac.* ]]; then
-                  value="${RED_BG}${value}"
-              fi
-              if [[ "${value}" =~ .*stage.* ]]; then
-                  value="${YELLOW}${value}"
-              fi
-              value="${PREFIX}${value}${SUFFIX}"
           fi
           echo "${value}"
       }
