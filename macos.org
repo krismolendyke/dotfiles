@@ -335,14 +335,12 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      brew "bash"
      brew "bash-completion@2"
      brew "bison"
+     brew "diff-so-fancy"
      brew "freetype"
      brew "fontconfig"
-     brew "font-input"
      brew "gettext", link: true
      brew "pixman"
      brew "cairo"
-     brew "emacs", args: ["HEAD", "with-cocoa"]
-     brew "cask"
      brew "cmake"
      brew "xvid"
      brew "flex"
@@ -350,7 +348,6 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      brew "gcc"
      brew "gd"
      brew "gdk-pixbuf"
-     brew "gdub"
      brew "gflags"
      brew "git"
      brew "go"
@@ -362,9 +359,8 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      brew "ispell"
      brew "lz4"
      brew "kubernetes-cli"
-     brew "kubectx", args: ["with-short-names"]
+     brew "kubectx"
      brew "less"
-     brew "libav"
      brew "libcroco"
      brew "libdvdcss"
      brew "librsvg"
@@ -372,7 +368,6 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      brew "libyaml"
      brew "make"
      brew "makedepend"
-     brew "mas"
      brew "node"
      brew "oniguruma"
      brew "parallel"
@@ -399,14 +394,9 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      cask "alfred"
      cask "firefox"
      cask "google-backup-and-sync"
-     cask "google-chrome"
      cask "google-cloud-sdk"
-     cask "google-featured-photos"
      cask "istat-menus"
      cask "mactex-no-gui"
-     cask "slack"
-     cask "zoomus"
-     mas "Pixelmator", id: 407963104
    #+END_SRC
 
 ** [[https://github.com/mas-cli/mas][mas]]
