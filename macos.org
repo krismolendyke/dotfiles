@@ -374,6 +374,8 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      brew "perl"
      brew "pstree"
      brew "pv"
+     brew "python"
+     brew "rg"
      brew "rocksdb"
      brew "ruby", link: true
      brew "scons"
@@ -382,7 +384,6 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      brew "subversion"
      brew "terminal-notifier"
      brew "texi2html"
-     brew "the_silver_searcher"
      brew "tree"
      brew "watch"
      brew "wget"
