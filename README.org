@@ -191,8 +191,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       fi
 
       if [[ "$OSTYPE" == darwin* ]]; then
-          export HOMEBREW_CASK_HOME=/usr/local/Caskroom
-          export HOMEBREW_CELLAR=$(/usr/local/bin/brew --cellar)
+          export HOMEBREW_CASK_HOME=/opt/homebrew/Caskroom
+          export HOMEBREW_CELLAR=$(/opt/homebrew/bin/brew --cellar)
           export HOMEBREW_INSTALL_CLEANUP=1
       fi
 
@@ -288,7 +288,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
       if [[ "$OSTYPE" == darwin* ]]; then
           pathmunge /usr/local/opt/python/libexec/bin
-          pathmunge "$(/usr/local/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
+          pathmunge "$(/opt/homebrew/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
+          pathmunge "$(/opt/homebrew/bin/brew --prefix)/opt/python/libexec/bin"
       fi
 
       if [[ -x /usr/share/doc/git/contrib/diff-highlight ]]; then
@@ -470,6 +471,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+BEGIN_SRC sh
       [ -e /usr/share/git/completion/git-prompt.sh ] && source //usr/share/git/completion/git-prompt.sh
+
+      [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
       PROMPT_COMMAND='__git_ps1 \
       "\n$(k20e_aws_profile)$(k20e_kubectx)$(k20e_virtual_env)\n$(k20e_working_directory)" \
