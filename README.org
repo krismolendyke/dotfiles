@@ -926,11 +926,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      ServerAliveInterval 60
 
      Host *
-         IdentityAgent ~/.1password/agent.sock
-
-     Host *
-         IdentityFile ~/.ssh/id_rsa
-         PreferredAuthentications publickey,password
+	 IdentityAgent ~/.1password/agent.sock
 
      Include ~/.ssh/config.d/*
    #+END_SRC
