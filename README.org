@@ -1829,6 +1829,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     mkdir -p ${HOME}/.ssh/config.d
   #+END_SRC
 
+  On macOS, 1Password requires this to work with the [[*Environment][Environment]] requires this link to work properly:
+
+  #+begin_src sh
+    mkdir -p ~/.1password && ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
+  #+end_src
+
 ** =config=
    :PROPERTIES:
    :header-args: :tangle ~/.ssh/config
@@ -1843,3 +1849,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
      Include ~/.ssh/config.d/*
    #+END_SRC
+
+** Environment
+   :PROPERTIES:
+   :header-args: :tangle ~/.bashrc.d/ssh_env.bash
+   :END:
+
+   #+begin_src sh
+     export SSH_AUTH_SOCK=~/.1password/agent.sock
+   #+end_src
