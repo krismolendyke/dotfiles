@@ -333,6 +333,7 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      tap "jmespath/jmespath"
      brew "aspell"
      brew "automake"
+     brew "awscli"
      brew "bash"
      brew "bash-completion@2"
      brew "bison"
