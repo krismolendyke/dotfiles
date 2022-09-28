@@ -746,9 +746,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        #
        # Blank space added around the window in pixels. This padding is scaled
        # by DPI and the specified value is always added at both opposing sides.
-       #padding:
-       #  x: 0
-       #  y: 0
+       padding:
+        x: 4
+        y: 4
 
        # Spread additional padding evenly around the terminal content.
        #dynamic_padding: false
