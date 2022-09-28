@@ -1,5 +1,5 @@
 #+TITLE: dotfiles for macOS
-#+OPTIONS: toc:nil num:nil
+#+OPTIONS: toc:nil num:nil ^:nil
 #+STARTUP: showall
 
 In addition to the base =README.org= file, this document describes and
@@ -284,8 +284,9 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
   found outside of a =Brewfile= and the =bundle= subcommand.
 
 ** Security
-
-   From https://www.davd.eu/securing-macos/#homebrew
+   :PROPERTIES:
+   :header-args: :tangle ~/.bashrc.d/homebrew_env.bash
+   :END:
 
    #+BEGIN_SRC sh
      export HOMEBREW_CASK_OPTS=--require-sha
