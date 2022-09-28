@@ -368,6 +368,7 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      brew "libyaml"
      brew "make"
      brew "makedepend"
+     brew "monitorcontrol"
      brew "node"
      brew "oniguruma"
      brew "parallel"
