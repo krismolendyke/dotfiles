@@ -331,6 +331,7 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      tap "homebrew/core"
      tap "homebrew/services"
      tap "jmespath/jmespath"
+     brew "1password-cli"
      brew "aspell"
      brew "automake"
      brew "awscli"
