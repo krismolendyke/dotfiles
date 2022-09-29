@@ -187,22 +187,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       fi
 
       if [[ "$OSTYPE" == darwin* ]]; then
-          export VLC_HOME=/Applications/VLC.app/Contents/MacOS
-      fi
-
-      if [[ "$OSTYPE" == darwin* ]]; then
           export HOMEBREW_CASK_HOME=/opt/homebrew/Caskroom
           export HOMEBREW_CELLAR=$(/opt/homebrew/bin/brew --cellar)
           export HOMEBREW_INSTALL_CLEANUP=1
+          export HOMEBREW_NO_ENV_HINTS=1
       fi
 
       if [[ -x jenv ]]; then
           export JENV_HOME=${HOME}/.jenv
-      fi
-
-      if [[ "$OSTYPE" == darwin* ]]; then
-          export MANPATH=/usr/local/share/man:${MANPATH}
-          export NODE_PATH=/usr/local/lib/node_modules:${NODE_PATH}
       fi
     #+END_SRC
 
