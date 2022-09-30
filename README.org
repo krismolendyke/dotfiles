@@ -1851,6 +1851,39 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      Include ~/.ssh/config.d/*
    #+END_SRC
 
+** Personal
+   :PROPERTIES:
+   :header-args: :tangle ~/.ssh/config.d/personal
+   :END:
+
+   Splitting work & personal to allow for using multiple GitHub accounts.  See
+   https://developer.1password.com/docs/ssh/agent/advanced/#use-multiple-github-accounts.
+
+   #+begin_src conf
+     Host personal.localhost
+          HostName github.com
+          User git
+          IdentityFile ~/.ssh/personal.pub
+          IdentitiesOnly yes
+          PreferredAuthentications publickey
+          PasswordAuthentication no
+   #+end_src
+
+** Work
+   :PROPERTIES:
+   :header-args: :tangle ~/.ssh/config.d/work
+   :END:
+
+   #+begin_src conf
+     Host work.localhost
+          HostName github.com
+          User git
+          IdentityFile ~/.ssh/work.pub
+          IdentitiesOnly yes
+          PreferredAuthentications publickey
+          PasswordAuthentication no
+   #+end_src
+
 ** Environment
    :PROPERTIES:
    :header-args: :tangle ~/.bashrc.d/ssh_env.bash
