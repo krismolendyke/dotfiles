@@ -1605,7 +1605,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
    #+BEGIN_SRC conf
      [user]
-             name = Kris
+             name = Kris Molendyke
              email = krismolendyke@users.noreply.github.com
              useconfigonly = true
      [color]
