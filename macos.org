@@ -403,6 +403,7 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      cask "istat-menus"
      cask "mactex-no-gui"
      cask "monitorcontrol"
+     cask "obsbot-tinycam"
    #+END_SRC
 
 ** [[https://github.com/mas-cli/mas][mas]]
