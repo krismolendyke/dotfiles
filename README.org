@@ -1814,8 +1814,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :header-args: :tangle ~/requirements-to-freeze.txt
    :END:
 
-   Use [[https://www.kennethreitz.org/essays/a-better-pip-workflow][A Better Pip Workflow™]] to specify packages that I do actually
-   want installed to the user's packages.
+   Use [[https://kennethreitz.org/essays/2016/02/25/a-better-pip-workflow][A Better Pip Workflow™]] to specify packages that I do actually want installed to the user's packages.
 
    #+BEGIN_SRC python
      # User packages
