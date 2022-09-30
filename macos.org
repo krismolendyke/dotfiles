@@ -351,6 +351,7 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      brew "gflags"
      brew "git"
      brew "glooctl"
+     brew "gnupg"
      brew "go"
      brew "gprof2dot"
      brew "helm"
