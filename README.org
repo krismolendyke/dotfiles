@@ -1587,7 +1587,16 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        #highlight_damage: false
    #+END_SRC
 
+* =asdf=
+
 * [[https://git-scm.com/][Git]]
+   :PROPERTIES:
+   :header-args: :tangle ~/.bashrc.d/asdf.bash
+   :END:
+
+   #+begin_src sh
+     [ -e /opt/homebrew/opt/asdf/libexec/asdf.sh ] && source /opt/homebrew/opt/asdf/libexec/asdf.sh
+   #+end_src
 
 ** =.gitconfig=
    :PROPERTIES:
