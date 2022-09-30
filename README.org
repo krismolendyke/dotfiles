@@ -1603,6 +1603,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :header-args: :tangle ~/.gitconfig
    :END:
 
+   The =includeIf= section below allows for sticking a =.gitconfig= in a directory such that repositories cloned into that
+   directory will read that config for each repository there.  This is useful for setting values like email, etc.,
+   that might be different than the global value without having to set it specifically in each repository's config.
+   Just clone the repository into this directory and make sure that the config is set.  =git config --list= is useful
+   when making sure that the config values are set properly.
+
    #+BEGIN_SRC conf
      [user]
              name = Kris Molendyke
@@ -1652,6 +1658,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
              helper = cache --timeout=3600
      [tag]
              sort = version:refname
+
+     # Conditional include to set some work defaults, e.g., email
+     [includeIf "gitdir:~/code/work/"]
+             path = ~/code/work/.gitconfig
    #+END_SRC
 
 ** =.gitignore-global=
