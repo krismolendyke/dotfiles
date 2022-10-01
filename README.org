@@ -1454,7 +1454,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      #
      # If the same trigger is assigned to multiple actions, all of them are executed
      # in the order they were defined in.
-     #key_bindings:
+     key_bindings:
        #- { key: Paste,                                       action: Paste          }
        #- { key: Copy,                                        action: Copy           }
        #- { key: L,         mods: Control,                    action: ClearLogNotice }
@@ -1563,8 +1563,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        #- { key: W,              mods: Command,                    action: Quit                  }
        #- { key: N,              mods: Command,                    action: SpawnNewInstance      }
        #- { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
-       #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
-       #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
+       # Search macOS
+       - { key: S,              mods: Command, mode: ~Search,     action: SearchForward         }
+       - { key: R,              mods: Command, mode: ~Search,     action: SearchBackward         }
+       # ⌘-B, ⌘-F move by word in macOS
+       - { key: B,              mods: Command, chars: "\x1bb"        }
+       - { key: F,              mods: Command, chars: "\x1bf"        }
 
      #debug:
        # Display the time it takes to redraw each frame.
