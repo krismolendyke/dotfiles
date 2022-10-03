@@ -468,7 +468,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
       PROMPT_COMMAND='__git_ps1 \
-      "\n$(k20e_aws_profile)$(k20e_kubectx)$(k20e_virtual_env)\n$(k20e_working_directory)" \
+      "\n$(k20e_aws_profile)$(k20e_gcp_project)$(k20e_kubectx)$(k20e_virtual_env)\n$(k20e_working_directory)" \
       "\n\$ " \
       " %s"'
     #+END_SRC
