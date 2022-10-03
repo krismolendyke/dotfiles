@@ -646,6 +646,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 *** AWS CLI
 
     #+BEGIN_SRC sh
+      export AWS_SDK_LOAD_CONFIG=1
+      export AWS_VAULT_KEYCHAIN_NAME=login
+
+
       if [[ "$OSTYPE" == darwin* ]]; then
           complete -C '/opt/homebrew/bin/aws_completer' aws
       else
