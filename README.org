@@ -1564,11 +1564,11 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        #- { key: N,              mods: Command,                    action: SpawnNewInstance      }
        #- { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
        # Search macOS
-       - { key: S,              mods: Command, mode: ~Search,     action: SearchForward         }
+       - { key: S,              mods: Command, mode: ~Search,     action: SearchForward          }
        - { key: R,              mods: Command, mode: ~Search,     action: SearchBackward         }
        # ⌘-B, ⌘-F move by word in macOS
-       - { key: B,              mods: Command, chars: "\x1bb"        }
-       - { key: F,              mods: Command, chars: "\x1bf"        }
+       - { key: B,              mods: Command, chars: "\x1bb"                                    }
+       - { key: F,              mods: Command, chars: "\x1bf"                                    }
 
      #debug:
        # Display the time it takes to redraw each frame.
