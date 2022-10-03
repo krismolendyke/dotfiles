@@ -462,7 +462,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     =/usr/share/bash-completion/completions/=.
 
     #+BEGIN_SRC sh
-      [ -e /usr/share/git/completion/git-prompt.sh ] && source //usr/share/git/completion/git-prompt.sh
+      [ -e /usr/share/git/completion/git-prompt.sh ] && source /usr/share/git/completion/git-prompt.sh
+      [ -e /opt/homebrew/etc/bash_completion.d/git-prompt.sh ] && source /opt/homebrew/etc/bash_completion.d/git-prompt.sh
 
       [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
@@ -567,7 +568,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      macOS completion with completion for my =k= alias:
 
      #+BEGIN_SRC sh
-       [ -e /usr/share/bash-completion/completions/kubectl ] && source /usr/share/bash-completion/completions/kubectl && complete -o default -F __start_kubectl k
+       [ -e /opt/homebrew/etc/bash_completion.d/kubectl ] && source /opt/homebrew/etc/bash_completion.d/kubectl && complete -o default -F __start_kubectl k
      #+END_SRC
 
      Install [[https://github.com/ahmetb/kubectx][kubectx]] (via [[#brewfile][=${HOME}/.Brewfile=]]), completion for helper
@@ -576,6 +577,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      #+BEGIN_SRC sh
        [ -e /usr/share/bash-completion/completions/kubectx ] && source /usr/share/bash-completion/completions/kubectx && alias kctx="kubectx"
        [ -e /usr/share/bash-completion/completions/kubens ] && source /usr/share/bash-completion/completions/kubens && alias kns="kubens"
+
+       [ -e /opt/homebrew/etc/bash_completion.d/kubectx ] && source /opt/homebrew/etc/bash_completion.d/kubectx && alias kctx="kubectx"
+       [ -e /opt/homebrew/etc/bash_completion.d/kubens ] && source /opt/homebrew/etc/bash_completion.d/kubens && alias kns="kubens"
      #+END_SRC
 
      Linux =kubectx= install manually, completion to =pkg-config
