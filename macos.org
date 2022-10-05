@@ -359,6 +359,7 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      brew "imagemagick"
      brew "ispell"
      brew "jmespath/jmespath/jp"
+     brew "k9s"
      brew "kubectx"
      brew "kubernetes-cli"
      brew "kustomize"
@@ -370,6 +371,7 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      brew "lz4"
      brew "makedepend"
      brew "node"
+     brew "octant"
      brew "oniguruma"
      brew "openssl@3"
      brew "parallel"
@@ -397,6 +399,7 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      cask "1password-cli"
      cask "alacritty"
      cask "alfred"
+     cask "aws-vault"
      cask "docker"
      cask "firefox"
      cask "google-cloud-sdk"
@@ -404,6 +407,8 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      cask "mactex-no-gui"
      cask "monitorcontrol"
      cask "obsbot-tinycam"
+     cask "rectangle"
+     cask "vlc"
    #+END_SRC
 
 ** [[https://github.com/mas-cli/mas][mas]]
