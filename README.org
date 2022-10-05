@@ -1581,10 +1581,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        #- { key: W,              mods: Command,                    action: Quit                  }
        #- { key: N,              mods: Command,                    action: SpawnNewInstance      }
        #- { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
-       # Search macOS
+       # macOS search
        - { key: S,              mods: Command, mode: ~Search,     action: SearchForward          }
        - { key: R,              mods: Command, mode: ~Search,     action: SearchBackward         }
-       # ⌘-B, ⌘-F move by word in macOS
+       # macOS create a new window rather than a new instance (addresses lack of ⌘-` behavior)
+       - { key: N,              mods: Command,                    action: CreateNewWindow        }
+       # macOS move forward/backward by word with ⌘-F, ⌘-B
        - { key: B,              mods: Command, chars: "\x1bb"                                    }
        - { key: F,              mods: Command, chars: "\x1bf"                                    }
 
