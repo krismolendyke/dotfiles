@@ -1616,8 +1616,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    #+END_SRC
 
 * =asdf=
-
-* [[https://git-scm.com/][Git]]
    :PROPERTIES:
    :header-args: :tangle ~/.bashrc.d/asdf.bash
    :END:
@@ -1626,6 +1624,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      alias aoeu='asdf'
      [ -e /opt/homebrew/opt/asdf/libexec/asdf.sh ] && source /opt/homebrew/opt/asdf/libexec/asdf.sh
    #+end_src
+
+* [[https://git-scm.com/][Git]]
 
 ** =.gitconfig=
    :PROPERTIES:
