@@ -1689,7 +1689,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
              sort = version:refname
 
      # Conditional include to set some work defaults, e.g., email
-     [includeIf "gitdir:~/code/work/"]
+     [includeIf "gitdir/i:~/code/work/"]
              path = ~/code/work/.gitconfig
    #+END_SRC
 
