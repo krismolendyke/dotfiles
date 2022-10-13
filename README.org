@@ -1621,9 +1621,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :header-args: :tangle ~/.bashrc.d/asdf.bash
    :END:
 
+   Need to add completion for my silly Dvorak alias.  Lookup existing completion function: =complete -p asdf=, then add
+   it below.
+
    #+begin_src sh
      alias aoeu='asdf'
-     [ -e /opt/homebrew/opt/asdf/libexec/asdf.sh ] && source /opt/homebrew/opt/asdf/libexec/asdf.sh
+     [ -e /opt/homebrew/opt/asdf/libexec/asdf.sh ] && source /opt/homebrew/opt/asdf/libexec/asdf.sh && complete -o default -F _asdf aoeu
    #+end_src
 
 * [[https://git-scm.com/][Git]]
