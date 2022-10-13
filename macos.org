@@ -413,6 +413,7 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      cask "monitorcontrol"
      cask "obsbot-tinycam"
      cask "rectangle"
+     cask "vanilla"
      cask "vlc"
    #+END_SRC
 
