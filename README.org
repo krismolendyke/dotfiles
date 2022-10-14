@@ -701,6 +701,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       fi
     #+END_SRC
 
+*** Terraform
+
+    #+begin_src sh
+      if command -v terraform 1>/dev/null 2>&1; then
+          complete -C terraform terraform
+      fi
+    #+end_src
+
 * =.config=
 
 ** =alacritty/alacritty.yml=
