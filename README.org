@@ -1598,6 +1598,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        # macOS move forward/backward by word with ⌘-F, ⌘-B
        - { key: B,              mods: Command, chars: "\x1bb"                                    }
        - { key: F,              mods: Command, chars: "\x1bf"                                    }
+       # macOS backward erase word (see
+       # https://apple.stackexchange.com/questions/101754/os-x-disable-cmd-h-or-hide-app-command
+       # for re-mapping ⌘-H from "Hide alacritty" to something else)
+       - { key: H,              mods: Command, chars: "\x1b\x7f"                                 }
+       # macOS forward erase word
+       - { key: D,              mods: Command, chars: "\x1bd"                                    }
 
      #debug:
        # Display the time it takes to redraw each frame.
