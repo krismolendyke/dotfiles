@@ -407,6 +407,7 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      cask "aws-vault"
      cask "docker"
      cask "firefox"
+     cask "font-smoothing-adjuster"
      cask "google-cloud-sdk"
      cask "istat-menus"
      cask "mactex-no-gui"
