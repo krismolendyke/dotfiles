@@ -269,7 +269,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       pathmunge /usr/local/sbin
       pathmunge /usr/local/bin
       pathmunge "${HOME}/bin"
-      pathmunge "${HOME}/go/bin"
 
       if [ -v ${CARGO_HOME} ]; then
           pathmunge "${CARGO_HOME}/bin"
@@ -293,6 +292,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       if [[ -x /bin/go ]]; then
           pathmunge /bin/go/bin
           pathmunge "$(/bin/go env GOPATH)/bin"
+      fi
+
+      if [[ -x /opt/homebrew/bin/go ]]; then
+          pathmunge "$(/opt/homebrew/bin/go env GOPATH)/bin"
       fi
     #+END_SRC
 
