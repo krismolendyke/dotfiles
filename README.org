@@ -1917,7 +1917,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      ServerAliveInterval 60
 
      Host *
-     IdentityAgent ~/.1password/agent.sock
+         IdentityAgent ~/.1password/agent.sock
+         StrictHostKeyChecking accept-new
 
      Include ~/.ssh/config.d/*
    #+END_SRC
@@ -1953,6 +1954,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           IdentitiesOnly yes
           PreferredAuthentications publickey
           PasswordAuthentication no
+
+     Host prod-*
+         User krismolendyke
+
+     Host prodeu-*
+         User krismolendyke
    #+end_src
 
 ** Environment
