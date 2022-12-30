@@ -104,6 +104,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      unset -v config
    #+END_SRC
 
+   =TODO= If these modify =PATH=, etc., I should figure out a way to pre/post them with the rest of this setup.  For
+   instance, =asdf= tries to shim =PATH= here but then gets overwritten later by =pathmunge=.
+
 ** Custom
    :PROPERTIES:
    :header-args: :tangle ~/.bashrc.d/main.bash
@@ -1636,7 +1639,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * =asdf=
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/asdf.bash
+   :header-args: :tangle ~/.bashrc.d/zzz-asdf.bash
    :END:
 
    Need to add completion for my silly Dvorak alias.  Lookup existing completion function: =complete -p asdf=, then add
