@@ -1168,10 +1168,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      # Default:
      #   - (Linux/BSD/macOS) `$SHELL` or the user's login shell, if `$SHELL` is unset
      #   - (Windows) powershell
-     #shell:
-     #  program: /bin/bash
-     #  args:
-     #    - --login
+     shell:
+       program: /opt/homebrew/bin/bash
+       args:
+         - --login
 
      # Startup directory
      #
