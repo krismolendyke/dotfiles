@@ -408,6 +408,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           local value=''
           if [ -e ${HOME}/.config/gcloud/active_config ]; then
               value=$(cat ${HOME}/.config/gcloud/active_config)
+              if [[ "${value}" == 'none' ]]; then
+                  value='∅'
+              fi
               if [[ "${value}" =~ .*prod.* ]]; then
                   value="${RED_BG}${value}"
               fi
