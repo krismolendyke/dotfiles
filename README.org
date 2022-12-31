@@ -577,7 +577,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       [ -e /etc/bash_completion ] && source /etc/bash_completion
     #+END_SRC
 
-**** =kubectl=, =k=, =kctx=, =kns=
+**** =kubectl=, =k=, =kctx=, =kns=, =krew=
 
      Using MicroK8s in Ubuntu at the moment.
 
@@ -614,6 +614,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      #+BEGIN_SRC sh
        export KUBECTX_CURRENT_FGCOLOR=$(tput setaf 2)
      #+END_SRC
+
+     Install [[https://krew.sigs.k8s.io][krew]] via Homebrew.
+
+     #+begin_src sh
+       pathmunge "${HOME}/.krew/bin"
+     #+end_src
 
 **** Git
 
