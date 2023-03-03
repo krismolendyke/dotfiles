@@ -700,7 +700,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     :END:
 
     #+BEGIN_SRC sh
-      function k20e-pip-upgrade() {
+      function k20e_pip_upgrade() {
           if [[ $(which deactivate) == "deactivate: function" && -n ${VIRTUAL_ENV} ]]; then
               echo "Deactivating current virtual environment ${VIRTUAL_ENV}"
               deactivate
