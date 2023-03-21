@@ -733,9 +733,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :header-args: :tangle ~/.config/alacritty/alacritty.yml
    :END:
 
-   - Work on page up/down etc., with =showkey=
-     https://github.com/alacritty/alacritty/issues/1593
-   - https://github.com/arcticicestudio/nord-alacritty
+   Work on page up/down etc., with =showkey= https://github.com/alacritty/alacritty/issues/1593
+
+   Themes: https://github.com/alacritty/alacritty-theme
 
    #+BEGIN_SRC yaml
      # Configuration for Alacritty, the GPU enhanced terminal emulator.
@@ -748,8 +748,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      #
      # All imports must either be absolute paths starting with `/`, or paths relative
      # to the user's home directory starting with `~/`.
-     #import:
-     #  - /path/to/alacritty.yml
+     import:
+      - ~/.config/alacritty/light.yaml
 
      # Any items in the `env` entry below will be added as
      # environment variables. Some entries may override variables
