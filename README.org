@@ -808,7 +808,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        #
        # Window opacity as a floating point number from `0.0` to `1.0`.
        # The value `0.0` is completely transparent and `1.0` is opaque.
-       opacity: 0.95
+       opacity: 1.0
 
        # Startup Mode (changes require restart)
        #
