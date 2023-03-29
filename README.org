@@ -841,6 +841,18 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        # the default theme variant.
        #decorations_theme_variant: None
 
+       # Resize increments
+       #
+       # Prefer resizing window by discrete steps equal to cell dimensions.
+       #resize_increments: false
+
+       # Make `Option` key behave as `Alt` (macOS only):
+       #   - OnlyLeft
+       #   - OnlyRight
+       #   - Both
+       #   - None (default)
+       #option_as_alt: None
+
      #scrolling:
        # Maximum number of lines in the scrollback buffer.
        # Specifying '0' will disable scrolling.
@@ -1189,9 +1201,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      # directory of the parent process will be used.
      #working_directory: None
 
-     # Send ESC (\x1b) before characters when alt is pressed.
-     #alt_send_esc: true
-
      # Offer IPC using `alacritty msg` (unix only)
      #ipc_socket: true
 
@@ -1355,6 +1364,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      #   - Quit
      #       Quit Alacritty.
      #   - ToggleFullscreen
+     #   - ToggleMaximized
      #   - SpawnNewInstance
      #       Spawn a new instance of Alacritty.
      #   - CreateNewWindow
