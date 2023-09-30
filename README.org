@@ -174,7 +174,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+BEGIN_SRC sh
       export CODE_HOME=${HOME}/code
-      export GOOGLE=${HOME}/Google
+      export GOOGLE="${HOME}/Google?Drive/My?Drive"
     #+END_SRC
 
     File system variables.
