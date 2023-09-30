@@ -726,6 +726,50 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       fi
     #+end_src
 
+* wezterm
+   :PROPERTIES:
+   :header-args: :tangle ~/.wezterm.lua
+   :END:
+
+   #+begin_src lua
+     local wezterm = require 'wezterm'
+     local config = {}
+
+     if wezterm.config_builder then
+        config = wezterm.config_builder()
+     end
+
+     -- Shell
+     config.default_prog = {'/opt/homebrew/bin/bash', '--login'}
+
+     -- Font
+     config.font = wezterm.font('PragmataPro Mono Liga')
+     config.font_size = 16
+
+     -- Theme
+     function get_appearance()
+        if wezterm.gui then
+           return wezterm.gui.get_appearance()
+        end
+        return 'Dark'
+     end
+
+     function scheme_for_appearance(appearance)
+        if appearance:find 'Dark' then
+           return 'Tomorrow Night'
+        else
+           return 'Tomorrow'
+        end
+     end
+
+     config.color_scheme = scheme_for_appearance(get_appearance())
+
+     -- GUI
+     config.enable_tab_bar = false
+
+     return config
+   #+end_src
+
 * =.config=
 
 ** =alacritty/alacritty.yml=
