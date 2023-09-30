@@ -302,7 +302,7 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
   =brew= doesn't have a great way to manage dependencies that I've
   found outside of a =Brewfile= and the =bundle= subcommand.
 
-** Security
+** Configuration & Environment
    :PROPERTIES:
    :header-args: :tangle ~/.bashrc.d/homebrew_env.bash
    :END:
