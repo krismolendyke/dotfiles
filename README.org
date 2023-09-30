@@ -1994,11 +1994,15 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
    #+BEGIN_SRC python
      # User packages
+     boto3
+     botocore
      http-prompt
      keyring
      pipdeptree[graphviz]
+     pylsp-rope
      python-lsp-server[all]
      twine
+     urllib3
      virtualenvwrapper
    #+END_SRC
 
