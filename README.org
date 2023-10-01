@@ -745,7 +745,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      config.default_prog = {'/opt/homebrew/bin/bash', '--login'}
 
      -- Font
-     config.font = wezterm.font('PragmataPro Mono Liga')
+     config.font = wezterm.font('PragmataPro Liga')
      config.font_size = 16
 
      -- Theme
