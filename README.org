@@ -734,6 +734,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
    #+begin_src lua
      local wezterm = require 'wezterm'
+     local act = wezterm.action
      local config = {}
 
      if wezterm.config_builder then
@@ -764,6 +765,24 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      end
 
      config.color_scheme = scheme_for_appearance(get_appearance())
+
+     -- Bindings
+     config.keys = {
+        -- macOS move forward/backward by word with ⌘-f, ⌘-b
+        { key = 'b', mods = 'CMD', action = act.SendString '\x1bb' },
+        { key = 'f', mods = 'CMD', action = act.SendString '\x1bf' },
+
+        -- macOS backward erase word (see
+        -- https://apple.stackexchange.com/questions/101754/os-x-disable-cmd-h-or-hide-app-command for re-mapping ⌘-h from
+        -- "Hide alacritty" to something else)
+        { key = 'h', mods = 'CMD', action = act.SendString '\x1b\x7f' },
+
+        -- macOS forward erase word
+        { key = 'd', mods = 'CMD', action = act.SendString '\x1bd' },
+
+        -- Search, rather than ⌘-f
+        { key = 's', mods = 'CMD', action = act.Search 'CurrentSelectionOrEmptyString' },
+     }
 
      -- GUI
      config.enable_tab_bar = false
