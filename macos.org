@@ -417,7 +417,6 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      brew "jmespath/jmespath/jp"
      brew "tidbyt/tidbyt/pixlet"
      cask "1password-cli"
-     cask "alacritty"
      cask "alfred"
      cask "android-platform-tools"
      cask "flux"
