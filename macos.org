@@ -311,6 +311,8 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      export HOMEBREW_CASK_OPTS=--require-sha
      export HOMEBREW_NO_ANALYTICS=1
      export HOMEBREW_NO_INSECURE_REDIRECT=1
+
+     # [ -e /opt/homebrew/etc/bash_completion.d/brew ] && source /opt/homebrew/etc/bash_completion.d/brew
    #+END_SRC
 
 ** [[https://github.com/Homebrew/homebrew-bundle][Bundle]]
