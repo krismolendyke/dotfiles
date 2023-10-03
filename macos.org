@@ -28,6 +28,15 @@ creates macOS specific configuration.
     }
   #+end_src
 
+* Environment Variables
+   :PROPERTIES:
+   :header-args: :tangle ~/.bashrc.d/macos-env.bash
+   :END:
+
+  #+begin_src sh
+    export SHELL=/opt/homebrew/bin/bash
+  #+end_src
+
 * TODO Yabai
 
 BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
