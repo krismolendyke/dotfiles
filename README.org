@@ -750,7 +750,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      end
 
      -- Shell
-     config.default_prog = {'/opt/homebrew/bin/bash', '--login'}
+     if wezterm.target_triple == 'aarch64-apple-darwin' then
+        config.default_prog = {'/opt/homebrew/bin/bash', '--login'}
+     end
 
      -- Font
      config.font = wezterm.font('PragmataPro Liga')
