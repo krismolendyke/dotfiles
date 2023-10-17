@@ -773,7 +773,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
      function scheme_for_appearance(appearance)
         if appearance:find 'Dark' then
-           return 'Tomorrow Night'
+           return 'Tomorrow Bright'
         else
            return 'Tomorrow'
         end
