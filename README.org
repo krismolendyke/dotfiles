@@ -1117,6 +1117,13 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       format = '[$symbol$branch(:$remote_branch)]($style) '
     #+end_src
 
+*** https://starship.rs/config/#git-status
+
+    #+begin_src toml
+      [git_status]
+      format = '([$all_status$ahead_behind]($style) )'
+    #+end_src
+
 *** https://starship.rs/config/#kubernetes
 
      #+begin_src toml
