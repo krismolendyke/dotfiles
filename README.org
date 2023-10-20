@@ -1112,7 +1112,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+begin_src toml
       [git_branch]
-      always_show_remote = true
+      always_show_remote = false
       symbol = " "
       format = '[$symbol$branch(:$remote_branch)]($style) '
     #+end_src
