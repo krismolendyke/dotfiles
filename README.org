@@ -457,6 +457,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 **** Git
 
      #+BEGIN_SRC sh
+       [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+
        [ -e /usr/local/etc/bash_completion.d/git-completion.bash ] && source /usr/local/etc/bash_completion.d/git-completion.bash
        [ -e /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
      #+END_SRC
@@ -574,7 +576,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
      -- Shell
      if wezterm.target_triple == 'aarch64-apple-darwin' then
-        config.default_prog = {'/opt/homebrew/bin/bash', '--login'}
+        config.default_prog = {'/opt/homebrew/bin/bash'}
      elseif wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
         config.default_prog = {'/bin/bash'}
      end
@@ -1015,7 +1017,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Environment
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/101-ssh_env.bash
+   :header-args: :tangle ~/.bashrc.d/101-ssh-env.bash
    :END:
 
    #+begin_src sh
@@ -1101,11 +1103,25 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        symbol = " "
      #+end_src
 
+*** https://starship.rs/config/#battery
+
+    #+begin_src toml
+      [battery]
+      disabled = true
+    #+end_src
+
 *** https://starship.rs/config/#command-duration
 
     #+begin_src toml
       [cmd_duration]
       format = '[$duration]($style) '
+    #+end_src
+
+*** https://starship.rs/config/#google-cloud-gcloud
+
+    #+begin_src toml
+      [gcloud]
+      format = '[$symbol$account(@$domain)(\($region\))]($style) '
     #+end_src
 
 *** https://starship.rs/config/#git-branch

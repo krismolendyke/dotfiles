@@ -11,7 +11,7 @@ creates macOS specific configuration.
 
 * Dark & Light Theme
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/macos-theme.bash
+   :header-args: :tangle ~/.bashrc.d/200-macos-theme.bash
    :END:
 
   #+begin_src sh
@@ -30,7 +30,7 @@ creates macOS specific configuration.
 
 * Environment Variables
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/macos-env.bash
+   :header-args: :tangle ~/.bashrc.d/010-macos-env.bash
    :END:
 
   #+begin_src sh
@@ -313,7 +313,7 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
 
 ** Configuration & Environment
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/homebrew_env.bash
+   :header-args: :tangle ~/.bashrc.d/050-homebrew-env.bash
    :END:
 
    #+BEGIN_SRC sh
