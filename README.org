@@ -109,7 +109,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Custom
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/main.bash
+   :header-args: :tangle ~/.bashrc.d/100-main.bash
    :END:
 
    Interactive shell options.
@@ -365,144 +365,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       pathmunge "${PYTHON_USER_BASE}/bin"
     #+END_SRC
 
-*** =PROMPT_COMMAND=
-
-    #+BEGIN_SRC sh
-      [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ] && source /usr/local/etc/bash_completion.d/git-prompt.sh
-
-      GIT_PS1_SHOWCOLORHINTS=1
-      GIT_PS1_SHOWDIRTYSTATE=1
-      GIT_PS1_SHOWUNTRACKEDFILES=1
-    #+END_SRC
-
-    #+BEGIN_SRC sh
-      function k20e_working_directory() {
-          declare -r YELLOW='\[\e[0;33m\]'
-          declare -r RESET='\[\e[0m\]'
-          echo "${YELLOW}\w${RESET}"
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC sh
-      function k20e_virtual_env() {
-          declare -r BLUE='\[\e[0;34m\]'
-          declare -r YELLOW='\[\e[0;33m\]'
-          declare -r RESET='\[\e[0m\]'
-          declare -r PREFIX="${BLUE}p${YELLOW}y${RESET} "
-          declare -r SUFFIX=" ${RESET}"
-          local value=''
-          if [ -n "${VIRTUAL_ENV}" ] && [ -d "${VIRTUAL_ENV}" ]; then
-              value=$(basename "${VIRTUAL_ENV}")
-              value="${PREFIX}${value}${SUFFIX}"
-          fi
-          echo "${value}"
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC sh
-      function k20e_gcp_project() {
-          declare -r BLUE='\[\e[0;34m\]'
-          declare -r RED='\[\e[0;31m\]'
-          declare -r RED_BG='\[\e[0;41m\]'
-          declare -r YELLOW='\[\e[0;33m\]'
-          declare -r RESET='\[\e[0m\]'
-          declare -r PREFIX="${BLUE}g${RED}c${YELLOW}p${RESET} "
-          declare -r SUFFIX="${RESET} "
-          local value=''
-          if [ -e ${HOME}/.config/gcloud/active_config ]; then
-              value=$(cat ${HOME}/.config/gcloud/active_config)
-              if [[ "${value}" == 'none' ]]; then
-                  value='∅'
-              fi
-              if [[ "${value}" =~ .*prod.* ]]; then
-                  value="${RED_BG}${value}"
-              fi
-              if [[ "${value}" =~ .*apac.* ]]; then
-                  value="${RED_BG}${value}"
-              fi
-              value="${PREFIX}${value}${SUFFIX}"
-          fi
-          echo "${value}"
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC sh
-      function k20e_aws_profile() {
-          declare -r RED_BG='\[\e[0;41m\]'
-          declare -r YELLOW='\[\e[0;33m\]'
-          declare -r RESET='\[\e[0m\]'
-          declare -r PREFIX="${YELLOW}aws${RESET} "
-          declare -r SUFFIX="${RESET} "
-          local value=''
-          if [[ -v AWS_PROFILE ]]; then
-              value="${AWS_PROFILE}·"
-          else
-              value="∅"
-          fi
-          if [[ "${value}" =~ .*prod.* ]]; then
-              value="${RED_BG}${value}"
-          fi
-          if [[ "${value}" =~ .*apac.* ]]; then
-              value="${RED_BG}${value}"
-          fi
-          if [[ "${value}" =~ .*stage.* ]]; then
-              value="${YELLOW}${value}"
-          fi
-          value="${value}"
-          local region=''
-          if [ -v AWS_DEFAULT_REGION ]; then
-              region="${AWS_DEFAULT_REGION}"
-          fi
-          value="${value}${region}"
-          echo "${PREFIX}${value}${SUFFIX}"
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC sh
-      function k20e_kubectx() {
-          declare -r BLUE='\[\e[0;34m\]'
-          declare -r RED_BG='\[\e[0;41m\]'
-          declare -r YELLOW='\[\e[0;33m\]'
-          declare -r RESET='\[\e[0m\]'
-          declare -r PREFIX="${BLUE}k8s${RESET} "
-          declare -r SUFFIX="${RESET} "
-          local value=''
-          if command -v k > /dev/null 2>&1; then
-              value=$(k config view --output go-template='{{ index . "current-context" }}')
-              if [ ! -z "$value" ]; then
-                  fullname=${value}
-                  if [[ "${value}" =~ ^arn ]]; then
-                      value=$(echo "${value}" | cut -d / -f 2)
-                  fi
-                  value="${value}${RESET}·$(k config view -o=jsonpath="{.contexts[?(@.name==\"${fullname}\")].context.namespace}")"
-                  if [[ "${value}" =~ .*prod.* ]]; then
-                      value="${RED_BG}${value}"
-                  fi
-                  if [[ "${value}" =~ .*stage.* ]]; then
-                      value="${YELLOW}${value}"
-                  fi
-                  value="${PREFIX}${value}${SUFFIX}"
-              fi
-          fi
-          echo "${value}"
-      }
-    #+END_SRC
-
-    For Ubuntu, I had to copy [[https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh][git-prompt.sh]] to
-    =/usr/share/bash-completion/completions/=.
-
-    #+BEGIN_SRC sh
-      [ -e /usr/share/git/completion/git-prompt.sh ] && source /usr/share/git/completion/git-prompt.sh
-      [ -e /opt/homebrew/etc/bash_completion.d/git-prompt.sh ] && source /opt/homebrew/etc/bash_completion.d/git-prompt.sh
-
-      [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
-
-      PROMPT_COMMAND='__git_ps1 \
-      "\n$(k20e_aws_profile)$(k20e_gcp_project)$(k20e_kubectx)$(k20e_virtual_env)\n$(k20e_working_directory)" \
-      "\n\$ " \
-      " %s"'
-    #+END_SRC
-
 *** Aliases
 
     #+BEGIN_SRC sh
@@ -536,45 +398,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           source ${K20E_SECRET_ALIASES}
       fi
     #+END_SRC
-
-**** =ssh TERM=
-
-     My Emacs =multi-term= with =bash= has =TERM=xterm-256color=.  On
-     many remote hosts, primarily Amazon Linux, any =xterm= sets
-     =PROMPT_COMMAND= and garbles the prompt by attempting to set the
-     window title.  =/etc/bashrc= usually contains something like
-     this:
-
-     #+BEGIN_EXAMPLE
-       if [ -z "$PROMPT_COMMAND" ]; then
-         case $TERM in
-         xterm*)
-             if [ -e /etc/sysconfig/bash-prompt-xterm ]; then
-                 PROMPT_COMMAND=/etc/sysconfig/bash-prompt-xterm
-             else
-                 PROMPT_COMMAND='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
-             fi
-             ;;
-         screen)
-             if [ -e /etc/sysconfig/bash-prompt-screen ]; then
-                 PROMPT_COMMAND=/etc/sysconfig/bash-prompt-screen
-             else
-                 PROMPT_COMMAND='printf "\033]0;%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
-             fi
-             ;;
-         ,*)
-             [ -e /etc/sysconfig/bash-prompt-default ] && PROMPT_COMMAND=/etc/sysconfig/bash-prompt-default
-             ;;
-           esac
-       fi
-     #+END_EXAMPLE
-
-     Hacking that to some other reasonable value avoids prompt
-     garbling and muscle memory typing =unset PROMPT_COMMAND=.
-
-     #+BEGIN_SRC sh
-       alias ssh="TERM=ansi ssh"
-     #+END_SRC
 
 *** Completions
 
@@ -752,6 +575,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      -- Shell
      if wezterm.target_triple == 'aarch64-apple-darwin' then
         config.default_prog = {'/opt/homebrew/bin/bash', '--login'}
+     elseif wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
+        config.default_prog = {'/bin/bash'}
      end
 
      -- Font
@@ -857,7 +682,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * =asdf=
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/zzz-asdf.bash
+   :header-args: :tangle ~/.bashrc.d/110-asdf.bash
    :END:
 
    Need to add completion for my silly Dvorak alias.  Lookup existing completion function: =complete -p asdf=, then add
@@ -1078,7 +903,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =pyenv=
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/pyenv.bash
+   :header-args: :tangle ~/.bashrc.d/102-pyenv.bash
    :END:
 
    #+begin_src sh
@@ -1190,9 +1015,99 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Environment
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/ssh_env.bash
+   :header-args: :tangle ~/.bashrc.d/101-ssh_env.bash
    :END:
 
    #+begin_src sh
      export SSH_AUTH_SOCK=~/.1password/agent.sock
    #+end_src
+
+* Starship
+   :PROPERTIES:
+   :header-args: :tangle ~/.bashrc.d/999-starship.bash
+   :END:
+
+   #+begin_src sh
+     if command -v starship 1>/dev/null 2>&1; then
+         eval "$(starship init bash)"
+     fi
+   #+end_src
+
+** Config
+    :PROPERTIES:
+    :header-args: :tangle ~/.config/starship.toml
+    :END:
+
+    https://starship.rs/config/#kubernetes
+
+    #+begin_src toml
+      [kubernetes]
+      disabled = false
+    #+end_src
+
+    Started with =starship preset nerd-font-symbols= and removed stuff I'll never need.
+
+    #+begin_src toml
+      [aws]
+      symbol = "  "
+
+      [buf]
+      symbol = " "
+
+      [c]
+      symbol = " "
+
+      [directory]
+      read_only = " 󰌾"
+
+      [docker_context]
+      symbol = " "
+
+      [git_branch]
+      symbol = " "
+
+      [golang]
+      symbol = " "
+
+      [hostname]
+      ssh_symbol = " "
+
+      [java]
+      symbol = " "
+
+      [lua]
+      symbol = " "
+
+      [memory_usage]
+      symbol = "󰍛 "
+
+      [nodejs]
+      symbol = " "
+
+      [os.symbols]
+      Alpine = " "
+      Amazon = " "
+      Android = " "
+      Arch = " "
+      CentOS = " "
+      Debian = " "
+      Linux = " "
+      Macos = " "
+      Raspbian = " "
+      Redhat = " "
+      RedHatEnterprise = " "
+      Ubuntu = " "
+      Unknown = " "
+
+      [package]
+      symbol = "󰏗 "
+
+      [python]
+      symbol = " "
+
+      [ruby]
+      symbol = " "
+
+      [rust]
+      symbol = " "
+    #+end_src
