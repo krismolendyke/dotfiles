@@ -1040,14 +1040,69 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     :header-args: :tangle ~/.config/starship.toml
     :END:
 
+*** https://starship.rs/config/#prompt
+
+    This section must be first!
+
+    #+begin_src toml
+      format = """
+      $username\
+      $hostname\
+      $localip\
+      $shlvl\
+      $directory\
+      $git_branch\
+      $git_commit\
+      $git_state\
+      $git_metrics\
+      $git_status\
+      $docker_context\
+      $package\
+      $c\
+      $cmake\
+      $golang\
+      $helm\
+      $java\
+      $julia\
+      $kotlin\
+      $gradle\
+      $lua\
+      $nodejs\
+      $opa\
+      $perl\
+      $python\
+      $ruby\
+      $rust\
+      $scala\
+      $swift\
+      $terraform\
+      $zig\
+      $buf\
+      $memory_usage\
+      $aws\
+      $gcloud\
+      $kubernetes\
+      $env_var\
+      $crystal\
+      $custom\
+      $sudo\
+      $cmd_duration\
+      $line_break\
+      $jobs\
+      $battery\
+      $time\
+      $status\
+      $os\
+      $container\
+      $shell\
+      $character"""
+    #+end_src
+
 *** Presets
 
      Started with =starship preset nerd-font-symbols= and removed stuff I'll never need.
 
      #+begin_src toml
-       [aws]
-       symbol = "  "
-
        [buf]
        symbol = " "
 
@@ -1103,6 +1158,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        symbol = " "
      #+end_src
 
+*** https://starship.rs/config/#aws
+
+    #+begin_src toml
+      [aws]
+      symbol = "aws "
+      format = '[$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
+    #+end_src
+
 *** https://starship.rs/config/#battery
 
     #+begin_src toml
@@ -1121,7 +1184,11 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+begin_src toml
       [gcloud]
-      format = '[$symbol$account(@$domain)(\($region\))]($style) '
+      symbol = "gcp "
+      format = '[$symbol$project(\($region\))]($style) '
+
+      [gcloud.project_aliases]
+      gcp-s1-prod-scalyr = "prod"
     #+end_src
 
 *** https://starship.rs/config/#git-branch
@@ -1145,6 +1212,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      #+begin_src toml
        [kubernetes]
        disabled = false
+       symbol = "k8s "
+       format = '[$symbol$context( \($namespace\))]($style) '
      #+end_src
 
 *** https://starship.rs/config/#python
