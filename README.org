@@ -1046,6 +1046,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+begin_src toml
       format = """
+      $aws\
+      $gcloud\
+      $kubernetes\
+      $line_break\
       $username\
       $hostname\
       $localip\
@@ -1079,9 +1083,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       $zig\
       $buf\
       $memory_usage\
-      $aws\
-      $gcloud\
-      $kubernetes\
       $env_var\
       $crystal\
       $custom\
@@ -1108,9 +1109,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
        [c]
        symbol = " "
-
-       [directory]
-       read_only = " 󰌾"
 
        [docker_context]
        symbol = " "
@@ -1178,6 +1176,15 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+begin_src toml
       [cmd_duration]
       format = '[$duration]($style) '
+    #+end_src
+
+*** https://starship.rs/config/#directory
+
+    #+begin_src toml
+      [directory]
+      read_only = " 󰌾"
+      truncation_length = 4
+      format ='[$path]($style)[$read_only]($read_only_style) '
     #+end_src
 
 *** https://starship.rs/config/#google-cloud-gcloud
