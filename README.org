@@ -1205,7 +1205,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+begin_src toml
       [git_status]
-      format = '([$all_status$ahead_behind]($style) )'
+      # all_status = '$conflicted$stashed$deleted$renamed$modified$staged$untracked'
+      format = '([$conflicted$deleted$renamed$modified$staged$untracked$ahead_behind]($style) )'
     #+end_src
 
 *** https://starship.rs/config/#kubernetes
