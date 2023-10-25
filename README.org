@@ -1049,6 +1049,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       $aws\
       $gcloud\
       $kubernetes\
+      $docker_context\
       $line_break\
       $username\
       $hostname\
@@ -1060,7 +1061,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       $git_state\
       $git_metrics\
       $git_status\
-      $docker_context\
       $package\
       $c\
       $cmake\
@@ -1189,7 +1189,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+begin_src toml
       [docker_context]
       symbol = " "
-      format = ' [$symbol $context]($style) '
+      format = '[$symbol $context]($style) '
     #+end_src
 
 *** https://starship.rs/config/#google-cloud-gcloud
