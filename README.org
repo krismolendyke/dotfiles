@@ -1110,9 +1110,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        [c]
        symbol = " "
 
-       [docker_context]
-       symbol = " "
-
        [golang]
        symbol = " "
 
@@ -1187,6 +1184,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       format ='[$path]($style)[$read_only]($read_only_style) '
     #+end_src
 
+*** https://starship.rs/config/#docker-context
+
+    #+begin_src toml
+      [docker_context]
+      symbol = " "
+      format = ' [$symbol $context]($style) '
+    #+end_src
+
 *** https://starship.rs/config/#google-cloud-gcloud
 
     #+begin_src toml
@@ -1205,7 +1210,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       [git_branch]
       always_show_remote = false
       symbol = " "
-      format = '[$symbol$branch(:$remote_branch)]($style) '
+      format = '[$symbol $branch(:$remote_branch)]($style) '
     #+end_src
 
 *** https://starship.rs/config/#git-status
