@@ -376,6 +376,7 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      brew "cmake"
      brew "diff-so-fancy"
      brew "xvid"
+     brew "eza"
      brew "ffmpeg"
      brew "flex"
      brew "flyctl"

@@ -695,6 +695,21 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      [ -e /opt/homebrew/opt/asdf/libexec/asdf.sh ] && source /opt/homebrew/opt/asdf/libexec/asdf.sh && complete -o default -F _asdf aoeu
    #+end_src
 
+* [[https://github.com/eza-community/eza][eza]]
+   :PROPERTIES:
+   :header-args: :tangle ~/.bashrc.d/130-eza.bash
+   :END:
+
+  #+begin_src sh
+    if command -v eza 1>/dev/null 2>&1; then
+        alias l="EZA_ICON_SPACING=2 eza --classify --icons=always --git --git-repos --grid"
+        alias ls="EZA_ICON_SPACING=2 eza --classify --icons=always --git --git-repos --grid"
+        alias ll="EZA_ICON_SPACING=2 eza --classify --icons=always --git --git-repos --long"
+        alias lt="EZA_ICON_SPACING=2 eza --classify --icons=always --git --git-repos --tree"
+        alias ltl="EZA_ICON_SPACING=2 eza --classify --icons=always --git --git-repos --tree --long"
+    fi
+  #+end_src
+
 * [[https://git-scm.com/][Git]]
 
 ** =.gitconfig=
