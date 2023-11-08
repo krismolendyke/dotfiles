@@ -440,6 +440,7 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      cask "podman-desktop"
      cask "rectangle"
      cask "retroarch-metal"
+     cask "sk"
      cask "slack"
      cask "steam"
      cask "transmission"

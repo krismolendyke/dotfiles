@@ -946,6 +946,15 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     --sort-files
   #+END_SRC
 
+* [[https://github.com/lotabout/skim][skim]]
+   :PROPERTIES:
+   :header-args: :tangle ~/.bashrc.d/120-skim.bash
+   :END:
+
+  #+begin_src sh
+    export SKIM_DEFAULT_OPTIONS="--ansi --bind 'alt-a:select-all+accept,ctrl-o:execute(emacsclient --no-wait {})+accept' --prompt '❯ ' --cmd-prompt 'C❯ ' --color "$(if k20e_macos_is_dark > /dev/null 2>&1; then echo 'dark'; else echo 'light'; fi)" --inline-info --multi"
+  #+end_src
+
 * SSH
 
   Create a configuration directory:
