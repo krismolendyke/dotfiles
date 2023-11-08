@@ -16,14 +16,14 @@ creates macOS specific configuration.
 
   #+begin_src sh
     function k20e_macos_is_dark() {
-        [[ $(osascript -e 'tell application "System Events" to tell appearance preferences to return dark mode') = 'false' ]]
+        [[ $(osascript -e 'tell application "System Events" to tell appearance preferences to return dark mode') = 'true' ]]
     }
 
     function k20e_alacritty_set_theme() {
         if k20e_macos_is_dark; then
-            sed -i '' -e 's/dark\.yaml/light\.yaml/' ${HOME}/.config/alacritty/alacritty.yml
-        else
             sed -i '' -e 's/light\.yaml/dark\.yaml/' ${HOME}/.config/alacritty/alacritty.yml
+        else
+            sed -i '' -e 's/dark\.yaml/light\.yaml/' ${HOME}/.config/alacritty/alacritty.yml
         fi
     }
   #+end_src
