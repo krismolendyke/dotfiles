@@ -583,7 +583,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
      -- Font
      config.font = wezterm.font('PragmataPro Liga')
-     config.font_size = 16
+     config.font_size = 18
 
      -- GUI
      config.initial_rows = 48
