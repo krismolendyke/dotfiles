@@ -1143,9 +1143,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
        [c]
        symbol = " "
 
-       [golang]
-       symbol = " "
-
        [hostname]
        ssh_symbol = " "
 
@@ -1223,6 +1220,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       [docker_context]
       symbol = " "
       format = '[$symbol $context]($style) '
+    #+end_src
+
+*** https://starship.rs/config/#go
+
+    #+begin_src toml
+      [golang]
+      symbol = '󰟓  '
+      format = '[$symbol($version )]($style) '
     #+end_src
 
 *** https://starship.rs/config/#google-cloud-gcloud
