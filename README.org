@@ -968,7 +968,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
   #+begin_src sh
     export SKIM_DEFAULT_COMMAND="git ls-tree -r --name-only HEAD || rg --files || find ."
-    export SKIM_DEFAULT_OPTIONS="--ansi --bind 'alt-a:select-all+accept,ctrl-o:execute(emacsclient --no-wait {})+accept' --prompt '❯ ' --cmd-prompt 'C❯ ' --color 'light' --inline-info --multi"
+    export SKIM_DEFAULT_OPTIONS="--ansi --bind 'alt-a:select-all+accept,ctrl-o:execute(emacsclient --no-wait {})+accept' --prompt '❯ ' --cmd-prompt 'C❯ ' --color 'light' --multi"
   #+end_src
 
   skim [[https://github.com/lotabout/skim/blob/291fc34c58b1670a5e8c95f1e8f930b82c030b19/shell/key-bindings.bash#L82C1-L82C55][takes over]] =C-t= in the terminal.  I live by that key binding to transpose typographical errors.  Set it
