@@ -439,9 +439,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      Linux =kubectx= install manually, completion to =pkg-config
      --variable=completionsdir bash-completion= dir.
 
-     #+BEGIN_SRC sh
-     #+END_SRC
-
      Change currently selected color:
 
      #+BEGIN_SRC sh
