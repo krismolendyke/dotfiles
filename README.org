@@ -734,19 +734,19 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      [apply]
              whitespace = nowarn
      [alias]
-             diff = diff --color-moved
+             diff = difftool
              stache = stash
              st = status -sb
              a = add -p
-             l = log --color-moved --stat --no-merges
-             lp = log --color-moved --patch --stat --no-merges
-             wlp = log --color-moved --patch --stat --color-words --no-merges
-             lo = log --color-moved --oneline --decorate --no-merges
-             lf = log --color-moved --pretty=format: --name-only -z --max-count 1 --no-merges
+             l = log --color-moved --stat --no-merges --ext-diff
+             lp = log --color-moved --patch --stat --no-merges --ext-diff
+             wlp = log --color-moved --patch --stat --color-words --no-merges --ext-diff
+             lo = log --color-moved --oneline --decorate --no-merges --ext-diff
+             lf = log --color-moved --pretty=format: --name-only -z --max-count 1 --no-merges --ext-diff
              co = checkout
              br = branch -vv
-             wdiff = diff --color-moved --color-words
-             ds = diff --color-moved --staged
+             wdiff = diff --color-moved --color-words --ext-diff
+             ds = diff --color-moved --staged --ext-diff
      [advice]
              statusHints = true
      [rebase]
@@ -757,10 +757,15 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
              colorMoved = zebra
      [help]
              autocorrect = 1
+     [diff]
+             tool = difftastic
+             external = difft
+     [difftool]
+             prompt = false
+     [difftool "difftastic"]
+             cmd = difft "$LOCAL" "$REMOTE"
      [pager]
-             diff = diff-so-fancy | less
-             log = diff-so-fancy | less
-             show = diff-so-fancy | less
+             difftool = true
      [pull]
              rebase = false
      [init]
