@@ -753,17 +753,16 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
              autosquash = true
      [diff]
              algorithm = histogram
-             compactionHeuristic = 1
              colorMoved = zebra
-     [help]
-             autocorrect = 1
-     [diff]
+             compactionHeuristic = 1
+             external = difft --display=inline
              tool = difftastic
-             external = difft
      [difftool]
              prompt = false
      [difftool "difftastic"]
-             cmd = difft "$LOCAL" "$REMOTE"
+             cmd = difft --display=inline "$LOCAL" "$REMOTE"
+     [help]
+             autocorrect = 1
      [pager]
              difftool = true
      [pull]
