@@ -536,7 +536,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
               echo "Deactivating current virtual environment ${VIRTUAL_ENV}"
               deactivate
           fi
-          pip install --user --upgrade --requirement ${HOME}/requirements-to-freeze.txt
+          pip install --user --upgrade --break-system-packages --requirement ${HOME}/requirements-to-freeze.txt
           pip freeze > ${HOME}/requirements.txt
       }
     #+END_SRC
