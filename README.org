@@ -302,7 +302,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           pathmunge "$(/opt/homebrew/bin/go env GOPATH)/bin"
       fi
 
-      pathmunge "${HOME}/.docker/bin"
+      # Rancher Desktop instead of Docker as of 3/18/24
+      pathmunge "${HOME}/.rd/bin"
     #+END_SRC
 
     #+BEGIN_SRC sh
@@ -350,7 +351,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     For managing multiple ... Node installations.  Installed [[https://aur.archlinux.org/packages/nvm/][from AUR]].
 
     #+BEGIN_SRC sh
-      [ -e /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+      [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
     #+END_SRC
 
 *** =PYTHON_USER_BASE=
@@ -372,7 +375,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       alias ...="cd ../../"
       alias ....="cd ../../.."
       alias dirs="dirs -v"
-      alias docker="podman"
       alias emacs="/usr/bin/emacs --no-window-system"
       alias emacsclient="/usr/bin/emacsclient --no-wait"
       alias ec="emacsclient"
@@ -480,6 +482,21 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       fi
     #+END_SRC
 
+    This is a clever =emacsclient= hack to support opening files at a line number with the =:linum= suffix that I stumbled
+    across at https://stuff-things.net/2019/07/31/opening-files-with-line-numbers-in-emacs.
+
+    #+begin_src sh
+      function k20e_ec () {
+          if [[ $1 =~ (.*):([0-9]+):(.*)$ ]]; then
+              emacsclient "+${BASH_REMATCH[2]}" "${BASH_REMATCH[1]}"
+          else
+              emacsclient "$@"
+          fi
+      }
+
+      alias ec=k20e_ec
+    #+end_src
+
     #+BEGIN_SRC sh
       function k20e_exif_strip() {
           local path="$1"
@@ -501,6 +518,23 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           identify -verbose "${path}" | rg exif
       }
     #+END_SRC
+
+    #+begin_src sh
+      function k20e_jqf() {
+          local path="$1"
+          local tmpPath
+
+          if [ ! -e "${path}" ]; then
+              echo "File at path \"${path}\" does not exist"
+              return
+          fi
+
+          tmpPath=$(mktemp)
+          cp "${path}" "${tmpPath}"
+          jq . "${tmpPath}" > "${path}"
+          rm "${tmpPath}"
+      }
+    #+end_src
 
 *** AWS CLI
 
@@ -536,7 +570,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
               echo "Deactivating current virtual environment ${VIRTUAL_ENV}"
               deactivate
           fi
-          pip install --user --upgrade --break-system-packages --requirement ${HOME}/requirements-to-freeze.txt
+          pip install --break-system-packages --user --upgrade --requirement ${HOME}/requirements-to-freeze.txt
           pip freeze > ${HOME}/requirements.txt
       }
     #+END_SRC
