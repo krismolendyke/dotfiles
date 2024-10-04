@@ -596,6 +596,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :header-args: :tangle ~/.wezterm.lua
    :END:
 
+   =TERM= setup https://wezfurlong.org/wezterm/config/lua/config/term.html
+
    #+begin_src lua
      local wezterm = require 'wezterm'
      local act = wezterm.action
@@ -604,6 +606,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      if wezterm.config_builder then
         config = wezterm.config_builder()
      end
+
+     -- term https://wezfurlong.org/wezterm/config/lua/config/term.html
+     config.term = "wezterm"
 
      -- Shell
      if wezterm.target_triple == 'aarch64-apple-darwin' then
