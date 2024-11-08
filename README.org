@@ -11,8 +11,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
   #+BEGIN_SRC sh
     mkdir -p ~/.bashrc.d/secret
+    touch ~/.bashrc.d/secret/variables.sh
     # TODO: fix the fact that something below this needs a file to exist in the secrets dir
     mkdir -p ~/.ssh/config
+    mkdir -p ~/.config/yamllint
   #+END_SRC
 
 * Build Configuration Files
@@ -39,8 +41,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    system =bash= path.
 
    #+BEGIN_SRC sh
-     chsh -s /usr/local/bin/bash
-     export SHELL=/usr/local/bin/bash
+     chsh -s /opt/homebrew/bin/bash
+     export SHELL=/opt/homebrew/bin/bash
    #+END_SRC
 
    #+BEGIN_SRC sh
@@ -50,7 +52,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    On macOS:
 
    #+BEGIN_SRC sh
-     sudo dscl . -create ${HOME} UserShell /usr/local/bin/bash
+     sudo dscl . -create ${HOME} UserShell ${SHELL}
    #+END_SRC
 
    #+BEGIN_SRC sh
@@ -1027,7 +1029,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     mkdir -p ${HOME}/.ssh/config.d
   #+END_SRC
 
-  On macOS, 1Password requires this to work with the [[*Environment][Environment]] requires this link to work properly:
+  On macOS, 1Password requires this to work with the [[*Environment][Environment]] properly:
 
   #+begin_src sh
     mkdir -p ~/.1password && ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
