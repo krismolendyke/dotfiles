@@ -9,6 +9,12 @@ creates macOS specific configuration.
 
   =defaults write com.apple.Accessibility ReduceMotionEnabled -bool true=
 
+  Set hostname:
+
+  #+begin_src sh
+    sudo scutil --set HostName ${HOSTNAME}
+  #+end_src
+
 * Dark & Light Theme
    :PROPERTIES:
    :header-args: :tangle ~/.bashrc.d/200-macos-theme.bash
