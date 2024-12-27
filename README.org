@@ -7,16 +7,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 #+TOC: headlines 3
 
-* Prerequisites
-
-  #+BEGIN_SRC sh
-    mkdir -p ~/.bashrc.d/secret
-    touch ~/.bashrc.d/secret/variables.sh
-    # TODO: fix the fact that something below this needs a file to exist in the secrets dir
-    mkdir -p ~/.ssh/config
-    mkdir -p ~/.config/yamllint
-  #+END_SRC
-
 * Build Configuration Files
 
   Open this Org document in Emacs and [[http://orgmode.org/manual/tangle.html#tangle][tangle]] it (=C-c C-v t=).
@@ -67,7 +57,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =.inputrc=
    :PROPERTIES:
-   :header-args: :tangle ~/.inputrc
+   :header-args: :tangle ~/.inputrc :mkdirp yes
    :END:
 
    #+BEGIN_SRC sh
@@ -85,7 +75,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =.bash_profile=
    :PROPERTIES:
-   :header-args: :tangle ~/.bash_profile
+   :header-args: :tangle ~/.bash_profile :mkdirp yes
    :END:
 
    #+BEGIN_SRC sh
@@ -94,7 +84,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =.bashrc=
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc
+   :header-args: :tangle ~/.bashrc :mkdirp yes
    :END:
 
    Load all configuration:
@@ -111,7 +101,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Custom
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/100-main.bash
+   :header-args: :tangle ~/.bashrc.d/100-main.bash :mkdirp yes
    :END:
 
    Interactive shell options.
@@ -595,7 +585,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * wezterm
    :PROPERTIES:
-   :header-args: :tangle ~/.wezterm.lua
+   :header-args: :tangle ~/.wezterm.lua :mkdirp yes
    :END:
 
    =TERM= setup https://wezfurlong.org/wezterm/config/lua/config/term.html
@@ -671,7 +661,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =yamllint/config=
    :PROPERTIES:
-   :header-args: :tangle ~/.config/yamllint/config
+   :header-args: :tangle ~/.config/yamllint/config :mkdirp yes
    :END:
 
     Create a configuration directory: =mkdir -p ${HOME}/.config/yamllint=
@@ -722,7 +712,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * =asdf=
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/110-asdf.bash
+   :header-args: :tangle ~/.bashrc.d/110-asdf.bash :mkdirp yes
    :END:
 
    Need to add completion for my silly Dvorak alias.  Lookup existing completion function: =complete -p asdf=, then add
@@ -735,7 +725,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * [[https://github.com/eza-community/eza][eza]]
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/130-eza.bash
+   :header-args: :tangle ~/.bashrc.d/130-eza.bash :mkdirp yes
    :END:
 
   #+begin_src sh
@@ -752,7 +742,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =.gitconfig=
    :PROPERTIES:
-   :header-args: :tangle ~/.gitconfig
+   :header-args: :tangle ~/.gitconfig :mkdirp yes
    :END:
 
    The =includeIf= section below allows for sticking a =.gitconfig= in a directory such that repositories cloned into that
@@ -822,7 +812,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =.gitignore-global=
    :PROPERTIES:
-   :header-args: :tangle ~/.gitignore-global
+   :header-args: :tangle ~/.gitignore-global :mkdirp yes
    :END:
 
    #+BEGIN_SRC gitignore
@@ -962,7 +952,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =pyenv=
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/102-pyenv.bash
+   :header-args: :tangle ~/.bashrc.d/102-pyenv.bash :mkdirp yes
    :END:
 
    #+begin_src sh
@@ -973,7 +963,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =requirements-to-freeze.txt=
    :PROPERTIES:
-   :header-args: :tangle ~/requirements-to-freeze.txt
+   :header-args: :tangle ~/requirements-to-freeze.txt :mkdirp yes
    :END:
 
    Use [[https://kennethreitz.org/essays/2016/02/25/a-better-pip-workflow][A Better Pip Workflow™]] to specify packages that I do actually want installed to the user's packages.
@@ -992,9 +982,13 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      virtualenvwrapper
    #+END_SRC
 
+** =uv=
+
+
+
 * =ripgrep=
    :PROPERTIES:
-   :header-args: :tangle ~/.ripgreprc
+   :header-args: :tangle ~/.ripgreprc :mkdirp yes
    :END:
 
   See =RIPGREP_CONFIG_PATH= above.
@@ -1005,7 +999,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * [[https://github.com/lotabout/skim][skim]]
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/120-skim.bash
+   :header-args: :tangle ~/.bashrc.d/120-skim.bash :mkdirp yes
    :END:
 
   #+begin_src sh
@@ -1037,7 +1031,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =config=
    :PROPERTIES:
-   :header-args: :tangle ~/.ssh/config
+   :header-args: :tangle ~/.ssh/config :mkdirp yes
    :END:
 
    #+BEGIN_SRC conf
@@ -1053,7 +1047,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Personal
    :PROPERTIES:
-   :header-args: :tangle ~/.ssh/config.d/personal
+   :header-args: :tangle ~/.ssh/config.d/personal :mkdirp yes
    :END:
 
    Splitting work & personal to allow for using multiple GitHub accounts.  See
@@ -1071,7 +1065,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Work
    :PROPERTIES:
-   :header-args: :tangle ~/.ssh/config.d/work
+   :header-args: :tangle ~/.ssh/config.d/work :mkdirp yes
    :END:
 
    #+begin_src conf
@@ -1092,7 +1086,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Environment
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/101-ssh-env.bash
+   :header-args: :tangle ~/.bashrc.d/101-ssh-env.bash :mkdirp yes
    :END:
 
    #+begin_src sh
@@ -1114,7 +1108,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * Starship
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/999-starship.bash
+   :header-args: :tangle ~/.bashrc.d/999-starship.bash :mkdirp yes
    :END:
 
    #+begin_src sh
@@ -1125,7 +1119,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Config
     :PROPERTIES:
-    :header-args: :tangle ~/.config/starship.toml
+    :header-args: :tangle ~/.config/starship.toml :mkdirp yes
     :END:
 
 *** https://starship.rs/config/#prompt
