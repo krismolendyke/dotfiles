@@ -1099,6 +1099,19 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      export SSH_AUTH_SOCK=~/.1password/agent.sock
    #+end_src
 
+* Ghostty
+    :PROPERTIES:
+    :header-args: :tangle ~/.config/ghostty/config :mkdirp yes
+    :END:
+
+    #+begin_src conf
+      font-family = PragmataPro Mono Liga
+      font-size = 20
+      macos-option-as-alt = true
+      macos-titlebar-style = hidden
+      theme = light:Tomorrow,dark:Tomorrow Night Bright
+    #+end_src
+
 * Starship
    :PROPERTIES:
    :header-args: :tangle ~/.bashrc.d/999-starship.bash
