@@ -1099,11 +1099,36 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     :END:
 
     #+begin_src conf
+      cursor-style = block
+      cursor-style-blink = true
+
       font-family = PragmataPro Mono Liga
+      font-feature = calt
       font-size = 20
+
+      # Backwards erase word
+      # Remember to go change the "Hide Ghostty" menu shortcut to something else, e.g.,
+      # https://apple.stackexchange.com/questions/101754/os-x-disable-cmd-h-or-hide-app-command
+      keybind = cmd+h=text:\x1b\x7f
+
+      # Forward erase word
+      keybind = cmd+d=text:\x1bd
+
+      # Backward word
+      keybind = cmd+b=text:\x1bb
+
+      # Forward word
+      keybind = cmd+f=text:\x1bf
+
       macos-option-as-alt = true
       macos-titlebar-style = hidden
+
+      quit-after-last-window-closed = true
+
       theme = light:Tomorrow,dark:Tomorrow Night Bright
+
+      window-height = 48
+      window-width = 110
     #+end_src
 
 * Starship
