@@ -1106,19 +1106,19 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       font-feature = calt
       font-size = 20
 
-      # Backwards erase word
+      # Backward erase word
       # Remember to go change the "Hide Ghostty" menu shortcut to something else, e.g.,
       # https://apple.stackexchange.com/questions/101754/os-x-disable-cmd-h-or-hide-app-command
-      keybind = cmd+h=text:\x1b\x7f
+      keybind = cmd+h=esc:\x7f
 
       # Forward erase word
-      keybind = cmd+d=text:\x1bd
+      keybind = cmd+d=esc:d
 
       # Backward word
-      keybind = cmd+b=text:\x1bb
+      keybind = cmd+b=esc:b
 
       # Forward word
-      keybind = cmd+f=text:\x1bf
+      keybind = cmd+f=esc:f
 
       macos-option-as-alt = true
       macos-titlebar-style = hidden
