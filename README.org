@@ -1099,6 +1099,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     :END:
 
     #+begin_src conf
+      # See also shell-integration-features
       cursor-style = block
       cursor-style-blink = true
 
@@ -1110,13 +1111,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       # Remember to go change the "Hide Ghostty" menu shortcut to something else, e.g.,
       # https://apple.stackexchange.com/questions/101754/os-x-disable-cmd-h-or-hide-app-command
       keybind = cmd+h=esc:\x7f
-
       # Forward erase word
       keybind = cmd+d=esc:d
-
       # Backward word
       keybind = cmd+b=esc:b
-
       # Forward word
       keybind = cmd+f=esc:f
 
@@ -1124,6 +1122,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       macos-titlebar-style = hidden
 
       quit-after-last-window-closed = true
+
+      # This fixed an issue w/ the initial Bash cursor showing as a bar instead of a block before a command was executed
+      # (see cursor-style)
+      shell-integration-features = no-cursor
 
       theme = light:Tomorrow,dark:Tomorrow Night Bright
 
