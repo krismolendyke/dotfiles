@@ -1122,6 +1122,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       # Forward word
       keybind = cmd+f=esc:f
 
+      keybind = ctrl+up=jump_to_prompt:-1
+      keybind = ctrl+down=jump_to_prompt:1
+
       macos-option-as-alt = true
       macos-titlebar-style = hidden
 
