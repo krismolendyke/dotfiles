@@ -730,14 +730,26 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
   #+begin_src sh
     if command -v eza 1>/dev/null 2>&1; then
+        # Workaround for https://github.com/orgs/eza-community/discussions/209#discussioncomment-10801021 which is apparently still not resolved
+        export EXA_COLORS="xx=''"
+        export EZA_CONFIG_DIR="${HOME}/.config/eza"
         alias l="EZA_ICON_SPACING=1 eza --classify --icons=always --git --git-repos --grid"
         alias ls="EZA_ICON_SPACING=1 eza --classify --icons=always --git --git-repos --grid"
-        alias ll="EZA_ICON_SPACING=1 eza --classify --icons=always --git --git-repos --long"
         alias lt="EZA_ICON_SPACING=1 eza --classify --icons=always --git --git-repos --tree"
-        alias ltl="EZA_ICON_SPACING=1 eza --classify --icons=always --git --git-repos --tree --long"
+        alias ll="EZA_ICON_SPACING=1 eza --classify --icons=always --git --git-repos --long --header --smart-group"
+        alias ltl="EZA_ICON_SPACING=1 eza --classify --icons=always --git --git-repos --tree --long --header --smart-group"
     fi
   #+end_src
 
+** Config
+    :PROPERTIES:
+    :header-args: :tangle ~/.config/eza/theme.yml :mkdirp yes
+    :END:
+
+    #+begin_src yaml
+      ---
+      # See https://github.com/eza-community/eza-themes
+    #+end_src
 * [[https://git-scm.com/][Git]]
 
 ** =.gitconfig=
