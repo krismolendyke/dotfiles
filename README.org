@@ -733,11 +733,13 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
         # Workaround for https://github.com/orgs/eza-community/discussions/209#discussioncomment-10801021 which is apparently still not resolved
         export EXA_COLORS="xx=''"
         export EZA_CONFIG_DIR="${HOME}/.config/eza"
-        alias l="EZA_ICON_SPACING=1 eza --classify --icons=always --git --git-repos --grid"
-        alias ls="EZA_ICON_SPACING=1 eza --classify --icons=always --git --git-repos --grid"
-        alias lt="EZA_ICON_SPACING=1 eza --classify --icons=always --git --git-repos --tree"
-        alias ll="EZA_ICON_SPACING=1 eza --classify --icons=always --git --git-repos --long --header --smart-group"
-        alias ltl="EZA_ICON_SPACING=1 eza --classify --icons=always --git --git-repos --tree --long --header --smart-group"
+        export EZA_ICON_SPACING=1
+        export EZA_ICONS_AUTO=1
+        alias l="eza --classify --git --git-repos --grid"
+        alias ls="eza --classify --git --git-repos --grid"
+        alias ll="eza --classify --git --git-repos --long --header --smart-group"
+        alias lt="eza --classify --git --git-repos --tree"
+        alias ltl="eza --classify --git --git-repos --tree --long --header --smart-group"
     fi
   #+end_src
 
