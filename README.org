@@ -1090,12 +1090,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           IdentitiesOnly yes
           PreferredAuthentications publickey
           PasswordAuthentication no
-
-     Host prod-*
-         User krismolendyke
-
-     Host prodeu-*
-         User krismolendyke
    #+end_src
 
 ** Environment
