@@ -1125,13 +1125,18 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       keybind = cmd+h=text:\x1b\x7f
       # Forward erase word
       keybind = cmd+d=esc:d
+
       # Backward word
       keybind = cmd+b=esc:b
       # Forward word
       keybind = cmd+f=esc:f
 
+      # Jump to prompt
       keybind = ctrl+up=jump_to_prompt:-1
       keybind = ctrl+down=jump_to_prompt:1
+
+      # Quick terminal
+      keybind = global:ctrl+alt+cmd+t=toggle_quick_terminal
 
       macos-option-as-alt = true
       macos-titlebar-style = hidden
