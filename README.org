@@ -158,7 +158,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       LANG=en_US.UTF-8
 
       HISTSIZE=100000
-      HISTCONTROL=erasedups
+      HISTCONTROL=ignoredups:erasedups
       HISTTIMEFORMAT='%F %T '
     #+END_SRC
 
@@ -1161,7 +1161,19 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
    #+begin_src sh
      if command -v starship 1>/dev/null 2>&1; then
-         eval "$(starship init bash)"
+         function k20e_starship_precmd_user_func() {
+             # Immediately append commands to HISTFILE rather than waiting for logout
+             # NB this does not affect the current session's history but it does mean that a login will have access to all
+             # recent commands from any current sessions
+             history -a
+         }
+         # See https://starship.rs/advanced-config/#custom-pre-prompt-and-pre-execution-commands-in-bash
+         starship_precmd_user_func='k20e_starship_precmd_user_func'
+
+         # Only init one time, I found issues w/ this executing multiple time, e.g., via interactive `source ~/.bashrc`
+         if [ ! -v STARSHIP_SHELL ]; then
+             eval "$(starship init bash)"
+         fi
      fi
    #+end_src
 
