@@ -9,6 +9,12 @@ creates macOS specific configuration.
 
   =defaults write com.apple.Accessibility ReduceMotionEnabled -bool true=
 
+  Set hostname:
+
+  #+begin_src sh
+    sudo scutil --set HostName ${HOSTNAME}
+  #+end_src
+
 * Dark & Light Theme
    :PROPERTIES:
    :header-args: :tangle ~/.bashrc.d/200-macos-theme.bash
@@ -36,275 +42,6 @@ creates macOS specific configuration.
   #+begin_src sh
     export SHELL=/opt/homebrew/bin/bash
   #+end_src
-
-* TODO Yabai
-
-BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
-
-** =~/.skhdrc=
-   :PROPERTIES:
-   :header-args: :tangle ~/.skhdrc
-   :END:
-
-   Yabai still uses https://github.com/koekeishiya/skhd.
-
-   #+BEGIN_SRC shell :shebang #!/bin/bash
-     #  NOTE(koekeishiya): A list of all built-in modifier and literal keywords can
-     #                     be found at https://github.com/koekeishiya/skhd/issues/1
-     #
-     #                     A hotkey is written according to the following rules:
-     #
-     #                       hotkey       = <mode> '<' <action> | <action>
-     #
-     #                       mode         = 'name of mode' | <mode> ',' <mode>
-     #
-     #                       action       = <keysym> '[' <proc_map_lst> ']' | <keysym> '->' '[' <proc_map_lst> ']'
-     #                                      <keysym> ':' <command>          | <keysym> '->' ':' <command>
-     #                                      <keysym> ';' <mode>             | <keysym> '->' ';' <mode>
-     #
-     #                       keysym       = <mod> '-' <key> | <key>
-     #
-     #                       mod          = 'modifier keyword' | <mod> '+' <mod>
-     #
-     #                       key          = <literal> | <keycode>
-     #
-     #                       literal      = 'single letter or built-in keyword'
-     #
-     #                       keycode      = 'apple keyboard kVK_<Key> values (0x3C)'
-     #
-     #                       proc_map_lst = * <proc_map>
-     #
-     #                       proc_map     = <string> ':' <command>
-     #
-     #                       string       = '"' 'sequence of characters' '"'
-     #
-     #                       command      = command is executed through '$SHELL -c' and
-     #                                      follows valid shell syntax. if the $SHELL environment
-     #                                      variable is not set, it will default to '/bin/bash'.
-     #                                      when bash is used, the ';' delimeter can be specified
-     #                                      to chain commands.
-     #
-     #                                      to allow a command to extend into multiple lines,
-     #                                      prepend '\' at the end of the previous line.
-     #
-     #                                      an EOL character signifies the end of the bind.
-     #
-     #                       ->           = keypress is not consumed by skhd
-     #
-     #  NOTE(koekeishiya): A mode is declared according to the following rules:
-     #
-     #                       mode_decl = '::' <name> '@' ':' <command> | '::' <name> ':' <command> |
-     #                                   '::' <name> '@'               | '::' <name>
-     #
-     #                       name      = desired name for this mode,
-     #
-     #                       @         = capture keypresses regardless of being bound to an action
-     #
-     #                       command   = command is executed through '$SHELL -c' and
-     #                                   follows valid shell syntax. if the $SHELL environment
-     #                                   variable is not set, it will default to '/bin/bash'.
-     #                                   when bash is used, the ';' delimeter can be specified
-     #                                   to chain commands.
-     #
-     #                                   to allow a command to extend into multiple lines,
-     #                                   prepend '\' at the end of the previous line.
-     #
-     #                                   an EOL character signifies the end of the bind.
-
-     # add an on_enter command to the default mode
-     # :: default : chunkc border::color 0xff775759
-     #
-     # defines a new mode 'test' with an on_enter command, that captures keypresses
-     # :: test @ : chunkc border::color 0xff24ccaa
-     #
-     # from 'default' mode, activate mode 'test'
-     # cmd - x ; test
-     #
-     # from 'test' mode, activate mode 'default'
-     # test < cmd - x ; default
-     #
-     # launch a new terminal instance when in either 'default' or 'test' mode
-     # default, test < cmd - return : open -na /Applications/Terminal.app
-
-     # application specific bindings
-     #
-     # cmd - n [
-     #     "kitty"       : echo "hello kitty"
-     #     "qutebrowser" : echo "hello qutebrowser"
-     #     "finder"      : false
-     # ]
-
-     .blacklist [
-         "emacs"
-     ]
-
-     # close focused window
-     shift + alt - w : chunkc tiling::window --close
-
-     # focus window
-     alt - down : chunkc tiling::window --focus south
-     alt - left : chunkc tiling::window --focus west
-     alt - right : chunkc tiling::window --focus east
-     alt - up : chunkc tiling::window --focus north
-
-     alt - space : chunkc tiling::window --focus next
-     shift + alt - space : chunkc tiling::window --focus prev
-
-     # move window
-     shift + alt - down : chunkc tiling::window --warp south
-     shift + alt - left : chunkc tiling::window --warp west
-     shift + alt - right : chunkc tiling::window --warp east
-     shift + alt - up : chunkc tiling::window --warp north
-
-     # equalize size of windows
-     ctrl + alt - 0 : chunkc tiling::desktop --equalize
-
-     # swap window
-     # shift + alt - h : chunkc tiling::window --swap west
-     # shift + alt - j : chunkc tiling::window --swap south
-     # shift + alt - k : chunkc tiling::window --swap north
-     # shift + alt - l : chunkc tiling::window --swap east
-
-     # make floating window fill screen
-     # shift + alt - up     : chunkc tiling::window --grid-layout 1:1:0:0:1:1
-
-     # make floating window fill left-half of screen
-     # shift + alt - left   : chunkc tiling::window --grid-layout 1:2:0:0:1:1
-
-     # make floating window fill right-half of screen
-     # shift + alt - right  : chunkc tiling::window --grid-layout 1:2:1:0:1:1
-
-     # create desktop, move window and follow focus
-     # shift + cmd - n : chunkc tiling::desktop --create;\
-     #                   id=$(chunkc tiling::query --desktops-for-monitor $(chunkc tiling::query --monitor-for-desktop $(chunkc tiling::query --desktop id)));\
-     #                   chunkc tiling::window --send-to-desktop $(echo ${id##* });\
-     #                   chunkc tiling::desktop --focus $(echo ${id##* })
-
-     # create desktop and follow focus
-     # cmd + alt - n : chunkc tiling::desktop --create;\
-     #                 id=$(chunkc tiling::query --desktops-for-monitor $(chunkc tiling::query --monitor-for-desktop $(chunkc tiling::query --desktop id)));\
-     #                 chunkc tiling::desktop --focus $(echo ${id##* })
-
-     # destroy desktop
-     # cmd + alt - w : chunkc tiling::desktop --annihilate
-
-     # fast focus desktop
-     # cmd + alt - x : chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
-     # cmd + alt - z : chunkc tiling::desktop --focus prev
-     # cmd + alt - c : chunkc tiling::desktop --focus next
-     # cmd + alt - 1 : chunkc tiling::desktop --focus 1
-     # cmd + alt - 2 : chunkc tiling::desktop --focus 2
-     # cmd + alt - 3 : chunkc tiling::desktop --focus 3
-     # cmd + alt - 4 : chunkc tiling::desktop --focus 4
-     # cmd + alt - 5 : chunkc tiling::desktop --focus 5
-     # cmd + alt - 6 : chunkc tiling::desktop --focus 6
-     # cmd + alt - 7 : chunkc tiling::desktop --focus 7
-
-     # send window to desktop
-     # shift + alt - x : chunkc tiling::window --send-to-desktop $(chunkc get _last_active_desktop)
-     # shift + alt - z : chunkc tiling::window --send-to-desktop prev
-     # shift + alt - c : chunkc tiling::window --send-to-desktop next
-     # shift + alt - 1 : chunkc tiling::window --send-to-desktop 1
-     # shift + alt - 2 : chunkc tiling::window --send-to-desktop 2
-     # shift + alt - 3 : chunkc tiling::window --send-to-desktop 3
-     # shift + alt - 4 : chunkc tiling::window --send-to-desktop 4
-     # shift + alt - 5 : chunkc tiling::window --send-to-desktop 5
-     # shift + alt - 6 : chunkc tiling::window --send-to-desktop 6
-     # shift + alt - 7 : chunkc tiling::window --send-to-desktop 7
-
-     # send window to desktop and follow focus
-     # shift + cmd - x : chunkc tiling::window --send-to-desktop $(chunkc get _last_active_desktop); chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
-     # shift + cmd - z : chunkc tiling::window --send-to-desktop prev; chunkc tiling::desktop --focus prev
-     # shift + cmd - c : chunkc tiling::window --send-to-desktop next; chunkc tiling::desktop --focus next
-     # shift + cmd - 1 : chunkc tiling::window --send-to-desktop 1; chunkc tiling::desktop --focus 1
-     # shift + cmd - 2 : chunkc tiling::window --send-to-desktop 2; chunkc tiling::desktop --focus 2
-     # shift + cmd - 3 : chunkc tiling::window --send-to-desktop 3; chunkc tiling::desktop --focus 3
-     # shift + cmd - 4 : chunkc tiling::window --send-to-desktop 4; chunkc tiling::desktop --focus 4
-     # shift + cmd - 5 : chunkc tiling::window --send-to-desktop 5; chunkc tiling::desktop --focus 5
-     # shift + cmd - 6 : chunkc tiling::window --send-to-desktop 6; chunkc tiling::desktop --focus 6
-     # shift + cmd - 7 : chunkc tiling::window --send-to-desktop 7; chunkc tiling::desktop --focus 7
-
-     # focus monitor
-     # ctrl + alt - z  : chunkc tiling::monitor -f prev
-     # ctrl + alt - c  : chunkc tiling::monitor -f next
-     # ctrl + alt - 1  : chunkc tiling::monitor -f 1
-     # ctrl + alt - 2  : chunkc tiling::monitor -f 2
-     # ctrl + alt - 3  : chunkc tiling::monitor -f 3
-
-     # send window to monitor and follow focus
-     # ctrl + cmd - z  : chunkc tiling::window --send-to-monitor prev; chunkc tiling::monitor -f prev
-     # ctrl + cmd - c  : chunkc tiling::window --send-to-monitor next; chunkc tiling::monitor -f next
-     # ctrl + cmd - 1  : chunkc tiling::window --send-to-monitor 1; chunkc tiling::monitor -f 1
-     # ctrl + cmd - 2  : chunkc tiling::window --send-to-monitor 2; chunkc tiling::monitor -f 2
-     # ctrl + cmd - 3  : chunkc tiling::window --send-to-monitor 3; chunkc tiling::monitor -f 3
-
-     # increase region size
-     # shift + alt - a : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge west
-     # shift + alt - s : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge south
-     # shift + alt - w : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge north
-     # shift + alt - d : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge east
-
-     # decrease region size
-     # shift + cmd - a : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge west
-     # shift + cmd - s : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge south
-     # shift + cmd - w : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge north
-     # shift + cmd - d : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge east
-
-     # set insertion point for focused container
-     # ctrl + alt - f : chunkc tiling::window --use-insertion-point cancel
-     # ctrl + alt - h : chunkc tiling::window --use-insertion-point west
-     # ctrl + alt - j : chunkc tiling::window --use-insertion-point south
-     # ctrl + alt - k : chunkc tiling::window --use-insertion-point north
-     # ctrl + alt - l : chunkc tiling::window --use-insertion-point east
-
-     # rotate tree
-     # alt - r : chunkc tiling::desktop --rotate 90
-
-     # mirror tree y-axis
-     # alt - y : chunkc tiling::desktop --mirror vertical
-
-     # mirror tree x-axis
-     # alt - x : chunkc tiling::desktop --mirror horizontal
-
-     # toggle desktop offset
-     # alt - a : chunkc tiling::desktop --toggle offset
-
-     # toggle window fullscreen
-     # alt - f : chunkc tiling::window --toggle fullscreen
-
-     # toggle window native fullscreen
-     # shift + alt - f : chunkc tiling::window --toggle native-fullscreen
-
-     # toggle window parent zoom
-     # alt - d : chunkc tiling::window --toggle parent
-
-     # toggle window split type
-     # alt - e : chunkc tiling::window --toggle split
-
-     # toggle window fade
-     # alt - q : chunkc tiling::window --toggle fade
-
-     # float / unfloat window and center on screen
-     # alt - t : chunkc tiling::window --toggle float;\
-     #           chunkc tiling::window --grid-layout 4:4:1:1:2:2
-
-     # toggle sticky
-     # alt - s : chunkc tiling::window --toggle sticky
-
-     # toggle sticky, float and resize to picture-in-picture size
-     # alt - p : chunkc tiling::window --toggle sticky;\
-     #           chunkc tiling::window --grid-layout 5:5:4:0:1:1
-
-     # float next window to be tiled
-     # shift + alt - t : chunkc set window_float_next 1
-
-     # change layout of desktop
-     shift + alt - 1 : chunkc tiling::desktop --layout bsp
-     shift + alt - 2 : chunkc tiling::desktop --layout monocle
-     shift + alt - 3 : chunkc tiling::desktop --layout float
-
-     # ctrl + alt - w : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
-   #+END_SRC
 
 * [[https://brew.sh/][Homebrew]]
 
@@ -357,15 +94,11 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      tap "homebrew/aliases"
      tap "homebrew/autoupdate"
      tap "homebrew/bundle"
-     tap "homebrew/cask-drivers"
-     tap "homebrew/cask-fonts"
-     tap "homebrew/cask-versions"
      tap "homebrew/command-not-found"
      tap "homebrew/services"
      tap "homebrew/test-bot"
      tap "jmespath/jmespath"
      tap "tidbyt/tidbyt"
-     brew "openssl@3"
      brew "automake"
      brew "libyaml"
      brew "asdf"
@@ -373,10 +106,14 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      brew "bash"
      brew "bash-completion@2"
      brew "bison"
+     brew "chafa"
      brew "cmake"
+     brew "dasel"
      brew "diff-so-fancy"
-     brew "xvid"
+     brew "difftastic"
      brew "eza"
+     brew "libssh"
+     brew "xvid"
      brew "ffmpeg"
      brew "flex"
      brew "flyctl"
@@ -391,32 +128,31 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      brew "hunspell"
      brew "shared-mime-info"
      brew "imagemagick"
+     brew "innoextract"
      brew "ispell"
      brew "oniguruma"
      brew "jq"
-     brew "k9s"
      brew "kubernetes-cli"
      brew "less"
-     brew "libcroco"
      brew "libdvdcss"
-     brew "libssh"
      brew "makedepend"
      brew "node"
-     brew "octant"
      brew "parallel"
      brew "perl"
-     brew "podman"
      brew "pre-commit"
      brew "pstree"
      brew "pv"
      brew "pyenv"
      brew "pyenv-virtualenv"
      brew "python@3.10"
+     brew "repo"
      brew "ripgrep"
      brew "rocksdb"
      brew "ruby", link: true
      brew "scons"
      brew "shellcheck"
+     brew "sk"
+     brew "starship"
      brew "subversion"
      brew "terminal-notifier"
      brew "texi2html"
@@ -428,28 +164,29 @@ BSP window manager https://github.com/koekeishiya/yabai has replaced ChunkWM.
      brew "d12frosted/emacs-plus/emacs-plus@29"
      brew "jmespath/jmespath/jp"
      brew "tidbyt/tidbyt/pixlet"
+     cask "1password"
      cask "1password-cli"
      cask "alfred"
+     cask "alt-tab"
      cask "android-platform-tools"
-     cask "flux"
-     cask "font-smoothing-adjuster"
+     cask "betterdisplay"
+     cask "firefox"
+     cask "google-drive"
      cask "istat-menus"
      cask "mactex-no-gui"
-     cask "monitorcontrol"
-     cask "obsbot-tinycam"
+     cask "opal-composer"
      cask "openemu"
+     cask "orion"
      cask "podman-desktop"
+     cask "qlmarkdown"
      cask "rectangle"
-     cask "retroarch-metal"
-     cask "sk"
      cask "slack"
-     cask "steam"
+     cask "tomatobar"
      cask "transmission"
-     cask "vanilla"
+     cask "via"
      cask "vlc"
      cask "wezterm"
-     cask "xscreensaver"
-     cask "ytmdesktop-youtube-music"
+     cask "zoom"
    #+END_SRC
 
 ** [[https://github.com/mas-cli/mas][mas]]

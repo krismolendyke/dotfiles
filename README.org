@@ -7,14 +7,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 #+TOC: headlines 3
 
-* Prerequisites
-
-  #+BEGIN_SRC sh
-    mkdir -p ~/.bashrc.d/secret
-    # TODO: fix the fact that something below this needs a file to exist in the secrets dir
-    mkdir -p ~/.ssh/config
-  #+END_SRC
-
 * Build Configuration Files
 
   Open this Org document in Emacs and [[http://orgmode.org/manual/tangle.html#tangle][tangle]] it (=C-c C-v t=).
@@ -39,8 +31,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    system =bash= path.
 
    #+BEGIN_SRC sh
-     chsh -s /usr/local/bin/bash
-     export SHELL=/usr/local/bin/bash
+     chsh -s /opt/homebrew/bin/bash
+     export SHELL=/opt/homebrew/bin/bash
    #+END_SRC
 
    #+BEGIN_SRC sh
@@ -50,7 +42,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    On macOS:
 
    #+BEGIN_SRC sh
-     sudo dscl . -create ${HOME} UserShell /usr/local/bin/bash
+     sudo dscl . -create ${HOME} UserShell ${SHELL}
    #+END_SRC
 
    #+BEGIN_SRC sh
@@ -65,7 +57,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =.inputrc=
    :PROPERTIES:
-   :header-args: :tangle ~/.inputrc
+   :header-args: :tangle ~/.inputrc :mkdirp yes
    :END:
 
    #+BEGIN_SRC sh
@@ -83,7 +75,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =.bash_profile=
    :PROPERTIES:
-   :header-args: :tangle ~/.bash_profile
+   :header-args: :tangle ~/.bash_profile :mkdirp yes
    :END:
 
    #+BEGIN_SRC sh
@@ -92,7 +84,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =.bashrc=
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc
+   :header-args: :tangle ~/.bashrc :mkdirp yes
    :END:
 
    Load all configuration:
@@ -109,7 +101,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Custom
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/100-main.bash
+   :header-args: :tangle ~/.bashrc.d/100-main.bash :mkdirp yes
    :END:
 
    Interactive shell options.
@@ -166,7 +158,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       LANG=en_US.UTF-8
 
       HISTSIZE=100000
-      HISTCONTROL=erasedups
+      HISTCONTROL=ignoredups:erasedups
       HISTTIMEFORMAT='%F %T '
     #+END_SRC
 
@@ -593,8 +585,10 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * wezterm
    :PROPERTIES:
-   :header-args: :tangle ~/.wezterm.lua
+   :header-args: :tangle ~/.wezterm.lua :mkdirp yes
    :END:
+
+   =TERM= setup https://wezfurlong.org/wezterm/config/lua/config/term.html
 
    #+begin_src lua
      local wezterm = require 'wezterm'
@@ -604,6 +598,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      if wezterm.config_builder then
         config = wezterm.config_builder()
      end
+
+     -- term https://wezfurlong.org/wezterm/config/lua/config/term.html
+     config.term = "wezterm"
 
      -- Shell
      if wezterm.target_triple == 'aarch64-apple-darwin' then
@@ -664,7 +661,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =yamllint/config=
    :PROPERTIES:
-   :header-args: :tangle ~/.config/yamllint/config
+   :header-args: :tangle ~/.config/yamllint/config :mkdirp yes
    :END:
 
     Create a configuration directory: =mkdir -p ${HOME}/.config/yamllint=
@@ -715,7 +712,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * =asdf=
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/110-asdf.bash
+   :header-args: :tangle ~/.bashrc.d/110-asdf.bash :mkdirp yes
    :END:
 
    Need to add completion for my silly Dvorak alias.  Lookup existing completion function: =complete -p asdf=, then add
@@ -728,24 +725,38 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * [[https://github.com/eza-community/eza][eza]]
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/130-eza.bash
+   :header-args: :tangle ~/.bashrc.d/130-eza.bash :mkdirp yes
    :END:
 
   #+begin_src sh
     if command -v eza 1>/dev/null 2>&1; then
-        alias l="EZA_ICON_SPACING=2 eza --classify --icons=always --git --git-repos --grid"
-        alias ls="EZA_ICON_SPACING=2 eza --classify --icons=always --git --git-repos --grid"
-        alias ll="EZA_ICON_SPACING=2 eza --classify --icons=always --git --git-repos --long"
-        alias lt="EZA_ICON_SPACING=2 eza --classify --icons=always --git --git-repos --tree"
-        alias ltl="EZA_ICON_SPACING=2 eza --classify --icons=always --git --git-repos --tree --long"
+        # Workaround for https://github.com/orgs/eza-community/discussions/209#discussioncomment-10801021 which is apparently still not resolved
+        export EXA_COLORS="xx=''"
+        export EZA_CONFIG_DIR="${HOME}/.config/eza"
+        export EZA_ICON_SPACING=1
+        export EZA_ICONS_AUTO=1
+        alias l="eza --classify --git --git-repos --grid"
+        alias ls="eza --classify --git --git-repos --grid"
+        alias ll="eza --classify --git --git-repos --long --header --smart-group"
+        alias lt="eza --classify --git --git-repos --tree"
+        alias ltl="eza --classify --git --git-repos --tree --long --header --smart-group"
     fi
   #+end_src
 
+** Config
+    :PROPERTIES:
+    :header-args: :tangle ~/.config/eza/theme.yml :mkdirp yes
+    :END:
+
+    #+begin_src yaml
+      ---
+      # See https://github.com/eza-community/eza-themes
+    #+end_src
 * [[https://git-scm.com/][Git]]
 
 ** =.gitconfig=
    :PROPERTIES:
-   :header-args: :tangle ~/.gitconfig
+   :header-args: :tangle ~/.gitconfig :mkdirp yes
    :END:
 
    The =includeIf= section below allows for sticking a =.gitconfig= in a directory such that repositories cloned into that
@@ -815,7 +826,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =.gitignore-global=
    :PROPERTIES:
-   :header-args: :tangle ~/.gitignore-global
+   :header-args: :tangle ~/.gitignore-global :mkdirp yes
    :END:
 
    #+BEGIN_SRC gitignore
@@ -955,7 +966,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =pyenv=
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/102-pyenv.bash
+   :header-args: :tangle ~/.bashrc.d/102-pyenv.bash :mkdirp yes
    :END:
 
    #+begin_src sh
@@ -966,7 +977,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =requirements-to-freeze.txt=
    :PROPERTIES:
-   :header-args: :tangle ~/requirements-to-freeze.txt
+   :header-args: :tangle ~/requirements-to-freeze.txt :mkdirp yes
    :END:
 
    Use [[https://kennethreitz.org/essays/2016/02/25/a-better-pip-workflow][A Better Pip Workflow™]] to specify packages that I do actually want installed to the user's packages.
@@ -985,9 +996,13 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      virtualenvwrapper
    #+END_SRC
 
+** =uv=
+
+
+
 * =ripgrep=
    :PROPERTIES:
-   :header-args: :tangle ~/.ripgreprc
+   :header-args: :tangle ~/.ripgreprc :mkdirp yes
    :END:
 
   See =RIPGREP_CONFIG_PATH= above.
@@ -998,12 +1013,12 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * [[https://github.com/lotabout/skim][skim]]
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/120-skim.bash
+   :header-args: :tangle ~/.bashrc.d/120-skim.bash :mkdirp yes
    :END:
 
   #+begin_src sh
     export SKIM_DEFAULT_COMMAND="git ls-tree -r --name-only HEAD || rg --files || find ."
-    export SKIM_DEFAULT_OPTIONS="--ansi --bind 'alt-a:select-all+accept,ctrl-o:execute(emacsclient --no-wait {})+accept' --prompt '❯ ' --cmd-prompt 'C❯ ' --color 'light' --multi"
+    export SKIM_DEFAULT_OPTIONS="--ansi --bind 'alt-a:select-all+accept,ctrl-o:execute(emacsclient --no-wait {})+accept' --prompt '❯ ' --cmd-prompt 'C❯ ' --color 'light' --multi --tiebreak=score,begin,end"
   #+end_src
 
   skim [[https://github.com/lotabout/skim/blob/291fc34c58b1670a5e8c95f1e8f930b82c030b19/shell/key-bindings.bash#L82C1-L82C55][takes over]] =C-t= in the terminal.  I live by that key binding to transpose typographical errors.  Set it
@@ -1022,7 +1037,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     mkdir -p ${HOME}/.ssh/config.d
   #+END_SRC
 
-  On macOS, 1Password requires this to work with the [[*Environment][Environment]] requires this link to work properly:
+  On macOS, 1Password requires this to work with the [[*Environment][Environment]] properly:
 
   #+begin_src sh
     mkdir -p ~/.1password && ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
@@ -1030,7 +1045,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =config=
    :PROPERTIES:
-   :header-args: :tangle ~/.ssh/config
+   :header-args: :tangle ~/.ssh/config :mkdirp yes
    :END:
 
    #+BEGIN_SRC conf
@@ -1046,7 +1061,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Personal
    :PROPERTIES:
-   :header-args: :tangle ~/.ssh/config.d/personal
+   :header-args: :tangle ~/.ssh/config.d/personal :mkdirp yes
    :END:
 
    Splitting work & personal to allow for using multiple GitHub accounts.  See
@@ -1064,7 +1079,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Work
    :PROPERTIES:
-   :header-args: :tangle ~/.ssh/config.d/work
+   :header-args: :tangle ~/.ssh/config.d/work :mkdirp yes
    :END:
 
    #+begin_src conf
@@ -1075,37 +1090,96 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
           IdentitiesOnly yes
           PreferredAuthentications publickey
           PasswordAuthentication no
-
-     Host prod-*
-         User krismolendyke
-
-     Host prodeu-*
-         User krismolendyke
    #+end_src
 
 ** Environment
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/101-ssh-env.bash
+   :header-args: :tangle ~/.bashrc.d/101-ssh-env.bash :mkdirp yes
    :END:
 
    #+begin_src sh
      export SSH_AUTH_SOCK=~/.1password/agent.sock
    #+end_src
 
+* Ghostty
+    :PROPERTIES:
+    :header-args: :tangle ~/.config/ghostty/config :mkdirp yes
+    :END:
+
+    - [X] https://ghostty.org/docs/config/keybind/reference#jump_to_prompt
+    - [X] https://ghostty.org/docs/config/keybind/reference#toggle_quick_terminal
+
+    #+begin_src conf
+      # See also shell-integration-features
+      cursor-style = block
+      cursor-style-blink = true
+
+      font-family = PragmataPro Mono Liga
+      font-feature = calt
+      font-size = 20
+
+      # Backward erase word
+      # This binds cmd+h to alt+backspace which will backward erase one word
+      # Remember to go change the "Hide Ghostty" menu shortcut to something else, e.g.,
+      # https://apple.stackexchange.com/questions/101754/os-x-disable-cmd-h-or-hide-app-command
+      keybind = cmd+h=text:\x1b\x7f
+      # Forward erase word
+      keybind = cmd+d=esc:d
+
+      # Backward word
+      keybind = cmd+b=esc:b
+      # Forward word
+      keybind = cmd+f=esc:f
+
+      # Jump to prompt
+      keybind = ctrl+up=jump_to_prompt:-1
+      keybind = ctrl+down=jump_to_prompt:1
+
+      # Quick terminal
+      keybind = global:ctrl+alt+cmd+t=toggle_quick_terminal
+
+      macos-option-as-alt = true
+      macos-titlebar-style = hidden
+
+      quit-after-last-window-closed = true
+
+      shell-integration = bash
+      # This fixed an issue w/ the initial Bash cursor showing as a bar instead of a block before a command was executed
+      # (see cursor-style)
+      shell-integration-features = no-cursor
+
+      theme = light:Tomorrow,dark:Tomorrow Night Bright
+
+      window-height = 48
+      window-width = 110
+    #+end_src
+
 * Starship
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/999-starship.bash
+   :header-args: :tangle ~/.bashrc.d/999-starship.bash :mkdirp yes
    :END:
 
    #+begin_src sh
      if command -v starship 1>/dev/null 2>&1; then
-         eval "$(starship init bash)"
+         function k20e_starship_precmd_user_func() {
+             # Immediately append commands to HISTFILE rather than waiting for logout
+             # NB this does not affect the current session's history but it does mean that a login will have access to all
+             # recent commands from any current sessions
+             history -a
+         }
+         # See https://starship.rs/advanced-config/#custom-pre-prompt-and-pre-execution-commands-in-bash
+         starship_precmd_user_func='k20e_starship_precmd_user_func'
+
+         # Only init one time, I found issues w/ this executing multiple time, e.g., via interactive `source ~/.bashrc`
+         if [ ! -v STARSHIP_SHELL ]; then
+             eval "$(starship init bash)"
+         fi
      fi
    #+end_src
 
 ** Config
     :PROPERTIES:
-    :header-args: :tangle ~/.config/starship.toml
+    :header-args: :tangle ~/.config/starship.toml :mkdirp yes
     :END:
 
 *** https://starship.rs/config/#prompt
@@ -1222,7 +1296,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+begin_src toml
       [aws]
-      symbol = "aws "
+      symbol = 'aws '
       format = '[$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
     #+end_src
 
@@ -1244,7 +1318,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+begin_src toml
       [directory]
-      read_only = " 󰌾"
+      read_only = ' 󰌾'
       truncation_length = 4
       format ='[$path]($style)[$read_only]($read_only_style) '
     #+end_src
@@ -1253,7 +1327,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+begin_src toml
       [docker_context]
-      symbol = " "
+      symbol = ''
       format = '[$symbol $context]($style) '
     #+end_src
 
@@ -1261,7 +1335,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+begin_src toml
       [golang]
-      symbol = '󰟓  '
+      symbol = '󰟓 '
       format = '[$symbol($version )]($style) '
     #+end_src
 
@@ -1269,7 +1343,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+begin_src toml
       [gcloud]
-      symbol = "gcp "
+      symbol = 'gcp '
       format = '[$symbol$project(\($region\))]($style) '
       detect_env_vars = [ 'GCLOUD_ACTIVE' ]
 
@@ -1282,7 +1356,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+begin_src toml
       [git_branch]
       always_show_remote = false
-      symbol = " "
+      symbol = ''
       format = '[$symbol $branch(:$remote_branch)]($style) '
     #+end_src
 
@@ -1299,7 +1373,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      #+begin_src toml
        [kubernetes]
        disabled = false
-       symbol = "k8s "
+       symbol = 'k8s '
        format = '[$symbol$context( \($namespace\))]($style) '
      #+end_src
 
@@ -1307,6 +1381,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
     #+begin_src toml
       [python]
-      symbol = "  "
+      symbol = ' '
       format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
     #+end_src
