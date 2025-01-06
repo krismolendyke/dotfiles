@@ -1110,6 +1110,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     - [X] https://ghostty.org/docs/config/keybind/reference#toggle_quick_terminal
 
     #+begin_src conf
+      background-opacity = 0.75
+      background-blur-radius = 20
+
       # See also shell-integration-features
       cursor-style = block
       cursor-style-blink = true
