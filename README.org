@@ -1315,6 +1315,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       disabled = true
     #+end_src
 
+*** https://starship.rs/config/#character
+
+    #+begin_src toml
+      [character]
+      success_symbol = '[#](bold green)'
+      error_symbol = '[#](bold red)'
+    #+end_src
+
 *** https://starship.rs/config/#command-duration
 
     #+begin_src toml
