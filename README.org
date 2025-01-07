@@ -1009,8 +1009,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =uv=
 
-
-
 * =ripgrep=
    :PROPERTIES:
    :header-args: :tangle ~/.ripgreprc :mkdirp yes
