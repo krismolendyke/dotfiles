@@ -960,6 +960,17 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      .idea/caches/build_file_checksums.ser
    #+END_SRC
 
+* OCaml
+   :PROPERTIES:
+   :header-args: :tangle ~/.bashrc.d/500-opam.bash :mkdirp yes
+   :END:
+
+   This is just the output of =opam init=:
+
+   #+begin_src sh
+     test -r "${HOME}/.opam/opam-init/init.sh" && . "${HOME}/.opam/opam-init/init.sh" > /dev/null 2> /dev/null || true
+   #+end_src
+
 * Python
 
   See also [[#functions-python][Python functions]].
