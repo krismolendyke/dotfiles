@@ -20,17 +20,12 @@ creates macOS specific configuration.
    :header-args: :tangle ~/.bashrc.d/200-macos-theme.bash
    :END:
 
+   I used to use this to switch the Alacritty theme.  Keeping this function around because I think it's an interesting
+   Apple Script example.
+
   #+begin_src sh
     function k20e_macos_is_dark() {
         [[ $(osascript -e 'tell application "System Events" to tell appearance preferences to return dark mode') = 'true' ]]
-    }
-
-    function k20e_alacritty_set_theme() {
-        if k20e_macos_is_dark; then
-            sed -i '' -e 's/light\.yaml/dark\.yaml/' ${HOME}/.config/alacritty/alacritty.yml
-        else
-            sed -i '' -e 's/dark\.yaml/light\.yaml/' ${HOME}/.config/alacritty/alacritty.yml
-        fi
     }
   #+end_src
 
