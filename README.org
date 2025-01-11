@@ -74,10 +74,22 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      unset -v config
    #+END_SRC
 
-** Shell Options
+** Configuration
    :PROPERTIES:
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/000-bash.bash
    :END:
+
+   Environment variables:
+
+   #+begin_src sh
+     LANG=en_US.UTF-8
+
+     HISTSIZE=100000
+     HISTCONTROL=ignoredups:erasedups
+     HISTTIMEFORMAT='%F %T '
+   #+end_src
+
+   Shell options:
 
    #+begin_src sh
      shopt -s \
@@ -298,19 +310,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/100-main.bash
   :END:
 
-  Interactive shell options.
-
 ** Variables
-
-   Bash variables.
-
-   #+BEGIN_SRC sh
-     LANG=en_US.UTF-8
-
-     HISTSIZE=100000
-     HISTCONTROL=ignoredups:erasedups
-     HISTTIMEFORMAT='%F %T '
-   #+END_SRC
 
    Base variables that I use to organize the file system.
 
