@@ -258,6 +258,25 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     chmod -Rf 0600 ${K20E_SECRET_HOME}/*
   #+END_SRC
 
+* [[https://www.shellcheck.net/][ShellCheck]]
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/300-shellcheck.bash
+  :END:
+
+  #+begin_src sh
+    command -v shellcheck >/dev/null 2>&1 && alias k20e_shellcheck='find $K20E_BASHRC_DIR -type f -exec shellcheck '\''{}'\'' \;'
+  #+end_src
+
+* =~/.shellcheckrc=
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.shellcheckrc
+  :END:
+
+  #+begin_src conf
+    color=always
+    shell=bash
+  #+end_src
+
 * Custom
   :PROPERTIES:
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/100-main.bash
