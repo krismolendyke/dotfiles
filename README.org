@@ -387,7 +387,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
      if [[ "$OSTYPE" == darwin* ]]; then
          pathmunge "$(brew --prefix git)/share/git-core/contrib/diff-highlight"
-         pathmunge "$(brew --prefix python)/libexec/bin"
      fi
 
      if [[ -x /usr/share/doc/git/contrib/diff-highlight ]]; then
@@ -423,18 +422,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      export NVM_DIR="$HOME/.nvm"
      [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
      [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-   #+END_SRC
-
-** =PYTHON_USER_BASE=
-
-   Add Python =site.USER_BASE= for user site-packages and =pip
-   install --user= installations.
-
-   - https://docs.python.org/3/install/index.html#inst-alt-install-user
-
-   #+BEGIN_SRC sh
-     export PYTHON_USER_BASE=$(python -m site --user-base)
-     pathmunge "${PYTHON_USER_BASE}/bin"
    #+END_SRC
 
 ** Aliases
@@ -613,22 +600,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    #+BEGIN_SRC sh
      [ -e ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc ] && source ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
      [ -e ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc ] && source ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
-   #+END_SRC
-
-** Python
-   :PROPERTIES:
-   :custom_id: functions-python
-   :END:
-
-   #+BEGIN_SRC sh
-     function k20e_pip_upgrade() {
-         if [[ $(which deactivate) == "deactivate: function" && -n ${VIRTUAL_ENV} ]]; then
-             echo "Deactivating current virtual environment ${VIRTUAL_ENV}"
-             deactivate
-         fi
-         pip install --break-system-packages --user --upgrade --requirement ${HOME}/requirements-to-freeze.txt
-         pip freeze > ${HOME}/requirements.txt
-     }
    #+END_SRC
 
 ** Terraform
@@ -1057,19 +1028,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * Python
 
-  See also [[#functions-python][Python functions]].
-
-** =pyenv=
-   :PROPERTIES:
-   :header-args: :mkdirp yes :tangle ~/.bashrc.d/102-pyenv.bash
-   :END:
-
-   #+begin_src sh
-     if command -v pyenv >/dev/null 2>&1; then
-         eval "$(pyenv init -)"
-     fi
-   #+end_src
-
 ** =~/requirements-to-freeze.txt=
    :PROPERTIES:
    :header-args: :mkdirp yes :tangle ~/requirements-to-freeze.txt
@@ -1091,7 +1049,48 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      virtualenvwrapper
    #+END_SRC
 
-** =uv=
+** Configuration
+   :PROPERTIES:
+   :header-args: :mkdirp yes :tangle ~/.bashrc.d/102-python.bash
+   :END:
+
+   #+begin_src sh
+     pathmunge "$(brew --prefix python)/libexec/bin"
+   #+end_src
+
+   Add Python =site.USER_BASE= for user site-packages and =pip install --user= installations.  See
+   https://docs.python.org/3/install/index.html#inst-alt-install-user
+
+   #+BEGIN_SRC sh
+     export PYTHON_USER_BASE=$(python -m site --user-base)
+     pathmunge "${PYTHON_USER_BASE}/bin"
+   #+END_SRC
+
+   Old function I've used to bootstrap a sane Python user environment:
+
+   #+begin_src sh
+     function k20e_pip_upgrade() {
+         if [[ $(which deactivate) == "deactivate: function" && -n ${VIRTUAL_ENV} ]]; then
+             echo "Deactivating current virtual environment ${VIRTUAL_ENV}"
+             deactivate
+         fi
+         pip install --break-system-packages --user --upgrade --requirement ${HOME}/requirements-to-freeze.txt
+         pip freeze > ${HOME}/requirements.txt
+     }
+   #+end_src
+
+** =pyenv=
+   :PROPERTIES:
+   :header-args: :mkdirp yes :tangle ~/.bashrc.d/103-pyenv.bash
+   :END:
+
+   #+begin_src sh
+     if command -v pyenv >/dev/null 2>&1; then
+         eval "$(pyenv init -)"
+     fi
+   #+end_src
+
+** TODO =uv=
 
 * =ripgrep=
   :PROPERTIES:
