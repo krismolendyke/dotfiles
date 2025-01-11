@@ -74,6 +74,22 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      unset -v config
    #+END_SRC
 
+** Shell Options
+   :PROPERTIES:
+   :header-args: :mkdirp yes :tangle ~/.bashrc.d/000-bash.bash
+   :END:
+
+   #+begin_src sh
+     shopt -s \
+           autocd \
+           cdspell \
+           checkjobs \
+           checkwinsize \
+           dirspell \
+           histappend \
+           no_empty_cmd_completion
+   #+end_src
+
    =TODO= If these modify =PATH=, etc., I should figure out a way to pre/post them with the rest of this setup.  For
    instance, =asdf= tries to shim =PATH= here but then gets overwritten later by =pathmunge=.
 
@@ -283,19 +299,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
   :END:
 
   Interactive shell options.
-
-** Options
-
-   #+BEGIN_SRC sh
-     shopt -s \
-           autocd \
-           cdspell \
-           checkjobs \
-           checkwinsize \
-           dirspell \
-           histappend \
-           no_empty_cmd_completion
-   #+END_SRC
 
 ** Variables
 
