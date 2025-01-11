@@ -12,66 +12,41 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
   Open this Org document in Emacs and [[http://orgmode.org/manual/tangle.html#tangle][tangle]] it (=C-c C-v t=).
   Configuration files, e.g., =.bashrc=, will be generated.
 
-** OS
+** Linux
 
-   OS specific configuration is currently split out into the following
-   distinct files:
+   I don't daily drive Linux as much as of [2025-01-11 Sat] after getting a 15" MBA M3.  [[file:linux.org][linux.org]] contains specific
+   Linux configuration that I've used over the years.  This file must be manually tangled for those environments.
 
-   - =linux.org=
-   - =macos.org=
+* Bootstrap
 
-   Tangling of those files must be done manually on the correct
-   system.
-
-* Shell
+  - Install https://brew.sh/
 
 ** Change Default Shell
 
-   For macOS this should be the Homebrew installed =bash= /not/ the
-   system =bash= path.
+   I prefer =bash= over =zsh=.
+
+   This should be the Homebrew installed =bash= /not/ the system =bash= path:
 
    #+BEGIN_SRC sh
-     chsh -s /opt/homebrew/bin/bash
-     export SHELL=/opt/homebrew/bin/bash
+     export SHELL="${HOMEBREW_PREFIX}/bin/bash" && \
+         sudo dscl . -create ${HOME} UserShell ${SHELL} && \
+         dscl . -read ${HOME} UserShell
    #+END_SRC
 
-   #+BEGIN_SRC sh
-     echo ${SHELL}
-   #+END_SRC
+** Set =HOSTNAME=
 
-   On macOS:
+   #+begin_src sh
+     export HOSTNAME='TODO' && \
+         sudo scutil --set HostName ${HOSTNAME}
+   #+end_src
 
-   #+BEGIN_SRC sh
-     sudo dscl . -create ${HOME} UserShell ${SHELL}
-   #+END_SRC
+** Accessibility
 
-   #+BEGIN_SRC sh
-     dscl . -read ${HOME} UserShell
-   #+END_SRC
+   #+begin_src sh
+     defaults write com.apple.Accessibility ReduceMotionEnabled -bool true
+   #+end_src
 
-   Make the Bash configuration directory:
-
-   #+BEGIN_SRC sh
-     mkdir -p "${HOME}/.bashrc.d"
-   #+END_SRC
-
-** =.inputrc=
-   :PROPERTIES:
-   :header-args: :tangle ~/.inputrc :mkdirp yes
-   :END:
-
-   #+BEGIN_SRC sh
-     set bell-style none
-     set colored-completion-prefix on
-     set colored-stats on
-     set completion-ignore-case off
-     set convert-meta off
-     set expand-tilde on
-     set input-meta on
-     set output-meta on
-     set show-all-if-ambiguous on
-     set visible-stats on
-   #+END_SRC
+* Bash
 
 ** =.bash_profile=
    :PROPERTIES:
@@ -86,6 +61,20 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :PROPERTIES:
    :header-args: :tangle ~/.bashrc :mkdirp yes
    :END:
+
+   Setup =brew=:
+
+   #+begin_src sh
+     if command -v brew >/dev/null 2>&1; then
+         eval "$(/opt/homebrew/bin/brew shellenv)"
+     fi
+   #+end_src
+
+   Use =brew='s modern =bash=:
+
+   #+begin_src sh
+     command -v "${HOMEBREW_PREFIX}/bin/bash" >/dev/null 2>&1 && export SHELL="${HOMEBREW_PREFIX}/bin/bash"
+   #+end_src
 
    Load all configuration:
 
@@ -578,10 +567,28 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 *** Terraform
 
     #+begin_src sh
-      if command -v terraform 1>/dev/null 2>&1; then
+      if command -v terraform >/dev/null 2>&1; then
           complete -C terraform terraform
       fi
     #+end_src
+
+* =.inputrc=
+  :PROPERTIES:
+  :header-args: :tangle ~/.inputrc :mkdirp yes
+  :END:
+
+  #+BEGIN_SRC sh
+    set bell-style none
+    set colored-completion-prefix on
+    set colored-stats on
+    set completion-ignore-case off
+    set convert-meta off
+    set expand-tilde on
+    set input-meta on
+    set output-meta on
+    set show-all-if-ambiguous on
+    set visible-stats on
+  #+END_SRC
 
 * wezterm
    :PROPERTIES:
@@ -729,7 +736,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :END:
 
   #+begin_src sh
-    if command -v eza 1>/dev/null 2>&1; then
+    if command -v eza >/dev/null 2>&1; then
         # Workaround for https://github.com/orgs/eza-community/discussions/209#discussioncomment-10801021 which is apparently still not resolved
         export EXA_COLORS="xx=''"
         export EZA_CONFIG_DIR="${HOME}/.config/eza"
@@ -981,7 +988,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :END:
 
    #+begin_src sh
-     if command -v pyenv 1>/dev/null 2>&1; then
+     if command -v pyenv >/dev/null 2>&1; then
          eval "$(pyenv init -)"
      fi
    #+end_src
@@ -1175,7 +1182,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :END:
 
    #+begin_src sh
-     if command -v starship 1>/dev/null 2>&1; then
+     if command -v starship >/dev/null 2>&1; then
          function k20e_starship_precmd_user_func() {
              # Immediately append commands to HISTFILE rather than waiting for logout
              # NB this does not affect the current session's history but it does mean that a login will have access to all
