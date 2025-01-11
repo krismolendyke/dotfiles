@@ -226,7 +226,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       brew "yasm"
       brew "yq"
       brew "d12frosted/emacs-plus/emacs-plus@29"
-      brew "jmespath/jmespath/jp"
       brew "tidbyt/tidbyt/pixlet"
       cask "1password"
       cask "1password-cli"
@@ -338,20 +337,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    #+BEGIN_SRC sh
      export CODE_HOME=${HOME}/code
      export GOOGLE="${HOME}/Google?Drive/My?Drive"
-   #+END_SRC
-
-   #+BEGIN_QUOTE
-   ... use the =-u/--unquoted= option to specify that any result that
-   is a string will be printed without quotes. ... If this is a
-   common enough occurance for you, you can set the =JP_UNQUOTED=
-   environment variable to make this the default behavior
-
-   -- https://github.com/jmespath/jp
-
-   #+END_QUOTE
-
-   #+BEGIN_SRC sh
-     export JP_UNQUOTED=true
    #+END_SRC
 
    https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
