@@ -428,14 +428,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      pathmunge "${HOME}/.rd/bin"
    #+END_SRC
 
-** =.dir_colors=
-
-   https://www.nordtheme.com/docs/ports/dircolors
-
-   #+BEGIN_SRC sh
-     [ -e "${HOME}/.dir_colors" ] && eval $(dircolors "${HOME}/.dir_colors")
-   #+END_SRC
-
 ** 1Password CLI
 
    Generate completion script:
@@ -447,8 +439,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    #+end_src
 
 ** [[https://github.com/nvm-sh/nvm][nvm]]
-
-   For managing multiple ... Node installations.  Installed [[https://aur.archlinux.org/packages/nvm/][from AUR]].
 
    #+BEGIN_SRC sh
      export NVM_DIR="$HOME/.nvm"
