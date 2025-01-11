@@ -259,9 +259,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      fi
 
      if [[ "$OSTYPE" == darwin* ]]; then
-         pathmunge /usr/local/opt/python/libexec/bin
-         pathmunge "$(/opt/homebrew/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
-         pathmunge "$(/opt/homebrew/bin/brew --prefix)/opt/python/libexec/bin"
+         pathmunge "$(brew --prefix git)/share/git-core/contrib/diff-highlight"
+         pathmunge "$(brew --prefix python)/libexec/bin"
      fi
 
      if [[ -x /usr/share/doc/git/contrib/diff-highlight ]]; then
@@ -365,7 +364,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
      if [[ "$OSTYPE" == darwin* ]]; then
          alias brewdump="brew bundle dump --force --global --verbose && pbcopy < ${HOME}/.Brewfile"
-         alias emacsclient="$(/opt/homebrew/bin/brew --prefix)/bin/emacsclient --no-wait"
+         alias emacsclient="${HOMEBREW_PREFIX}/bin/emacsclient --no-wait"
          alias top="top -ocpu -Orsize"
      fi
    #+END_SRC
