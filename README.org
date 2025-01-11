@@ -355,12 +355,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      export JP_UNQUOTED=true
    #+END_SRC
 
-   #+BEGIN_SRC sh
-     if [ -f ${K20E_SECRET_VARIABLES} ]; then
-         source ${K20E_SECRET_VARIABLES}
-     fi
-   #+END_SRC
-
    https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
 
    #+BEGIN_SRC sh
@@ -433,12 +427,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
      # Rancher Desktop instead of Docker as of 3/18/24
      pathmunge "${HOME}/.rd/bin"
-   #+END_SRC
-
-   #+BEGIN_SRC sh
-     if [ -f ${K20E_SECRET_PATH} ]; then
-         source ${K20E_SECRET_PATH}
-     fi
    #+END_SRC
 
 ** =.dir_colors=
@@ -523,12 +511,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      fi
    #+END_SRC
 
-   #+BEGIN_SRC sh
-     if [ -f ${K20E_SECRET_ALIASES} ]; then
-         source ${K20E_SECRET_ALIASES}
-     fi
-   #+END_SRC
-
 ** Completions
 
    [2020-09-05 Sat]
@@ -603,12 +585,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+END_SRC
 
 ** Functions
-
-   #+BEGIN_SRC sh
-     if [ -f ${K20E_SECRET_FUNCTIONS} ]; then
-         source ${K20E_SECRET_FUNCTIONS}
-     fi
-   #+END_SRC
 
    This is a clever =emacsclient= hack to support opening files at a line number with the =:linum= suffix that I stumbled
    across at https://stuff-things.net/2019/07/31/opening-files-with-line-numbers-in-emacs.
