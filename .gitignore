@@ -1,5 +1,1 @@
 *.html
-*.zcompdump*
-*.zwc
-.zshrc
-secret/
