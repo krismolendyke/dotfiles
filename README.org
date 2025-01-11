@@ -336,16 +336,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      export GOOGLE="${HOME}/Google?Drive/My?Drive"
    #+END_SRC
 
-   File system variables.
-
-   #+BEGIN_SRC sh
-     if [[ -x jenv ]]; then
-         export JENV_HOME=${HOME}/.jenv
-     fi
-   #+END_SRC
-
-   Non file system variables.
-
    #+BEGIN_SRC sh
      export EDITOR=emacsclient
      export LANG=en_US.UTF-8
