@@ -339,12 +339,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      export GOOGLE="${HOME}/Google?Drive/My?Drive"
    #+END_SRC
 
-   https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
-
-   #+BEGIN_SRC sh
-     export RIPGREP_CONFIG_PATH=${HOME}/.ripgreprc
-   #+END_SRC
-
 ** =CDPATH=
 
    #+BEGIN_QUOTE
@@ -1098,11 +1092,20 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 ** =uv=
 
 * =ripgrep=
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/510-ripgrep.bash
+  :END:
+
+  #+BEGIN_SRC sh
+    export RIPGREP_CONFIG_PATH=${HOME}/.ripgreprc
+  #+END_SRC
+
+** Configuration
    :PROPERTIES:
    :header-args: :mkdirp yes :tangle ~/.ripgreprc
    :END:
 
-  See =RIPGREP_CONFIG_PATH= above.
+   See =RIPGREP_CONFIG_PATH= above and https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
 
   #+BEGIN_SRC sh
     --sort-files
