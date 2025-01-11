@@ -66,7 +66,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    Load all configuration:
 
    #+BEGIN_SRC sh
-     for f in "${HOME}/.bashrc.d/"*.bash; do
+     export K20E_BASHRC_DIR="${HOME}/.bashrc.d"
+     for f in "${K20E_BASHRC_DIR}/"*.bash; do
+         # shellcheck source=/dev/null
          source "${f}"
      done
      unset -v config
@@ -217,42 +219,51 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       cask "zoom"
     #+end_src
 
+* Secrets
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/011-secrets.bash
+  :END:
+
+  Define a directory to keep secret information in.  Make sure that it exists in [[#gitignore-global][=.gitignore-global=]].
+
+  #+BEGIN_SRC sh
+    export K20E_SECRET_HOME="${K20E_BASHRC_DIR}/secret"
+    mkdir -p "${K20E_SECRET_HOME}"
+  #+END_SRC
+
+  Setup environment, create & source secrets for aliases, functions, =PATH= and environment variables:
+
+  #+BEGIN_SRC sh
+    export K20E_SECRET_ALIASES="${K20E_SECRET_HOME}/aliases.sh" && touch -a "${K20E_SECRET_ALIASES}"
+    # shellcheck source=/dev/null
+    source "${K20E_SECRET_ALIASES}"
+
+    export K20E_SECRET_FUNCTIONS="${K20E_SECRET_HOME}/functions.sh" && touch -a "${K20E_SECRET_FUNCTIONS}"
+    # shellcheck source=/dev/null
+    source "${K20E_SECRET_FUNCTIONS}"
+
+    export K20E_SECRET_PATH="${K20E_SECRET_HOME}/path.sh" && touch -a "${K20E_SECRET_PATH}"
+    # shellcheck source=/dev/null
+    source "${K20E_SECRET_PATH}"
+
+    export K20E_SECRET_VARIABLES="${K20E_SECRET_HOME}/variables.sh" && touch -a "${K20E_SECRET_VARIABLES}"
+    # shellcheck source=/dev/null
+    source "${K20E_SECRET_VARIABLES}"
+  #+END_SRC
+
+  Adjust permissions.
+
+  #+BEGIN_SRC sh
+    chmod 0700 "${K20E_SECRET_HOME}"
+    chmod -Rf 0600 ${K20E_SECRET_HOME}/*
+  #+END_SRC
+
 * Custom
   :PROPERTIES:
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/100-main.bash
   :END:
 
   Interactive shell options.
-
-** Secret Information
-
-   Define a directory to keep secret information in.  Make sure that it exists in [[#gitignore-global][=.gitignore-global=]].
-
-   #+BEGIN_SRC sh
-     export K20E_SECRET_HOME=${HOME}/.bashrc.d/secret
-   #+END_SRC
-
-   Create it if necessary.
-
-   #+BEGIN_SRC sh
-     mkdir -p ${K20E_SECRET_HOME}
-   #+END_SRC
-
-   Adjust permissions.
-
-   #+BEGIN_SRC sh
-     chmod 0700 ${K20E_SECRET_HOME}
-     chmod -Rf 0600 ${K20E_SECRET_HOME}/*.sh
-   #+END_SRC
-
-   Define files to =source= in the following sections.
-
-   #+BEGIN_SRC sh
-     export K20E_SECRET_VARIABLES=${K20E_SECRET_HOME}/variables.sh
-     export K20E_SECRET_ALIASES=${K20E_SECRET_HOME}/aliases.sh
-     export K20E_SECRET_PATH=${K20E_SECRET_HOME}/path.sh
-     export K20E_SECRET_FUNCTIONS=${K20E_SECRET_HOME}/functions.sh
-   #+END_SRC
 
 ** Options
 
