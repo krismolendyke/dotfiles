@@ -51,7 +51,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =.bash_profile=
    :PROPERTIES:
-   :header-args: :tangle ~/.bash_profile :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.bash_profile
    :END:
 
    #+BEGIN_SRC sh
@@ -60,7 +60,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =.bashrc=
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.bashrc
    :END:
 
    Load all configuration:
@@ -77,7 +77,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * [[https://brew.sh/][Homebrew]]
   :PROPERTIES:
-  :header-args: :tangle ~/.bashrc.d/010-brew.bash :mkdirp yes
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/010-brew.bash
   :END:
 
   #+begin_src sh
@@ -110,7 +110,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 *** =~/.Brewfile=
     :PROPERTIES:
-    :header-args: :tangle ~/.Brewfile
+    :header-args: :mkdirp yes :tangle ~/.Brewfile
     :END:
 
     #+begin_src sh
@@ -219,7 +219,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * Custom
   :PROPERTIES:
-  :header-args: :tangle ~/.bashrc.d/100-main.bash :mkdirp yes
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/100-main.bash
   :END:
 
   Interactive shell options.
@@ -691,7 +691,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * =.inputrc=
   :PROPERTIES:
-  :header-args: :tangle ~/.inputrc :mkdirp yes
+  :header-args: :mkdirp yes :tangle ~/.inputrc
   :END:
 
   #+BEGIN_SRC sh
@@ -709,7 +709,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * wezterm
    :PROPERTIES:
-   :header-args: :tangle ~/.wezterm.lua :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.wezterm.lua
    :END:
 
    =TERM= setup https://wezfurlong.org/wezterm/config/lua/config/term.html
@@ -785,7 +785,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =yamllint/config=
    :PROPERTIES:
-   :header-args: :tangle ~/.config/yamllint/config :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.config/yamllint/config
    :END:
 
     Create a configuration directory: =mkdir -p ${HOME}/.config/yamllint=
@@ -836,7 +836,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * =asdf=
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/110-asdf.bash :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.bashrc.d/110-asdf.bash
    :END:
 
    Need to add completion for my silly Dvorak alias.  Lookup existing completion function: =complete -p asdf=, then add
@@ -849,7 +849,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * [[https://github.com/eza-community/eza][eza]]
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/130-eza.bash :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.bashrc.d/130-eza.bash
    :END:
 
   #+begin_src sh
@@ -869,7 +869,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Config
     :PROPERTIES:
-    :header-args: :tangle ~/.config/eza/theme.yml :mkdirp yes
+    :header-args: :mkdirp yes :tangle ~/.config/eza/theme.yml
     :END:
 
     #+begin_src yaml
@@ -880,7 +880,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =.gitconfig=
    :PROPERTIES:
-   :header-args: :tangle ~/.gitconfig :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.gitconfig
    :END:
 
    The =includeIf= section below allows for sticking a =.gitconfig= in a directory such that repositories cloned into that
@@ -950,7 +950,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =.gitignore-global=
    :PROPERTIES:
-   :header-args: :tangle ~/.gitignore-global :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.gitignore-global
    :custom_id: gitignore-global
    :END:
 
@@ -1089,7 +1089,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * OCaml
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/500-opam.bash :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.bashrc.d/500-opam.bash
    :END:
 
    This is just the output of =opam init=:
@@ -1104,7 +1104,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =pyenv=
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/102-pyenv.bash :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.bashrc.d/102-pyenv.bash
    :END:
 
    #+begin_src sh
@@ -1115,7 +1115,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =requirements-to-freeze.txt=
    :PROPERTIES:
-   :header-args: :tangle ~/requirements-to-freeze.txt :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/requirements-to-freeze.txt
    :END:
 
    Use [[https://kennethreitz.org/essays/2016/02/25/a-better-pip-workflow][A Better Pip Workflow™]] to specify packages that I do actually want installed to the user's packages.
@@ -1138,7 +1138,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * =ripgrep=
    :PROPERTIES:
-   :header-args: :tangle ~/.ripgreprc :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.ripgreprc
    :END:
 
   See =RIPGREP_CONFIG_PATH= above.
@@ -1149,7 +1149,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * [[https://github.com/lotabout/skim][skim]]
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/120-skim.bash :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.bashrc.d/120-skim.bash
    :END:
 
   #+begin_src sh
@@ -1181,7 +1181,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** =config=
    :PROPERTIES:
-   :header-args: :tangle ~/.ssh/config :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.ssh/config
    :END:
 
    #+BEGIN_SRC conf
@@ -1197,7 +1197,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Personal
    :PROPERTIES:
-   :header-args: :tangle ~/.ssh/config.d/personal :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.ssh/config.d/personal
    :END:
 
    Splitting work & personal to allow for using multiple GitHub accounts.  See
@@ -1215,7 +1215,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Work
    :PROPERTIES:
-   :header-args: :tangle ~/.ssh/config.d/work :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.ssh/config.d/work
    :END:
 
    #+begin_src conf
@@ -1230,7 +1230,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Environment
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/101-ssh-env.bash :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.bashrc.d/101-ssh-env.bash
    :END:
 
    #+begin_src sh
@@ -1239,7 +1239,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * Ghostty
     :PROPERTIES:
-    :header-args: :tangle ~/.config/ghostty/config :mkdirp yes
+    :header-args: :mkdirp yes :tangle ~/.config/ghostty/config
     :END:
 
     - [X] https://ghostty.org/docs/config/keybind/reference#jump_to_prompt
@@ -1298,7 +1298,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * Starship
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/999-starship.bash :mkdirp yes
+   :header-args: :mkdirp yes :tangle ~/.bashrc.d/999-starship.bash
    :END:
 
    #+begin_src sh
@@ -1321,7 +1321,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Config
     :PROPERTIES:
-    :header-args: :tangle ~/.config/starship.toml :mkdirp yes
+    :header-args: :mkdirp yes :tangle ~/.config/starship.toml
     :END:
 
 *** https://starship.rs/config/#prompt
