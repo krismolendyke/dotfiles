@@ -267,15 +267,15 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     command -v shellcheck >/dev/null 2>&1 && alias k20e_shellcheck='find $K20E_BASHRC_DIR -type f -exec shellcheck '\''{}'\'' \;'
   #+end_src
 
-* =~/.shellcheckrc=
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.shellcheckrc
-  :END:
+** =~/.shellcheckrc=
+   :PROPERTIES:
+   :header-args: :mkdirp yes :tangle ~/.shellcheckrc
+   :END:
 
-  #+begin_src conf
-    color=always
-    shell=bash
-  #+end_src
+   #+begin_src conf
+     color=always
+     shell=bash
+   #+end_src
 
 * Custom
   :PROPERTIES:
