@@ -305,6 +305,23 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      shell=bash
    #+end_src
 
+* Rust
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/550-rust.bash
+  :END:
+
+  See https://github.com/rust-lang-nursery/rustfmt#tips.
+
+  #+begin_src sh
+    if [ -d "${HOME}/.cargo" ]; then
+        export CARGO_HOME=${HOME}/.cargo
+    fi
+
+    if [[ -x ${CARGO_HOME}/bin/rustc ]]; then
+        export DYLD_LIBRARY_PATH=$(${CARGO_HOME}/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
+    fi
+  #+end_src
+
 * Custom
   :PROPERTIES:
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/100-main.bash
@@ -322,15 +339,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    File system variables.
 
    #+BEGIN_SRC sh
-     if [ -d "${HOME}/.cargo" ]; then
-         export CARGO_HOME=${HOME}/.cargo
-     fi
-
-     # https://github.com/rust-lang-nursery/rustfmt#tips
-     if [[ -x ${CARGO_HOME}/bin/rustc ]]; then
-         export DYLD_LIBRARY_PATH=$(${CARGO_HOME}/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
-     fi
-
      if [[ -x jenv ]]; then
          export JENV_HOME=${HOME}/.jenv
      fi
