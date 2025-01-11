@@ -226,8 +226,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Secret Information
 
-   Define a directory to keep secret information in.  Make sure that it exists
-   in [[https://github.com/krismolendyke/.zsh/blob/master/.gitignore][=.gitignore=]].
+   Define a directory to keep secret information in.  Make sure that it exists in [[#gitignore-global][=.gitignore-global=]].
 
    #+BEGIN_SRC sh
      export K20E_SECRET_HOME=${HOME}/.bashrc.d/secret
@@ -952,10 +951,13 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 ** =.gitignore-global=
    :PROPERTIES:
    :header-args: :tangle ~/.gitignore-global :mkdirp yes
+   :custom_id: gitignore-global
    :END:
 
    #+BEGIN_SRC gitignore
      # -*- mode: gitignore; -*-
+
+     ~/.bashrc.d/secret/
 
      ##########################################################################
      # Below from:                                                            #
