@@ -446,22 +446,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      [ -e /opt/homebrew/etc/bash_completion.d/op ] && source /opt/homebrew/etc/bash_completion.d/op
    #+end_src
 
-** jEnv
-
-   For managing multiple Java installations.
-
-   #+BEGIN_SRC sh
-     if [[ -x jenv ]]; then
-         eval "$(jenv init -)"
-     fi
-   #+END_SRC
-
-** [[https://www.nomadproject.io/][Nomad]]
-
-   #+BEGIN_SRC sh
-     [ -x /usr/bin/nomad ] && complete -C /usr/bin/nomad nomad
-   #+END_SRC
-
 ** [[https://github.com/nvm-sh/nvm][nvm]]
 
    For managing multiple ... Node installations.  Installed [[https://aur.archlinux.org/packages/nvm/][from AUR]].
