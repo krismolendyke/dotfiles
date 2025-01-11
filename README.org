@@ -49,7 +49,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * Bash
 
-** =.bash_profile=
+** =~./bash_profile=
    :PROPERTIES:
    :header-args: :mkdirp yes :tangle ~/.bash_profile
    :END:
@@ -58,7 +58,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      source "${HOME}/.bashrc"
    #+END_SRC
 
-** =.bashrc=
+** =~/.bashrc=
    :PROPERTIES:
    :header-args: :mkdirp yes :tangle ~/.bashrc
    :END:
@@ -648,7 +648,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     command -v terminal-notifier >/dev/null 2>&1 && alias notify=terminal-notifier
   #+END_SRC
 
-* =.inputrc=
+* =~/.inputrc=
   :PROPERTIES:
   :header-args: :mkdirp yes :tangle ~/.inputrc
   :END:
@@ -822,18 +822,20 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     fi
   #+end_src
 
-** Config
+** Theme
     :PROPERTIES:
     :header-args: :mkdirp yes :tangle ~/.config/eza/theme.yml
     :END:
 
+    See https://github.com/eza-community/eza-themes
+
     #+begin_src yaml
       ---
-      # See https://github.com/eza-community/eza-themes
     #+end_src
+
 * [[https://git-scm.com/][Git]]
 
-** =.gitconfig=
+** =~/.gitconfig=
    :PROPERTIES:
    :header-args: :mkdirp yes :tangle ~/.gitconfig
    :END:
@@ -903,7 +905,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
              path = ~/code/work/.gitconfig
    #+END_SRC
 
-** =.gitignore-global=
+** =~/.gitignore-global=
    :PROPERTIES:
    :header-args: :mkdirp yes :tangle ~/.gitignore-global
    :custom_id: gitignore-global
@@ -1068,7 +1070,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      fi
    #+end_src
 
-** =requirements-to-freeze.txt=
+** =~/requirements-to-freeze.txt=
    :PROPERTIES:
    :header-args: :mkdirp yes :tangle ~/requirements-to-freeze.txt
    :END:
@@ -1100,7 +1102,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     export RIPGREP_CONFIG_PATH=${HOME}/.ripgreprc
   #+END_SRC
 
-** Configuration
+** =~/.ripgreprc=
    :PROPERTIES:
    :header-args: :mkdirp yes :tangle ~/.ripgreprc
    :END:
@@ -1143,7 +1145,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     mkdir -p ~/.1password && ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
   #+end_src
 
-** =config=
+** =~/.ssh/config=
    :PROPERTIES:
    :header-args: :mkdirp yes :tangle ~/.ssh/config
    :END:
@@ -1283,7 +1285,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      fi
    #+end_src
 
-** Config
+** =~/.config/starship.toml=
     :PROPERTIES:
     :header-args: :mkdirp yes :tangle ~/.config/starship.toml
     :END:
