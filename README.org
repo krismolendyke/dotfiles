@@ -19,7 +19,8 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 * Bootstrap
 
-  - Install https://brew.sh/
+  - Install [[https://brew.sh/][Homebrew]]
+  - Install [[https://github.com/Homebrew/homebrew-bundle][Homebrew Bundle]]: =brew bundle=
 
 ** Change Default Shell
 
@@ -93,6 +94,16 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
         command -v "${HOMEBREW_PREFIX}/bin/bash" >/dev/null 2>&1 && export SHELL="${HOMEBREW_PREFIX}/bin/bash"
     fi
   #+end_src
+
+** Homebrew Bundle
+
+   Install: =brew bundle=
+
+   #+begin_src sh
+     export HOMEBREW_BREWFILE="${HOME}/.Brewfile"
+     alias k20e_brew_bundle_dump="brew bundle dump --force --global --verbose && pbcopy < ${HOMEBREW_BREWFILE}"
+     alias k20e_brew_bundle_install="brew bundle --global"
+   #+end_src
 
 * Custom
   :PROPERTIES:
@@ -366,7 +377,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      alias tree="tree -C"
 
      if [[ "$OSTYPE" == darwin* ]]; then
-         alias brewdump="brew bundle dump --force --global --verbose && pbcopy < ${HOME}/.Brewfile"
          alias emacsclient="${HOMEBREW_PREFIX}/bin/emacsclient --no-wait"
          alias top="top -ocpu -Orsize"
      fi
