@@ -771,58 +771,54 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      return config
    #+end_src
 
-* =.config=
+* =yamllint=
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.config/yamllint/config
+  :END:
 
-** =yamllint/config=
-   :PROPERTIES:
-   :header-args: :mkdirp yes :tangle ~/.config/yamllint/config
-   :END:
+  See https://yamllint.readthedocs.io/en/stable/configuration.html and
+  https://yamllint.readthedocs.io/en/stable/rules.html.
 
-    Create a configuration directory: =mkdir -p ${HOME}/.config/yamllint=
+  #+begin_src yaml
+    ---
 
-   See https://yamllint.readthedocs.io/en/stable/configuration.html and
-   https://yamllint.readthedocs.io/en/stable/rules.html.
+    yaml-files:
+      - '*.yaml'
+      - '*.yml'
+      - '.yamllint'
 
-   #+begin_src yaml
-     ---
-
-     yaml-files:
-       - '*.yaml'
-       - '*.yml'
-       - '.yamllint'
-
-     rules:
-       braces:
-         level: warning
-       brackets: enable
-       colons:
-         level: warning
-       commas: enable
-       comments:
-         level: warning
-       comments-indentation:
-         level: warning
-       document-end: disable
-       document-start:
-         level: warning
-       empty-lines: enable
-       empty-values: disable
-       float-values: disable
-       hyphens: enable
-       indentation: enable
-       key-duplicates: enable
-       key-ordering: disable
-       line-length: disable
-       new-line-at-end-of-file:
-         level: warning
-       new-lines: enable
-       octal-values: disable
-       quoted-strings: disable
-       trailing-spaces:
-         level: warning
-       truthy:
-         level: warning
-   #+end_src
+    rules:
+      braces:
+        level: warning
+      brackets: enable
+      colons:
+        level: warning
+      commas: enable
+      comments:
+        level: warning
+      comments-indentation:
+        level: warning
+      document-end: disable
+      document-start:
+        level: warning
+      empty-lines: enable
+      empty-values: disable
+      float-values: disable
+      hyphens: enable
+      indentation: enable
+      key-duplicates: enable
+      key-ordering: disable
+      line-length: disable
+      new-line-at-end-of-file:
+        level: warning
+      new-lines: enable
+      octal-values: disable
+      quoted-strings: disable
+      trailing-spaces:
+        level: warning
+      truthy:
+        level: warning
+  #+end_src
 
 * =asdf=
    :PROPERTIES:
