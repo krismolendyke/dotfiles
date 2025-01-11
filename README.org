@@ -259,8 +259,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      fi
 
      if [[ "$OSTYPE" == darwin* ]]; then
-         pathmunge /opt/homebrew/bin
-         pathmunge /opt/homebrew/sbin
          pathmunge /usr/local/opt/python/libexec/bin
          pathmunge "$(/opt/homebrew/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
          pathmunge "$(/opt/homebrew/bin/brew --prefix)/opt/python/libexec/bin"
