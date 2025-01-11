@@ -84,8 +84,11 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
         eval "$(/opt/homebrew/bin/brew shellenv)"
 
         export HOMEBREW_CASK_HOME="${HOMEBREW_PREFIX}/Caskroom"
+        export HOMEBREW_CASK_OPTS=--require-sha
         export HOMEBREW_INSTALL_CLEANUP=1
+        export HOMEBREW_NO_ANALYTICS=1
         export HOMEBREW_NO_ENV_HINTS=1
+        export HOMEBREW_NO_INSECURE_REDIRECT=1
 
         command -v "${HOMEBREW_PREFIX}/bin/bash" >/dev/null 2>&1 && export SHELL="${HOMEBREW_PREFIX}/bin/bash"
     fi
