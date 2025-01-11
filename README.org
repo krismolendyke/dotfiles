@@ -662,14 +662,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      }
    #+END_SRC
 
-** [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
-
-   #+BEGIN_SRC sh
-     if [ -e "/Applications/terminal-notifier.app" ]; then
-         alias notify="/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier"
-     fi
-   #+END_SRC
-
 ** Terraform
 
    #+begin_src sh
@@ -677,6 +669,15 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
          complete -C terraform terraform
      fi
    #+end_src
+
+* [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/599-terminal-notifier.bash
+  :END:
+
+  #+BEGIN_SRC sh
+    command -v terminal-notifier >/dev/null 2>&1 && alias notify=terminal-notifier
+  #+END_SRC
 
 * =.inputrc=
   :PROPERTIES:
