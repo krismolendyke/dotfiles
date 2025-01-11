@@ -82,11 +82,15 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    Environment variables:
 
    #+begin_src sh
-     LANG=en_US.UTF-8
+     export EDITOR=emacsclient
 
-     HISTSIZE=100000
-     HISTCONTROL=ignoredups:erasedups
-     HISTTIMEFORMAT='%F %T '
+     export LANG=en_US.UTF-8
+
+     export HISTSIZE=100000
+     export HISTCONTROL=ignoredups:erasedups
+     export HISTTIMEFORMAT='%F %T '
+
+     export TERM=xterm-256color
    #+end_src
 
    Shell options:
@@ -334,12 +338,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    #+BEGIN_SRC sh
      export CODE_HOME=${HOME}/code
      export GOOGLE="${HOME}/Google?Drive/My?Drive"
-   #+END_SRC
-
-   #+BEGIN_SRC sh
-     export EDITOR=emacsclient
-     export LANG=en_US.UTF-8
-     export TERM=xterm-256color
    #+END_SRC
 
    #+BEGIN_QUOTE
