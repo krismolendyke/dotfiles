@@ -62,20 +62,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    :header-args: :tangle ~/.bashrc :mkdirp yes
    :END:
 
-   Setup =brew=:
-
-   #+begin_src sh
-     if command -v brew >/dev/null 2>&1; then
-         eval "$(/opt/homebrew/bin/brew shellenv)"
-     fi
-   #+end_src
-
-   Use =brew='s modern =bash=:
-
-   #+begin_src sh
-     command -v "${HOMEBREW_PREFIX}/bin/bash" >/dev/null 2>&1 && export SHELL="${HOMEBREW_PREFIX}/bin/bash"
-   #+end_src
-
    Load all configuration:
 
    #+BEGIN_SRC sh
@@ -88,489 +74,499 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    =TODO= If these modify =PATH=, etc., I should figure out a way to pre/post them with the rest of this setup.  For
    instance, =asdf= tries to shim =PATH= here but then gets overwritten later by =pathmunge=.
 
-** Custom
+* [[https://brew.sh/][Homebrew]]
+  :PROPERTIES:
+  :header-args: :tangle ~/.bashrc.d/010-brew.bash :mkdirp yes
+  :END:
+
+  #+begin_src sh
+    if [ -e /opt/homebrew/bin/brew ]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+
+        export HOMEBREW_CASK_HOME="${HOMEBREW_PREFIX}/Caskroom"
+        export HOMEBREW_INSTALL_CLEANUP=1
+        export HOMEBREW_NO_ENV_HINTS=1
+
+        command -v "${HOMEBREW_PREFIX}/bin/bash" >/dev/null 2>&1 && export SHELL="${HOMEBREW_PREFIX}/bin/bash"
+    fi
+  #+end_src
+
+* Custom
+  :PROPERTIES:
+  :header-args: :tangle ~/.bashrc.d/100-main.bash :mkdirp yes
+  :END:
+
+  Interactive shell options.
+
+** Secret Information
+
+   Define a directory to keep secret information in.  Make sure that it exists
+   in [[https://github.com/krismolendyke/.zsh/blob/master/.gitignore][=.gitignore=]].
+
+   #+BEGIN_SRC sh
+     export K20E_SECRET_HOME=${HOME}/.bashrc.d/secret
+   #+END_SRC
+
+   Create it if necessary.
+
+   #+BEGIN_SRC sh
+     mkdir -p ${K20E_SECRET_HOME}
+   #+END_SRC
+
+   Adjust permissions.
+
+   #+BEGIN_SRC sh
+     chmod 0700 ${K20E_SECRET_HOME}
+     chmod -Rf 0600 ${K20E_SECRET_HOME}/*.sh
+   #+END_SRC
+
+   Define files to =source= in the following sections.
+
+   #+BEGIN_SRC sh
+     export K20E_SECRET_VARIABLES=${K20E_SECRET_HOME}/variables.sh
+     export K20E_SECRET_ALIASES=${K20E_SECRET_HOME}/aliases.sh
+     export K20E_SECRET_PATH=${K20E_SECRET_HOME}/path.sh
+     export K20E_SECRET_FUNCTIONS=${K20E_SECRET_HOME}/functions.sh
+   #+END_SRC
+
+** Options
+
+   #+BEGIN_SRC sh
+     shopt -s \
+           autocd \
+           cdspell \
+           checkjobs \
+           checkwinsize \
+           dirspell \
+           histappend \
+           no_empty_cmd_completion
+   #+END_SRC
+
+** Variables
+
+   Bash variables.
+
+   #+BEGIN_SRC sh
+     LANG=en_US.UTF-8
+
+     HISTSIZE=100000
+     HISTCONTROL=ignoredups:erasedups
+     HISTTIMEFORMAT='%F %T '
+   #+END_SRC
+
+   Base variables that I use to organize the file system.
+
+   #+BEGIN_SRC sh
+     export CODE_HOME=${HOME}/code
+     export GOOGLE="${HOME}/Google?Drive/My?Drive"
+   #+END_SRC
+
+   File system variables.
+
+   #+BEGIN_SRC sh
+     if [ -d "${HOME}/.cargo" ]; then
+         export CARGO_HOME=${HOME}/.cargo
+     fi
+
+     # https://github.com/rust-lang-nursery/rustfmt#tips
+     if [[ -x ${CARGO_HOME}/bin/rustc ]]; then
+         export DYLD_LIBRARY_PATH=$(${CARGO_HOME}/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
+     fi
+
+     if [[ -x jenv ]]; then
+         export JENV_HOME=${HOME}/.jenv
+     fi
+   #+END_SRC
+
+   Non file system variables.
+
+   #+BEGIN_SRC sh
+     export EDITOR=emacsclient
+     export LANG=en_US.UTF-8
+     export TERM=xterm-256color
+   #+END_SRC
+
+   #+BEGIN_QUOTE
+   ... use the =-u/--unquoted= option to specify that any result that
+   is a string will be printed without quotes. ... If this is a
+   common enough occurance for you, you can set the =JP_UNQUOTED=
+   environment variable to make this the default behavior
+
+   -- https://github.com/jmespath/jp
+
+   #+END_QUOTE
+
+   #+BEGIN_SRC sh
+     export JP_UNQUOTED=true
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+     if [ -f ${K20E_SECRET_VARIABLES} ]; then
+         source ${K20E_SECRET_VARIABLES}
+     fi
+   #+END_SRC
+
+   https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
+
+   #+BEGIN_SRC sh
+     export RIPGREP_CONFIG_PATH=${HOME}/.ripgreprc
+   #+END_SRC
+
+** =CDPATH=
+
+   #+BEGIN_QUOTE
+   The =cdpath= variable sets the search path for the cd command. If
+   you do not specify =.= somewhere in the path, it is assumed to be
+   the first component.
+   #+END_QUOTE
+
+   #+BEGIN_SRC sh
+     export CDPATH="${CODE_HOME}:${GOOGLE}"
+   #+END_SRC
+
+** =PATH=
+
+   #+BEGIN_SRC sh
+     pathmunge () {
+         case ":${PATH}:" in
+             ,*:"$1":*)
+                 ;;
+             ,*)
+                 if [ "$2" = "after" ] ; then
+                     PATH=$PATH:$1
+                 else
+                     PATH=$1:$PATH
+                 fi
+         esac
+     }
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+     if [ -v ${JENV_HOME} ]; then
+         pathmunge "${JENV_HOME}/bin"
+     fi
+
+     pathmunge /usr/local/sbin
+     pathmunge /usr/local/bin
+     pathmunge "${HOME}/bin"
+
+     if [ -v ${CARGO_HOME} ]; then
+         pathmunge "${CARGO_HOME}/bin"
+     fi
+
+     if [ -v ${VLC_HOME} ]; then
+         pathmunge "${VLC_HOME}"
+     fi
+
+     if [[ "$OSTYPE" == darwin* ]]; then
+         pathmunge /opt/homebrew/bin
+         pathmunge /opt/homebrew/sbin
+         pathmunge /usr/local/opt/python/libexec/bin
+         pathmunge "$(/opt/homebrew/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
+         pathmunge "$(/opt/homebrew/bin/brew --prefix)/opt/python/libexec/bin"
+     fi
+
+     if [[ -x /usr/share/doc/git/contrib/diff-highlight ]]; then
+         pathmunge /usr/share/doc/git/contrib/diff-highlight
+     fi
+
+     if [[ -x /bin/go ]]; then
+         pathmunge /bin/go/bin
+         pathmunge "$(/bin/go env GOPATH)/bin"
+     fi
+
+     if [[ -x /opt/homebrew/bin/go ]]; then
+         pathmunge "$(/opt/homebrew/bin/go env GOPATH)/bin"
+     fi
+
+     # Rancher Desktop instead of Docker as of 3/18/24
+     pathmunge "${HOME}/.rd/bin"
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+     if [ -f ${K20E_SECRET_PATH} ]; then
+         source ${K20E_SECRET_PATH}
+     fi
+   #+END_SRC
+
+** =.dir_colors=
+
+   https://www.nordtheme.com/docs/ports/dircolors
+
+   #+BEGIN_SRC sh
+     [ -e "${HOME}/.dir_colors" ] && eval $(dircolors "${HOME}/.dir_colors")
+   #+END_SRC
+
+** 1Password CLI
+
+   Generate completion script:
+
+   =op completion bash > /opt/homebrew/etc/bash_completion.d/op=
+
+   #+begin_src sh
+     [ -e /opt/homebrew/etc/bash_completion.d/op ] && source /opt/homebrew/etc/bash_completion.d/op
+   #+end_src
+
+** jEnv
+
+   For managing multiple Java installations.
+
+   #+BEGIN_SRC sh
+     if [[ -x jenv ]]; then
+         eval "$(jenv init -)"
+     fi
+   #+END_SRC
+
+** [[https://www.nomadproject.io/][Nomad]]
+
+   #+BEGIN_SRC sh
+     [ -x /usr/bin/nomad ] && complete -C /usr/bin/nomad nomad
+   #+END_SRC
+
+** [[https://github.com/nvm-sh/nvm][nvm]]
+
+   For managing multiple ... Node installations.  Installed [[https://aur.archlinux.org/packages/nvm/][from AUR]].
+
+   #+BEGIN_SRC sh
+     export NVM_DIR="$HOME/.nvm"
+     [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+     [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+   #+END_SRC
+
+** =PYTHON_USER_BASE=
+
+   Add Python =site.USER_BASE= for user site-packages and =pip
+   install --user= installations.
+
+   - https://docs.python.org/3/install/index.html#inst-alt-install-user
+
+   #+BEGIN_SRC sh
+     export PYTHON_USER_BASE=$(python -m site --user-base)
+     pathmunge "${PYTHON_USER_BASE}/bin"
+   #+END_SRC
+
+** Aliases
+
+   #+BEGIN_SRC sh
+     alias ..="cd ../"
+     alias ...="cd ../../"
+     alias ....="cd ../../.."
+     alias dirs="dirs -v"
+     alias emacs="/usr/bin/emacs --no-window-system"
+     alias emacsclient="/usr/bin/emacsclient --no-wait"
+     alias ec="emacsclient"
+     alias g="git"
+     alias j="jobs -l"
+     alias k="kubectl"
+     alias l.l='ls -1A | grep "^\." | xargs ls -lhGF'
+     alias ll="ls --color=always -lhF"
+     alias lll="ll --color=always"
+     alias ls="ls --color=always -GF"
+     alias l="ls --color=always"
+     alias tree="tree -C"
+
+     if [[ "$OSTYPE" == darwin* ]]; then
+         alias brewdump="brew bundle dump --force --global --verbose && pbcopy < ${HOME}/.Brewfile"
+         alias emacsclient="$(/opt/homebrew/bin/brew --prefix)/bin/emacsclient --no-wait"
+         alias top="top -ocpu -Orsize"
+     fi
+   #+END_SRC
+
+   #+BEGIN_SRC sh
+     if [ -f ${K20E_SECRET_ALIASES} ]; then
+         source ${K20E_SECRET_ALIASES}
+     fi
+   #+END_SRC
+
+** Completions
+
+   [2020-09-05 Sat]
+
+   For Arch need to update to https://wiki.archlinux.org/index.php/Bash#Tab_completion.
+
+   #+BEGIN_SRC sh
+     [ -e /usr/share/bash-completion/bash_completion ] && source /usr/share/bash-completion/bash_completion
+     [ -e /etc/bash_completion ] && source /etc/bash_completion
+   #+END_SRC
+
+*** =kubectl=, =k=, =kctx=, =kns=, =krew=
+
+    Using MicroK8s in Ubuntu at the moment.
+
+    Instead of =snap= below, maybe =microk8s.status --yaml= parsing?
+
+    #+BEGIN_SRC sh
+    #+END_SRC
+
+    macOS completion with completion for my =k= alias:
+
+    #+BEGIN_SRC sh
+      [ -e /opt/homebrew/etc/bash_completion.d/kubectl ] && source /opt/homebrew/etc/bash_completion.d/kubectl && complete -o default -F __start_kubectl k
+    #+END_SRC
+
+    Install [[https://github.com/ahmetb/kubectx][kubectx]] (via [[#brewfile][=${HOME}/.Brewfile=]]), completion for helper
+    tools =kctx=, =kns=:
+
+    #+BEGIN_SRC sh
+      [ -e /usr/share/bash-completion/completions/kubectx ] && source /usr/share/bash-completion/completions/kubectx && alias kctx="kubectx"
+      [ -e /usr/share/bash-completion/completions/kubens ] && source /usr/share/bash-completion/completions/kubens && alias kns="kubens"
+
+      [ -e /opt/homebrew/etc/bash_completion.d/kubectx ] && source /opt/homebrew/etc/bash_completion.d/kubectx && alias kctx="kubectx"
+      [ -e /opt/homebrew/etc/bash_completion.d/kubens ] && source /opt/homebrew/etc/bash_completion.d/kubens && alias kns="kubens"
+    #+END_SRC
+
+    Linux =kubectx= install manually, completion to =pkg-config
+    --variable=completionsdir bash-completion= dir.
+
+    Change currently selected color:
+
+    #+BEGIN_SRC sh
+      export KUBECTX_CURRENT_FGCOLOR=$(tput setaf 2)
+    #+END_SRC
+
+    Install [[https://krew.sigs.k8s.io][krew]] via Homebrew.
+
+    #+begin_src sh
+      pathmunge "${HOME}/.krew/bin"
+    #+end_src
+
+*** Git
+
+    #+BEGIN_SRC sh
+      [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+
+      [ -e /usr/local/etc/bash_completion.d/git-completion.bash ] && source /usr/local/etc/bash_completion.d/git-completion.bash
+      [ -e /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
+    #+END_SRC
+
+    Add completion for my muscle memory alias of =g= for =git=:
+
+    #+BEGIN_SRC sh
+       __git_complete g __git_main
+    #+END_SRC
+
+*** =systemd=
+
+    #+BEGIN_SRC sh
+      [ -e /usr/share/bash-completion/completions/systemctl ] && source /usr/share/bash-completion/completions/systemctl
+    #+END_SRC
+
+** Functions
+
+   #+BEGIN_SRC sh
+     if [ -f ${K20E_SECRET_FUNCTIONS} ]; then
+         source ${K20E_SECRET_FUNCTIONS}
+     fi
+   #+END_SRC
+
+   This is a clever =emacsclient= hack to support opening files at a line number with the =:linum= suffix that I stumbled
+   across at https://stuff-things.net/2019/07/31/opening-files-with-line-numbers-in-emacs.
+
+   #+begin_src sh
+     function k20e_ec () {
+         if [[ $1 =~ (.*):([0-9]+):(.*)$ ]]; then
+             emacsclient "+${BASH_REMATCH[2]}" "${BASH_REMATCH[1]}"
+         else
+             emacsclient "$@"
+         fi
+     }
+
+     alias ec=k20e_ec
+   #+end_src
+
+   #+BEGIN_SRC sh
+     function k20e_exif_strip() {
+         local path="$1"
+
+         if [ ! -e "${path}" ]; then
+             echo "Image at path \"${path}\" does not exist"
+             return
+         fi
+
+         echo "Before:"
+         echo
+         identify -verbose "${path}" | rg exif
+
+         mogrify -strip "${path}"
+
+         echo
+         echo "After:"
+         echo
+         identify -verbose "${path}" | rg exif
+     }
+   #+END_SRC
+
+   #+begin_src sh
+     function k20e_jqf() {
+         local path="$1"
+         local tmpPath
+
+         if [ ! -e "${path}" ]; then
+             echo "File at path \"${path}\" does not exist"
+             return
+         fi
+
+         tmpPath=$(mktemp)
+         cp "${path}" "${tmpPath}"
+         jq . "${tmpPath}" > "${path}"
+         rm "${tmpPath}"
+     }
+   #+end_src
+
+** AWS CLI
+
+   #+BEGIN_SRC sh
+     export AWS_SDK_LOAD_CONFIG=1
+     export AWS_VAULT_KEYCHAIN_NAME=login
+
+
+     if [[ "$OSTYPE" == darwin* ]]; then
+         complete -C '/opt/homebrew/bin/aws_completer' aws
+     else
+         complete -C '/usr/bin/aws_completer' aws
+     fi
+   #+END_SRC
+
+** Google Cloud SDK
+
+   Completion:
+
+   #+BEGIN_SRC sh
+     [ -e ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc ] && source ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
+     [ -e ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc ] && source ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
+   #+END_SRC
+
+** Python
    :PROPERTIES:
-   :header-args: :tangle ~/.bashrc.d/100-main.bash :mkdirp yes
+   :CUSTOM_ID: functions-python
    :END:
 
-   Interactive shell options.
-
-*** Secret Information
-
-    Define a directory to keep secret information in.  Make sure that it exists
-    in [[https://github.com/krismolendyke/.zsh/blob/master/.gitignore][=.gitignore=]].
-
-    #+BEGIN_SRC sh
-      export K20E_SECRET_HOME=${HOME}/.bashrc.d/secret
-    #+END_SRC
-
-    Create it if necessary.
-
-    #+BEGIN_SRC sh
-      mkdir -p ${K20E_SECRET_HOME}
-    #+END_SRC
-
-    Adjust permissions.
-
-    #+BEGIN_SRC sh
-      chmod 0700 ${K20E_SECRET_HOME}
-      chmod -Rf 0600 ${K20E_SECRET_HOME}/*.sh
-    #+END_SRC
-
-    Define files to =source= in the following sections.
-
-    #+BEGIN_SRC sh
-      export K20E_SECRET_VARIABLES=${K20E_SECRET_HOME}/variables.sh
-      export K20E_SECRET_ALIASES=${K20E_SECRET_HOME}/aliases.sh
-      export K20E_SECRET_PATH=${K20E_SECRET_HOME}/path.sh
-      export K20E_SECRET_FUNCTIONS=${K20E_SECRET_HOME}/functions.sh
-    #+END_SRC
-
-*** Options
-
-    #+BEGIN_SRC sh
-      shopt -s \
-            autocd \
-            cdspell \
-            checkjobs \
-            checkwinsize \
-            dirspell \
-            histappend \
-            no_empty_cmd_completion
-    #+END_SRC
-
-*** Variables
-
-    Bash variables.
-
-    #+BEGIN_SRC sh
-      LANG=en_US.UTF-8
-
-      HISTSIZE=100000
-      HISTCONTROL=ignoredups:erasedups
-      HISTTIMEFORMAT='%F %T '
-    #+END_SRC
-
-    Base variables that I use to organize the file system.
-
-    #+BEGIN_SRC sh
-      export CODE_HOME=${HOME}/code
-      export GOOGLE="${HOME}/Google?Drive/My?Drive"
-    #+END_SRC
-
-    File system variables.
-
-    #+BEGIN_SRC sh
-      if [ -d "${HOME}/.cargo" ]; then
-          export CARGO_HOME=${HOME}/.cargo
-      fi
-
-      # https://github.com/rust-lang-nursery/rustfmt#tips
-      if [[ -x ${CARGO_HOME}/bin/rustc ]]; then
-          export DYLD_LIBRARY_PATH=$(${CARGO_HOME}/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
-      fi
-
-      if [[ "$OSTYPE" == darwin* ]]; then
-          export HOMEBREW_CASK_HOME=/opt/homebrew/Caskroom
-          export HOMEBREW_CELLAR=$(/opt/homebrew/bin/brew --cellar)
-          export HOMEBREW_INSTALL_CLEANUP=1
-          export HOMEBREW_NO_ENV_HINTS=1
-      fi
-
-      if [[ -x jenv ]]; then
-          export JENV_HOME=${HOME}/.jenv
-      fi
-    #+END_SRC
-
-    Non file system variables.
-
-    #+BEGIN_SRC sh
-      export EDITOR=emacsclient
-      export LANG=en_US.UTF-8
-      export TERM=xterm-256color
-    #+END_SRC
-
-    #+BEGIN_QUOTE
-    ... use the =-u/--unquoted= option to specify that any result that
-    is a string will be printed without quotes. ... If this is a
-    common enough occurance for you, you can set the =JP_UNQUOTED=
-    environment variable to make this the default behavior
-
-    -- https://github.com/jmespath/jp
-
-    #+END_QUOTE
-
-    #+BEGIN_SRC sh
-      export JP_UNQUOTED=true
-    #+END_SRC
-
-    #+BEGIN_SRC sh
-      if [ -f ${K20E_SECRET_VARIABLES} ]; then
-          source ${K20E_SECRET_VARIABLES}
-      fi
-    #+END_SRC
-
-    https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
-
-    #+BEGIN_SRC sh
-      export RIPGREP_CONFIG_PATH=${HOME}/.ripgreprc
-    #+END_SRC
-
-*** =CDPATH=
-
-    #+BEGIN_QUOTE
-    The =cdpath= variable sets the search path for the cd command. If
-    you do not specify =.= somewhere in the path, it is assumed to be
-    the first component.
-    #+END_QUOTE
-
-    #+BEGIN_SRC sh
-      export CDPATH="${CODE_HOME}:${GOOGLE}"
-    #+END_SRC
-
-*** =PATH=
-
-    #+BEGIN_SRC sh
-      pathmunge () {
-          case ":${PATH}:" in
-              ,*:"$1":*)
-                  ;;
-              ,*)
-                  if [ "$2" = "after" ] ; then
-                      PATH=$PATH:$1
-                  else
-                      PATH=$1:$PATH
-                  fi
-          esac
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC sh
-      if [ -v ${JENV_HOME} ]; then
-          pathmunge "${JENV_HOME}/bin"
-      fi
-
-      pathmunge /usr/local/sbin
-      pathmunge /usr/local/bin
-      pathmunge "${HOME}/bin"
-
-      if [ -v ${CARGO_HOME} ]; then
-          pathmunge "${CARGO_HOME}/bin"
-      fi
-
-      if [ -v ${VLC_HOME} ]; then
-          pathmunge "${VLC_HOME}"
-      fi
-
-      if [[ "$OSTYPE" == darwin* ]]; then
-          pathmunge /opt/homebrew/bin
-          pathmunge /opt/homebrew/sbin
-          pathmunge /usr/local/opt/python/libexec/bin
-          pathmunge "$(/opt/homebrew/bin/brew --prefix git)/share/git-core/contrib/diff-highlight"
-          pathmunge "$(/opt/homebrew/bin/brew --prefix)/opt/python/libexec/bin"
-      fi
-
-      if [[ -x /usr/share/doc/git/contrib/diff-highlight ]]; then
-          pathmunge /usr/share/doc/git/contrib/diff-highlight
-      fi
-
-      if [[ -x /bin/go ]]; then
-          pathmunge /bin/go/bin
-          pathmunge "$(/bin/go env GOPATH)/bin"
-      fi
-
-      if [[ -x /opt/homebrew/bin/go ]]; then
-          pathmunge "$(/opt/homebrew/bin/go env GOPATH)/bin"
-      fi
-
-      # Rancher Desktop instead of Docker as of 3/18/24
-      pathmunge "${HOME}/.rd/bin"
-    #+END_SRC
-
-    #+BEGIN_SRC sh
-      if [ -f ${K20E_SECRET_PATH} ]; then
-          source ${K20E_SECRET_PATH}
-      fi
-    #+END_SRC
-
-*** =.dir_colors=
-
-    https://www.nordtheme.com/docs/ports/dircolors
-
-    #+BEGIN_SRC sh
-      [ -e "${HOME}/.dir_colors" ] && eval $(dircolors "${HOME}/.dir_colors")
-    #+END_SRC
-
-*** 1Password CLI
-
-    Generate completion script:
-
-    =op completion bash > /opt/homebrew/etc/bash_completion.d/op=
-
-    #+begin_src sh
-      [ -e /opt/homebrew/etc/bash_completion.d/op ] && source /opt/homebrew/etc/bash_completion.d/op
-    #+end_src
-
-*** jEnv
-
-    For managing multiple Java installations.
-
-    #+BEGIN_SRC sh
-      if [[ -x jenv ]]; then
-          eval "$(jenv init -)"
-      fi
-    #+END_SRC
-
-*** [[https://www.nomadproject.io/][Nomad]]
-
-    #+BEGIN_SRC sh
-      [ -x /usr/bin/nomad ] && complete -C /usr/bin/nomad nomad
-    #+END_SRC
-
-*** [[https://github.com/nvm-sh/nvm][nvm]]
-
-    For managing multiple ... Node installations.  Installed [[https://aur.archlinux.org/packages/nvm/][from AUR]].
-
-    #+BEGIN_SRC sh
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-      [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-    #+END_SRC
-
-*** =PYTHON_USER_BASE=
-
-    Add Python =site.USER_BASE= for user site-packages and =pip
-    install --user= installations.
-
-    - https://docs.python.org/3/install/index.html#inst-alt-install-user
-
-    #+BEGIN_SRC sh
-      export PYTHON_USER_BASE=$(python -m site --user-base)
-      pathmunge "${PYTHON_USER_BASE}/bin"
-    #+END_SRC
-
-*** Aliases
-
-    #+BEGIN_SRC sh
-      alias ..="cd ../"
-      alias ...="cd ../../"
-      alias ....="cd ../../.."
-      alias dirs="dirs -v"
-      alias emacs="/usr/bin/emacs --no-window-system"
-      alias emacsclient="/usr/bin/emacsclient --no-wait"
-      alias ec="emacsclient"
-      alias g="git"
-      alias j="jobs -l"
-      alias k="kubectl"
-      alias l.l='ls -1A | grep "^\." | xargs ls -lhGF'
-      alias ll="ls --color=always -lhF"
-      alias lll="ll --color=always"
-      alias ls="ls --color=always -GF"
-      alias l="ls --color=always"
-      alias tree="tree -C"
-
-      if [[ "$OSTYPE" == darwin* ]]; then
-          alias brewdump="brew bundle dump --force --global --verbose && pbcopy < ${HOME}/.Brewfile"
-          alias emacsclient="$(/opt/homebrew/bin/brew --prefix)/bin/emacsclient --no-wait"
-          alias top="top -ocpu -Orsize"
-      fi
-    #+END_SRC
-
-    #+BEGIN_SRC sh
-      if [ -f ${K20E_SECRET_ALIASES} ]; then
-          source ${K20E_SECRET_ALIASES}
-      fi
-    #+END_SRC
-
-*** Completions
-
-    [2020-09-05 Sat]
-
-    For Arch need to update to https://wiki.archlinux.org/index.php/Bash#Tab_completion.
-
-    #+BEGIN_SRC sh
-      [ -e /usr/share/bash-completion/bash_completion ] && source /usr/share/bash-completion/bash_completion
-      [ -e /etc/bash_completion ] && source /etc/bash_completion
-    #+END_SRC
-
-**** =kubectl=, =k=, =kctx=, =kns=, =krew=
-
-     Using MicroK8s in Ubuntu at the moment.
-
-     Instead of =snap= below, maybe =microk8s.status --yaml= parsing?
-
-     #+BEGIN_SRC sh
-     #+END_SRC
-
-     macOS completion with completion for my =k= alias:
-
-     #+BEGIN_SRC sh
-       [ -e /opt/homebrew/etc/bash_completion.d/kubectl ] && source /opt/homebrew/etc/bash_completion.d/kubectl && complete -o default -F __start_kubectl k
-     #+END_SRC
-
-     Install [[https://github.com/ahmetb/kubectx][kubectx]] (via [[#brewfile][=${HOME}/.Brewfile=]]), completion for helper
-     tools =kctx=, =kns=:
-
-     #+BEGIN_SRC sh
-       [ -e /usr/share/bash-completion/completions/kubectx ] && source /usr/share/bash-completion/completions/kubectx && alias kctx="kubectx"
-       [ -e /usr/share/bash-completion/completions/kubens ] && source /usr/share/bash-completion/completions/kubens && alias kns="kubens"
-
-       [ -e /opt/homebrew/etc/bash_completion.d/kubectx ] && source /opt/homebrew/etc/bash_completion.d/kubectx && alias kctx="kubectx"
-       [ -e /opt/homebrew/etc/bash_completion.d/kubens ] && source /opt/homebrew/etc/bash_completion.d/kubens && alias kns="kubens"
-     #+END_SRC
-
-     Linux =kubectx= install manually, completion to =pkg-config
-     --variable=completionsdir bash-completion= dir.
-
-     Change currently selected color:
-
-     #+BEGIN_SRC sh
-       export KUBECTX_CURRENT_FGCOLOR=$(tput setaf 2)
-     #+END_SRC
-
-     Install [[https://krew.sigs.k8s.io][krew]] via Homebrew.
-
-     #+begin_src sh
-       pathmunge "${HOME}/.krew/bin"
-     #+end_src
-
-**** Git
-
-     #+BEGIN_SRC sh
-       [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
-
-       [ -e /usr/local/etc/bash_completion.d/git-completion.bash ] && source /usr/local/etc/bash_completion.d/git-completion.bash
-       [ -e /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
-     #+END_SRC
-
-     Add completion for my muscle memory alias of =g= for =git=:
-
-     #+BEGIN_SRC sh
-        __git_complete g __git_main
-     #+END_SRC
-
-**** =systemd=
-
-     #+BEGIN_SRC sh
-       [ -e /usr/share/bash-completion/completions/systemctl ] && source /usr/share/bash-completion/completions/systemctl
-     #+END_SRC
-
-*** Functions
-
-    #+BEGIN_SRC sh
-      if [ -f ${K20E_SECRET_FUNCTIONS} ]; then
-          source ${K20E_SECRET_FUNCTIONS}
-      fi
-    #+END_SRC
-
-    This is a clever =emacsclient= hack to support opening files at a line number with the =:linum= suffix that I stumbled
-    across at https://stuff-things.net/2019/07/31/opening-files-with-line-numbers-in-emacs.
-
-    #+begin_src sh
-      function k20e_ec () {
-          if [[ $1 =~ (.*):([0-9]+):(.*)$ ]]; then
-              emacsclient "+${BASH_REMATCH[2]}" "${BASH_REMATCH[1]}"
-          else
-              emacsclient "$@"
-          fi
-      }
-
-      alias ec=k20e_ec
-    #+end_src
-
-    #+BEGIN_SRC sh
-      function k20e_exif_strip() {
-          local path="$1"
-
-          if [ ! -e "${path}" ]; then
-              echo "Image at path \"${path}\" does not exist"
-              return
-          fi
-
-          echo "Before:"
-          echo
-          identify -verbose "${path}" | rg exif
-
-          mogrify -strip "${path}"
-
-          echo
-          echo "After:"
-          echo
-          identify -verbose "${path}" | rg exif
-      }
-    #+END_SRC
-
-    #+begin_src sh
-      function k20e_jqf() {
-          local path="$1"
-          local tmpPath
-
-          if [ ! -e "${path}" ]; then
-              echo "File at path \"${path}\" does not exist"
-              return
-          fi
-
-          tmpPath=$(mktemp)
-          cp "${path}" "${tmpPath}"
-          jq . "${tmpPath}" > "${path}"
-          rm "${tmpPath}"
-      }
-    #+end_src
-
-*** AWS CLI
-
-    #+BEGIN_SRC sh
-      export AWS_SDK_LOAD_CONFIG=1
-      export AWS_VAULT_KEYCHAIN_NAME=login
-
-
-      if [[ "$OSTYPE" == darwin* ]]; then
-          complete -C '/opt/homebrew/bin/aws_completer' aws
-      else
-          complete -C '/usr/bin/aws_completer' aws
-      fi
-    #+END_SRC
-
-*** Google Cloud SDK
-
-    Completion:
-
-    #+BEGIN_SRC sh
-      [ -e ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc ] && source ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
-      [ -e ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc ] && source ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
-    #+END_SRC
-
-*** Python
-    :PROPERTIES:
-    :CUSTOM_ID: functions-python
-    :END:
-
-    #+BEGIN_SRC sh
-      function k20e_pip_upgrade() {
-          if [[ $(which deactivate) == "deactivate: function" && -n ${VIRTUAL_ENV} ]]; then
-              echo "Deactivating current virtual environment ${VIRTUAL_ENV}"
-              deactivate
-          fi
-          pip install --break-system-packages --user --upgrade --requirement ${HOME}/requirements-to-freeze.txt
-          pip freeze > ${HOME}/requirements.txt
-      }
-    #+END_SRC
-
-*** [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
-
-    #+BEGIN_SRC sh
-      if [ -e "/Applications/terminal-notifier.app" ]; then
-          alias notify="/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier"
-      fi
-    #+END_SRC
-
-*** Terraform
-
-    #+begin_src sh
-      if command -v terraform >/dev/null 2>&1; then
-          complete -C terraform terraform
-      fi
-    #+end_src
+   #+BEGIN_SRC sh
+     function k20e_pip_upgrade() {
+         if [[ $(which deactivate) == "deactivate: function" && -n ${VIRTUAL_ENV} ]]; then
+             echo "Deactivating current virtual environment ${VIRTUAL_ENV}"
+             deactivate
+         fi
+         pip install --break-system-packages --user --upgrade --requirement ${HOME}/requirements-to-freeze.txt
+         pip freeze > ${HOME}/requirements.txt
+     }
+   #+END_SRC
+
+** [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
+
+   #+BEGIN_SRC sh
+     if [ -e "/Applications/terminal-notifier.app" ]; then
+         alias notify="/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier"
+     fi
+   #+END_SRC
+
+** Terraform
+
+   #+begin_src sh
+     if command -v terraform >/dev/null 2>&1; then
+         complete -C terraform terraform
+     fi
+   #+end_src
 
 * =.inputrc=
   :PROPERTIES:
