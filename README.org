@@ -344,14 +344,6 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
          pathmunge "${VLC_HOME}"
      fi
 
-     if [[ "$OSTYPE" == darwin* ]]; then
-         pathmunge "$(brew --prefix git)/share/git-core/contrib/diff-highlight"
-     fi
-
-     if [[ -x /usr/share/doc/git/contrib/diff-highlight ]]; then
-         pathmunge /usr/share/doc/git/contrib/diff-highlight
-     fi
-
      if [[ -x /bin/go ]]; then
          pathmunge /bin/go/bin
          pathmunge "$(/bin/go env GOPATH)/bin"
@@ -775,7 +767,13 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
   Add completion for my muscle memory alias of =g= for =git=:
 
   #+begin_src sh
-     __git_complete g __git_main
+    __git_complete g __git_main
+  #+end_src
+
+  Diff highlighting (need to review if this is necessary now since I've configured [[https://github.com/Wilfred/difftastic][difftastic]] below).
+
+  #+begin_src sh
+    [ -e "$(brew --prefix git)/share/git-core/contrib/diff-highlight/" ] && pathmunge "$(brew --prefix git)/share/git-core/contrib/diff-highlight/"
   #+end_src
 
 ** =~/.gitconfig=
