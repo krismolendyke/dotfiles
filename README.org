@@ -194,7 +194,7 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
      if command -v "${HOMEBREW_PREFIX}/bin/bundle" >/dev/null 2>&1; then
          export HOMEBREW_BREWFILE="${HOME}/.Brewfile"
 
-         alias k20e_brew_bundle_dump="brew bundle dump --force --global --verbose && pbcopy < ${HOMEBREW_BREWFILE}"
+         alias k20e_brew_bundle_dump='brew bundle dump --force --global --verbose && pbcopy < $HOMEBREW_BREWFILE'
          alias k20e_brew_bundle_install="brew bundle --global"
      fi
    #+end_src
@@ -343,7 +343,7 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
 
   #+begin_src sh
     chmod 0700 "${K20E_SECRET_HOME}"
-    chmod -Rf 0600 ${K20E_SECRET_HOME}/*
+    chmod -Rf 0600 "${K20E_SECRET_HOME}"/*
   #+end_src
 
 * Functions
@@ -438,7 +438,7 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
   :END:
 
   #+begin_src sh
-    [[ -x "${HOMEBREW_PREFIX}/bin/go" ]] && pathmunge "$(${HOMEBREW_PREFIX}/bin/go env GOPATH)/bin"
+    [[ -x "${HOMEBREW_PREFIX}/bin/go" ]] && pathmunge "$("${HOMEBREW_PREFIX}/bin/go" env GOPATH)/bin"
   #+end_src
 
 * [[https://www.shellcheck.net/][ShellCheck]]
@@ -474,7 +474,8 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
     fi
 
     if [[ -x ${CARGO_HOME}/bin/rustc ]]; then
-        export DYLD_LIBRARY_PATH=$(${CARGO_HOME}/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
+        DYLD_LIBRARY_PATH=$("${CARGO_HOME}"/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
+        export DYLD_LIBRARY_PATH
     fi
   #+end_src
 
@@ -501,7 +502,8 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
   Change currently selected color:
 
   #+begin_src sh
-    export KUBECTX_CURRENT_FGCOLOR=$(tput setaf 2)
+    KUBECTX_CURRENT_FGCOLOR=$(tput setaf 2)
+    export KUBECTX_CURRENT_FGCOLOR
   #+end_src
 
 ** TODO krew
@@ -542,8 +544,10 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
   Completion:
 
   #+begin_src sh
-    [ -e ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc ] && source ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
-    [ -e ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc ] && source ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
+    # shellcheck source=/dev/null
+    [ -e "${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc" ] && source "${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
+    # shellcheck source=/dev/null
+    [ -e "${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc" ] && source "${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
   #+end_src
 
 * Terraform
@@ -565,7 +569,8 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
   =op completion bash > /opt/homebrew/etc/bash_completion.d/op=
 
   #+begin_src sh
-    [ -e /opt/homebrew/etc/bash_completion.d/op ] && source /opt/homebrew/etc/bash_completion.d/op
+    # shellcheck source=/dev/null
+    [ -e "${HOMEBREW_PREFIX}/etc/bash_completion.d/op" ] && source "${HOMEBREW_PREFIX}/etc/bash_completion.d/op"
   #+end_src
 
 * [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
@@ -728,7 +733,8 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
 
    #+begin_src sh
      alias aoeu='asdf'
-     [ -e /opt/homebrew/opt/asdf/libexec/asdf.sh ] && source /opt/homebrew/opt/asdf/libexec/asdf.sh && complete -o default -F _asdf aoeu
+     # shellcheck source=/dev/null
+     [ -e "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh" ] && source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh" && complete -o default -F _asdf aoeu
    #+end_src
 
 * [[https://github.com/eza-community/eza][eza]]
@@ -994,10 +1000,11 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/500-opam.bash
    :END:
 
-   This is just the output of =opam init=:
+   Modified output of =opam init=:
 
    #+begin_src sh
-     test -r "${HOME}/.opam/opam-init/init.sh" && . "${HOME}/.opam/opam-init/init.sh" > /dev/null 2> /dev/null || true
+     # shellcheck source=/dev/null
+     [ -e "${HOME}/.opam/opam-init/init.sh" ] && source "${HOME}/.opam/opam-init/init.sh"
    #+end_src
 
 * Python
@@ -1036,7 +1043,8 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
    https://docs.python.org/3/install/index.html#inst-alt-install-user
 
    #+begin_src sh
-     export PYTHON_USER_BASE=$(python -m site --user-base)
+     PYTHON_USER_BASE=$(python -m site --user-base)
+     export PYTHON_USER_BASE
      pathmunge "${PYTHON_USER_BASE}/bin"
    #+end_src
 
@@ -1048,8 +1056,8 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
              echo "Deactivating current virtual environment ${VIRTUAL_ENV}"
              deactivate
          fi
-         pip install --break-system-packages --user --upgrade --requirement ${HOME}/requirements-to-freeze.txt
-         pip freeze > ${HOME}/requirements.txt
+         pip install --break-system-packages --user --upgrade --requirement "${HOME}/requirements-to-freeze.txt"
+         pip freeze > "${HOME}/requirements.txt"
      }
    #+end_src
 
@@ -1249,6 +1257,7 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
              history -a
          }
          # See https://starship.rs/advanced-config/#custom-pre-prompt-and-pre-execution-commands-in-bash
+         # shellcheck disable=SC2034
          starship_precmd_user_func='k20e_starship_precmd_user_func'
 
          # Only init one time, I found issues w/ this executing multiple time, e.g., via interactive `source ~/.bashrc`
