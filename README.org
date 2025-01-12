@@ -432,54 +432,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      fi
    #+end_src
 
-** Completions
-
-   #+begin_src sh
-     [ -e /usr/share/bash-completion/bash_completion ] && source /usr/share/bash-completion/bash_completion
-     [ -e /etc/bash_completion ] && source /etc/bash_completion
-   #+end_src
-
-*** =kubectl=, =k=, =kctx=, =kns=, =krew=
-
-    Using MicroK8s in Ubuntu at the moment.
-
-    Instead of =snap= below, maybe =microk8s.status --yaml= parsing?
-
-    #+begin_src sh
-    #+end_src
-
-    macOS completion with completion for my =k= alias:
-
-    #+begin_src sh
-      [ -e /opt/homebrew/etc/bash_completion.d/kubectl ] && source /opt/homebrew/etc/bash_completion.d/kubectl && complete -o default -F __start_kubectl k
-    #+end_src
-
-    Install [[https://github.com/ahmetb/kubectx][kubectx]] (via [[#brewfile][=${HOME}/.Brewfile=]]), completion for helper
-    tools =kctx=, =kns=:
-
-    #+begin_src sh
-      [ -e /usr/share/bash-completion/completions/kubectx ] && source /usr/share/bash-completion/completions/kubectx && alias kctx="kubectx"
-      [ -e /usr/share/bash-completion/completions/kubens ] && source /usr/share/bash-completion/completions/kubens && alias kns="kubens"
-
-      [ -e /opt/homebrew/etc/bash_completion.d/kubectx ] && source /opt/homebrew/etc/bash_completion.d/kubectx && alias kctx="kubectx"
-      [ -e /opt/homebrew/etc/bash_completion.d/kubens ] && source /opt/homebrew/etc/bash_completion.d/kubens && alias kns="kubens"
-    #+end_src
-
-    Linux =kubectx= install manually, completion to =pkg-config
-    --variable=completionsdir bash-completion= dir.
-
-    Change currently selected color:
-
-    #+begin_src sh
-      export KUBECTX_CURRENT_FGCOLOR=$(tput setaf 2)
-    #+end_src
-
-    Install [[https://krew.sigs.k8s.io][krew]] via Homebrew.
-
-    #+begin_src sh
-      pathmunge "${HOME}/.krew/bin"
-    #+end_src
-
 ** Functions
 
    This is a clever =emacsclient= hack to support opening files at a line number with the =:linum= suffix that I stumbled
@@ -535,6 +487,35 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
          rm "${tmpPath}"
      }
    #+end_src
+
+* =kubectl=, =k=, =kctx=, =kns=, =krew=
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/104-kubectl.bash
+  :END:
+
+  macOS completion with completion for my =k= alias:
+
+  #+begin_src sh
+    # shellcheck source=/dev/null
+    [ -e "$(brew --prefix)/etc/bash_completion.d/kubectl" ] && source "$(brew --prefix)/etc/bash_completion.d/kubectl" && complete -o default -F __start_kubectl k
+  #+end_src
+
+  [[https://github.com/ahmetb/kubectx][kubectx]] for wrangling contexts and namespaces:
+
+  #+begin_src sh
+    command -v kubectx >/dev/null 2>&1 && alias kctx="kubectx"
+    command -v kubens >/dev/null 2>&1 && alias kns="kubens"
+  #+end_src
+
+  Change currently selected color:
+
+  #+begin_src sh
+    export KUBECTX_CURRENT_FGCOLOR=$(tput setaf 2)
+  #+end_src
+
+** TODO krew
+
+   Install and configure [[https://krew.sigs.k8s.io/docs/user-guide/setup/install/][krew]].
 
 * [[https://github.com/nvm-sh/nvm][nvm]]
   :PROPERTIES:
