@@ -399,14 +399,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      pathmunge "${HOME}/.rd/bin"
    #+end_src
 
-** [[https://github.com/nvm-sh/nvm][nvm]]
-
-   #+begin_src sh
-     export NVM_DIR="$HOME/.nvm"
-     [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-     [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-   #+end_src
-
 ** Aliases
 
    #+begin_src sh
@@ -540,6 +532,21 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
          rm "${tmpPath}"
      }
    #+end_src
+
+* [[https://github.com/nvm-sh/nvm][nvm]]
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/590-nvm.bash
+  :END:
+
+  #+begin_src sh
+    if complete -v nvm >/dev/null 2>&1; then
+        export NVM_DIR="$HOME/.nvm"
+        # shellcheck source=/dev/null
+        [ -e "$(brew --prefix nvm)/nvm.sh" ] && source "$(brew --prefix nvm)/nvm.sh"
+        # shellcheck source=/dev/null
+        [ -e "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && source "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
+    fi
+  #+end_src
 
 * AWS CLI
   :PROPERTIES:
