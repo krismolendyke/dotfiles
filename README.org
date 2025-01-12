@@ -105,6 +105,24 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
            no_empty_cmd_completion
    #+end_src
 
+   Base variables that I use to organize the file system:
+
+   #+begin_src sh
+     export K20E_CODE_HOME=${HOME}/code
+     export GOOGLE="${HOME}/Google Drive/My Drive"
+   #+end_src
+
+   =CDPATH=:
+
+   #+BEGIN_QUOTE
+   The =CDPATH= variable sets the search path for the cd command. If you do not specify =.= somewhere in the path, it is
+   assumed to be the first component.
+   #+END_QUOTE
+
+   #+begin_src sh
+     export CDPATH="${K20E_CODE_HOME}:${GOOGLE}"
+   #+end_src
+
    =TODO= If these modify =PATH=, etc., I should figure out a way to pre/post them with the rest of this setup.  For
    instance, =asdf= tries to shim =PATH= here but then gets overwritten later by =pathmunge=.
 
@@ -299,27 +317,6 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
   :PROPERTIES:
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/100-main.bash
   :END:
-
-** Variables
-
-   Base variables that I use to organize the file system.
-
-   #+begin_src sh
-     export CODE_HOME=${HOME}/code
-     export GOOGLE="${HOME}/Google Drive/My Drive"
-   #+end_src
-
-** =CDPATH=
-
-   #+BEGIN_QUOTE
-   The =cdpath= variable sets the search path for the cd command. If
-   you do not specify =.= somewhere in the path, it is assumed to be
-   the first component.
-   #+END_QUOTE
-
-   #+begin_src sh
-     export CDPATH="${CODE_HOME}:${GOOGLE}"
-   #+end_src
 
 ** =PATH=
 
