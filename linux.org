@@ -1055,6 +1055,14 @@ https://wiki.archlinux.org/index.php/Security#Lock_out_user_after_three_failed_l
     .wmv 32
   #+END_SRC
 
+* TODO =systemd=
+
+  Work on tangling this somewhere so it's useful.
+
+  #+begin_src sh
+    [ -e /usr/share/bash-completion/completions/systemctl ] && source /usr/share/bash-completion/completions/systemctl
+  #+end_src
+
 * =.dwm=
   :PROPERTIES:
   :header-args: :tangle ~/.dwm/autostart.sh
