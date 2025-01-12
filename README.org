@@ -54,6 +54,7 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
    :END:
 
    #+begin_src sh
+     # shellcheck source=/dev/null
      source "${HOME}/.bashrc"
    #+end_src
 
@@ -446,8 +447,11 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/300-shellcheck.bash
   :END:
 
+  =k20e_shellcheck= will run =shellcheck= against the result of tangling all of this configuration to the files that the
+  shell will actually execute.
+
   #+begin_src sh
-    command -v shellcheck >/dev/null 2>&1 && alias k20e_shellcheck='find $K20E_BASHRC_DIR -type f -exec shellcheck '\''{}'\'' \;'
+    command -v shellcheck >/dev/null 2>&1 && alias k20e_shellcheck='find $HOME/.bash_profile $HOME/.bashrc $K20E_BASHRC_DIR -type f -exec shellcheck '\''{}'\'' \;'
   #+end_src
 
 ** =~/.shellcheckrc=
