@@ -2,8 +2,7 @@
 #+OPTIONS: toc:nil num:nil ^:nil
 #+STARTUP: showall
 
-A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]] dotfiles created and maintained
-in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org mode.]]
+A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]] dotfiles created and maintained in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org mode.]]
 
 #+TOC: headlines 2
 
@@ -296,43 +295,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     chmod -Rf 0600 ${K20E_SECRET_HOME}/*
   #+end_src
 
-* [[https://www.shellcheck.net/][ShellCheck]]
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/300-shellcheck.bash
-  :END:
-
-  #+begin_src sh
-    command -v shellcheck >/dev/null 2>&1 && alias k20e_shellcheck='find $K20E_BASHRC_DIR -type f -exec shellcheck '\''{}'\'' \;'
-  #+end_src
-
-** =~/.shellcheckrc=
-   :PROPERTIES:
-   :header-args: :mkdirp yes :tangle ~/.shellcheckrc
-   :END:
-
-   #+begin_src conf
-     color=always
-     shell=bash
-   #+end_src
-
-* Rust
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/550-rust.bash
-  :END:
-
-  See https://github.com/rust-lang-nursery/rustfmt#tips.
-
-  #+begin_src sh
-    if [ -d "${HOME}/.cargo" ]; then
-        export CARGO_HOME=${HOME}/.cargo
-        pathmunge "${CARGO_HOME}/bin"
-    fi
-
-    if [[ -x ${CARGO_HOME}/bin/rustc ]]; then
-        export DYLD_LIBRARY_PATH=$(${CARGO_HOME}/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
-    fi
-  #+end_src
-
 * Custom
   :PROPERTIES:
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/100-main.bash
@@ -487,6 +449,43 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
          rm "${tmpPath}"
      }
    #+end_src
+
+* [[https://www.shellcheck.net/][ShellCheck]]
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/300-shellcheck.bash
+  :END:
+
+  #+begin_src sh
+    command -v shellcheck >/dev/null 2>&1 && alias k20e_shellcheck='find $K20E_BASHRC_DIR -type f -exec shellcheck '\''{}'\'' \;'
+  #+end_src
+
+** =~/.shellcheckrc=
+   :PROPERTIES:
+   :header-args: :mkdirp yes :tangle ~/.shellcheckrc
+   :END:
+
+   #+begin_src conf
+     color=always
+     shell=bash
+   #+end_src
+
+* Rust
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/550-rust.bash
+  :END:
+
+  See https://github.com/rust-lang-nursery/rustfmt#tips.
+
+  #+begin_src sh
+    if [ -d "${HOME}/.cargo" ]; then
+        export CARGO_HOME=${HOME}/.cargo
+        pathmunge "${CARGO_HOME}/bin"
+    fi
+
+    if [[ -x ${CARGO_HOME}/bin/rustc ]]; then
+        export DYLD_LIBRARY_PATH=$(${CARGO_HOME}/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
+    fi
+  #+end_src
 
 * =kubectl=, =k=, =kctx=, =kns=, =krew=
   :PROPERTIES:
