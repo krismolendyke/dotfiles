@@ -318,6 +318,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
   #+begin_src sh
     if [ -d "${HOME}/.cargo" ]; then
         export CARGO_HOME=${HOME}/.cargo
+        pathmunge "${CARGO_HOME}/bin"
     fi
 
     if [[ -x ${CARGO_HOME}/bin/rustc ]]; then
@@ -369,17 +370,9 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
    #+end_src
 
    #+begin_src sh
-     if [ -v ${JENV_HOME} ]; then
-         pathmunge "${JENV_HOME}/bin"
-     fi
-
      pathmunge /usr/local/sbin
      pathmunge /usr/local/bin
      pathmunge "${HOME}/bin"
-
-     if [ -v ${CARGO_HOME} ]; then
-         pathmunge "${CARGO_HOME}/bin"
-     fi
 
      if [ -v ${VLC_HOME} ]; then
          pathmunge "${VLC_HOME}"
