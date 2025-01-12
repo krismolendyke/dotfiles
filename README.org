@@ -485,21 +485,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
       pathmunge "${HOME}/.krew/bin"
     #+end_src
 
-*** Git
-
-    #+begin_src sh
-      [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
-
-      [ -e /usr/local/etc/bash_completion.d/git-completion.bash ] && source /usr/local/etc/bash_completion.d/git-completion.bash
-      [ -e /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
-    #+end_src
-
-    Add completion for my muscle memory alias of =g= for =git=:
-
-    #+begin_src sh
-       __git_complete g __git_main
-    #+end_src
-
 ** Functions
 
    This is a clever =emacsclient= hack to support opening files at a line number with the =:linum= suffix that I stumbled
@@ -798,6 +783,25 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     #+end_src
 
 * [[https://git-scm.com/][Git]]
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/105-git.bash
+  :END:
+
+  #+begin_src sh
+    # shellcheck source=/dev/null
+    [ -e "$(brew --prefix git)/etc/bash_completion.d/git-completion.bash" ] && source "$(brew --prefix git)/etc/bash_completion.d/git-completion.bash"
+
+    # shellcheck source=/dev/null
+    [ -e /usr/local/etc/bash_completion.d/git-completion.bash ] && source /usr/local/etc/bash_completion.d/git-completion.bash
+    # shellcheck source=/dev/null
+    [ -e /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
+  #+end_src
+
+  Add completion for my muscle memory alias of =g= for =git=:
+
+  #+begin_src sh
+     __git_complete g __git_main
+  #+end_src
 
 ** =~/.gitconfig=
    :PROPERTIES:
