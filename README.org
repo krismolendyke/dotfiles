@@ -346,51 +346,55 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
     chmod -Rf 0600 ${K20E_SECRET_HOME}/*
   #+end_src
 
-* Custom
+* Functions
   :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/100-main.bash
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/800-functions.bash
   :END:
 
-** Functions
+  Random functions.
 
-   #+begin_src sh
-     function k20e_exif_strip() {
-         local path="$1"
+  Strip exif information out of images like geoloc data:
 
-         if [ ! -e "${path}" ]; then
-             echo "Image at path \"${path}\" does not exist"
-             return
-         fi
+  #+begin_src sh
+    function k20e_exif_strip() {
+        local path="$1"
 
-         echo "Before:"
-         echo
-         identify -verbose "${path}" | rg exif
+        if [ ! -e "${path}" ]; then
+            echo "Image at path \"${path}\" does not exist"
+            return
+        fi
 
-         mogrify -strip "${path}"
+        echo "Before:"
+        echo
+        identify -verbose "${path}" | rg exif
 
-         echo
-         echo "After:"
-         echo
-         identify -verbose "${path}" | rg exif
-     }
-   #+end_src
+        mogrify -strip "${path}"
 
-   #+begin_src sh
-     function k20e_jqf() {
-         local path="$1"
-         local tmpPath
+        echo
+        echo "After:"
+        echo
+        identify -verbose "${path}" | rg exif
+    }
+  #+end_src
 
-         if [ ! -e "${path}" ]; then
-             echo "File at path \"${path}\" does not exist"
-             return
-         fi
+  Use =jq= to reformat messy JSON files:
 
-         tmpPath=$(mktemp)
-         cp "${path}" "${tmpPath}"
-         jq . "${tmpPath}" > "${path}"
-         rm "${tmpPath}"
-     }
-   #+end_src
+  #+begin_src sh
+    function k20e_jqf() {
+        local path="$1"
+        local tmpPath
+
+        if [ ! -e "${path}" ]; then
+            echo "File at path \"${path}\" does not exist"
+            return
+        fi
+
+        tmpPath=$(mktemp)
+        cp "${path}" "${tmpPath}"
+        jq . "${tmpPath}" > "${path}"
+        rm "${tmpPath}"
+    }
+  #+end_src
 
 * Emacs
   :PROPERTIES:
