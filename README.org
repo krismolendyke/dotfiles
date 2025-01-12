@@ -344,15 +344,6 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
          pathmunge "${VLC_HOME}"
      fi
 
-     if [[ -x /bin/go ]]; then
-         pathmunge /bin/go/bin
-         pathmunge "$(/bin/go env GOPATH)/bin"
-     fi
-
-     if [[ -x /opt/homebrew/bin/go ]]; then
-         pathmunge "$(/opt/homebrew/bin/go env GOPATH)/bin"
-     fi
-
      # Rancher Desktop instead of Docker as of 3/18/24
      pathmunge "${HOME}/.rd/bin"
    #+end_src
@@ -438,6 +429,15 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
          rm "${tmpPath}"
      }
    #+end_src
+
+* Go
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/106-go.bash
+  :END:
+
+  #+begin_src sh
+    [[ -x "${HOMEBREW_PREFIX}/bin/go" ]] && pathmunge "$(${HOMEBREW_PREFIX}/bin/go env GOPATH)/bin"
+  #+end_src
 
 * [[https://www.shellcheck.net/][ShellCheck]]
   :PROPERTIES:

@@ -1069,10 +1069,15 @@ https://wiki.archlinux.org/index.php/Security#Lock_out_user_after_three_failed_l
     [ -e /usr/share/bash-completion/completions/kubens ] && source /usr/share/bash-completion/completions/kubens && alias kns="kubens"
     [ -e /usr/local/etc/bash_completion.d/git-completion.bash ] && source /usr/local/etc/bash_completion.d/git-completion.bash
     [ -e /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
+
     if [[ -x /usr/share/doc/git/contrib/diff-highlight ]]; then
         pathmunge /usr/share/doc/git/contrib/diff-highlight
     fi
 
+    if [[ -x /bin/go ]]; then
+        pathmunge /bin/go/bin
+        pathmunge "$(/bin/go env GOPATH)/bin"
+    fi
   #+end_src
 
 * =.dwm=
