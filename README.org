@@ -427,10 +427,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
 ** Completions
 
-   [2020-09-05 Sat]
-
-   For Arch need to update to https://wiki.archlinux.org/index.php/Bash#Tab_completion.
-
    #+begin_src sh
      [ -e /usr/share/bash-completion/bash_completion ] && source /usr/share/bash-completion/bash_completion
      [ -e /etc/bash_completion ] && source /etc/bash_completion

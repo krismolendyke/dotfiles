@@ -1059,6 +1059,8 @@ https://wiki.archlinux.org/index.php/Security#Lock_out_user_after_three_failed_l
 
   Work on tangling this somewhere so it's useful.
 
+  For Arch need to update to https://wiki.archlinux.org/index.php/Bash#Tab_completion.
+
   #+begin_src sh
     [ -e /usr/share/bash-completion/completions/systemctl ] && source /usr/share/bash-completion/completions/systemctl
   #+end_src
