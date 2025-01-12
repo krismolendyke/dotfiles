@@ -306,7 +306,7 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
 
    #+begin_src sh
      export CODE_HOME=${HOME}/code
-     export GOOGLE="${HOME}/Google?Drive/My?Drive"
+     export GOOGLE="${HOME}/Google Drive/My Drive"
    #+end_src
 
 ** =CDPATH=
