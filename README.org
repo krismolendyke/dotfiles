@@ -339,13 +339,6 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
      pathmunge /usr/local/sbin
      pathmunge /usr/local/bin
      pathmunge "${HOME}/bin"
-
-     if [ -v ${VLC_HOME} ]; then
-         pathmunge "${VLC_HOME}"
-     fi
-
-     # Rancher Desktop instead of Docker as of 3/18/24
-     pathmunge "${HOME}/.rd/bin"
    #+end_src
 
 ** Aliases
@@ -429,6 +422,15 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
          rm "${tmpPath}"
      }
    #+end_src
+
+* Rancher
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/560-rancher.bash
+  :END:
+
+  #+begin_src sh
+    [ -d "${HOME}/.rd/bin" ] && pathmunge "${HOME}/.rd/bin"
+  #+end_src
 
 * Go
   :PROPERTIES:
