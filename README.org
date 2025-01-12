@@ -81,8 +81,6 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
    Environment variables:
 
    #+begin_src sh
-     export EDITOR=emacsclient
-
      export LANG=en_US.UTF-8
 
      export HISTSIZE=100000
@@ -348,9 +346,6 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
      alias ...="cd ../../"
      alias ....="cd ../../.."
      alias dirs="dirs -v"
-     alias emacs="/usr/bin/emacs --no-window-system"
-     alias emacsclient="/usr/bin/emacsclient --no-wait"
-     alias ec="emacsclient"
      alias g="git"
      alias j="jobs -l"
      alias k="kubectl"
@@ -360,29 +355,10 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
      alias ls="ls --color=always -GF"
      alias l="ls --color=always"
      alias tree="tree -C"
-
-     if [[ "$OSTYPE" == darwin* ]]; then
-         alias emacsclient="${HOMEBREW_PREFIX}/bin/emacsclient --no-wait"
-         alias top="top -ocpu -Orsize"
-     fi
+     alias top="top -ocpu -Orsize"
    #+end_src
 
 ** Functions
-
-   This is a clever =emacsclient= hack to support opening files at a line number with the =:linum= suffix that I stumbled
-   across at https://stuff-things.net/2019/07/31/opening-files-with-line-numbers-in-emacs.
-
-   #+begin_src sh
-     function k20e_ec () {
-         if [[ $1 =~ (.*):([0-9]+):(.*)$ ]]; then
-             emacsclient "+${BASH_REMATCH[2]}" "${BASH_REMATCH[1]}"
-         else
-             emacsclient "$@"
-         fi
-     }
-
-     alias ec=k20e_ec
-   #+end_src
 
    #+begin_src sh
      function k20e_exif_strip() {
@@ -422,6 +398,33 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
          rm "${tmpPath}"
      }
    #+end_src
+
+* Emacs
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/107-emacs.bash
+  :END:
+
+  #+begin_src sh
+    [ -x "${HOMEBREW_PREFIX}/bin/emacs" ] && alias emacs='$HOMEBREW_PREFIX/bin/emacs --no-window-system'
+    [ -x "${HOMEBREW_PREFIX}/bin/emacsclient" ] && alias emacsclient='$HOMEBREW_PREFIX/bin/emacsclient --no-wait'
+
+    export EDITOR=emacsclient
+  #+end_src
+
+   This is a clever =emacsclient= hack to support opening files at a line number with the =:linum= suffix that I stumbled
+   across at https://stuff-things.net/2019/07/31/opening-files-with-line-numbers-in-emacs.
+
+  #+begin_src sh
+    function k20e_ec () {
+        if [[ $1 =~ (.*):([0-9]+):(.*)$ ]]; then
+            emacsclient "+${BASH_REMATCH[2]}" "${BASH_REMATCH[1]}"
+        else
+            emacsclient "$@"
+        fi
+    }
+
+    alias ec=k20e_ec
+  #+end_src
 
 * Rancher
   :PROPERTIES:
