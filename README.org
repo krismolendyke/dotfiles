@@ -776,13 +776,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/105-git.bash
   :END:
 
-  #+begin_src sh
-    # shellcheck source=/dev/null
-    [ -e /usr/local/etc/bash_completion.d/git-completion.bash ] && source /usr/local/etc/bash_completion.d/git-completion.bash
-    # shellcheck source=/dev/null
-    [ -e /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
-  #+end_src
-
   Add completion for my muscle memory alias of =g= for =git=:
 
   #+begin_src sh
