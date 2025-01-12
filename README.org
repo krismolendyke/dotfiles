@@ -147,6 +147,18 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
    =TODO= If these modify =PATH=, etc., I should figure out a way to pre/post them with the rest of this setup.  For
    instance, =asdf= tries to shim =PATH= here but then gets overwritten later by =pathmunge=.
 
+   Aliases:
+
+   #+begin_src sh
+     alias ..="cd ../"
+     alias ...="cd ../../"
+     alias ....="cd ../../.."
+     alias dirs="dirs -v"
+     alias j="jobs -l"
+     alias tree="tree -C"
+     alias top="top -ocpu -Orsize"
+   #+end_src
+
 * [[https://brew.sh/][Homebrew]]
   :PROPERTIES:
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/010-brew.bash
@@ -339,25 +351,6 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/100-main.bash
   :END:
 
-** Aliases
-
-   #+begin_src sh
-     alias ..="cd ../"
-     alias ...="cd ../../"
-     alias ....="cd ../../.."
-     alias dirs="dirs -v"
-     alias g="git"
-     alias j="jobs -l"
-     alias k="kubectl"
-     alias l.l='ls -1A | grep "^\." | xargs ls -lhGF'
-     alias ll="ls --color=always -lhF"
-     alias lll="ll --color=always"
-     alias ls="ls --color=always -GF"
-     alias l="ls --color=always"
-     alias tree="tree -C"
-     alias top="top -ocpu -Orsize"
-   #+end_src
-
 ** Functions
 
    #+begin_src sh
@@ -489,6 +482,7 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
   Completion for my =k= alias:
 
   #+begin_src sh
+    alias k="kubectl"
     # shellcheck source=/dev/null
     [ -e "${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl" ] && source "${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl" && complete -o default -F __start_kubectl k
   #+end_src
@@ -772,6 +766,7 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
   Add completion for my muscle memory alias of =g= for =git=:
 
   #+begin_src sh
+    alias g="git"
     __git_complete g __git_main
   #+end_src
 
