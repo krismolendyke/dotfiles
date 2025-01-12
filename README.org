@@ -133,7 +133,7 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
 
    #+begin_src sh
      # shellcheck source=/dev/null
-     [ -e "$(brew --prefix)/etc/profile.d/bash_completion.sh" ] && source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+     [ -e "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ] && source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
    #+end_src
 
 ** Homebrew Bundle
@@ -493,11 +493,11 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/104-kubectl.bash
   :END:
 
-  macOS completion with completion for my =k= alias:
+  Completion for my =k= alias:
 
   #+begin_src sh
     # shellcheck source=/dev/null
-    [ -e "$(brew --prefix)/etc/bash_completion.d/kubectl" ] && source "$(brew --prefix)/etc/bash_completion.d/kubectl" && complete -o default -F __start_kubectl k
+    [ -e "${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl" ] && source "${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl" && complete -o default -F __start_kubectl k
   #+end_src
 
   [[https://github.com/ahmetb/kubectx][kubectx]] for wrangling contexts and namespaces:
@@ -527,8 +527,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
         export NVM_DIR="$HOME/.nvm"
         # shellcheck source=/dev/null
         [ -e "$(brew --prefix nvm)/nvm.sh" ] && source "$(brew --prefix nvm)/nvm.sh"
-        # shellcheck source=/dev/null
-        [ -e "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && source "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
     fi
   #+end_src
 
@@ -779,9 +777,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
   :END:
 
   #+begin_src sh
-    # shellcheck source=/dev/null
-    [ -e "$(brew --prefix git)/etc/bash_completion.d/git-completion.bash" ] && source "$(brew --prefix git)/etc/bash_completion.d/git-completion.bash"
-
     # shellcheck source=/dev/null
     [ -e /usr/local/etc/bash_completion.d/git-completion.bash ] && source /usr/local/etc/bash_completion.d/git-completion.bash
     # shellcheck source=/dev/null
