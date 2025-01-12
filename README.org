@@ -585,13 +585,14 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      [ -e ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc ] && source ${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
    #+end_src
 
-** Terraform
+* Terraform
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/525-terraform.bash
+  :END:
 
-   #+begin_src sh
-     if command -v terraform >/dev/null 2>&1; then
-         complete -C terraform terraform
-     fi
-   #+end_src
+  #+begin_src sh
+    command -v terraform >/dev/null 2>&1 && complete -C terraform terraform
+  #+end_src
 
 * 1Password
   :PROPERTIES:
