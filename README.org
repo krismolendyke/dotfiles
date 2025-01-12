@@ -123,6 +123,29 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
      export CDPATH="${K20E_CODE_HOME}:${GOOGLE}"
    #+end_src
 
+   =PATH=:
+
+   #+begin_src sh
+     pathmunge () {
+         case ":${PATH}:" in
+             ,*:"$1":*)
+                 ;;
+             ,*)
+                 if [ "$2" = "after" ] ; then
+                     PATH=$PATH:$1
+                 else
+                     PATH=$1:$PATH
+                 fi
+         esac
+     }
+   #+end_src
+
+   #+begin_src sh
+     pathmunge /usr/local/sbin
+     pathmunge /usr/local/bin
+     pathmunge "${HOME}/bin"
+   #+end_src
+
    =TODO= If these modify =PATH=, etc., I should figure out a way to pre/post them with the rest of this setup.  For
    instance, =asdf= tries to shim =PATH= here but then gets overwritten later by =pathmunge=.
 
@@ -317,29 +340,6 @@ A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate pr
   :PROPERTIES:
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/100-main.bash
   :END:
-
-** =PATH=
-
-   #+begin_src sh
-     pathmunge () {
-         case ":${PATH}:" in
-             ,*:"$1":*)
-                 ;;
-             ,*)
-                 if [ "$2" = "after" ] ; then
-                     PATH=$PATH:$1
-                 else
-                     PATH=$1:$PATH
-                 fi
-         esac
-     }
-   #+end_src
-
-   #+begin_src sh
-     pathmunge /usr/local/sbin
-     pathmunge /usr/local/bin
-     pathmunge "${HOME}/bin"
-   #+end_src
 
 ** Aliases
 
