@@ -2,19 +2,14 @@
 #+OPTIONS: toc:nil num:nil ^:nil prop:t
 #+STARTUP: showall
 
-A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]] dotfiles created and maintained in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org mode.]]
+A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]] dotfiles created and maintained in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org mode.]]  As of [2025-01-12 Sun]
+this document is focused on macOS only after I migrated Linux specific configuration to [[file:linux.org]].
 
 #+TOC: headlines 2
 
 * Build Configuration Files
 
-  Open this Org document in Emacs and [[http://orgmode.org/manual/tangle.html#tangle][tangle]] it (=C-c C-v t=).
-  Configuration files, e.g., =.bashrc=, will be generated.
-
-** Linux
-
-   I don't daily drive Linux as much as of [2025-01-11 Sat] after getting a 15" MBA M3.  [[file:linux.org][linux.org]] contains specific
-   Linux configuration that I've used over the years.  This file must be manually tangled for those environments.
+  Open this Org document in Emacs and [[http://orgmode.org/manual/tangle.html#tangle][tangle]] it (=C-c C-v t=).  Configuration files, e.g., =~/.bashrc=, will be generated.
 
 * Bootstrap
 
