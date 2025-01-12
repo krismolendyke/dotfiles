@@ -399,16 +399,6 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      pathmunge "${HOME}/.rd/bin"
    #+end_src
 
-** 1Password CLI
-
-   Generate completion script:
-
-   =op completion bash > /opt/homebrew/etc/bash_completion.d/op=
-
-   #+begin_src sh
-     [ -e /opt/homebrew/etc/bash_completion.d/op ] && source /opt/homebrew/etc/bash_completion.d/op
-   #+end_src
-
 ** [[https://github.com/nvm-sh/nvm][nvm]]
 
    #+begin_src sh
@@ -602,6 +592,19 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
          complete -C terraform terraform
      fi
    #+end_src
+
+* 1Password
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/501-1password.bash
+  :END:
+
+  Generate completion script:
+
+  =op completion bash > /opt/homebrew/etc/bash_completion.d/op=
+
+  #+begin_src sh
+    [ -e /opt/homebrew/etc/bash_completion.d/op ] && source /opt/homebrew/etc/bash_completion.d/op
+  #+end_src
 
 * [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
   :PROPERTIES:
