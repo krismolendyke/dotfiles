@@ -129,6 +129,13 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
     fi
   #+end_src
 
+   Completion:
+
+   #+begin_src sh
+     # shellcheck source=/dev/null
+     [ -e "$(brew --prefix)/etc/profile.d/bash_completion.sh" ] && source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+   #+end_src
+
 ** Homebrew Bundle
 
    Install: =brew bundle=
