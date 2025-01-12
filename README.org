@@ -562,19 +562,18 @@ in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org
      }
    #+end_src
 
-** AWS CLI
+* AWS CLI
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/440-awscli.bash
+  :END:
 
-   #+begin_src sh
-     export AWS_SDK_LOAD_CONFIG=1
-     export AWS_VAULT_KEYCHAIN_NAME=login
+  #+begin_src sh
+    export AWS_SDK_LOAD_CONFIG=1
+    export AWS_VAULT_KEYCHAIN_NAME=login
 
-
-     if [[ "$OSTYPE" == darwin* ]]; then
-         complete -C '/opt/homebrew/bin/aws_completer' aws
-     else
-         complete -C '/usr/bin/aws_completer' aws
-     fi
-   #+end_src
+    [ -e "${HOMEBREW_PREFIX}/bin/aws_completer" ] && complete -C "${HOMEBREW_PREFIX}/bin/aws_completer" aws
+    [ -e '/usr/bin/aws_completer' ] && complete -C '/usr/bin/aws_completer' aws
+  #+end_src
 
 * Google Cloud SDK
   :PROPERTIES:
