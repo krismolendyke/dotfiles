@@ -5,7 +5,7 @@
 A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]] dotfiles created and maintained
 in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org mode.]]
 
-#+TOC: headlines 3
+#+TOC: headlines 2
 
 * Build Configuration Files
 
