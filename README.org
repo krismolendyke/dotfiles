@@ -392,6 +392,47 @@ this document is focused on macOS only after I migrated Linux specific configura
     }
   #+end_src
 
+* 1Password
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/501-1password.bash
+  :END:
+
+  Generate completion script:
+
+  =op completion bash > /opt/homebrew/etc/bash_completion.d/op=
+
+  #+begin_src sh
+    # shellcheck source=/dev/null
+    [ -e "${HOMEBREW_PREFIX}/etc/bash_completion.d/op" ] && source "${HOMEBREW_PREFIX}/etc/bash_completion.d/op"
+  #+end_src
+
+* =asdf=
+   :PROPERTIES:
+   :header-args: :mkdirp yes :tangle ~/.bashrc.d/110-asdf.bash
+   :END:
+
+   Need to add completion for my silly Dvorak alias.  Lookup existing completion function: =complete -p asdf=, then add
+   it below.
+
+   #+begin_src sh
+     alias aoeu='asdf'
+     # shellcheck source=/dev/null
+     [ -e "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh" ] && source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh" && complete -o default -F _asdf aoeu
+   #+end_src
+
+* AWS CLI
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/440-awscli.bash
+  :END:
+
+  #+begin_src sh
+    export AWS_SDK_LOAD_CONFIG=1
+    export AWS_VAULT_KEYCHAIN_NAME=login
+
+    [ -e "${HOMEBREW_PREFIX}/bin/aws_completer" ] && complete -C "${HOMEBREW_PREFIX}/bin/aws_completer" aws
+    [ -e '/usr/bin/aws_completer' ] && complete -C '/usr/bin/aws_completer' aws
+  #+end_src
+
 * Emacs
   :PROPERTIES:
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/107-emacs.bash
@@ -418,323 +459,6 @@ this document is focused on macOS only after I migrated Linux specific configura
 
     alias ec=k20e_ec
   #+end_src
-
-* Rancher
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/560-rancher.bash
-  :END:
-
-  #+begin_src sh
-    [ -d "${HOME}/.rd/bin" ] && pathmunge "${HOME}/.rd/bin"
-  #+end_src
-
-* Go
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/106-go.bash
-  :END:
-
-  #+begin_src sh
-    [[ -x "${HOMEBREW_PREFIX}/bin/go" ]] && pathmunge "$("${HOMEBREW_PREFIX}/bin/go" env GOPATH)/bin"
-  #+end_src
-
-* [[https://www.shellcheck.net/][ShellCheck]]
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/300-shellcheck.bash
-  :END:
-
-  =k20e_shellcheck= will run =shellcheck= against the result of tangling all of this configuration to the files that the
-  shell will actually execute.
-
-  #+begin_src sh
-    command -v shellcheck >/dev/null 2>&1 && alias k20e_shellcheck='find $HOME/.bash_profile $HOME/.bashrc $K20E_BASHRC_DIR -type f -exec shellcheck '\''{}'\'' \;'
-  #+end_src
-
-** =~/.shellcheckrc=
-   :PROPERTIES:
-   :header-args: :mkdirp yes :tangle ~/.shellcheckrc
-   :END:
-
-   #+begin_src conf
-     color=always
-     shell=bash
-   #+end_src
-
-* Rust
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/550-rust.bash
-  :END:
-
-  See https://github.com/rust-lang-nursery/rustfmt#tips.
-
-  #+begin_src sh
-    if [ -d "${HOME}/.cargo" ]; then
-        export CARGO_HOME=${HOME}/.cargo
-        pathmunge "${CARGO_HOME}/bin"
-    fi
-
-    if [[ -x ${CARGO_HOME}/bin/rustc ]]; then
-        DYLD_LIBRARY_PATH=$("${CARGO_HOME}"/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
-        export DYLD_LIBRARY_PATH
-    fi
-  #+end_src
-
-* =kubectl=, =k=, =kctx=, =kns=, =krew=
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/104-kubectl.bash
-  :END:
-
-  Completion for my =k= alias:
-
-  #+begin_src sh
-    alias k="kubectl"
-    # shellcheck source=/dev/null
-    [ -e "${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl" ] && source "${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl" && complete -o default -F __start_kubectl k
-  #+end_src
-
-  [[https://github.com/ahmetb/kubectx][kubectx]] for wrangling contexts and namespaces:
-
-  #+begin_src sh
-    command -v kubectx >/dev/null 2>&1 && alias kctx="kubectx"
-    command -v kubens >/dev/null 2>&1 && alias kns="kubens"
-  #+end_src
-
-  Change currently selected color:
-
-  #+begin_src sh
-    KUBECTX_CURRENT_FGCOLOR=$(tput setaf 2)
-    export KUBECTX_CURRENT_FGCOLOR
-  #+end_src
-
-** TODO krew
-
-   Install and configure [[https://krew.sigs.k8s.io/docs/user-guide/setup/install/][krew]].
-
-* [[https://github.com/nvm-sh/nvm][nvm]]
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/590-nvm.bash
-  :END:
-
-  #+begin_src sh
-    if complete -v nvm >/dev/null 2>&1; then
-        export NVM_DIR="$HOME/.nvm"
-        # shellcheck source=/dev/null
-        [ -e "$(brew --prefix nvm)/nvm.sh" ] && source "$(brew --prefix nvm)/nvm.sh"
-    fi
-  #+end_src
-
-* AWS CLI
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/440-awscli.bash
-  :END:
-
-  #+begin_src sh
-    export AWS_SDK_LOAD_CONFIG=1
-    export AWS_VAULT_KEYCHAIN_NAME=login
-
-    [ -e "${HOMEBREW_PREFIX}/bin/aws_completer" ] && complete -C "${HOMEBREW_PREFIX}/bin/aws_completer" aws
-    [ -e '/usr/bin/aws_completer' ] && complete -C '/usr/bin/aws_completer' aws
-  #+end_src
-
-* Google Cloud SDK
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/450-google-cloud-sdk.bash
-  :END:
-
-  Completion:
-
-  #+begin_src sh
-    # shellcheck source=/dev/null
-    [ -e "${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc" ] && source "${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
-    # shellcheck source=/dev/null
-    [ -e "${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc" ] && source "${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
-  #+end_src
-
-* Terraform
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/525-terraform.bash
-  :END:
-
-  #+begin_src sh
-    command -v terraform >/dev/null 2>&1 && complete -C terraform terraform
-  #+end_src
-
-* 1Password
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/501-1password.bash
-  :END:
-
-  Generate completion script:
-
-  =op completion bash > /opt/homebrew/etc/bash_completion.d/op=
-
-  #+begin_src sh
-    # shellcheck source=/dev/null
-    [ -e "${HOMEBREW_PREFIX}/etc/bash_completion.d/op" ] && source "${HOMEBREW_PREFIX}/etc/bash_completion.d/op"
-  #+end_src
-
-* [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/599-terminal-notifier.bash
-  :END:
-
-  #+begin_src sh
-    command -v terminal-notifier >/dev/null 2>&1 && alias notify=terminal-notifier
-  #+end_src
-
-* =~/.inputrc=
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.inputrc
-  :END:
-
-  #+begin_src sh
-    set bell-style none
-    set colored-completion-prefix on
-    set colored-stats on
-    set completion-ignore-case off
-    set convert-meta off
-    set expand-tilde on
-    set input-meta on
-    set output-meta on
-    set show-all-if-ambiguous on
-    set visible-stats on
-  #+end_src
-
-* [[https://wezfurlong.org/wezterm/index.html][WezTerm]]
-   :PROPERTIES:
-   :header-args: :mkdirp yes :tangle ~/.wezterm.lua
-   :END:
-
-   =TERM= setup https://wezfurlong.org/wezterm/config/lua/config/term.html
-
-   #+begin_src lua
-     local wezterm = require 'wezterm'
-     local act = wezterm.action
-     local config = {}
-
-     if wezterm.config_builder then
-        config = wezterm.config_builder()
-     end
-
-     -- term https://wezfurlong.org/wezterm/config/lua/config/term.html
-     config.term = "wezterm"
-
-     -- Shell
-     if wezterm.target_triple == 'aarch64-apple-darwin' then
-        config.default_prog = {'/opt/homebrew/bin/bash'}
-     elseif wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
-        config.default_prog = {'/bin/bash'}
-     end
-
-     -- Font
-     config.font = wezterm.font('PragmataPro Liga')
-     config.font_size = 22
-
-     -- GUI
-     config.initial_rows = 48
-     config.initial_cols = 110
-     config.enable_tab_bar = false
-
-     -- Theme
-     function get_appearance()
-        if wezterm.gui then
-           return wezterm.gui.get_appearance()
-        end
-        return 'Dark'
-     end
-
-     function scheme_for_appearance(appearance)
-        if appearance:find 'Dark' then
-           return 'Tomorrow Night Bright'
-        else
-           return 'Tomorrow'
-        end
-     end
-
-     config.color_scheme = scheme_for_appearance(get_appearance())
-
-     -- Bindings
-     config.keys = {
-        -- macOS move forward/backward by word with ⌘-f, ⌘-b
-        { key = 'b', mods = 'CMD', action = act.SendString '\x1bb' },
-        { key = 'f', mods = 'CMD', action = act.SendString '\x1bf' },
-
-        -- macOS backward erase word (see
-        -- https://apple.stackexchange.com/questions/101754/os-x-disable-cmd-h-or-hide-app-command for re-mapping ⌘-h from
-        -- "Hide WezTerm" to something else)
-        { key = 'h', mods = 'CMD', action = act.SendString '\x1b\x7f' },
-
-        -- macOS forward erase word
-        { key = 'd', mods = 'CMD', action = act.SendString '\x1bd' },
-
-        -- Search, rather than ⌘-f
-        { key = 's', mods = 'CMD', action = act.Search 'CurrentSelectionOrEmptyString' },
-     }
-
-     return config
-   #+end_src
-
-* =yamllint=
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.config/yamllint/config
-  :END:
-
-  See https://yamllint.readthedocs.io/en/stable/configuration.html and
-  https://yamllint.readthedocs.io/en/stable/rules.html.
-
-  #+begin_src yaml
-    ---
-
-    yaml-files:
-      - '*.yaml'
-      - '*.yml'
-      - '.yamllint'
-
-    rules:
-      braces:
-        level: warning
-      brackets: enable
-      colons:
-        level: warning
-      commas: enable
-      comments:
-        level: warning
-      comments-indentation:
-        level: warning
-      document-end: disable
-      document-start:
-        level: warning
-      empty-lines: enable
-      empty-values: disable
-      float-values: disable
-      hyphens: enable
-      indentation: enable
-      key-duplicates: enable
-      key-ordering: disable
-      line-length: disable
-      new-line-at-end-of-file:
-        level: warning
-      new-lines: enable
-      octal-values: disable
-      quoted-strings: disable
-      trailing-spaces:
-        level: warning
-      truthy:
-        level: warning
-  #+end_src
-
-* =asdf=
-   :PROPERTIES:
-   :header-args: :mkdirp yes :tangle ~/.bashrc.d/110-asdf.bash
-   :END:
-
-   Need to add completion for my silly Dvorak alias.  Lookup existing completion function: =complete -p asdf=, then add
-   it below.
-
-   #+begin_src sh
-     alias aoeu='asdf'
-     # shellcheck source=/dev/null
-     [ -e "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh" ] && source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh" && complete -o default -F _asdf aoeu
-   #+end_src
 
 * [[https://github.com/eza-community/eza][eza]]
    :PROPERTIES:
@@ -765,6 +489,65 @@ this document is focused on macOS only after I migrated Linux specific configura
 
     #+begin_src yaml
       ---
+    #+end_src
+
+* Ghostty
+    :PROPERTIES:
+    :header-args: :mkdirp yes :tangle ~/.config/ghostty/config
+    :END:
+
+    - [X] https://ghostty.org/docs/config/keybind/reference#jump_to_prompt
+    - [X] https://ghostty.org/docs/config/keybind/reference#toggle_quick_terminal
+
+    #+begin_src conf
+      background-opacity = 0.75
+      background-blur-radius = 20
+
+      # See also shell-integration-features
+      cursor-style = block
+      cursor-style-blink = true
+
+      font-family = ""
+      font-family = PragmataPro Mono Liga
+      font-feature = calt
+      font-size = 20
+
+      # Backward erase word
+      # This binds cmd+h to alt+backspace which will backward erase one word
+      # Remember to go change the "Hide Ghostty" menu shortcut to something else, e.g.,
+      # https://apple.stackexchange.com/questions/101754/os-x-disable-cmd-h-or-hide-app-command
+      keybind = cmd+h=text:\x1b\x7f
+      # Forward erase word
+      keybind = cmd+d=esc:d
+
+      # Backward word
+      keybind = cmd+b=esc:b
+      # Forward word
+      keybind = cmd+f=esc:f
+
+      # Jump to prompt
+      keybind = ctrl+up=jump_to_prompt:-1
+      keybind = ctrl+down=jump_to_prompt:1
+
+      # Quick terminal
+      keybind = global:ctrl+alt+cmd+t=toggle_quick_terminal
+
+      macos-option-as-alt = true
+      macos-titlebar-style = hidden
+
+      quit-after-last-window-closed = true
+
+      resize-overlay = never
+
+      shell-integration = bash
+      # This fixed an issue w/ the initial Bash cursor showing as a bar instead of a block before a command was executed
+      # (see cursor-style)
+      shell-integration-features = no-cursor
+
+      theme = light:Tomorrow,dark:Tomorrow Night Bright
+
+      window-height = 48
+      window-width = 110
     #+end_src
 
 * [[https://git-scm.com/][Git]]
@@ -994,6 +777,73 @@ this document is focused on macOS only after I migrated Linux specific configura
      .idea/caches/build_file_checksums.ser
    #+end_src
 
+* Go
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/106-go.bash
+  :END:
+
+  #+begin_src sh
+    [[ -x "${HOMEBREW_PREFIX}/bin/go" ]] && pathmunge "$("${HOMEBREW_PREFIX}/bin/go" env GOPATH)/bin"
+  #+end_src
+
+* Google Cloud SDK
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/450-google-cloud-sdk.bash
+  :END:
+
+  Completion:
+
+  #+begin_src sh
+    # shellcheck source=/dev/null
+    [ -e "${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc" ] && source "${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
+    # shellcheck source=/dev/null
+    [ -e "${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc" ] && source "${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
+  #+end_src
+
+* =kubectl=, =k=, =kctx=, =kns=, =krew=
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/104-kubectl.bash
+  :END:
+
+  Completion for my =k= alias:
+
+  #+begin_src sh
+    alias k="kubectl"
+    # shellcheck source=/dev/null
+    [ -e "${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl" ] && source "${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl" && complete -o default -F __start_kubectl k
+  #+end_src
+
+  [[https://github.com/ahmetb/kubectx][kubectx]] for wrangling contexts and namespaces:
+
+  #+begin_src sh
+    command -v kubectx >/dev/null 2>&1 && alias kctx="kubectx"
+    command -v kubens >/dev/null 2>&1 && alias kns="kubens"
+  #+end_src
+
+  Change currently selected color:
+
+  #+begin_src sh
+    KUBECTX_CURRENT_FGCOLOR=$(tput setaf 2)
+    export KUBECTX_CURRENT_FGCOLOR
+  #+end_src
+
+** TODO krew
+
+   Install and configure [[https://krew.sigs.k8s.io/docs/user-guide/setup/install/][krew]].
+
+* [[https://github.com/nvm-sh/nvm][nvm]]
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/590-nvm.bash
+  :END:
+
+  #+begin_src sh
+    if complete -v nvm >/dev/null 2>&1; then
+        export NVM_DIR="$HOME/.nvm"
+        # shellcheck source=/dev/null
+        [ -e "$(brew --prefix nvm)/nvm.sh" ] && source "$(brew --prefix nvm)/nvm.sh"
+    fi
+  #+end_src
+
 * OCaml
    :PROPERTIES:
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/500-opam.bash
@@ -1073,6 +923,15 @@ this document is focused on macOS only after I migrated Linux specific configura
 
 ** TODO =uv=
 
+* Rancher
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/560-rancher.bash
+  :END:
+
+  #+begin_src sh
+    [ -d "${HOME}/.rd/bin" ] && pathmunge "${HOME}/.rd/bin"
+  #+end_src
+
 * =ripgrep=
   :PROPERTIES:
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/510-ripgrep.bash
@@ -1092,6 +951,47 @@ this document is focused on macOS only after I migrated Linux specific configura
   #+begin_src sh
     --sort-files
   #+end_src
+
+* Rust
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/550-rust.bash
+  :END:
+
+  See https://github.com/rust-lang-nursery/rustfmt#tips.
+
+  #+begin_src sh
+    if [ -d "${HOME}/.cargo" ]; then
+        export CARGO_HOME=${HOME}/.cargo
+        pathmunge "${CARGO_HOME}/bin"
+    fi
+
+    if [[ -x ${CARGO_HOME}/bin/rustc ]]; then
+        DYLD_LIBRARY_PATH=$("${CARGO_HOME}"/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
+        export DYLD_LIBRARY_PATH
+    fi
+  #+end_src
+
+* [[https://www.shellcheck.net/][ShellCheck]]
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/300-shellcheck.bash
+  :END:
+
+  =k20e_shellcheck= will run =shellcheck= against the result of tangling all of this configuration to the files that the
+  shell will actually execute.
+
+  #+begin_src sh
+    command -v shellcheck >/dev/null 2>&1 && alias k20e_shellcheck='find $HOME/.bash_profile $HOME/.bashrc $K20E_BASHRC_DIR -type f -exec shellcheck '\''{}'\'' \;'
+  #+end_src
+
+** =~/.shellcheckrc=
+   :PROPERTIES:
+   :header-args: :mkdirp yes :tangle ~/.shellcheckrc
+   :END:
+
+   #+begin_src conf
+     color=always
+     shell=bash
+   #+end_src
 
 * [[https://github.com/lotabout/skim][skim]]
    :PROPERTIES:
@@ -1182,65 +1082,6 @@ this document is focused on macOS only after I migrated Linux specific configura
    #+begin_src sh
      export SSH_AUTH_SOCK=~/.1password/agent.sock
    #+end_src
-
-* Ghostty
-    :PROPERTIES:
-    :header-args: :mkdirp yes :tangle ~/.config/ghostty/config
-    :END:
-
-    - [X] https://ghostty.org/docs/config/keybind/reference#jump_to_prompt
-    - [X] https://ghostty.org/docs/config/keybind/reference#toggle_quick_terminal
-
-    #+begin_src conf
-      background-opacity = 0.75
-      background-blur-radius = 20
-
-      # See also shell-integration-features
-      cursor-style = block
-      cursor-style-blink = true
-
-      font-family = ""
-      font-family = PragmataPro Mono Liga
-      font-feature = calt
-      font-size = 20
-
-      # Backward erase word
-      # This binds cmd+h to alt+backspace which will backward erase one word
-      # Remember to go change the "Hide Ghostty" menu shortcut to something else, e.g.,
-      # https://apple.stackexchange.com/questions/101754/os-x-disable-cmd-h-or-hide-app-command
-      keybind = cmd+h=text:\x1b\x7f
-      # Forward erase word
-      keybind = cmd+d=esc:d
-
-      # Backward word
-      keybind = cmd+b=esc:b
-      # Forward word
-      keybind = cmd+f=esc:f
-
-      # Jump to prompt
-      keybind = ctrl+up=jump_to_prompt:-1
-      keybind = ctrl+down=jump_to_prompt:1
-
-      # Quick terminal
-      keybind = global:ctrl+alt+cmd+t=toggle_quick_terminal
-
-      macos-option-as-alt = true
-      macos-titlebar-style = hidden
-
-      quit-after-last-window-closed = true
-
-      resize-overlay = never
-
-      shell-integration = bash
-      # This fixed an issue w/ the initial Bash cursor showing as a bar instead of a block before a command was executed
-      # (see cursor-style)
-      shell-integration-features = no-cursor
-
-      theme = light:Tomorrow,dark:Tomorrow Night Bright
-
-      window-height = 48
-      window-width = 110
-    #+end_src
 
 * Starship
    :PROPERTIES:
@@ -1484,3 +1325,161 @@ this document is focused on macOS only after I migrated Linux specific configura
       symbol = ' '
       format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
     #+end_src
+* [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/599-terminal-notifier.bash
+  :END:
+
+  #+begin_src sh
+    command -v terminal-notifier >/dev/null 2>&1 && alias notify=terminal-notifier
+  #+end_src
+
+* Terraform
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/525-terraform.bash
+  :END:
+
+  #+begin_src sh
+    command -v terraform >/dev/null 2>&1 && complete -C terraform terraform
+  #+end_src
+
+* [[https://wezfurlong.org/wezterm/index.html][WezTerm]]
+   :PROPERTIES:
+   :header-args: :mkdirp yes :tangle ~/.wezterm.lua
+   :END:
+
+   =TERM= setup https://wezfurlong.org/wezterm/config/lua/config/term.html
+
+   #+begin_src lua
+     local wezterm = require 'wezterm'
+     local act = wezterm.action
+     local config = {}
+
+     if wezterm.config_builder then
+        config = wezterm.config_builder()
+     end
+
+     -- term https://wezfurlong.org/wezterm/config/lua/config/term.html
+     config.term = "wezterm"
+
+     -- Shell
+     if wezterm.target_triple == 'aarch64-apple-darwin' then
+        config.default_prog = {'/opt/homebrew/bin/bash'}
+     elseif wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
+        config.default_prog = {'/bin/bash'}
+     end
+
+     -- Font
+     config.font = wezterm.font('PragmataPro Liga')
+     config.font_size = 22
+
+     -- GUI
+     config.initial_rows = 48
+     config.initial_cols = 110
+     config.enable_tab_bar = false
+
+     -- Theme
+     function get_appearance()
+        if wezterm.gui then
+           return wezterm.gui.get_appearance()
+        end
+        return 'Dark'
+     end
+
+     function scheme_for_appearance(appearance)
+        if appearance:find 'Dark' then
+           return 'Tomorrow Night Bright'
+        else
+           return 'Tomorrow'
+        end
+     end
+
+     config.color_scheme = scheme_for_appearance(get_appearance())
+
+     -- Bindings
+     config.keys = {
+        -- macOS move forward/backward by word with ⌘-f, ⌘-b
+        { key = 'b', mods = 'CMD', action = act.SendString '\x1bb' },
+        { key = 'f', mods = 'CMD', action = act.SendString '\x1bf' },
+
+        -- macOS backward erase word (see
+        -- https://apple.stackexchange.com/questions/101754/os-x-disable-cmd-h-or-hide-app-command for re-mapping ⌘-h from
+        -- "Hide WezTerm" to something else)
+        { key = 'h', mods = 'CMD', action = act.SendString '\x1b\x7f' },
+
+        -- macOS forward erase word
+        { key = 'd', mods = 'CMD', action = act.SendString '\x1bd' },
+
+        -- Search, rather than ⌘-f
+        { key = 's', mods = 'CMD', action = act.Search 'CurrentSelectionOrEmptyString' },
+     }
+
+     return config
+   #+end_src
+
+* =yamllint=
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.config/yamllint/config
+  :END:
+
+  See https://yamllint.readthedocs.io/en/stable/configuration.html and
+  https://yamllint.readthedocs.io/en/stable/rules.html.
+
+  #+begin_src yaml
+    ---
+
+    yaml-files:
+      - '*.yaml'
+      - '*.yml'
+      - '.yamllint'
+
+    rules:
+      braces:
+        level: warning
+      brackets: enable
+      colons:
+        level: warning
+      commas: enable
+      comments:
+        level: warning
+      comments-indentation:
+        level: warning
+      document-end: disable
+      document-start:
+        level: warning
+      empty-lines: enable
+      empty-values: disable
+      float-values: disable
+      hyphens: enable
+      indentation: enable
+      key-duplicates: enable
+      key-ordering: disable
+      line-length: disable
+      new-line-at-end-of-file:
+        level: warning
+      new-lines: enable
+      octal-values: disable
+      quoted-strings: disable
+      trailing-spaces:
+        level: warning
+      truthy:
+        level: warning
+  #+end_src
+
+* =~/.inputrc=
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.inputrc
+  :END:
+
+  #+begin_src sh
+    set bell-style none
+    set colored-completion-prefix on
+    set colored-stats on
+    set completion-ignore-case off
+    set convert-meta off
+    set expand-tilde on
+    set input-meta on
+    set output-meta on
+    set show-all-if-ambiguous on
+    set visible-stats on
+  #+end_src
