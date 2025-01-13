@@ -2,8 +2,8 @@
 #+OPTIONS: toc:nil num:nil ^:nil prop:t
 #+STARTUP: showall
 
-A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]] dotfiles created and maintained in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org mode.]]  As of [2025-01-12 Sun]
-this document is focused on macOS only after I migrated Linux specific configuration to [[file:linux.org]].
+A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]] dotfiles created and maintained in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org mode.]]  The source is available
+at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]].[fn:1]
 
 #+TOC: headlines 2
 
@@ -1483,3 +1483,8 @@ this document is focused on macOS only after I migrated Linux specific configura
     set show-all-if-ambiguous on
     set visible-stats on
   #+end_src
+
+* Footnotes
+
+[fn:1] As of [2025-01-12 Sun] this document is focused on macOS only after I migrated Linux specific configuration to
+[[https://github.com/krismolendyke/dotfiles/blob/master/linux.org][linux.org]].

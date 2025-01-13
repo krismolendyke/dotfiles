@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-01-13 Mon 08:17 -->
+<!-- 2025-01-13 Mon 08:31 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1193,122 +1193,125 @@ than body or by calling htmlize-buffer and desired style.
 <header>
 <h1 class="title">dotfiles</h1>
 </header><p>
-A collection of <a href="http://en.wikipedia.org/wiki/Literate_programming">literate programming</a> dotfiles created and maintained in <a href="http://www.gnu.org/software/emacs/">Emacs</a> with <a href="http://orgmode.org/">Org mode.</a>  As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</span></span>
-this document is focused on macOS only after I migrated Linux specific configuration to <a href="linux.html">linux.html</a>.
+A collection of <a href="http://en.wikipedia.org/wiki/Literate_programming">literate programming</a> dotfiles created and maintained in <a href="http://www.gnu.org/software/emacs/">Emacs</a> with <a href="http://orgmode.org/">Org mode.</a>  The source is available
+at <a href="https://github.com/krismolendyke/dotfiles/blob/master/index.org">index.org</a>.<label id='fnr.1' for='fnr-in.1.7953239' class='margin-toggle sidenote-number'><sup class='numeral'>1</sup></label><input type='checkbox' id='fnr-in.1.7953239' class='margin-toggle'><span class='sidenote'><sup class='numeral'>1</sup>
+As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun] </span></span> this document is focused on macOS only after I migrated Linux specific configuration to
+<a href="https://github.com/krismolendyke/dotfiles/blob/master/linux.org">linux.org</a>.
+</span>
 </p>
 
 <nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7f16d57">Build Configuration Files</a></li>
-<li><a href="#org99c01cb">Bootstrap</a>
+<li><a href="#org99c01cb">Build Configuration Files</a></li>
+<li><a href="#orgd98eb26">Bootstrap</a>
 <ul>
-<li><a href="#orgd98eb26">Change Default Shell</a></li>
-<li><a href="#org7925b9e">Set <code>HOSTNAME</code></a></li>
-<li><a href="#orgee35afe">Accessibility</a></li>
+<li><a href="#org7925b9e">Change Default Shell</a></li>
+<li><a href="#orgee35afe">Set <code>HOSTNAME</code></a></li>
+<li><a href="#org0ce0959">Accessibility</a></li>
 </ul>
 </li>
-<li><a href="#org0ce0959">Bash</a>
+<li><a href="#org9639605">Bash</a>
 <ul>
-<li><a href="#org9639605"><code>~./bash_profile</code></a></li>
-<li><a href="#org7f6f53b"><code>~/.bashrc</code></a></li>
-<li><a href="#orgb948b55">Configuration</a></li>
+<li><a href="#org7f6f53b"><code>~./bash_profile</code></a></li>
+<li><a href="#orgb948b55"><code>~/.bashrc</code></a></li>
+<li><a href="#org9beed48">Configuration</a></li>
 </ul>
 </li>
-<li><a href="#org9beed48">Homebrew</a>
+<li><a href="#org2dc1f56">Homebrew</a>
 <ul>
-<li><a href="#org2dc1f56">Homebrew Bundle</a></li>
+<li><a href="#orgde0f8b8">Homebrew Bundle</a></li>
 </ul>
 </li>
-<li><a href="#orgde0f8b8">Secrets</a></li>
-<li><a href="#orgfa898cb">Functions</a></li>
-<li><a href="#org7161a33">1Password</a></li>
-<li><a href="#org194cf40"><code>asdf</code></a></li>
-<li><a href="#org0043671">AWS CLI</a></li>
-<li><a href="#org0c8fbd7">Emacs</a></li>
-<li><a href="#orga55bdd4">eza</a>
+<li><a href="#orgfa898cb">Secrets</a></li>
+<li><a href="#org7161a33">Functions</a></li>
+<li><a href="#org194cf40">1Password</a></li>
+<li><a href="#org0043671"><code>asdf</code></a></li>
+<li><a href="#org0c8fbd7">AWS CLI</a></li>
+<li><a href="#orga55bdd4">Emacs</a></li>
+<li><a href="#org1520f12">eza</a>
 <ul>
-<li><a href="#org1520f12">Theme</a></li>
+<li><a href="#orgff52af2">Theme</a></li>
 </ul>
 </li>
-<li><a href="#orgff52af2">Ghostty</a></li>
-<li><a href="#org79c4fb7">Git</a>
+<li><a href="#org79c4fb7">Ghostty</a></li>
+<li><a href="#orgf718da5">Git</a>
 <ul>
-<li><a href="#orgf718da5"><code>~/.gitconfig</code></a></li>
+<li><a href="#org0b22235"><code>~/.gitconfig</code></a></li>
 <li><a href="#gitignore-global"><code>~/.gitignore-global</code></a></li>
 </ul>
 </li>
-<li><a href="#org0b22235">Go</a></li>
-<li><a href="#org0c2fec5">Google Cloud SDK</a></li>
-<li><a href="#org8a1512e"><code>kubectl</code>, <code>k</code>, <code>kctx</code>, <code>kns</code>, <code>krew</code></a>
+<li><a href="#org0c2fec5">Go</a></li>
+<li><a href="#org8a1512e">Google Cloud SDK</a></li>
+<li><a href="#orgf42ba8d"><code>kubectl</code>, <code>k</code>, <code>kctx</code>, <code>kns</code>, <code>krew</code></a>
 <ul>
-<li><a href="#orgf42ba8d"><span class="todo TODO">TODO</span> krew</a></li>
+<li><a href="#org72a3840"><span class="todo TODO">TODO</span> krew</a></li>
 </ul>
 </li>
-<li><a href="#org72a3840">nvm</a></li>
-<li><a href="#org5c0e423">OCaml</a></li>
-<li><a href="#orgaf542ca">Python</a>
+<li><a href="#org5c0e423">nvm</a></li>
+<li><a href="#orgaf542ca">OCaml</a></li>
+<li><a href="#orgc025086">Python</a>
 <ul>
-<li><a href="#orgc025086"><code>~/requirements-to-freeze.txt</code></a></li>
-<li><a href="#orge63ca02">Configuration</a></li>
-<li><a href="#org819e6b8"><code>pyenv</code></a></li>
-<li><a href="#org496e461"><span class="todo TODO">TODO</span> <code>uv</code></a></li>
+<li><a href="#orge63ca02"><code>~/requirements-to-freeze.txt</code></a></li>
+<li><a href="#org819e6b8">Configuration</a></li>
+<li><a href="#org496e461"><code>pyenv</code></a></li>
+<li><a href="#orgd9cd98a"><span class="todo TODO">TODO</span> <code>uv</code></a></li>
 </ul>
 </li>
-<li><a href="#orgd9cd98a">Rancher</a></li>
-<li><a href="#orgb22ef7e"><code>ripgrep</code></a>
+<li><a href="#orgb22ef7e">Rancher</a></li>
+<li><a href="#org0c96d26"><code>ripgrep</code></a>
 <ul>
-<li><a href="#org0c96d26"><code>~/.ripgreprc</code></a></li>
+<li><a href="#org8b8830a"><code>~/.ripgreprc</code></a></li>
 </ul>
 </li>
-<li><a href="#org8b8830a">Rust</a></li>
-<li><a href="#org50a2617">ShellCheck</a>
+<li><a href="#org50a2617">Rust</a></li>
+<li><a href="#org3f63f7f">ShellCheck</a>
 <ul>
-<li><a href="#org3f63f7f"><code>~/.shellcheckrc</code></a></li>
+<li><a href="#org648c2f4"><code>~/.shellcheckrc</code></a></li>
 </ul>
 </li>
-<li><a href="#org648c2f4">skim</a></li>
-<li><a href="#org530237a">SSH</a>
+<li><a href="#org530237a">skim</a></li>
+<li><a href="#org651f861">SSH</a>
 <ul>
-<li><a href="#org651f861"><code>~/.ssh/config</code></a></li>
-<li><a href="#org6ee8555">Personal</a></li>
-<li><a href="#org8948797">Work</a></li>
-<li><a href="#orgbec9ad4">Environment</a></li>
+<li><a href="#org6ee8555"><code>~/.ssh/config</code></a></li>
+<li><a href="#org8948797">Personal</a></li>
+<li><a href="#orgbec9ad4">Work</a></li>
+<li><a href="#org94dc380">Environment</a></li>
 </ul>
 </li>
-<li><a href="#org94dc380">Starship</a>
+<li><a href="#org38570f5">Starship</a>
 <ul>
-<li><a href="#org38570f5"><code>~/.config/starship.toml</code></a></li>
+<li><a href="#org7e0b801"><code>~/.config/starship.toml</code></a></li>
 </ul>
 </li>
-<li><a href="#org7e0b801">terminal-notifier</a></li>
-<li><a href="#org37a066c">Terraform</a></li>
-<li><a href="#orga4ab287">WezTerm</a></li>
-<li><a href="#orgc36236b"><code>yamllint</code></a></li>
-<li><a href="#org39af42c"><code>~/.inputrc</code></a></li>
+<li><a href="#org37a066c">terminal-notifier</a></li>
+<li><a href="#orga4ab287">Terraform</a></li>
+<li><a href="#orgc36236b">WezTerm</a></li>
+<li><a href="#org39af42c"><code>yamllint</code></a></li>
+<li><a href="#org9c54a6f"><code>~/.inputrc</code></a></li>
 </ul>
 </div>
 </nav>
-<section id="outline-container-org7f16d57" class="outline-2">
-<h2 id="org7f16d57">Build Configuration Files</h2>
-<div class="outline-text-2" id="text-org7f16d57">
+<section id="outline-container-org99c01cb" class="outline-2">
+<h2 id="org99c01cb">Build Configuration Files</h2>
+<div class="outline-text-2" id="text-org99c01cb">
 <p>
 Open this Org document in Emacs and <a href="http://orgmode.org/manual/tangle.html#tangle">tangle</a> it (<code>C-c C-v t</code>).  Configuration files, e.g., <code>~/.bashrc</code>, will be generated.
 </p>
 </div>
 </section>
-<section id="outline-container-org99c01cb" class="outline-2">
-<h2 id="org99c01cb">Bootstrap</h2>
-<div class="outline-text-2" id="text-org99c01cb">
+<section id="outline-container-orgd98eb26" class="outline-2">
+<h2 id="orgd98eb26">Bootstrap</h2>
+<div class="outline-text-2" id="text-orgd98eb26">
 <ul class="org-ul">
 <li>Install <a href="https://brew.sh/">Homebrew</a></li>
 <li>Install <a href="https://github.com/Homebrew/homebrew-bundle">Homebrew Bundle</a>: <code>brew bundle</code></li>
 </ul>
 </div>
-<div id="outline-container-orgd98eb26" class="outline-3">
-<h3 id="orgd98eb26">Change Default Shell</h3>
-<div class="outline-text-3" id="text-orgd98eb26">
+<div id="outline-container-org7925b9e" class="outline-3">
+<h3 id="org7925b9e">Change Default Shell</h3>
+<div class="outline-text-3" id="text-org7925b9e">
 <p>
 I prefer <code>bash</code> over <code>zsh</code>.
 </p>
@@ -1325,9 +1328,9 @@ This should be the Homebrew installed <code>bash</code> <i>not</i> the system <c
 </div>
 </div>
 </div>
-<div id="outline-container-org7925b9e" class="outline-3">
-<h3 id="org7925b9e">Set <code>HOSTNAME</code></h3>
-<div class="outline-text-3" id="text-org7925b9e">
+<div id="outline-container-orgee35afe" class="outline-3">
+<h3 id="orgee35afe">Set <code>HOSTNAME</code></h3>
+<div class="outline-text-3" id="text-orgee35afe">
 <div class="org-src-container">
 <pre class="src src-sh"><span class="org-builtin">export</span> <span class="org-variable-name">HOSTNAME</span>=<span class="org-string">'TODO'</span> &amp;&amp; <span class="org-sh-escaped-newline">\</span>
     sudo scutil --set HostName ${<span class="org-variable-name">HOSTNAME</span>}
@@ -1335,9 +1338,9 @@ This should be the Homebrew installed <code>bash</code> <i>not</i> the system <c
 </div>
 </div>
 </div>
-<div id="outline-container-orgee35afe" class="outline-3">
-<h3 id="orgee35afe">Accessibility</h3>
-<div class="outline-text-3" id="text-orgee35afe">
+<div id="outline-container-org0ce0959" class="outline-3">
+<h3 id="org0ce0959">Accessibility</h3>
+<div class="outline-text-3" id="text-org0ce0959">
 <div class="org-src-container">
 <pre class="src src-sh">defaults write com.apple.Accessibility ReduceMotionEnabled -bool true
 </pre>
@@ -1345,13 +1348,13 @@ This should be the Homebrew installed <code>bash</code> <i>not</i> the system <c
 </div>
 </div>
 </section>
-<section id="outline-container-org0ce0959" class="outline-2">
-<h2 id="org0ce0959">Bash</h2>
-<div class="outline-text-2" id="text-org0ce0959">
+<section id="outline-container-org9639605" class="outline-2">
+<h2 id="org9639605">Bash</h2>
+<div class="outline-text-2" id="text-org9639605">
 </div>
-<div id="outline-container-org9639605" class="outline-3">
-<h3 id="org9639605"><code>~./bash_profile</code></h3>
-<div class="outline-text-3" id="text-org9639605">
+<div id="outline-container-org7f6f53b" class="outline-3">
+<h3 id="org7f6f53b"><code>~./bash_profile</code></h3>
+<div class="outline-text-3" id="text-org7f6f53b">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bash_profile
 </pre>
@@ -1363,9 +1366,9 @@ header-args: :mkdirp yes :tangle ~/.bash_profile
 </div>
 </div>
 </div>
-<div id="outline-container-org7f6f53b" class="outline-3">
-<h3 id="org7f6f53b"><code>~/.bashrc</code></h3>
-<div class="outline-text-3" id="text-org7f6f53b">
+<div id="outline-container-orgb948b55" class="outline-3">
+<h3 id="orgb948b55"><code>~/.bashrc</code></h3>
+<div class="outline-text-3" id="text-orgb948b55">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc
 </pre>
@@ -1385,9 +1388,9 @@ Load all configuration:
 </div>
 </div>
 </div>
-<div id="outline-container-orgb948b55" class="outline-3">
-<h3 id="orgb948b55">Configuration</h3>
-<div class="outline-text-3" id="text-orgb948b55">
+<div id="outline-container-org9beed48" class="outline-3">
+<h3 id="org9beed48">Configuration</h3>
+<div class="outline-text-3" id="text-org9beed48">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/000-bash.bash
 </pre>
@@ -1498,9 +1501,9 @@ Aliases:
 </div>
 </div>
 </section>
-<section id="outline-container-org9beed48" class="outline-2">
-<h2 id="org9beed48"><a href="https://brew.sh/">Homebrew</a></h2>
-<div class="outline-text-2" id="text-org9beed48">
+<section id="outline-container-org2dc1f56" class="outline-2">
+<h2 id="org2dc1f56"><a href="https://brew.sh/">Homebrew</a></h2>
+<div class="outline-text-2" id="text-org2dc1f56">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/010-brew.bash
 </pre>
@@ -1531,9 +1534,9 @@ Completion:
 </pre>
 </div>
 </div>
-<div id="outline-container-org2dc1f56" class="outline-3">
-<h3 id="org2dc1f56">Homebrew Bundle</h3>
-<div class="outline-text-3" id="text-org2dc1f56">
+<div id="outline-container-orgde0f8b8" class="outline-3">
+<h3 id="orgde0f8b8">Homebrew Bundle</h3>
+<div class="outline-text-3" id="text-orgde0f8b8">
 <p>
 Install: <code>brew bundle</code>
 </p>
@@ -1548,9 +1551,9 @@ Install: <code>brew bundle</code>
 </pre>
 </div>
 </div>
-<div id="outline-container-org60e9411" class="outline-4">
-<h4 id="org60e9411"><code>~/.Brewfile</code></h4>
-<div class="outline-text-4" id="text-org60e9411">
+<div id="outline-container-orgac01944" class="outline-4">
+<h4 id="orgac01944"><code>~/.Brewfile</code></h4>
+<div class="outline-text-4" id="text-orgac01944">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.Brewfile
 </pre>
@@ -1662,9 +1665,9 @@ cask <span class="org-string">"zoom"</span>
 </div>
 </div>
 </section>
-<section id="outline-container-orgde0f8b8" class="outline-2">
-<h2 id="orgde0f8b8">Secrets</h2>
-<div class="outline-text-2" id="text-orgde0f8b8">
+<section id="outline-container-orgfa898cb" class="outline-2">
+<h2 id="orgfa898cb">Secrets</h2>
+<div class="outline-text-2" id="text-orgfa898cb">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/011-secrets.bash
 </pre>
@@ -1713,9 +1716,9 @@ chmod -Rf 0600 <span class="org-string">"${K20E_SECRET_HOME}"</span>/*
 </div>
 </div>
 </section>
-<section id="outline-container-orgfa898cb" class="outline-2">
-<h2 id="orgfa898cb">Functions</h2>
-<div class="outline-text-2" id="text-orgfa898cb">
+<section id="outline-container-org7161a33" class="outline-2">
+<h2 id="org7161a33">Functions</h2>
+<div class="outline-text-2" id="text-org7161a33">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/800-functions.bash
 </pre>
@@ -1774,9 +1777,9 @@ Use <code>jq</code> to reformat messy JSON files:
 </div>
 </div>
 </section>
-<section id="outline-container-org7161a33" class="outline-2">
-<h2 id="org7161a33">1Password</h2>
-<div class="outline-text-2" id="text-org7161a33">
+<section id="outline-container-org194cf40" class="outline-2">
+<h2 id="org194cf40">1Password</h2>
+<div class="outline-text-2" id="text-org194cf40">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/501-1password.bash
 </pre>
@@ -1796,9 +1799,9 @@ Generate completion script:
 </div>
 </div>
 </section>
-<section id="outline-container-org194cf40" class="outline-2">
-<h2 id="org194cf40"><code>asdf</code></h2>
-<div class="outline-text-2" id="text-org194cf40">
+<section id="outline-container-org0043671" class="outline-2">
+<h2 id="org0043671"><code>asdf</code></h2>
+<div class="outline-text-2" id="text-org0043671">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/110-asdf.bash
 </pre>
@@ -1816,9 +1819,9 @@ it below.
 </div>
 </div>
 </section>
-<section id="outline-container-org0043671" class="outline-2">
-<h2 id="org0043671">AWS CLI</h2>
-<div class="outline-text-2" id="text-org0043671">
+<section id="outline-container-org0c8fbd7" class="outline-2">
+<h2 id="org0c8fbd7">AWS CLI</h2>
+<div class="outline-text-2" id="text-org0c8fbd7">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/440-awscli.bash
 </pre>
@@ -1833,9 +1836,9 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/440-awscli.bash
 </div>
 </div>
 </section>
-<section id="outline-container-org0c8fbd7" class="outline-2">
-<h2 id="org0c8fbd7">Emacs</h2>
-<div class="outline-text-2" id="text-org0c8fbd7">
+<section id="outline-container-orga55bdd4" class="outline-2">
+<h2 id="orga55bdd4">Emacs</h2>
+<div class="outline-text-2" id="text-orga55bdd4">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/107-emacs.bash
 </pre>
@@ -1867,9 +1870,9 @@ across at <a href="https://stuff-things.net/2019/07/31/opening-files-with-line-n
 </div>
 </div>
 </section>
-<section id="outline-container-orga55bdd4" class="outline-2">
-<h2 id="orga55bdd4"><a href="https://github.com/eza-community/eza">eza</a></h2>
-<div class="outline-text-2" id="text-orga55bdd4">
+<section id="outline-container-org1520f12" class="outline-2">
+<h2 id="org1520f12"><a href="https://github.com/eza-community/eza">eza</a></h2>
+<div class="outline-text-2" id="text-org1520f12">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/130-eza.bash
 </pre>
@@ -1890,9 +1893,9 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/130-eza.bash
 </pre>
 </div>
 </div>
-<div id="outline-container-org1520f12" class="outline-3">
-<h3 id="org1520f12">Theme</h3>
-<div class="outline-text-3" id="text-org1520f12">
+<div id="outline-container-orgff52af2" class="outline-3">
+<h3 id="orgff52af2">Theme</h3>
+<div class="outline-text-3" id="text-orgff52af2">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/eza/theme.yml
 </pre>
@@ -1908,9 +1911,9 @@ See <a href="https://github.com/eza-community/eza-themes">https://github.com/eza
 </div>
 </div>
 </section>
-<section id="outline-container-orgff52af2" class="outline-2">
-<h2 id="orgff52af2">Ghostty</h2>
-<div class="outline-text-2" id="text-orgff52af2">
+<section id="outline-container-org79c4fb7" class="outline-2">
+<h2 id="org79c4fb7">Ghostty</h2>
+<div class="outline-text-2" id="text-org79c4fb7">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/ghostty/config
 </pre>
@@ -1973,9 +1976,9 @@ header-args: :mkdirp yes :tangle ~/.config/ghostty/config
 </div>
 </div>
 </section>
-<section id="outline-container-org79c4fb7" class="outline-2">
-<h2 id="org79c4fb7"><a href="https://git-scm.com/">Git</a></h2>
-<div class="outline-text-2" id="text-org79c4fb7">
+<section id="outline-container-orgf718da5" class="outline-2">
+<h2 id="orgf718da5"><a href="https://git-scm.com/">Git</a></h2>
+<div class="outline-text-2" id="text-orgf718da5">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/105-git.bash
 </pre>
@@ -1999,9 +2002,9 @@ Diff highlighting (need to review if this is necessary now since I've configured
 </pre>
 </div>
 </div>
-<div id="outline-container-orgf718da5" class="outline-3">
-<h3 id="orgf718da5"><code>~/.gitconfig</code></h3>
-<div class="outline-text-3" id="text-orgf718da5">
+<div id="outline-container-org0b22235" class="outline-3">
+<h3 id="org0b22235"><code>~/.gitconfig</code></h3>
+<div class="outline-text-3" id="text-org0b22235">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.gitconfig
 </pre>
@@ -2219,9 +2222,9 @@ fabric.properties
 </div>
 </div>
 </section>
-<section id="outline-container-org0b22235" class="outline-2">
-<h2 id="org0b22235">Go</h2>
-<div class="outline-text-2" id="text-org0b22235">
+<section id="outline-container-org0c2fec5" class="outline-2">
+<h2 id="org0c2fec5">Go</h2>
+<div class="outline-text-2" id="text-org0c2fec5">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/106-go.bash
 </pre>
@@ -2232,9 +2235,9 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/106-go.bash
 </div>
 </div>
 </section>
-<section id="outline-container-org0c2fec5" class="outline-2">
-<h2 id="org0c2fec5">Google Cloud SDK</h2>
-<div class="outline-text-2" id="text-org0c2fec5">
+<section id="outline-container-org8a1512e" class="outline-2">
+<h2 id="org8a1512e">Google Cloud SDK</h2>
+<div class="outline-text-2" id="text-org8a1512e">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/450-google-cloud-sdk.bash
 </pre>
@@ -2252,9 +2255,9 @@ Completion:
 </div>
 </div>
 </section>
-<section id="outline-container-org8a1512e" class="outline-2">
-<h2 id="org8a1512e"><code>kubectl</code>, <code>k</code>, <code>kctx</code>, <code>kns</code>, <code>krew</code></h2>
-<div class="outline-text-2" id="text-org8a1512e">
+<section id="outline-container-orgf42ba8d" class="outline-2">
+<h2 id="orgf42ba8d"><code>kubectl</code>, <code>k</code>, <code>kctx</code>, <code>kns</code>, <code>krew</code></h2>
+<div class="outline-text-2" id="text-orgf42ba8d">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/104-kubectl.bash
 </pre>
@@ -2290,18 +2293,18 @@ Change currently selected color:
 </pre>
 </div>
 </div>
-<div id="outline-container-orgf42ba8d" class="outline-3">
-<h3 id="orgf42ba8d"><span class="todo TODO">TODO</span> krew</h3>
-<div class="outline-text-3" id="text-orgf42ba8d">
+<div id="outline-container-org72a3840" class="outline-3">
+<h3 id="org72a3840"><span class="todo TODO">TODO</span> krew</h3>
+<div class="outline-text-3" id="text-org72a3840">
 <p>
 Install and configure <a href="https://krew.sigs.k8s.io/docs/user-guide/setup/install/">krew</a>.
 </p>
 </div>
 </div>
 </section>
-<section id="outline-container-org72a3840" class="outline-2">
-<h2 id="org72a3840"><a href="https://github.com/nvm-sh/nvm">nvm</a></h2>
-<div class="outline-text-2" id="text-org72a3840">
+<section id="outline-container-org5c0e423" class="outline-2">
+<h2 id="org5c0e423"><a href="https://github.com/nvm-sh/nvm">nvm</a></h2>
+<div class="outline-text-2" id="text-org5c0e423">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/590-nvm.bash
 </pre>
@@ -2316,9 +2319,9 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/590-nvm.bash
 </div>
 </div>
 </section>
-<section id="outline-container-org5c0e423" class="outline-2">
-<h2 id="org5c0e423">OCaml</h2>
-<div class="outline-text-2" id="text-org5c0e423">
+<section id="outline-container-orgaf542ca" class="outline-2">
+<h2 id="orgaf542ca">OCaml</h2>
+<div class="outline-text-2" id="text-orgaf542ca">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/500-opam.bash
 </pre>
@@ -2334,13 +2337,13 @@ Modified output of <code>opam init</code>:
 </div>
 </div>
 </section>
-<section id="outline-container-orgaf542ca" class="outline-2">
-<h2 id="orgaf542ca">Python</h2>
-<div class="outline-text-2" id="text-orgaf542ca">
+<section id="outline-container-orgc025086" class="outline-2">
+<h2 id="orgc025086">Python</h2>
+<div class="outline-text-2" id="text-orgc025086">
 </div>
-<div id="outline-container-orgc025086" class="outline-3">
-<h3 id="orgc025086"><code>~/requirements-to-freeze.txt</code></h3>
-<div class="outline-text-3" id="text-orgc025086">
+<div id="outline-container-orge63ca02" class="outline-3">
+<h3 id="orge63ca02"><code>~/requirements-to-freeze.txt</code></h3>
+<div class="outline-text-3" id="text-orge63ca02">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/requirements-to-freeze.txt
 </pre>
@@ -2365,9 +2368,9 @@ virtualenvwrapper
 </div>
 </div>
 </div>
-<div id="outline-container-orge63ca02" class="outline-3">
-<h3 id="orge63ca02">Configuration</h3>
-<div class="outline-text-3" id="text-orge63ca02">
+<div id="outline-container-org819e6b8" class="outline-3">
+<h3 id="org819e6b8">Configuration</h3>
+<div class="outline-text-3" id="text-org819e6b8">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/102-python.bash
 </pre>
@@ -2406,9 +2409,9 @@ Old function I've used to bootstrap a sane Python user environment:
 </div>
 </div>
 </div>
-<div id="outline-container-org819e6b8" class="outline-3">
-<h3 id="org819e6b8"><code>pyenv</code></h3>
-<div class="outline-text-3" id="text-org819e6b8">
+<div id="outline-container-org496e461" class="outline-3">
+<h3 id="org496e461"><code>pyenv</code></h3>
+<div class="outline-text-3" id="text-org496e461">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/103-pyenv.bash
 </pre>
@@ -2421,13 +2424,13 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/103-pyenv.bash
 </div>
 </div>
 </div>
-<div id="outline-container-org496e461" class="outline-3">
-<h3 id="org496e461"><span class="todo TODO">TODO</span> <code>uv</code></h3>
+<div id="outline-container-orgd9cd98a" class="outline-3">
+<h3 id="orgd9cd98a"><span class="todo TODO">TODO</span> <code>uv</code></h3>
 </div>
 </section>
-<section id="outline-container-orgd9cd98a" class="outline-2">
-<h2 id="orgd9cd98a">Rancher</h2>
-<div class="outline-text-2" id="text-orgd9cd98a">
+<section id="outline-container-orgb22ef7e" class="outline-2">
+<h2 id="orgb22ef7e">Rancher</h2>
+<div class="outline-text-2" id="text-orgb22ef7e">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/560-rancher.bash
 </pre>
@@ -2438,9 +2441,9 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/560-rancher.bash
 </div>
 </div>
 </section>
-<section id="outline-container-orgb22ef7e" class="outline-2">
-<h2 id="orgb22ef7e"><code>ripgrep</code></h2>
-<div class="outline-text-2" id="text-orgb22ef7e">
+<section id="outline-container-org0c96d26" class="outline-2">
+<h2 id="org0c96d26"><code>ripgrep</code></h2>
+<div class="outline-text-2" id="text-org0c96d26">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/510-ripgrep.bash
 </pre>
@@ -2450,9 +2453,9 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/510-ripgrep.bash
 </pre>
 </div>
 </div>
-<div id="outline-container-org0c96d26" class="outline-3">
-<h3 id="org0c96d26"><code>~/.ripgreprc</code></h3>
-<div class="outline-text-3" id="text-org0c96d26">
+<div id="outline-container-org8b8830a" class="outline-3">
+<h3 id="org8b8830a"><code>~/.ripgreprc</code></h3>
+<div class="outline-text-3" id="text-org8b8830a">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.ripgreprc
 </pre>
@@ -2468,9 +2471,9 @@ See <code>RIPGREP_CONFIG_PATH</code> above and <a href="https://github.com/Burnt
 </div>
 </div>
 </section>
-<section id="outline-container-org8b8830a" class="outline-2">
-<h2 id="org8b8830a">Rust</h2>
-<div class="outline-text-2" id="text-org8b8830a">
+<section id="outline-container-org50a2617" class="outline-2">
+<h2 id="org50a2617">Rust</h2>
+<div class="outline-text-2" id="text-org50a2617">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/550-rust.bash
 </pre>
@@ -2493,9 +2496,9 @@ See <a href="https://github.com/rust-lang-nursery/rustfmt#tips">https://github.c
 </div>
 </div>
 </section>
-<section id="outline-container-org50a2617" class="outline-2">
-<h2 id="org50a2617"><a href="https://www.shellcheck.net/">ShellCheck</a></h2>
-<div class="outline-text-2" id="text-org50a2617">
+<section id="outline-container-org3f63f7f" class="outline-2">
+<h2 id="org3f63f7f"><a href="https://www.shellcheck.net/">ShellCheck</a></h2>
+<div class="outline-text-2" id="text-org3f63f7f">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/300-shellcheck.bash
 </pre>
@@ -2510,9 +2513,9 @@ shell will actually execute.
 </pre>
 </div>
 </div>
-<div id="outline-container-org3f63f7f" class="outline-3">
-<h3 id="org3f63f7f"><code>~/.shellcheckrc</code></h3>
-<div class="outline-text-3" id="text-org3f63f7f">
+<div id="outline-container-org648c2f4" class="outline-3">
+<h3 id="org648c2f4"><code>~/.shellcheckrc</code></h3>
+<div class="outline-text-3" id="text-org648c2f4">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.shellcheckrc
 </pre>
@@ -2525,9 +2528,9 @@ header-args: :mkdirp yes :tangle ~/.shellcheckrc
 </div>
 </div>
 </section>
-<section id="outline-container-org648c2f4" class="outline-2">
-<h2 id="org648c2f4"><a href="https://github.com/lotabout/skim">skim</a></h2>
-<div class="outline-text-2" id="text-org648c2f4">
+<section id="outline-container-org530237a" class="outline-2">
+<h2 id="org530237a"><a href="https://github.com/lotabout/skim">skim</a></h2>
+<div class="outline-text-2" id="text-org530237a">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/120-skim.bash
 </pre>
@@ -2550,9 +2553,9 @@ explicitly:
 </div>
 </div>
 </section>
-<section id="outline-container-org530237a" class="outline-2">
-<h2 id="org530237a">SSH</h2>
-<div class="outline-text-2" id="text-org530237a">
+<section id="outline-container-org651f861" class="outline-2">
+<h2 id="org651f861">SSH</h2>
+<div class="outline-text-2" id="text-org651f861">
 <p>
 Create a configuration directory:
 </p>
@@ -2563,7 +2566,7 @@ Create a configuration directory:
 </div>
 
 <p>
-On macOS, 1Password requires this to work with the <a href="#orgbec9ad4">Environment</a> properly:
+On macOS, 1Password requires this to work with the <a href="#org94dc380">Environment</a> properly:
 </p>
 
 <div class="org-src-container">
@@ -2571,9 +2574,9 @@ On macOS, 1Password requires this to work with the <a href="#orgbec9ad4">Environ
 </pre>
 </div>
 </div>
-<div id="outline-container-org651f861" class="outline-3">
-<h3 id="org651f861"><code>~/.ssh/config</code></h3>
-<div class="outline-text-3" id="text-org651f861">
+<div id="outline-container-org6ee8555" class="outline-3">
+<h3 id="org6ee8555"><code>~/.ssh/config</code></h3>
+<div class="outline-text-3" id="text-org6ee8555">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.ssh/config
 </pre>
@@ -2591,9 +2594,9 @@ Include ~/.ssh/config.d/*
 </div>
 </div>
 </div>
-<div id="outline-container-org6ee8555" class="outline-3">
-<h3 id="org6ee8555">Personal</h3>
-<div class="outline-text-3" id="text-org6ee8555">
+<div id="outline-container-org8948797" class="outline-3">
+<h3 id="org8948797">Personal</h3>
+<div class="outline-text-3" id="text-org8948797">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.ssh/config.d/personal
 </pre>
@@ -2615,9 +2618,9 @@ Splitting work &amp; personal to allow for using multiple GitHub accounts.  See
 </div>
 </div>
 </div>
-<div id="outline-container-org8948797" class="outline-3">
-<h3 id="org8948797">Work</h3>
-<div class="outline-text-3" id="text-org8948797">
+<div id="outline-container-orgbec9ad4" class="outline-3">
+<h3 id="orgbec9ad4">Work</h3>
+<div class="outline-text-3" id="text-orgbec9ad4">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.ssh/config.d/work
 </pre>
@@ -2634,9 +2637,9 @@ header-args: :mkdirp yes :tangle ~/.ssh/config.d/work
 </div>
 </div>
 </div>
-<div id="outline-container-orgbec9ad4" class="outline-3">
-<h3 id="orgbec9ad4">Environment</h3>
-<div class="outline-text-3" id="text-orgbec9ad4">
+<div id="outline-container-org94dc380" class="outline-3">
+<h3 id="org94dc380">Environment</h3>
+<div class="outline-text-3" id="text-org94dc380">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/101-ssh-env.bash
 </pre>
@@ -2648,9 +2651,9 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/101-ssh-env.bash
 </div>
 </div>
 </section>
-<section id="outline-container-org94dc380" class="outline-2">
-<h2 id="org94dc380">Starship</h2>
-<div class="outline-text-2" id="text-org94dc380">
+<section id="outline-container-org38570f5" class="outline-2">
+<h2 id="org38570f5">Starship</h2>
+<div class="outline-text-2" id="text-org38570f5">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/999-starship.bash
 </pre>
@@ -2675,16 +2678,16 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/999-starship.bash
 </pre>
 </div>
 </div>
-<div id="outline-container-org38570f5" class="outline-3">
-<h3 id="org38570f5"><code>~/.config/starship.toml</code></h3>
-<div class="outline-text-3" id="text-org38570f5">
+<div id="outline-container-org7e0b801" class="outline-3">
+<h3 id="org7e0b801"><code>~/.config/starship.toml</code></h3>
+<div class="outline-text-3" id="text-org7e0b801">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/starship.toml
 </pre>
 </div>
-<div id="outline-container-org75a6fe5" class="outline-4">
-<h4 id="org75a6fe5"><a href="https://starship.rs/config/#prompt">https://starship.rs/config/#prompt</a></h4>
-<div class="outline-text-4" id="text-org75a6fe5">
+<div id="outline-container-org9f48080" class="outline-4">
+<h4 id="org9f48080"><a href="https://starship.rs/config/#prompt">https://starship.rs/config/#prompt</a></h4>
+<div class="outline-text-4" id="text-org9f48080">
 <p>
 This section must be first!
 </p>
@@ -2746,9 +2749,9 @@ This section must be first!
 </div>
 </div>
 </div>
-<div id="outline-container-org375df87" class="outline-4">
-<h4 id="org375df87">Presets</h4>
-<div class="outline-text-4" id="text-org375df87">
+<div id="outline-container-org0313799" class="outline-4">
+<h4 id="org0313799">Presets</h4>
+<div class="outline-text-4" id="text-org0313799">
 <p>
 Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'll never need.
 </p>
@@ -2805,9 +2808,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-orgb5d4a0e" class="outline-4">
-<h4 id="orgb5d4a0e"><a href="https://starship.rs/config/#aws">https://starship.rs/config/#aws</a></h4>
-<div class="outline-text-4" id="text-orgb5d4a0e">
+<div id="outline-container-org2e631b9" class="outline-4">
+<h4 id="org2e631b9"><a href="https://starship.rs/config/#aws">https://starship.rs/config/#aws</a></h4>
+<div class="outline-text-4" id="text-org2e631b9">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">aws</span>]
 <span class="org-variable-name">symbol</span> = <span class="org-string">'aws '</span>
@@ -2816,9 +2819,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-orgb671d45" class="outline-4">
-<h4 id="orgb671d45"><a href="https://starship.rs/config/#battery">https://starship.rs/config/#battery</a></h4>
-<div class="outline-text-4" id="text-orgb671d45">
+<div id="outline-container-org1345e6f" class="outline-4">
+<h4 id="org1345e6f"><a href="https://starship.rs/config/#battery">https://starship.rs/config/#battery</a></h4>
+<div class="outline-text-4" id="text-org1345e6f">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">battery</span>]
 <span class="org-variable-name">disabled</span> = <span class="org-keyword">true</span>
@@ -2826,9 +2829,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org8dfee0a" class="outline-4">
-<h4 id="org8dfee0a"><a href="https://starship.rs/config/#character">https://starship.rs/config/#character</a></h4>
-<div class="outline-text-4" id="text-org8dfee0a">
+<div id="outline-container-org2c8b4f1" class="outline-4">
+<h4 id="org2c8b4f1"><a href="https://starship.rs/config/#character">https://starship.rs/config/#character</a></h4>
+<div class="outline-text-4" id="text-org2c8b4f1">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">character</span>]
 <span class="org-variable-name">success_symbol</span> = <span class="org-string">'[#](bold green)'</span>
@@ -2837,9 +2840,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-orgebfd51c" class="outline-4">
-<h4 id="orgebfd51c"><a href="https://starship.rs/config/#command-duration">https://starship.rs/config/#command-duration</a></h4>
-<div class="outline-text-4" id="text-orgebfd51c">
+<div id="outline-container-org66bed1d" class="outline-4">
+<h4 id="org66bed1d"><a href="https://starship.rs/config/#command-duration">https://starship.rs/config/#command-duration</a></h4>
+<div class="outline-text-4" id="text-org66bed1d">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">cmd_duration</span>]
 <span class="org-variable-name">format</span> = <span class="org-string">'[$duration]($style) '</span>
@@ -2847,9 +2850,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org85ab081" class="outline-4">
-<h4 id="org85ab081"><a href="https://starship.rs/config/#directory">https://starship.rs/config/#directory</a></h4>
-<div class="outline-text-4" id="text-org85ab081">
+<div id="outline-container-org225b935" class="outline-4">
+<h4 id="org225b935"><a href="https://starship.rs/config/#directory">https://starship.rs/config/#directory</a></h4>
+<div class="outline-text-4" id="text-org225b935">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">directory</span>]
 <span class="org-variable-name">read_only</span> = <span class="org-string">' &#983870;'</span>
@@ -2859,9 +2862,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org26bb722" class="outline-4">
-<h4 id="org26bb722"><a href="https://starship.rs/config/#docker-context">https://starship.rs/config/#docker-context</a></h4>
-<div class="outline-text-4" id="text-org26bb722">
+<div id="outline-container-org0e605d2" class="outline-4">
+<h4 id="org0e605d2"><a href="https://starship.rs/config/#docker-context">https://starship.rs/config/#docker-context</a></h4>
+<div class="outline-text-4" id="text-org0e605d2">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">docker_context</span>]
 <span class="org-variable-name">symbol</span> = <span class="org-string">'&#62216;'</span>
@@ -2870,9 +2873,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org6655ac7" class="outline-4">
-<h4 id="org6655ac7"><a href="https://starship.rs/config/#go">https://starship.rs/config/#go</a></h4>
-<div class="outline-text-4" id="text-org6655ac7">
+<div id="outline-container-org9fb1fbd" class="outline-4">
+<h4 id="org9fb1fbd"><a href="https://starship.rs/config/#go">https://starship.rs/config/#go</a></h4>
+<div class="outline-text-4" id="text-org9fb1fbd">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">golang</span>]
 <span class="org-variable-name">symbol</span> = <span class="org-string">'&#985043; '</span>
@@ -2881,9 +2884,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org30a4d89" class="outline-4">
-<h4 id="org30a4d89"><a href="https://starship.rs/config/#google-cloud-gcloud">https://starship.rs/config/#google-cloud-gcloud</a></h4>
-<div class="outline-text-4" id="text-org30a4d89">
+<div id="outline-container-org5ab56b1" class="outline-4">
+<h4 id="org5ab56b1"><a href="https://starship.rs/config/#google-cloud-gcloud">https://starship.rs/config/#google-cloud-gcloud</a></h4>
+<div class="outline-text-4" id="text-org5ab56b1">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">gcloud</span>]
 <span class="org-variable-name">symbol</span> = <span class="org-string">'gcp '</span>
@@ -2896,9 +2899,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org160238c" class="outline-4">
-<h4 id="org160238c"><a href="https://starship.rs/config/#git-branch">https://starship.rs/config/#git-branch</a></h4>
-<div class="outline-text-4" id="text-org160238c">
+<div id="outline-container-org5b806d2" class="outline-4">
+<h4 id="org5b806d2"><a href="https://starship.rs/config/#git-branch">https://starship.rs/config/#git-branch</a></h4>
+<div class="outline-text-4" id="text-org5b806d2">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">git_branch</span>]
 <span class="org-variable-name">always_show_remote</span> = <span class="org-keyword">false</span>
@@ -2908,9 +2911,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org100b653" class="outline-4">
-<h4 id="org100b653"><a href="https://starship.rs/config/#git-status">https://starship.rs/config/#git-status</a></h4>
-<div class="outline-text-4" id="text-org100b653">
+<div id="outline-container-org37cd64c" class="outline-4">
+<h4 id="org37cd64c"><a href="https://starship.rs/config/#git-status">https://starship.rs/config/#git-status</a></h4>
+<div class="outline-text-4" id="text-org37cd64c">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">git_status</span>]
 <span class="org-comment-delimiter"># </span><span class="org-comment">all_status = '$conflicted$stashed$deleted$renamed$modified$staged$untracked'</span>
@@ -2919,9 +2922,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org36242ad" class="outline-4">
-<h4 id="org36242ad"><a href="https://starship.rs/config/#kubernetes">https://starship.rs/config/#kubernetes</a></h4>
-<div class="outline-text-4" id="text-org36242ad">
+<div id="outline-container-org3f83322" class="outline-4">
+<h4 id="org3f83322"><a href="https://starship.rs/config/#kubernetes">https://starship.rs/config/#kubernetes</a></h4>
+<div class="outline-text-4" id="text-org3f83322">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">kubernetes</span>]
 <span class="org-variable-name">disabled</span> = <span class="org-keyword">false</span>
@@ -2931,9 +2934,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org262d4f4" class="outline-4">
-<h4 id="org262d4f4"><a href="https://starship.rs/config/#python">https://starship.rs/config/#python</a></h4>
-<div class="outline-text-4" id="text-org262d4f4">
+<div id="outline-container-orgcc567fb" class="outline-4">
+<h4 id="orgcc567fb"><a href="https://starship.rs/config/#python">https://starship.rs/config/#python</a></h4>
+<div class="outline-text-4" id="text-orgcc567fb">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">python</span>]
 <span class="org-variable-name">symbol</span> = <span class="org-string">'&#57909; '</span>
@@ -2944,9 +2947,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </section>
-<section id="outline-container-org7e0b801" class="outline-2">
-<h2 id="org7e0b801"><a href="https://github.com/alloy/terminal-notifier">terminal-notifier</a></h2>
-<div class="outline-text-2" id="text-org7e0b801">
+<section id="outline-container-org37a066c" class="outline-2">
+<h2 id="org37a066c"><a href="https://github.com/alloy/terminal-notifier">terminal-notifier</a></h2>
+<div class="outline-text-2" id="text-org37a066c">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/599-terminal-notifier.bash
 </pre>
@@ -2957,9 +2960,9 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/599-terminal-notifier.bash
 </div>
 </div>
 </section>
-<section id="outline-container-org37a066c" class="outline-2">
-<h2 id="org37a066c">Terraform</h2>
-<div class="outline-text-2" id="text-org37a066c">
+<section id="outline-container-orga4ab287" class="outline-2">
+<h2 id="orga4ab287">Terraform</h2>
+<div class="outline-text-2" id="text-orga4ab287">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/525-terraform.bash
 </pre>
@@ -2970,9 +2973,9 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/525-terraform.bash
 </div>
 </div>
 </section>
-<section id="outline-container-orga4ab287" class="outline-2">
-<h2 id="orga4ab287"><a href="https://wezfurlong.org/wezterm/index.html">WezTerm</a></h2>
-<div class="outline-text-2" id="text-orga4ab287">
+<section id="outline-container-orgc36236b" class="outline-2">
+<h2 id="orgc36236b"><a href="https://wezfurlong.org/wezterm/index.html">WezTerm</a></h2>
+<div class="outline-text-2" id="text-orgc36236b">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.wezterm.lua
 </pre>
@@ -3050,9 +3053,9 @@ config.keys = {
 </div>
 </div>
 </section>
-<section id="outline-container-orgc36236b" class="outline-2">
-<h2 id="orgc36236b"><code>yamllint</code></h2>
-<div class="outline-text-2" id="text-orgc36236b">
+<section id="outline-container-org39af42c" class="outline-2">
+<h2 id="org39af42c"><code>yamllint</code></h2>
+<div class="outline-text-2" id="text-org39af42c">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/yamllint/config
 </pre>
@@ -3105,9 +3108,9 @@ See <a href="https://yamllint.readthedocs.io/en/stable/configuration.html">https
 </div>
 </div>
 </section>
-<section id="outline-container-org39af42c" class="outline-2">
-<h2 id="org39af42c"><code>~/.inputrc</code></h2>
-<div class="outline-text-2" id="text-org39af42c">
+<section id="outline-container-org9c54a6f" class="outline-2">
+<h2 id="org9c54a6f"><code>~/.inputrc</code></h2>
+<div class="outline-text-2" id="text-org9c54a6f">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.inputrc
 </pre>
@@ -3130,7 +3133,7 @@ header-args: :mkdirp yes :tangle ~/.inputrc
 </article>
 <footer id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2025-01-12 Sun 20:33</p>
+<p class="date">2025-01-13 Mon 08:31</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.4 (<a href="https://orgmode.org">Org</a> mode 9.7.18)</p>
 </footer>
 </body>
