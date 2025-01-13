@@ -4,4 +4,5 @@
 
 A collection of [[http://en.wikipedia.org/wiki/Literate_programming][literate programming]] dotfiles created and maintained in [[http://www.gnu.org/software/emacs/][Emacs]] with [[http://orgmode.org/][Org mode.]]
 
-This =README= is just a placeholder for GitHub.  The entry point to everything for macOS is [[file:index.org]].
+This =README= is just a placeholder for GitHub.  The entry point for my macOS configuration is [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]].  The rendered
+document is available at this project's [[https://krismolendyke.github.io/dotfiles/][GitHub Pages site]].
