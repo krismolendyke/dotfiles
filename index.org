@@ -23,7 +23,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    This should be the Homebrew installed =bash= /not/ the system =bash= path:
 
    #+begin_src sh
-     export SHELL="${HOMEBREW_PREFIX}/bin/bash" && \
+     eval "$(/opt/homebrew/bin/brew shellenv)" && \
+         export SHELL="${HOMEBREW_PREFIX}/bin/bash" && \
          sudo dscl . -create ${HOME} UserShell ${SHELL} && \
          dscl . -read ${HOME} UserShell
    #+end_src

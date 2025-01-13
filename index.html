@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-01-13 Mon 08:31 -->
+<!-- 2025-01-13 Mon 09:12 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1321,7 +1321,8 @@ This should be the Homebrew installed <code>bash</code> <i>not</i> the system <c
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span class="org-builtin">export</span> <span class="org-variable-name">SHELL</span>=<span class="org-string">"${HOMEBREW_PREFIX}/bin/bash"</span> &amp;&amp; <span class="org-sh-escaped-newline">\</span>
+<pre class="src src-sh"><span class="org-builtin">eval</span> <span class="org-string">"$(</span><span class="org-sh-quoted-exec">/opt/homebrew/bin/brew shellenv</span><span class="org-string">)"</span> &amp;&amp; <span class="org-sh-escaped-newline">\</span>
+    <span class="org-builtin">export</span> <span class="org-variable-name">SHELL</span>=<span class="org-string">"${HOMEBREW_PREFIX}/bin/bash"</span> &amp;&amp; <span class="org-sh-escaped-newline">\</span>
     sudo dscl . -create ${<span class="org-variable-name">HOME</span>} UserShell ${<span class="org-variable-name">SHELL</span>} &amp;&amp; <span class="org-sh-escaped-newline">\</span>
     dscl . -read ${<span class="org-variable-name">HOME</span>} UserShell
 </pre>
@@ -3133,7 +3134,7 @@ header-args: :mkdirp yes :tangle ~/.inputrc
 </article>
 <footer id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2025-01-13 Mon 08:31</p>
+<p class="date">2025-01-13 Mon 09:12</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.4 (<a href="https://orgmode.org">Org</a> mode 9.7.18)</p>
 </footer>
 </body>
