@@ -2,8 +2,7 @@
 #+OPTIONS: toc:nil num:nil ^:nil
 #+STARTUP: showall
 
-In addition to the base =README.org= file, this document describes and
-creates Linux specific configuration.
+In addition to the base =index.org= file, this document describes and creates Linux specific configuration.
 
 https://wiki.archlinux.org/index.php/Security#Lock_out_user_after_three_failed_login_attempts
 
