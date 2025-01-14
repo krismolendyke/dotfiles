@@ -857,6 +857,15 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      [ -e "${HOME}/.opam/opam-init/init.sh" ] && source "${HOME}/.opam/opam-init/init.sh"
    #+end_src
 
+* PostgreSQL
+   :PROPERTIES:
+   :header-args: :mkdirp yes :tangle ~/.bashrc.d/515-postgresql.bash
+   :END:
+
+  #+begin_src sh
+    [ -d $(brew --prefix postgresql@16) ] && pathmunge "$(brew --prefix postgresql@16)/bin"
+  #+end_src
+
 * Python
 
 ** =~/requirements-to-freeze.txt=
