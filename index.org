@@ -838,7 +838,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   :END:
 
   #+begin_src sh
-    if complete -v nvm >/dev/null 2>&1; then
+    if command -v nvm >/dev/null 2>&1; then
         export NVM_DIR="$HOME/.nvm"
         # shellcheck source=/dev/null
         [ -e "$(brew --prefix nvm)/nvm.sh" ] && source "$(brew --prefix nvm)/nvm.sh"
