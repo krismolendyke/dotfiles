@@ -634,7 +634,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      [tag]
              sort = version:refname
 
-     # Conditional include to set some work defaults, e.g., email
+     # Conditional include to set some work defaults, e.g., email, GHE interal url replacement, ssh signing
+     # This file is stored in work 1Password Employee vault
      [includeIf "gitdir/i:~/code/work/"]
              path = ~/code/work/.gitconfig
    #+end_src
