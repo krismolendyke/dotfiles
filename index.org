@@ -501,6 +501,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     - [X] https://ghostty.org/docs/config/keybind/reference#toggle_quick_terminal
 
     #+begin_src conf
+      alpha-blending = native
+
       background-opacity = 0.75
       background-blur-radius = 20
 
