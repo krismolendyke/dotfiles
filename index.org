@@ -536,7 +536,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       keybind = global:ctrl+alt+cmd+t=toggle_quick_terminal
 
       macos-option-as-alt = true
-      macos-titlebar-style = hidden
+      macos-titlebar-style = native
 
       quit-after-last-window-closed = true
 
