@@ -471,7 +471,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
         # Workaround for https://github.com/orgs/eza-community/discussions/209#discussioncomment-10801021 which is apparently still not resolved
         export EXA_COLORS="xx=''"
         export EZA_CONFIG_DIR="${HOME}/.config/eza"
-        export EZA_ICON_SPACING=1
+        export EZA_ICON_SPACING=2
         export EZA_ICONS_AUTO=1
         alias l="eza --classify --git --git-repos --grid"
         alias ls="eza --classify --git --git-repos --grid"
@@ -501,6 +501,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     - [X] https://ghostty.org/docs/config/keybind/reference#toggle_quick_terminal
 
     #+begin_src conf
+      # See https://github.com/ghostty-org/ghostty/discussions/3501#discussioncomment-12102205
+      font-codepoint-map = U+e000-U+e00a,U+ea60-U+ebeb,U+e0a0-U+e0c8,U+e0ca,U+e0cc-U+e0d7,U+e200-U+e2a9,U+e300-U+e3e3,U+e5fa-U+e6b1,U+e700-U+e7c5,U+ed00-U+efc1,U+f000-U+f2ff,U+f000-U+f2e0,U+f300-U+f372,U+f400-U+f533,U+f0001-U+f1af0=Symbols Nerd Font Mono
+
       alpha-blending = native
 
       background-opacity = 0.75
