@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-01-25 Sat 21:33 -->
+<!-- 2025-02-09 Sun 11:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1884,7 +1884,7 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/130-eza.bash
     <span class="org-comment-delimiter"># </span><span class="org-comment">Workaround for https://github.com/orgs/eza-community/discussions/209#discussioncomment-10801021 which is apparently still not resolved</span>
     <span class="org-builtin">export</span> <span class="org-variable-name">EXA_COLORS</span>=<span class="org-string">"xx=''"</span>
     <span class="org-builtin">export</span> <span class="org-variable-name">EZA_CONFIG_DIR</span>=<span class="org-string">"${HOME}/.config/eza"</span>
-    <span class="org-builtin">export</span> <span class="org-variable-name">EZA_ICON_SPACING</span>=1
+    <span class="org-builtin">export</span> <span class="org-variable-name">EZA_ICON_SPACING</span>=2
     <span class="org-builtin">export</span> <span class="org-variable-name">EZA_ICONS_AUTO</span>=1
     <span class="org-builtin">alias</span> <span class="org-variable-name">l</span>=<span class="org-string">"eza --classify --git --git-repos --grid"</span>
     <span class="org-builtin">alias</span> <span class="org-variable-name">ls</span>=<span class="org-string">"eza --classify --git --git-repos --grid"</span>
@@ -1926,7 +1926,12 @@ header-args: :mkdirp yes :tangle ~/.config/ghostty/config
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-conf"><span class="org-variable-name">background-opacity</span> = 0.75
+<pre class="src src-conf"><span class="org-comment-delimiter"># </span><span class="org-comment">See https://github.com/ghostty-org/ghostty/discussions/3501#discussioncomment-12102205</span>
+<span class="org-variable-name">font-codepoint-map</span> = U+e000-U+e00a,U+ea60-U+ebeb,U+e0a0-U+e0c8,U+e0ca,U+e0cc-U+e0d7,U+e200-U+e2a9,U+e300-U+e3e3,U+e5fa-U+e6b1,U+e700-U+e7c5,U+ed00-U+efc1,U+f000-U+f2ff,U+f000-U+f2e0,U+f300-U+f372,U+f400-U+f533,U+f0001-U+f1af0=Symbols Nerd Font Mono
+
+<span class="org-variable-name">alpha-blending</span> = native
+
+<span class="org-variable-name">background-opacity</span> = 0.75
 <span class="org-variable-name">background-blur-radius</span> = 20
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">See also shell-integration-features</span>
@@ -1959,7 +1964,7 @@ header-args: :mkdirp yes :tangle ~/.config/ghostty/config
 <span class="org-variable-name">keybind</span> = global:ctrl+alt+cmd+t=toggle_quick_terminal
 
 <span class="org-variable-name">macos-option-as-alt</span> = true
-<span class="org-variable-name">macos-titlebar-style</span> = hidden
+<span class="org-variable-name">macos-titlebar-style</span> = native
 
 <span class="org-variable-name">quit-after-last-window-closed</span> = true
 
@@ -2073,7 +2078,8 @@ when making sure that the config values are set properly.
 [<span class="org-type">tag</span>]
         <span class="org-variable-name">sort</span> = version:refname
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Conditional include to set some work defaults, e.g., email</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Conditional include to set some work defaults, e.g., email, GHE interal url replacement, ssh signing</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">This file is stored in work 1Password Employee vault</span>
 [includeIf <span class="org-string">"gitdir/i:~/code/work/"</span>]
         <span class="org-variable-name">path</span> = ~/code/work/.gitconfig
 </pre>
@@ -3148,7 +3154,7 @@ header-args: :mkdirp yes :tangle ~/.inputrc
 </article>
 <footer id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2025-01-25 Sat 21:33</p>
+<p class="date">2025-02-09 Sun 11:10</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.4 (<a href="https://orgmode.org">Org</a> mode 9.7.18)</p>
 </footer>
 </body>
