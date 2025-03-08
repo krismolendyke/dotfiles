@@ -869,7 +869,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    :END:
 
   #+begin_src sh
-    [ -d $(brew --prefix postgresql@16) ] && pathmunge "$(brew --prefix postgresql@16)/bin"
+    [ -d "$(brew --prefix postgresql@16)" ] && pathmunge "$(brew --prefix postgresql@16)/bin"
   #+end_src
 
 * Python
