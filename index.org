@@ -1375,7 +1375,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
        function tv_smart_autocomplete() {
            local current_prompt="${READLINE_LINE:0:$READLINE_POINT}"
 
-           local output=$(tv --autocomplete-prompt "$current_prompt")
+           local output
+           output=$(tv --autocomplete-prompt "$current_prompt")
 
            if [[ -n $output ]]; then
                # add a space if the prompt does not end with one
@@ -1389,7 +1390,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
        function tv_shell_history() {
            local current_prompt="${READLINE_LINE:0:$READLINE_POINT}"
 
-           local output=$(tv bash-history --input "$current_prompt")
+           local output
+           output=$(tv bash-history --input "$current_prompt")
 
            if [[ -n $output ]]; then
                READLINE_LINE=$output
