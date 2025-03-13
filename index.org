@@ -1378,7 +1378,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
            local current_prompt="${READLINE_LINE:0:$READLINE_POINT}"
 
            local output
-           output=$(tv bash-history --input "$current_prompt")
+           output=$(tv --no-preview bash-history --input "$current_prompt")
 
            if [[ -n $output ]]; then
                READLINE_LINE=$output
