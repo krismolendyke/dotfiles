@@ -257,8 +257,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       brew "pre-commit"
       brew "pstree"
       brew "pv"
-      brew "pyenv"
-      brew "pyenv-virtualenv"
       brew "python@3.10"
       brew "repo"
       brew "ripgrep"
@@ -924,17 +922,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
          pip install --break-system-packages --user --upgrade --requirement "${HOME}/requirements-to-freeze.txt"
          pip freeze > "${HOME}/requirements.txt"
      }
-   #+end_src
-
-** =pyenv=
-   :PROPERTIES:
-   :header-args: :mkdirp yes :tangle ~/.bashrc.d/103-pyenv.bash
-   :END:
-
-   #+begin_src sh
-     if command -v pyenv >/dev/null 2>&1; then
-         eval "$(pyenv init -)"
-     fi
    #+end_src
 
 ** TODO =uv=
