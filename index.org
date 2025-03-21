@@ -877,59 +877,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Python
 
-** =~/requirements-to-freeze.txt=
-   :PROPERTIES:
-   :header-args: :mkdirp yes :tangle ~/requirements-to-freeze.txt
-   :END:
-
-   Use [[https://kennethreitz.org/essays/2016/02/25/a-better-pip-workflow][A Better Pip Workflow™]] to specify packages that I do actually want installed to the user's packages.
-
-   #+begin_src python
-     # User packages
-     boto3
-     botocore
-     http-prompt
-     keyring
-     pipdeptree[graphviz]
-     pylsp-rope
-     python-lsp-server[all]
-     twine
-     urllib3
-     virtualenvwrapper
-   #+end_src
-
-** Configuration
-   :PROPERTIES:
-   :header-args: :mkdirp yes :tangle ~/.bashrc.d/102-python.bash
-   :END:
-
-   #+begin_src sh
-     pathmunge "$(brew --prefix python)/libexec/bin"
-   #+end_src
-
-   Add Python =site.USER_BASE= for user site-packages and =pip install --user= installations.  See
-   https://docs.python.org/3/install/index.html#inst-alt-install-user
-
-   #+begin_src sh
-     PYTHON_USER_BASE=$(python -m site --user-base)
-     export PYTHON_USER_BASE
-     pathmunge "${PYTHON_USER_BASE}/bin"
-   #+end_src
-
-   Old function I've used to bootstrap a sane Python user environment:
-
-   #+begin_src sh
-     function k20e_pip_upgrade() {
-         if [[ $(which deactivate) == "deactivate: function" && -n ${VIRTUAL_ENV} ]]; then
-             echo "Deactivating current virtual environment ${VIRTUAL_ENV}"
-             deactivate
-         fi
-         pip install --break-system-packages --user --upgrade --requirement "${HOME}/requirements-to-freeze.txt"
-         pip freeze > "${HOME}/requirements.txt"
-     }
-   #+end_src
-
-** TODO =uv=
+  https://docs.astral.sh/uv/ FTW I'll remove this section soon.
 
 * Rancher
   :PROPERTIES:
