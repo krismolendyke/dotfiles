@@ -1428,7 +1428,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      # ------------------------
      [keybindings]
      # Quit the application
-     quit = ["esc", "ctrl-c"]
+     quit = ["esc", "ctrl-c", "ctrl-g"]
      # Scrolling through entries
      select_next_entry = ["down", "ctrl-n", "ctrl-j"]
      select_prev_entry = ["up", "ctrl-p", "ctrl-k"]
@@ -1450,7 +1450,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      # Toggle the send to channel mode
      toggle_send_to_channel = "ctrl-s"
      # Toggle the help bar
-     toggle_help = "ctrl-g"
+     toggle_help = "ctrl-h"
      # Toggle the preview panel
      toggle_preview = "ctrl-o"
 
