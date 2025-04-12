@@ -626,6 +626,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
              br = branch -vv
              wdiff = diff --color-moved --color-words --ext-diff
              ds = diff --color-moved --staged --ext-diff
+             g = log --oneline --graph --decorate --all
      [advice]
              statusHints = true
      [rebase]
