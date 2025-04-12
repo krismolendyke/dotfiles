@@ -518,8 +518,19 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
       font-family = ""
       font-family = PragmataPro Mono Liga
-      font-feature = calt
       font-size = 20
+
+      # Font features for PragmataPro
+      # Contextual alternate ligatures
+      font-feature = calt
+      # Ligatures
+      font-feature = liga
+      # Git tree
+      font-feature = ss13
+      # Serif
+      # font-feature = ss16
+      # BUG // TODO // HACK tags
+      font-feature = ss18
 
       # Backward erase word
       # This binds cmd+h to alt+backspace which will backward erase one word
