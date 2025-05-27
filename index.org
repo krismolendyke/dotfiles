@@ -878,6 +878,15 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      [ -e "${HOME}/.opam/opam-init/init.sh" ] && source "${HOME}/.opam/opam-init/init.sh"
    #+end_src
 
+* Playdate
+   :PROPERTIES:
+   :header-args: :mkdirp yes :tangle ~/.bashrc.d/511-playdate.bash
+   :END:
+
+  #+begin_src sh
+    [ -e "${HOME}/Developer/PlaydateSDK" ] && export PLAYDATE_SDK_PATH="${HOME}/Developer/PlaydateSDK" && pathmunge "${PLAYDATE_SDK_PATH}/bin"
+  #+end_src
+
 * PostgreSQL
    :PROPERTIES:
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/515-postgresql.bash
