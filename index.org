@@ -996,12 +996,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * SSH
 
-  Create a configuration directory:
-
-  #+begin_src sh
-    mkdir -p ${HOME}/.ssh/config.d
-  #+end_src
-
   On macOS, 1Password requires this to work with the [[*Environment][Environment]] properly:
 
   #+begin_src sh
