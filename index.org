@@ -215,6 +215,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       brew "automake"
       brew "bash"
       brew "bash-completion@2"
+      brew "bat"
       brew "bison"
       brew "chafa"
       brew "cmake"
@@ -223,6 +224,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       brew "difftastic"
       brew "dive"
       brew "eza"
+      brew "fd"
       brew "libssh"
       brew "xvid"
       brew "ffmpeg"
@@ -1384,7 +1386,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      # General settings
      # ----------------------------------------------------------------------------
-     frame_rate = 60 # DEPRECATED: this option is no longer used
      tick_rate = 50
 
      [ui]
@@ -1469,12 +1470,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      # Toggle the preview panel
      toggle_preview = "ctrl-o"
 
-     # Remote control mode
-     # -------------------------------
-     # Select an entry
-     select_entry = "enter"
-
-
      # Shell integration
      # ----------------------------------------------------------------------------
      #
@@ -1558,11 +1553,10 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    #+end_src
 
 ** Cable Channels
-   :PROPERTIES:
-   :header-args: :mkdirp yes :tangle ~/.config/television/cable_channels.toml
-   :END:
 
-   Modified from https://github.com/alexpasmantier/television/blob/main/cable/unix-channels.toml
+   Modified from https://github.com/alexpasmantier/television/tree/main/cable/unix
+
+   TODO migrate these to the 0.12+ format :/
 
    #+begin_src toml
      # Git
@@ -1570,36 +1564,68 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      name = "git-diff"
      source_command = "git diff --name-only"
      preview_command = "git diff --color=always {0}"
-
      [[cable_channel]]
      name = "git-reflog"
      source_command = 'git reflog'
      preview_command = 'git show -p --stat --pretty=fuller --color=always {0}'
-
      [[cable_channel]]
      name = "git-log"
      source_command = "git log --oneline --date=short --pretty=\"format:%h %s %an %cd\" \"$@\""
      preview_command = "git show -p --stat --pretty=fuller --color=always {0}"
-
      [[cable_channel]]
      name = "git-branch"
      source_command = "git --no-pager branch --all --format=\"%(refname:short)\""
      preview_command = "git show -p --stat --pretty=fuller --color=always {0}"
-
      [[cable_channel]]
      name = "docker-images"
      source_command = "docker image list --format \"{{.ID}}\""
      preview_command = "docker image inspect {0} | jq -C"
-
      [[cable_channel]]
      name = "my-dotfiles"
      source_command = "find $HOME/.bashrc $HOME/.bashrc.d -type f"
      preview_command = ":files:"
-
      [[cable_channel]]
      name = "bash-history"
      source_command = "sed '1!G;h;$!d' ${HISTFILE:-${HOME}/.bash_history} | rg -v '^#' | nl | sort -k2 -u | sort -n | cut -f 2"
    #+end_src
+
+*** Bash History
+    :PROPERTIES:
+    :header-args: :mkdirp yes :tangle ~/.config/television/cable/bash-history.toml
+    :END:
+
+    #+begin_src toml
+      # UNTESTED
+      [metadata]
+      name = "bash-history"
+      description = "A channel to select from your bash history"
+      requirements = ["bash"]
+
+      [source]
+      command = "sed '1!G;h;$!d' ${HISTFILE:-${HOME}/.bash_history} | rg -v '^#' | nl | sort -k2 -u | sort -n | cut -f 2"
+    #+end_src
+
+*** Files
+    :PROPERTIES:
+    :header-args: :mkdirp yes :tangle ~/.config/television/cable/files.toml
+    :END:
+
+    #+begin_src toml
+      [metadata]
+      name = "files"
+      description = "A channel to select files and directories"
+      requirements = ["fd", "bat"]
+
+      [source]
+      command = ["fd -t f", "fd -t f -H"]
+
+      [preview]
+      command = "bat -n --color=always '{}'"
+      env = { BAT_THEME = "ansi" }
+
+      [keybindings]
+      shortcut = "f1"
+    #+end_src
 
 ** Theme
    :PROPERTIES:
@@ -1620,13 +1646,15 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      result_line_number_fg = 'bright-yellow'
      result_value_fg = 'white'
      selection_fg = 'bright-green'
-     selection_bg = '#eeeeee'
+     selection_bg = 'bright-black'
      match_fg = 'bright-red'
      # preview
      preview_title_fg = 'bright-magenta'
      # modes
-     channel_mode_fg = 'green'
-     remote_control_mode_fg = 'yellow'
+     channel_mode_fg = 'black'
+     channel_mode_bg = 'green'
+     remote_control_mode_fg = 'black'
+     remote_control_mode_bg = 'yellow'
      send_to_channel_mode_fg = 'cyan'
    #+end_src
 
