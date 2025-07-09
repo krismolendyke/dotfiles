@@ -1319,47 +1319,51 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   #+end_src
 
 * Television
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/140-television.bash
-  :END:
 
-  This eats =
+  A fuzzy finder https://alexpasmantier.github.io/television/
 
-  Modified output of =tv init bash=:
+** Smart Autocomplete & Shell History
+   :PROPERTIES:
+   :header-args: :mkdirp yes :tangle ~/.bashrc.d/140-television.bash
+   :END:
 
-  #+begin_src sh
-    if command -v tv >/dev/null 2>&1; then
-       function tv_smart_autocomplete() {
-           local current_prompt="${READLINE_LINE:0:$READLINE_POINT}"
+   This eats =
 
-           local output
-           output=$(tv --autocomplete-prompt "$current_prompt")
+   Modified output of =tv init bash=:
 
-           if [[ -n $output ]]; then
-               # add a space if the prompt does not end with one
-               [[ "${current_prompt}" != *" " ]] && current_prompt="${current_prompt} "
+   #+begin_src sh
+     if command -v tv >/dev/null 2>&1; then
+        function tv_smart_autocomplete() {
+            local current_prompt="${READLINE_LINE:0:$READLINE_POINT}"
 
-               READLINE_LINE=$current_prompt$output
-               READLINE_POINT=${#READLINE_LINE}
-           fi
-       }
+            local output
+            output=$(tv --autocomplete-prompt "$current_prompt")
 
-       function tv_shell_history() {
-           local current_prompt="${READLINE_LINE:0:$READLINE_POINT}"
+            if [[ -n $output ]]; then
+                # add a space if the prompt does not end with one
+                [[ "${current_prompt}" != *" " ]] && current_prompt="${current_prompt} "
 
-           local output
-           output=$(tv --no-preview bash-history --input "$current_prompt")
+                READLINE_LINE=$current_prompt$output
+                READLINE_POINT=${#READLINE_LINE}
+            fi
+        }
 
-           if [[ -n $output ]]; then
-               READLINE_LINE=$output
-               READLINE_POINT=${#READLINE_LINE}
-           fi
-       }
+        function tv_shell_history() {
+            local current_prompt="${READLINE_LINE:0:$READLINE_POINT}"
 
-       bind -x '"\C-X\C-T": tv_smart_autocomplete' # NB I need C-t as transpose-chars
-       bind -x '"\C-R": tv_shell_history'
-    fi
-  #+end_src
+            local output
+            output=$(tv --no-preview bash-history --input "$current_prompt")
+
+            if [[ -n $output ]]; then
+                READLINE_LINE=$output
+                READLINE_POINT=${#READLINE_LINE}
+            fi
+        }
+
+        bind -x '"\C-X\C-T": tv_smart_autocomplete' # NB I need C-t as transpose-chars
+        bind -x '"\C-R": tv_shell_history'
+     fi
+   #+end_src
 
 ** Configuration
    :PROPERTIES:
