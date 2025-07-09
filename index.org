@@ -1263,10 +1263,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       [gcloud]
       symbol = 'gcp '
       format = '[$symbol$project(\($region\))]($style) '
-      detect_env_vars = [ 'GCLOUD_ACTIVE' ]
-
-      [gcloud.project_aliases]
-      gcp-s1-prod-scalyr = "prod"
     #+end_src
 
 *** https://starship.rs/config/#git-branch
