@@ -138,6 +138,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    #+begin_src sh
      pathmunge /usr/local/sbin
      pathmunge /usr/local/bin
+     pathmunge "${HOME}/.local/bin"
      pathmunge "${HOME}/bin"
    #+end_src
 
