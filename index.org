@@ -511,7 +511,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       {
         "checkpointing": {
           "enabled": true
-        }
+        },
+        "selectedAuthType": "gemini-api-key",
+        "theme": "GitHub Light"
       }
     #+end_src
 
