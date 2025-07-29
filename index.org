@@ -502,6 +502,19 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       ---
     #+end_src
 
+* Gemini CLI
+    :PROPERTIES:
+    :header-args: :mkdirp yes :tangle ~/.gemini/settings.json
+    :END:
+
+    #+begin_src js
+      {
+        "checkpointing": {
+          "enabled": true
+        }
+      }
+    #+end_src
+
 * Ghostty
     :PROPERTIES:
     :header-args: :mkdirp yes :tangle ~/.config/ghostty/config
