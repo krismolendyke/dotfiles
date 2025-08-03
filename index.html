@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-03-13 Thu 06:27 -->
-<meta charset="utf-8" />
+<!-- 2025-08-03 Sun 07:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
 <meta name="author" content="Kris Molendyke" />
@@ -1189,76 +1191,73 @@ than body or by calling htmlize-buffer and desired style.
 <link href='https://edwardtufte.github.io/tufte-css/tufte.min.css' rel='stylesheet' type='text/css' />
 </head>
 <body>
-<article id="content" class="content">
-<header>
+<div id="content" class="content">
 <h1 class="title">dotfiles</h1>
-</header><p>
+<p>
 A collection of <a href="http://en.wikipedia.org/wiki/Literate_programming">literate programming</a> dotfiles created and maintained in <a href="http://www.gnu.org/software/emacs/">Emacs</a> with <a href="http://orgmode.org/">Org mode.</a>  The source is available
-at <a href="https://github.com/krismolendyke/dotfiles/blob/master/index.org">index.org</a>.<label id='fnr.1' for='fnr-in.1.7953239' class='margin-toggle sidenote-number'><sup class='numeral'>1</sup></label><input type='checkbox' id='fnr-in.1.7953239' class='margin-toggle'><span class='sidenote'><sup class='numeral'>1</sup>
-As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun] </span></span> this document is focused on macOS only after I migrated Linux specific configuration to
-<a href="https://github.com/krismolendyke/dotfiles/blob/master/linux.org">linux.org</a>.
-</span>
+at <a href="https://github.com/krismolendyke/dotfiles/blob/master/index.org">index.org</a>.<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>
 </p>
 
-<nav id="table-of-contents" role="doc-toc">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org99c01cb">Build Configuration Files</a></li>
-<li><a href="#orgd98eb26">Bootstrap</a>
+<li><a href="#org7f16d57">Build Configuration Files</a></li>
+<li><a href="#org99c01cb">Bootstrap</a>
 <ul>
-<li><a href="#org7925b9e">Change Default Shell</a></li>
-<li><a href="#orgee35afe">Set <code>HOSTNAME</code></a></li>
-<li><a href="#org0ce0959">Accessibility</a></li>
+<li><a href="#orgd98eb26">Change Default Shell</a></li>
+<li><a href="#org7925b9e">Set <code>HOSTNAME</code></a></li>
+<li><a href="#orgee35afe">Accessibility</a></li>
 </ul>
 </li>
-<li><a href="#org9639605">Bash</a>
+<li><a href="#org0ce0959">Bash</a>
 <ul>
-<li><a href="#org7f6f53b"><code>~./bash_profile</code></a></li>
-<li><a href="#orgb948b55"><code>~/.bashrc</code></a></li>
-<li><a href="#org9beed48">Configuration</a></li>
+<li><a href="#org9639605"><code>~./bash_profile</code></a></li>
+<li><a href="#org7f6f53b"><code>~/.bashrc</code></a></li>
+<li><a href="#orgb948b55">Configuration</a></li>
 </ul>
 </li>
-<li><a href="#org2dc1f56">Homebrew</a>
+<li><a href="#org9beed48">Homebrew</a>
 <ul>
-<li><a href="#orgde0f8b8">Homebrew Bundle</a></li>
+<li><a href="#org2dc1f56">Homebrew Bundle</a></li>
 </ul>
 </li>
-<li><a href="#orgfa898cb">Secrets</a></li>
-<li><a href="#org7161a33">Functions</a></li>
-<li><a href="#org194cf40">1Password</a></li>
-<li><a href="#org0043671"><code>asdf</code></a></li>
-<li><a href="#org0c8fbd7">AWS CLI</a></li>
-<li><a href="#orga55bdd4">Emacs</a></li>
-<li><a href="#org1520f12">eza</a>
+<li><a href="#orgde0f8b8">Secrets</a></li>
+<li><a href="#orgfa898cb">Functions</a></li>
+<li><a href="#org7161a33">1Password</a></li>
+<li><a href="#org194cf40"><code>asdf</code></a></li>
+<li><a href="#org0043671">AWS CLI</a></li>
+<li><a href="#org0c8fbd7">bat</a>
 <ul>
-<li><a href="#orgff52af2">Theme</a></li>
+<li><a href="#orga55bdd4"><code>~/.config/bat</code></a></li>
 </ul>
 </li>
-<li><a href="#org79c4fb7">Ghostty</a></li>
-<li><a href="#orgf718da5">Git</a>
+<li><a href="#org1520f12">Emacs</a></li>
+<li><a href="#orgff52af2">eza</a>
 <ul>
-<li><a href="#org0b22235"><code>~/.gitconfig</code></a></li>
+<li><a href="#org79c4fb7">Theme</a></li>
+</ul>
+</li>
+<li><a href="#orgf718da5">Gemini CLI</a></li>
+<li><a href="#org0b22235">Ghostty</a></li>
+<li><a href="#org0c2fec5">Git</a>
+<ul>
+<li><a href="#org8a1512e"><code>~/.gitconfig</code></a></li>
 <li><a href="#gitignore-global"><code>~/.gitignore-global</code></a></li>
 </ul>
 </li>
-<li><a href="#org0c2fec5">Go</a></li>
-<li><a href="#org8a1512e">Google Cloud SDK</a></li>
-<li><a href="#orgf42ba8d"><code>kubectl</code>, <code>k</code>, <code>kctx</code>, <code>kns</code>, <code>krew</code></a>
+<li><a href="#orgf42ba8d">Go</a></li>
+<li><a href="#org72a3840">Google Cloud SDK</a></li>
+<li><a href="#org5c0e423"><code>kubectl</code>, <code>k</code>, <code>kctx</code>, <code>kns</code>, <code>krew</code></a>
 <ul>
-<li><a href="#org72a3840"><span class="todo TODO">TODO</span> krew</a></li>
+<li><a href="#orgaf542ca"><span class="todo TODO">TODO</span> krew</a></li>
 </ul>
 </li>
-<li><a href="#org5c0e423">nvm</a></li>
-<li><a href="#orgaf542ca">OCaml</a></li>
-<li><a href="#orgc025086">PostgreSQL</a></li>
-<li><a href="#orge63ca02">Python</a>
-<ul>
-<li><a href="#org819e6b8"><code>~/requirements-to-freeze.txt</code></a></li>
-<li><a href="#org496e461">Configuration</a></li>
-<li><a href="#orgd9cd98a"><span class="todo TODO">TODO</span> <code>uv</code></a></li>
-</ul>
-</li>
+<li><a href="#orgc025086">nvm</a></li>
+<li><a href="#orge63ca02">OCaml</a></li>
+<li><a href="#org819e6b8">Playdate</a></li>
+<li><a href="#org496e461">PostgreSQL</a></li>
+<li><a href="#orgd9cd98a">Python</a></li>
 <li><a href="#orgb22ef7e">Rancher</a></li>
 <li><a href="#org0c96d26"><code>ripgrep</code></a>
 <ul>
@@ -1289,35 +1288,37 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun] <
 <li><a href="#orga4ab287">Terraform</a></li>
 <li><a href="#orgc36236b">Television</a>
 <ul>
-<li><a href="#org39af42c">Configuration</a></li>
-<li><a href="#org9c54a6f">Cable Channels</a></li>
+<li><a href="#org39af42c">Smart Autocomplete &amp; Shell History</a></li>
+<li><a href="#org9c54a6f">Configuration</a></li>
+<li><a href="#orgb7d0ae3">Cable Channels</a></li>
+<li><a href="#orgf4316c4">Theme</a></li>
 </ul>
 </li>
-<li><a href="#orgb7d0ae3">WezTerm</a></li>
-<li><a href="#orgf4316c4"><code>yamllint</code></a></li>
-<li><a href="#org288531e"><code>~/.inputrc</code></a></li>
+<li><a href="#org288531e">WezTerm</a></li>
+<li><a href="#orgca4550f"><code>yamllint</code></a></li>
+<li><a href="#org3cb68a9"><code>~/.inputrc</code></a></li>
 </ul>
 </div>
-</nav>
-<section id="outline-container-org99c01cb" class="outline-2">
-<h2 id="org99c01cb">Build Configuration Files</h2>
-<div class="outline-text-2" id="text-org99c01cb">
+</div>
+<div id="outline-container-org7f16d57" class="outline-2">
+<h2 id="org7f16d57">Build Configuration Files</h2>
+<div class="outline-text-2" id="text-org7f16d57">
 <p>
 Open this Org document in Emacs and <a href="http://orgmode.org/manual/tangle.html#tangle">tangle</a> it (<code>C-c C-v t</code>).  Configuration files, e.g., <code>~/.bashrc</code>, will be generated.
 </p>
 </div>
-</section>
-<section id="outline-container-orgd98eb26" class="outline-2">
-<h2 id="orgd98eb26">Bootstrap</h2>
-<div class="outline-text-2" id="text-orgd98eb26">
+</div>
+<div id="outline-container-org99c01cb" class="outline-2">
+<h2 id="org99c01cb">Bootstrap</h2>
+<div class="outline-text-2" id="text-org99c01cb">
 <ul class="org-ul">
 <li>Install <a href="https://brew.sh/">Homebrew</a></li>
 <li>Install <a href="https://github.com/Homebrew/homebrew-bundle">Homebrew Bundle</a>: <code>brew bundle</code></li>
 </ul>
 </div>
-<div id="outline-container-org7925b9e" class="outline-3">
-<h3 id="org7925b9e">Change Default Shell</h3>
-<div class="outline-text-3" id="text-org7925b9e">
+<div id="outline-container-orgd98eb26" class="outline-3">
+<h3 id="orgd98eb26">Change Default Shell</h3>
+<div class="outline-text-3" id="text-orgd98eb26">
 <p>
 I prefer <code>bash</code> over <code>zsh</code>.
 </p>
@@ -1335,9 +1336,9 @@ This should be the Homebrew installed <code>bash</code> <i>not</i> the system <c
 </div>
 </div>
 </div>
-<div id="outline-container-orgee35afe" class="outline-3">
-<h3 id="orgee35afe">Set <code>HOSTNAME</code></h3>
-<div class="outline-text-3" id="text-orgee35afe">
+<div id="outline-container-org7925b9e" class="outline-3">
+<h3 id="org7925b9e">Set <code>HOSTNAME</code></h3>
+<div class="outline-text-3" id="text-org7925b9e">
 <div class="org-src-container">
 <pre class="src src-sh"><span class="org-builtin">export</span> <span class="org-variable-name">HOSTNAME</span>=<span class="org-string">'TODO'</span> &amp;&amp; <span class="org-sh-escaped-newline">\</span>
     sudo scutil --set HostName ${<span class="org-variable-name">HOSTNAME</span>}
@@ -1345,37 +1346,37 @@ This should be the Homebrew installed <code>bash</code> <i>not</i> the system <c
 </div>
 </div>
 </div>
-<div id="outline-container-org0ce0959" class="outline-3">
-<h3 id="org0ce0959">Accessibility</h3>
-<div class="outline-text-3" id="text-org0ce0959">
+<div id="outline-container-orgee35afe" class="outline-3">
+<h3 id="orgee35afe">Accessibility</h3>
+<div class="outline-text-3" id="text-orgee35afe">
 <div class="org-src-container">
 <pre class="src src-sh">defaults write com.apple.Accessibility ReduceMotionEnabled -bool true
 </pre>
 </div>
 </div>
 </div>
-</section>
-<section id="outline-container-org9639605" class="outline-2">
-<h2 id="org9639605">Bash</h2>
-<div class="outline-text-2" id="text-org9639605">
 </div>
-<div id="outline-container-org7f6f53b" class="outline-3">
-<h3 id="org7f6f53b"><code>~./bash_profile</code></h3>
-<div class="outline-text-3" id="text-org7f6f53b">
+<div id="outline-container-org0ce0959" class="outline-2">
+<h2 id="org0ce0959">Bash</h2>
+<div class="outline-text-2" id="text-org0ce0959">
+</div>
+<div id="outline-container-org9639605" class="outline-3">
+<h3 id="org9639605"><code>~./bash_profile</code></h3>
+<div class="outline-text-3" id="text-org9639605">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bash_profile
 </pre>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null</span>
-<span class="org-builtin">source</span> <span class="org-string">"${HOME}/.bashrc"</span>
+<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
+</span><span class="org-builtin">source</span> <span class="org-string">"${HOME}/.bashrc"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb948b55" class="outline-3">
-<h3 id="orgb948b55"><code>~/.bashrc</code></h3>
-<div class="outline-text-3" id="text-orgb948b55">
+<div id="outline-container-org7f6f53b" class="outline-3">
+<h3 id="org7f6f53b"><code>~/.bashrc</code></h3>
+<div class="outline-text-3" id="text-org7f6f53b">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc
 </pre>
@@ -1387,17 +1388,17 @@ Load all configuration:
 <div class="org-src-container">
 <pre class="src src-sh"><span class="org-builtin">export</span> <span class="org-variable-name">K20E_BASHRC_DIR</span>=<span class="org-string">"${HOME}/.bashrc.d"</span>
 <span class="org-keyword">for</span> f<span class="org-keyword"> in</span> <span class="org-string">"${K20E_BASHRC_DIR}/"</span>*.bash; <span class="org-keyword">do</span>
-    <span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null</span>
-    <span class="org-builtin">source</span> <span class="org-string">"${f}"</span>
+    <span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
+</span>    <span class="org-builtin">source</span> <span class="org-string">"${f}"</span>
 <span class="org-keyword">done</span>
 <span class="org-builtin">unset</span> -v config
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org9beed48" class="outline-3">
-<h3 id="org9beed48">Configuration</h3>
-<div class="outline-text-3" id="text-org9beed48">
+<div id="outline-container-orgb948b55" class="outline-3">
+<h3 id="orgb948b55">Configuration</h3>
+<div class="outline-text-3" id="text-orgb948b55">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/000-bash.bash
 </pre>
@@ -1482,6 +1483,7 @@ assumed to be the first component.
 <div class="org-src-container">
 <pre class="src src-sh">pathmunge /usr/local/sbin
 pathmunge /usr/local/bin
+pathmunge <span class="org-string">"${HOME}/.local/bin"</span>
 pathmunge <span class="org-string">"${HOME}/bin"</span>
 </pre>
 </div>
@@ -1507,10 +1509,10 @@ Aliases:
 </div>
 </div>
 </div>
-</section>
-<section id="outline-container-org2dc1f56" class="outline-2">
-<h2 id="org2dc1f56"><a href="https://brew.sh/">Homebrew</a></h2>
-<div class="outline-text-2" id="text-org2dc1f56">
+</div>
+<div id="outline-container-org9beed48" class="outline-2">
+<h2 id="org9beed48"><a href="https://brew.sh/">Homebrew</a></h2>
+<div class="outline-text-2" id="text-org9beed48">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/010-brew.bash
 </pre>
@@ -1536,14 +1538,14 @@ Completion:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null</span>
-[ -e <span class="org-string">"${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"</span> ] &amp;&amp; <span class="org-builtin">source</span> <span class="org-string">"${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"</span>
+<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
+</span>[ -e <span class="org-string">"${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"</span> ] &amp;&amp; <span class="org-builtin">source</span> <span class="org-string">"${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"</span>
 </pre>
 </div>
 </div>
-<div id="outline-container-orgde0f8b8" class="outline-3">
-<h3 id="orgde0f8b8">Homebrew Bundle</h3>
-<div class="outline-text-3" id="text-orgde0f8b8">
+<div id="outline-container-org2dc1f56" class="outline-3">
+<h3 id="org2dc1f56">Homebrew Bundle</h3>
+<div class="outline-text-3" id="text-org2dc1f56">
 <p>
 Install: <code>brew bundle</code>
 </p>
@@ -1558,9 +1560,9 @@ Install: <code>brew bundle</code>
 </pre>
 </div>
 </div>
-<div id="outline-container-org05f9cc3" class="outline-4">
-<h4 id="org05f9cc3"><code>~/.Brewfile</code></h4>
-<div class="outline-text-4" id="text-org05f9cc3">
+<div id="outline-container-orgf4d1ff3" class="outline-4">
+<h4 id="orgf4d1ff3"><code>~/.Brewfile</code></h4>
+<div class="outline-text-4" id="text-orgf4d1ff3">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.Brewfile
 </pre>
@@ -1579,6 +1581,7 @@ brew <span class="org-string">"aspell"</span>
 brew <span class="org-string">"automake"</span>
 brew <span class="org-string">"bash"</span>
 brew <span class="org-string">"bash-completion@2"</span>
+brew <span class="org-string">"bat"</span>
 brew <span class="org-string">"bison"</span>
 brew <span class="org-string">"chafa"</span>
 brew <span class="org-string">"cmake"</span>
@@ -1587,6 +1590,7 @@ brew <span class="org-string">"diff-so-fancy"</span>
 brew <span class="org-string">"difftastic"</span>
 brew <span class="org-string">"dive"</span>
 brew <span class="org-string">"eza"</span>
+brew <span class="org-string">"fd"</span>
 brew <span class="org-string">"libssh"</span>
 brew <span class="org-string">"xvid"</span>
 brew <span class="org-string">"ffmpeg"</span>
@@ -1607,6 +1611,7 @@ brew <span class="org-string">"innoextract"</span>
 brew <span class="org-string">"ispell"</span>
 brew <span class="org-string">"oniguruma"</span>
 brew <span class="org-string">"jq"</span>
+brew <span class="org-string">"just"</span>
 brew <span class="org-string">"kubernetes-cli"</span>
 brew <span class="org-string">"kubectx"</span>
 brew <span class="org-string">"less"</span>
@@ -1641,6 +1646,7 @@ brew <span class="org-string">"wget"</span>
 brew <span class="org-string">"yamllint"</span>
 brew <span class="org-string">"yasm"</span>
 brew <span class="org-string">"yq"</span>
+brew <span class="org-string">"yt-dlp"</span>
 brew <span class="org-string">"d12frosted/emacs-plus/emacs-plus@30"</span>
 brew <span class="org-string">"tidbyt/tidbyt/pixlet"</span>
 cask <span class="org-string">"1password"</span>
@@ -1655,6 +1661,7 @@ cask <span class="org-string">"google-chrome"</span>
 cask <span class="org-string">"google-drive"</span>
 cask <span class="org-string">"heroic"</span>
 cask <span class="org-string">"istat-menus"</span>
+cask <span class="org-string">"lm-studio"</span>
 cask <span class="org-string">"mactex-no-gui"</span>
 cask <span class="org-string">"nova"</span>
 cask <span class="org-string">"orion"</span>
@@ -1662,6 +1669,7 @@ cask <span class="org-string">"playdate-simulator"</span>
 cask <span class="org-string">"qlmarkdown"</span>
 cask <span class="org-string">"rancher"</span>
 cask <span class="org-string">"rectangle"</span>
+cask <span class="org-string">"signal"</span>
 cask <span class="org-string">"slack"</span>
 cask <span class="org-string">"tomatobar"</span>
 cask <span class="org-string">"vanilla"</span>
@@ -1674,10 +1682,10 @@ cask <span class="org-string">"zoom"</span>
 </div>
 </div>
 </div>
-</section>
-<section id="outline-container-orgfa898cb" class="outline-2">
-<h2 id="orgfa898cb">Secrets</h2>
-<div class="outline-text-2" id="text-orgfa898cb">
+</div>
+<div id="outline-container-orgde0f8b8" class="outline-2">
+<h2 id="orgde0f8b8">Secrets</h2>
+<div class="outline-text-2" id="text-orgde0f8b8">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/011-secrets.bash
 </pre>
@@ -1698,20 +1706,20 @@ Setup environment, create &amp; source secrets for aliases, functions, <code>PAT
 
 <div class="org-src-container">
 <pre class="src src-sh"><span class="org-builtin">export</span> <span class="org-variable-name">K20E_SECRET_ALIASES</span>=<span class="org-string">"${K20E_SECRET_HOME}/aliases.sh"</span> &amp;&amp; touch -a <span class="org-string">"${K20E_SECRET_ALIASES}"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null</span>
-<span class="org-builtin">source</span> <span class="org-string">"${K20E_SECRET_ALIASES}"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
+</span><span class="org-builtin">source</span> <span class="org-string">"${K20E_SECRET_ALIASES}"</span>
 
 <span class="org-builtin">export</span> <span class="org-variable-name">K20E_SECRET_FUNCTIONS</span>=<span class="org-string">"${K20E_SECRET_HOME}/functions.sh"</span> &amp;&amp; touch -a <span class="org-string">"${K20E_SECRET_FUNCTIONS}"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null</span>
-<span class="org-builtin">source</span> <span class="org-string">"${K20E_SECRET_FUNCTIONS}"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
+</span><span class="org-builtin">source</span> <span class="org-string">"${K20E_SECRET_FUNCTIONS}"</span>
 
 <span class="org-builtin">export</span> <span class="org-variable-name">K20E_SECRET_PATH</span>=<span class="org-string">"${K20E_SECRET_HOME}/path.sh"</span> &amp;&amp; touch -a <span class="org-string">"${K20E_SECRET_PATH}"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null</span>
-<span class="org-builtin">source</span> <span class="org-string">"${K20E_SECRET_PATH}"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
+</span><span class="org-builtin">source</span> <span class="org-string">"${K20E_SECRET_PATH}"</span>
 
 <span class="org-builtin">export</span> <span class="org-variable-name">K20E_SECRET_VARIABLES</span>=<span class="org-string">"${K20E_SECRET_HOME}/variables.sh"</span> &amp;&amp; touch -a <span class="org-string">"${K20E_SECRET_VARIABLES}"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null</span>
-<span class="org-builtin">source</span> <span class="org-string">"${K20E_SECRET_VARIABLES}"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
+</span><span class="org-builtin">source</span> <span class="org-string">"${K20E_SECRET_VARIABLES}"</span>
 </pre>
 </div>
 
@@ -1725,10 +1733,10 @@ chmod -Rf 0600 <span class="org-string">"${K20E_SECRET_HOME}"</span>/*
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-org7161a33" class="outline-2">
-<h2 id="org7161a33">Functions</h2>
-<div class="outline-text-2" id="text-org7161a33">
+</div>
+<div id="outline-container-orgfa898cb" class="outline-2">
+<h2 id="orgfa898cb">Functions</h2>
+<div class="outline-text-2" id="text-orgfa898cb">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/800-functions.bash
 </pre>
@@ -1786,10 +1794,10 @@ Use <code>jq</code> to reformat messy JSON files:
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-org194cf40" class="outline-2">
-<h2 id="org194cf40">1Password</h2>
-<div class="outline-text-2" id="text-org194cf40">
+</div>
+<div id="outline-container-org7161a33" class="outline-2">
+<h2 id="org7161a33">1Password</h2>
+<div class="outline-text-2" id="text-org7161a33">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/501-1password.bash
 </pre>
@@ -1803,15 +1811,15 @@ Generate completion script:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null</span>
-[ -e <span class="org-string">"${HOMEBREW_PREFIX}/etc/bash_completion.d/op"</span> ] &amp;&amp; <span class="org-builtin">source</span> <span class="org-string">"${HOMEBREW_PREFIX}/etc/bash_completion.d/op"</span>
+<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
+</span>[ -e <span class="org-string">"${HOMEBREW_PREFIX}/etc/bash_completion.d/op"</span> ] &amp;&amp; <span class="org-builtin">source</span> <span class="org-string">"${HOMEBREW_PREFIX}/etc/bash_completion.d/op"</span>
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-org0043671" class="outline-2">
-<h2 id="org0043671"><code>asdf</code></h2>
-<div class="outline-text-2" id="text-org0043671">
+</div>
+<div id="outline-container-org194cf40" class="outline-2">
+<h2 id="org194cf40"><code>asdf</code></h2>
+<div class="outline-text-2" id="text-org194cf40">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/110-asdf.bash
 </pre>
@@ -1823,15 +1831,15 @@ it below.
 
 <div class="org-src-container">
 <pre class="src src-sh"><span class="org-builtin">alias</span> <span class="org-variable-name">aoeu</span>=<span class="org-string">'asdf'</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null</span>
-[ -e <span class="org-string">"${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"</span> ] &amp;&amp; <span class="org-builtin">source</span> <span class="org-string">"${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"</span> &amp;&amp; <span class="org-builtin">complete</span> -o default -F _asdf aoeu
+<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
+</span>[ -e <span class="org-string">"${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"</span> ] &amp;&amp; <span class="org-builtin">source</span> <span class="org-string">"${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"</span> &amp;&amp; <span class="org-builtin">complete</span> -o default -F _asdf aoeu
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-org0c8fbd7" class="outline-2">
-<h2 id="org0c8fbd7">AWS CLI</h2>
-<div class="outline-text-2" id="text-org0c8fbd7">
+</div>
+<div id="outline-container-org0043671" class="outline-2">
+<h2 id="org0043671">AWS CLI</h2>
+<div class="outline-text-2" id="text-org0043671">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/440-awscli.bash
 </pre>
@@ -1845,10 +1853,60 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/440-awscli.bash
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-orga55bdd4" class="outline-2">
-<h2 id="orga55bdd4">Emacs</h2>
-<div class="outline-text-2" id="text-orga55bdd4">
+</div>
+<div id="outline-container-org0c8fbd7" class="outline-2">
+<h2 id="org0c8fbd7">bat</h2>
+<div class="outline-text-2" id="text-org0c8fbd7">
+<pre class="example">
+header-args: :mkdirp yes :tangle ~/.bashrc.d/108-bat.bash
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-sh">[ -x <span class="org-string">"${HOMEBREW_PREFIX}/bin/bat"</span> ] &amp;&amp; <span class="org-builtin">alias</span> <span class="org-variable-name">cat</span>=<span class="org-string">'alias cat="bat --theme auto:system --theme-dark default --theme-light GitHub"'</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-orga55bdd4" class="outline-3">
+<h3 id="orga55bdd4"><code>~/.config/bat</code></h3>
+<div class="outline-text-3" id="text-orga55bdd4">
+<pre class="example">
+header-args: :mkdirp yes :tangle ~/.config/bat/config
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-conf"><span class="org-comment-delimiter"># </span><span class="org-comment">This is `bat`s configuration file. Each line either contains a comment or
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">a command-line option that you want to pass to `bat` by default. You can
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">run `bat --help` to get a list of all possible configuration options.
+</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Specify desired highlighting theme (e.g. "TwoDark"). Run `bat --list-themes`
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">for a list of all available themes
+</span><span class="org-comment-delimiter">#</span><span class="org-comment">--theme="TwoDark"
+</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Enable this to use italic text on the terminal. This is not supported on all
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">terminal emulators (like tmux, by default):
+</span><span class="org-comment-delimiter">#</span><span class="org-comment">--italic-text=always
+</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Uncomment the following line to disable automatic paging:
+</span><span class="org-comment-delimiter">#</span><span class="org-comment">--paging=never
+</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Uncomment the following line if you are using less version &gt;= 551 and want to
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">enable mouse scrolling support in `bat` when running inside tmux. This might
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">disable text selection, unless you press shift.
+</span><span class="org-comment-delimiter">#</span><span class="org-comment">--pager="less --RAW-CONTROL-CHARS --quit-if-one-screen --mouse"
+</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Syntax mappings: map a certain filename pattern to a language.
+</span><span class="org-comment-delimiter">#   </span><span class="org-comment">Example 1: use the C++ syntax for Arduino .ino files
+</span><span class="org-comment-delimiter">#   </span><span class="org-comment">Example 2: Use ".gitignore"-style highlighting for ".ignore" files
+</span><span class="org-comment-delimiter">#</span><span class="org-comment">--map-syntax "*.ino:C++"
+</span><span class="org-comment-delimiter">#</span><span class="org-comment">--map-syntax ".ignore:Git Ignore"</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org1520f12" class="outline-2">
+<h2 id="org1520f12">Emacs</h2>
+<div class="outline-text-2" id="text-org1520f12">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/107-emacs.bash
 </pre>
@@ -1879,18 +1937,18 @@ across at <a href="https://stuff-things.net/2019/07/31/opening-files-with-line-n
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-org1520f12" class="outline-2">
-<h2 id="org1520f12"><a href="https://github.com/eza-community/eza">eza</a></h2>
-<div class="outline-text-2" id="text-org1520f12">
+</div>
+<div id="outline-container-orgff52af2" class="outline-2">
+<h2 id="orgff52af2"><a href="https://github.com/eza-community/eza">eza</a></h2>
+<div class="outline-text-2" id="text-orgff52af2">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/130-eza.bash
 </pre>
 
 <div class="org-src-container">
 <pre class="src src-sh"><span class="org-keyword">if </span><span class="org-builtin">command</span> -v eza &gt;/dev/null 2&gt;&amp;1; <span class="org-keyword">then</span>
-    <span class="org-comment-delimiter"># </span><span class="org-comment">Workaround for https://github.com/orgs/eza-community/discussions/209#discussioncomment-10801021 which is apparently still not resolved</span>
-    <span class="org-builtin">export</span> <span class="org-variable-name">EXA_COLORS</span>=<span class="org-string">"xx=''"</span>
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Workaround for https://github.com/orgs/eza-community/discussions/209#discussioncomment-10801021 which is apparently still not resolved
+</span>    <span class="org-builtin">export</span> <span class="org-variable-name">EXA_COLORS</span>=<span class="org-string">"xx=''"</span>
     <span class="org-builtin">export</span> <span class="org-variable-name">EZA_CONFIG_DIR</span>=<span class="org-string">"${HOME}/.config/eza"</span>
     <span class="org-builtin">export</span> <span class="org-variable-name">EZA_ICON_SPACING</span>=2
     <span class="org-builtin">export</span> <span class="org-variable-name">EZA_ICONS_AUTO</span>=1
@@ -1903,9 +1961,9 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/130-eza.bash
 </pre>
 </div>
 </div>
-<div id="outline-container-orgff52af2" class="outline-3">
-<h3 id="orgff52af2">Theme</h3>
-<div class="outline-text-3" id="text-orgff52af2">
+<div id="outline-container-org79c4fb7" class="outline-3">
+<h3 id="org79c4fb7">Theme</h3>
+<div class="outline-text-3" id="text-org79c4fb7">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/eza/theme.yml
 </pre>
@@ -1920,56 +1978,86 @@ See <a href="https://github.com/eza-community/eza-themes">https://github.com/eza
 </div>
 </div>
 </div>
-</section>
-<section id="outline-container-org79c4fb7" class="outline-2">
-<h2 id="org79c4fb7">Ghostty</h2>
-<div class="outline-text-2" id="text-org79c4fb7">
+</div>
+<div id="outline-container-orgf718da5" class="outline-2">
+<h2 id="orgf718da5">Gemini CLI</h2>
+<div class="outline-text-2" id="text-orgf718da5">
+<pre class="example">
+header-args: :mkdirp yes :tangle ~/.gemini/settings.json
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-js">{
+  <span class="org-string">"checkpointing"</span>: {
+    <span class="org-string">"enabled"</span>: <span class="org-constant">true</span>
+  },
+  <span class="org-string">"selectedAuthType"</span>: <span class="org-string">"gemini-api-key"</span>,
+  <span class="org-string">"theme"</span>: <span class="org-string">"GitHub Light"</span>
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0b22235" class="outline-2">
+<h2 id="org0b22235">Ghostty</h2>
+<div class="outline-text-2" id="text-org0b22235">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/ghostty/config
 </pre>
 
 <ul class="org-ul">
-<li class="on"><input type='checkbox' checked='checked' /> <a href="https://ghostty.org/docs/config/keybind/reference#jump_to_prompt">https://ghostty.org/docs/config/keybind/reference#jump_to_prompt</a></li>
-<li class="on"><input type='checkbox' checked='checked' /> <a href="https://ghostty.org/docs/config/keybind/reference#toggle_quick_terminal">https://ghostty.org/docs/config/keybind/reference#toggle_quick_terminal</a></li>
+<li class="on"><code>[X]</code> <a href="https://ghostty.org/docs/config/keybind/reference#jump_to_prompt">https://ghostty.org/docs/config/keybind/reference#jump_to_prompt</a></li>
+<li class="on"><code>[X]</code> <a href="https://ghostty.org/docs/config/keybind/reference#toggle_quick_terminal">https://ghostty.org/docs/config/keybind/reference#toggle_quick_terminal</a></li>
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-conf"><span class="org-comment-delimiter"># </span><span class="org-comment">See https://github.com/ghostty-org/ghostty/discussions/3501#discussioncomment-12102205</span>
-<span class="org-variable-name">font-codepoint-map</span> = U+E000-U+E00A,U+E0A0-U+E0A3,U+E0B0-U+E0C8,U+E0CA,U+E0CC-U+E0D7,U+E200-U+E2A9,U+E300-U+E3E3,U+E5FA-U+E6B7,U+E700-U+E8EF,U+EA60-U+EC1E,U+ED00-U+F2FF,U+EE00-U+EE0B,U+F300-U+F381,U+F400-U+F533,U+F0001-U+F1AF0=Symbols Nerd Font
+<pre class="src src-conf"><span class="org-comment-delimiter"># </span><span class="org-comment">See https://github.com/ghostty-org/ghostty/discussions/3501#discussioncomment-12102205
+</span><span class="org-variable-name">font-codepoint-map</span> = U+E000-U+E00A,U+E0A0-U+E0A3,U+E0B0-U+E0C8,U+E0CA,U+E0CC-U+E0D7,U+E200-U+E2A9,U+E300-U+E3E3,U+E5FA-U+E6B7,U+E700-U+E8EF,U+EA60-U+EC1E,U+ED00-U+F2FF,U+EE00-U+EE0B,U+F300-U+F381,U+F400-U+F533,U+F0001-U+F1AF0=Symbols Nerd Font
 
 <span class="org-variable-name">alpha-blending</span> = native
 
 <span class="org-variable-name">background-opacity</span> = 0.75
 <span class="org-variable-name">background-blur-radius</span> = 20
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">See also shell-integration-features</span>
-<span class="org-variable-name">cursor-style</span> = block
+<span class="org-comment-delimiter"># </span><span class="org-comment">See also shell-integration-features
+</span><span class="org-variable-name">cursor-style</span> = block
 <span class="org-variable-name">cursor-style-blink</span> = true
 
 <span class="org-variable-name">font-family</span> = <span class="org-string">""</span>
 <span class="org-variable-name">font-family</span> = PragmataPro Mono Liga
-<span class="org-variable-name">font-feature</span> = calt
 <span class="org-variable-name">font-size</span> = 20
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Backward erase word</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">This binds cmd+h to alt+backspace which will backward erase one word</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Remember to go change the "Hide Ghostty" menu shortcut to something else, e.g.,</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">https://apple.stackexchange.com/questions/101754/os-x-disable-cmd-h-or-hide-app-command</span>
-<span class="org-variable-name">keybind</span> = cmd+h=text:\x1b\x7f
-<span class="org-comment-delimiter"># </span><span class="org-comment">Forward erase word</span>
-<span class="org-variable-name">keybind</span> = cmd+d=esc:d
+<span class="org-comment-delimiter"># </span><span class="org-comment">Font features for PragmataPro
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">Contextual alternate ligatures
+</span><span class="org-variable-name">font-feature</span> = calt
+<span class="org-comment-delimiter"># </span><span class="org-comment">Ligatures
+</span><span class="org-variable-name">font-feature</span> = liga
+<span class="org-comment-delimiter"># </span><span class="org-comment">Git tree
+</span><span class="org-variable-name">font-feature</span> = ss13
+<span class="org-comment-delimiter"># </span><span class="org-comment">Serif
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">font-feature = ss16
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">BUG // TODO // HACK tags
+</span><span class="org-variable-name">font-feature</span> = ss18
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Backward word</span>
-<span class="org-variable-name">keybind</span> = cmd+b=esc:b
-<span class="org-comment-delimiter"># </span><span class="org-comment">Forward word</span>
-<span class="org-variable-name">keybind</span> = cmd+f=esc:f
+<span class="org-comment-delimiter"># </span><span class="org-comment">Backward erase word
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">This binds cmd+h to alt+backspace which will backward erase one word
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">Remember to go change the "Hide Ghostty" menu shortcut to something else, e.g.,
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">https://apple.stackexchange.com/questions/101754/os-x-disable-cmd-h-or-hide-app-command
+</span><span class="org-variable-name">keybind</span> = cmd+h=text:\x1b\x7f
+<span class="org-comment-delimiter"># </span><span class="org-comment">Forward erase word
+</span><span class="org-variable-name">keybind</span> = cmd+d=esc:d
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Jump to prompt</span>
-<span class="org-variable-name">keybind</span> = ctrl+up=jump_to_prompt:-1
+<span class="org-comment-delimiter"># </span><span class="org-comment">Backward word
+</span><span class="org-variable-name">keybind</span> = cmd+b=esc:b
+<span class="org-comment-delimiter"># </span><span class="org-comment">Forward word
+</span><span class="org-variable-name">keybind</span> = cmd+f=esc:f
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Jump to prompt
+</span><span class="org-variable-name">keybind</span> = ctrl+up=jump_to_prompt:-1
 <span class="org-variable-name">keybind</span> = ctrl+down=jump_to_prompt:1
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Quick terminal</span>
-<span class="org-variable-name">keybind</span> = global:ctrl+alt+cmd+t=toggle_quick_terminal
+<span class="org-comment-delimiter"># </span><span class="org-comment">Quick terminal
+</span><span class="org-variable-name">keybind</span> = global:ctrl+alt+cmd+t=toggle_quick_terminal
 
 <span class="org-variable-name">macos-option-as-alt</span> = true
 <span class="org-variable-name">macos-titlebar-style</span> = native
@@ -1979,9 +2067,9 @@ header-args: :mkdirp yes :tangle ~/.config/ghostty/config
 <span class="org-variable-name">resize-overlay</span> = never
 
 <span class="org-variable-name">shell-integration</span> = bash
-<span class="org-comment-delimiter"># </span><span class="org-comment">This fixed an issue w/ the initial Bash cursor showing as a bar instead of a block before a command was executed</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">(see cursor-style)</span>
-<span class="org-variable-name">shell-integration-features</span> = no-cursor
+<span class="org-comment-delimiter"># </span><span class="org-comment">This fixed an issue w/ the initial Bash cursor showing as a bar instead of a block before a command was executed
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">(see cursor-style)
+</span><span class="org-variable-name">shell-integration-features</span> = no-cursor
 
 <span class="org-variable-name">theme</span> = light:Tomorrow,dark:Tomorrow Night Bright
 
@@ -1990,10 +2078,10 @@ header-args: :mkdirp yes :tangle ~/.config/ghostty/config
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-orgf718da5" class="outline-2">
-<h2 id="orgf718da5"><a href="https://git-scm.com/">Git</a></h2>
-<div class="outline-text-2" id="text-orgf718da5">
+</div>
+<div id="outline-container-org0c2fec5" class="outline-2">
+<h2 id="org0c2fec5"><a href="https://git-scm.com/">Git</a></h2>
+<div class="outline-text-2" id="text-org0c2fec5">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/105-git.bash
 </pre>
@@ -2017,9 +2105,9 @@ Diff highlighting (need to review if this is necessary now since I've configured
 </pre>
 </div>
 </div>
-<div id="outline-container-org0b22235" class="outline-3">
-<h3 id="org0b22235"><code>~/.gitconfig</code></h3>
-<div class="outline-text-3" id="text-org0b22235">
+<div id="outline-container-org8a1512e" class="outline-3">
+<h3 id="org8a1512e"><code>~/.gitconfig</code></h3>
+<div class="outline-text-3" id="text-org8a1512e">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.gitconfig
 </pre>
@@ -2059,6 +2147,7 @@ when making sure that the config values are set properly.
         <span class="org-variable-name">br</span> = branch -vv
         <span class="org-variable-name">wdiff</span> = diff --color-moved --color-words --ext-diff
         <span class="org-variable-name">ds</span> = diff --color-moved --staged --ext-diff
+        <span class="org-variable-name">g</span> = log --oneline --graph --decorate --all
 [<span class="org-type">advice</span>]
         <span class="org-variable-name">statusHints</span> = true
 [<span class="org-type">rebase</span>]
@@ -2086,9 +2175,9 @@ when making sure that the config values are set properly.
 [<span class="org-type">tag</span>]
         <span class="org-variable-name">sort</span> = version:refname
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Conditional include to set some work defaults, e.g., email, GHE interal url replacement, ssh signing</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">This file is stored in work 1Password Employee vault</span>
-[includeIf <span class="org-string">"gitdir/i:~/code/work/"</span>]
+<span class="org-comment-delimiter"># </span><span class="org-comment">Conditional include to set some work defaults, e.g., email, GHE interal url replacement, ssh signing
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">This file is stored in work 1Password Employee vault
+</span>[includeIf <span class="org-string">"gitdir/i:~/code/work/"</span>]
         <span class="org-variable-name">path</span> = ~/code/work/.gitconfig
 </pre>
 </div>
@@ -2237,10 +2326,10 @@ fabric.properties
 </div>
 </div>
 </div>
-</section>
-<section id="outline-container-org0c2fec5" class="outline-2">
-<h2 id="org0c2fec5">Go</h2>
-<div class="outline-text-2" id="text-org0c2fec5">
+</div>
+<div id="outline-container-orgf42ba8d" class="outline-2">
+<h2 id="orgf42ba8d">Go</h2>
+<div class="outline-text-2" id="text-orgf42ba8d">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/106-go.bash
 </pre>
@@ -2250,10 +2339,10 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/106-go.bash
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-org8a1512e" class="outline-2">
-<h2 id="org8a1512e">Google Cloud SDK</h2>
-<div class="outline-text-2" id="text-org8a1512e">
+</div>
+<div id="outline-container-org72a3840" class="outline-2">
+<h2 id="org72a3840">Google Cloud SDK</h2>
+<div class="outline-text-2" id="text-org72a3840">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/450-google-cloud-sdk.bash
 </pre>
@@ -2263,17 +2352,17 @@ Completion:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null</span>
-[ -e <span class="org-string">"${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"</span> ] &amp;&amp; <span class="org-builtin">source</span> <span class="org-string">"${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null</span>
-[ -e <span class="org-string">"${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"</span> ] &amp;&amp; <span class="org-builtin">source</span> <span class="org-string">"${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"</span>
+<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
+</span>[ -e <span class="org-string">"${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"</span> ] &amp;&amp; <span class="org-builtin">source</span> <span class="org-string">"${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
+</span>[ -e <span class="org-string">"${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"</span> ] &amp;&amp; <span class="org-builtin">source</span> <span class="org-string">"${HOMEBREW_CASK_HOME}/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"</span>
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-orgf42ba8d" class="outline-2">
-<h2 id="orgf42ba8d"><code>kubectl</code>, <code>k</code>, <code>kctx</code>, <code>kns</code>, <code>krew</code></h2>
-<div class="outline-text-2" id="text-orgf42ba8d">
+</div>
+<div id="outline-container-org5c0e423" class="outline-2">
+<h2 id="org5c0e423"><code>kubectl</code>, <code>k</code>, <code>kctx</code>, <code>kns</code>, <code>krew</code></h2>
+<div class="outline-text-2" id="text-org5c0e423">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/104-kubectl.bash
 </pre>
@@ -2284,8 +2373,8 @@ Completion for my <code>k</code> alias:
 
 <div class="org-src-container">
 <pre class="src src-sh"><span class="org-builtin">alias</span> <span class="org-variable-name">k</span>=<span class="org-string">"kubectl"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null</span>
-[ -e <span class="org-string">"${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl"</span> ] &amp;&amp; <span class="org-builtin">source</span> <span class="org-string">"${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl"</span> &amp;&amp; <span class="org-builtin">complete</span> -o default -F __start_kubectl k
+<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
+</span>[ -e <span class="org-string">"${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl"</span> ] &amp;&amp; <span class="org-builtin">source</span> <span class="org-string">"${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl"</span> &amp;&amp; <span class="org-builtin">complete</span> -o default -F __start_kubectl k
 </pre>
 </div>
 
@@ -2309,35 +2398,35 @@ Change currently selected color:
 </pre>
 </div>
 </div>
-<div id="outline-container-org72a3840" class="outline-3">
-<h3 id="org72a3840"><span class="todo TODO">TODO</span> krew</h3>
-<div class="outline-text-3" id="text-org72a3840">
+<div id="outline-container-orgaf542ca" class="outline-3">
+<h3 id="orgaf542ca"><span class="todo TODO">TODO</span> krew</h3>
+<div class="outline-text-3" id="text-orgaf542ca">
 <p>
 Install and configure <a href="https://krew.sigs.k8s.io/docs/user-guide/setup/install/">krew</a>.
 </p>
 </div>
 </div>
-</section>
-<section id="outline-container-org5c0e423" class="outline-2">
-<h2 id="org5c0e423"><a href="https://github.com/nvm-sh/nvm">nvm</a></h2>
-<div class="outline-text-2" id="text-org5c0e423">
+</div>
+<div id="outline-container-orgc025086" class="outline-2">
+<h2 id="orgc025086"><a href="https://github.com/nvm-sh/nvm">nvm</a></h2>
+<div class="outline-text-2" id="text-orgc025086">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/590-nvm.bash
 </pre>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span class="org-keyword">if </span><span class="org-builtin">command</span> -v nvm &gt;/dev/null 2&gt;&amp;1; <span class="org-keyword">then</span>
+<pre class="src src-sh"><span class="org-keyword">if</span> [ -e <span class="org-string">"$(</span><span class="org-sh-quoted-exec">brew --prefix nvm</span><span class="org-string">)/nvm.sh"</span> ]; <span class="org-keyword">then</span>
     <span class="org-builtin">export</span> <span class="org-variable-name">NVM_DIR</span>=<span class="org-string">"$HOME/.nvm"</span>
-    <span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null</span>
-    [ -e <span class="org-string">"$(</span><span class="org-sh-quoted-exec">brew --prefix nvm</span><span class="org-string">)/nvm.sh"</span> ] &amp;&amp; <span class="org-builtin">source</span> <span class="org-string">"$(</span><span class="org-sh-quoted-exec">brew --prefix nvm</span><span class="org-string">)/nvm.sh"</span>
+    <span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
+</span>    <span class="org-builtin">source</span> <span class="org-string">"$(</span><span class="org-sh-quoted-exec">brew --prefix nvm</span><span class="org-string">)/nvm.sh"</span>
 <span class="org-keyword">fi</span>
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-orgaf542ca" class="outline-2">
-<h2 id="orgaf542ca">OCaml</h2>
-<div class="outline-text-2" id="text-orgaf542ca">
+</div>
+<div id="outline-container-orge63ca02" class="outline-2">
+<h2 id="orge63ca02">OCaml</h2>
+<div class="outline-text-2" id="text-orge63ca02">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/500-opam.bash
 </pre>
@@ -2347,15 +2436,28 @@ Modified output of <code>opam init</code>:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null</span>
-[ -e <span class="org-string">"${HOME}/.opam/opam-init/init.sh"</span> ] &amp;&amp; <span class="org-builtin">source</span> <span class="org-string">"${HOME}/.opam/opam-init/init.sh"</span>
+<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
+</span>[ -e <span class="org-string">"${HOME}/.opam/opam-init/init.sh"</span> ] &amp;&amp; <span class="org-builtin">source</span> <span class="org-string">"${HOME}/.opam/opam-init/init.sh"</span>
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-orgc025086" class="outline-2">
-<h2 id="orgc025086">PostgreSQL</h2>
-<div class="outline-text-2" id="text-orgc025086">
+</div>
+<div id="outline-container-org819e6b8" class="outline-2">
+<h2 id="org819e6b8">Playdate</h2>
+<div class="outline-text-2" id="text-org819e6b8">
+<pre class="example">
+header-args: :mkdirp yes :tangle ~/.bashrc.d/511-playdate.bash
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-sh">[ -e <span class="org-string">"${HOME}/Developer/PlaydateSDK"</span> ] &amp;&amp; <span class="org-builtin">export</span> <span class="org-variable-name">PLAYDATE_SDK_PATH</span>=<span class="org-string">"${HOME}/Developer/PlaydateSDK"</span> &amp;&amp; pathmunge <span class="org-string">"${PLAYDATE_SDK_PATH}/bin"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org496e461" class="outline-2">
+<h2 id="org496e461">PostgreSQL</h2>
+<div class="outline-text-2" id="text-org496e461">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/515-postgresql.bash
 </pre>
@@ -2365,84 +2467,16 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/515-postgresql.bash
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-orge63ca02" class="outline-2">
-<h2 id="orge63ca02">Python</h2>
-<div class="outline-text-2" id="text-orge63ca02">
 </div>
-<div id="outline-container-org819e6b8" class="outline-3">
-<h3 id="org819e6b8"><code>~/requirements-to-freeze.txt</code></h3>
-<div class="outline-text-3" id="text-org819e6b8">
-<pre class="example">
-header-args: :mkdirp yes :tangle ~/requirements-to-freeze.txt
-</pre>
-
+<div id="outline-container-orgd9cd98a" class="outline-2">
+<h2 id="orgd9cd98a">Python</h2>
+<div class="outline-text-2" id="text-orgd9cd98a">
 <p>
-Use <a href="https://kennethreitz.org/essays/2016/02/25/a-better-pip-workflow">A Better Pip Workflow™</a> to specify packages that I do actually want installed to the user's packages.
+<a href="https://docs.astral.sh/uv/">https://docs.astral.sh/uv/</a> FTW I'll remove this section soon.
 </p>
-
-<div class="org-src-container">
-<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">User packages</span>
-boto3
-botocore
-http<span class="org-operator">-</span>prompt
-keyring
-pipdeptree[graphviz]
-pylsp<span class="org-operator">-</span>rope
-python<span class="org-operator">-</span>lsp<span class="org-operator">-</span>server[<span class="org-builtin">all</span>]
-twine
-urllib3
-virtualenvwrapper
-</pre>
 </div>
 </div>
-</div>
-<div id="outline-container-org496e461" class="outline-3">
-<h3 id="org496e461">Configuration</h3>
-<div class="outline-text-3" id="text-org496e461">
-<pre class="example">
-header-args: :mkdirp yes :tangle ~/.bashrc.d/102-python.bash
-</pre>
-
-<div class="org-src-container">
-<pre class="src src-sh">pathmunge <span class="org-string">"$(</span><span class="org-sh-quoted-exec">brew --prefix python</span><span class="org-string">)/libexec/bin"</span>
-</pre>
-</div>
-
-<p>
-Add Python <code>site.USER_BASE</code> for user site-packages and <code>pip install --user</code> installations.  See
-<a href="https://docs.python.org/3/install/index.html#inst-alt-install-user">https://docs.python.org/3/install/index.html#inst-alt-install-user</a>
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh"><span class="org-variable-name">PYTHON_USER_BASE</span>=$(<span class="org-sh-quoted-exec">python -m site --user-base</span>)
-<span class="org-builtin">export</span> PYTHON_USER_BASE
-pathmunge <span class="org-string">"${PYTHON_USER_BASE}/bin"</span>
-</pre>
-</div>
-
-<p>
-Old function I've used to bootstrap a sane Python user environment:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh"><span class="org-keyword">function</span> <span class="org-function-name">k20e_pip_upgrade</span>() {
-    <span class="org-keyword">if</span> [[ $(<span class="org-sh-quoted-exec">which deactivate</span>) == <span class="org-string">"deactivate: function"</span> &amp;&amp; -n ${<span class="org-variable-name">VIRTUAL_ENV</span>} ]]; <span class="org-keyword">then</span>
-        <span class="org-builtin">echo</span> <span class="org-string">"Deactivating current virtual environment ${VIRTUAL_ENV}"</span>
-        deactivate
-    <span class="org-keyword">fi</span>
-    pip install --break-system-packages --user --upgrade --requirement <span class="org-string">"${HOME}/requirements-to-freeze.txt"</span>
-    pip freeze &gt; <span class="org-string">"${HOME}/requirements.txt"</span>
-}
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-orgd9cd98a" class="outline-3">
-<h3 id="orgd9cd98a"><span class="todo TODO">TODO</span> <code>uv</code></h3>
-</div>
-</section>
-<section id="outline-container-orgb22ef7e" class="outline-2">
+<div id="outline-container-orgb22ef7e" class="outline-2">
 <h2 id="orgb22ef7e">Rancher</h2>
 <div class="outline-text-2" id="text-orgb22ef7e">
 <pre class="example">
@@ -2454,8 +2488,8 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/560-rancher.bash
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-org0c96d26" class="outline-2">
+</div>
+<div id="outline-container-org0c96d26" class="outline-2">
 <h2 id="org0c96d26"><code>ripgrep</code></h2>
 <div class="outline-text-2" id="text-org0c96d26">
 <pre class="example">
@@ -2484,8 +2518,8 @@ See <code>RIPGREP_CONFIG_PATH</code> above and <a href="https://github.com/Burnt
 </div>
 </div>
 </div>
-</section>
-<section id="outline-container-org50a2617" class="outline-2">
+</div>
+<div id="outline-container-org50a2617" class="outline-2">
 <h2 id="org50a2617">Rust</h2>
 <div class="outline-text-2" id="text-org50a2617">
 <pre class="example">
@@ -2509,8 +2543,8 @@ See <a href="https://github.com/rust-lang-nursery/rustfmt#tips">https://github.c
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-org3f63f7f" class="outline-2">
+</div>
+<div id="outline-container-org3f63f7f" class="outline-2">
 <h2 id="org3f63f7f"><a href="https://www.shellcheck.net/">ShellCheck</a></h2>
 <div class="outline-text-2" id="text-org3f63f7f">
 <pre class="example">
@@ -2541,8 +2575,8 @@ header-args: :mkdirp yes :tangle ~/.shellcheckrc
 </div>
 </div>
 </div>
-</section>
-<section id="outline-container-org530237a" class="outline-2">
+</div>
+<div id="outline-container-org530237a" class="outline-2">
 <h2 id="org530237a"><a href="https://github.com/lotabout/skim">skim</a></h2>
 <div class="outline-text-2" id="text-org530237a">
 <pre class="example">
@@ -2570,19 +2604,10 @@ explicitly:
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-org651f861" class="outline-2">
+</div>
+<div id="outline-container-org651f861" class="outline-2">
 <h2 id="org651f861">SSH</h2>
 <div class="outline-text-2" id="text-org651f861">
-<p>
-Create a configuration directory:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">mkdir -p ${<span class="org-variable-name">HOME</span>}/.ssh/config.d
-</pre>
-</div>
-
 <p>
 On macOS, 1Password requires this to work with the <a href="#org94dc380">Environment</a> properly:
 </p>
@@ -2668,8 +2693,8 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/101-ssh-env.bash
 </div>
 </div>
 </div>
-</section>
-<section id="outline-container-org38570f5" class="outline-2">
+</div>
+<div id="outline-container-org38570f5" class="outline-2">
 <h2 id="org38570f5">Starship</h2>
 <div class="outline-text-2" id="text-org38570f5">
 <pre class="example">
@@ -2679,17 +2704,17 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/999-starship.bash
 <div class="org-src-container">
 <pre class="src src-sh"><span class="org-keyword">if </span><span class="org-builtin">command</span> -v starship &gt;/dev/null 2&gt;&amp;1; <span class="org-keyword">then</span>
     <span class="org-keyword">function</span> <span class="org-function-name">k20e_starship_precmd_user_func</span>() {
-        <span class="org-comment-delimiter"># </span><span class="org-comment">Immediately append commands to HISTFILE rather than waiting for logout</span>
-        <span class="org-comment-delimiter"># </span><span class="org-comment">NB this does not affect the current session's history but it does mean that a login will have access to all</span>
-        <span class="org-comment-delimiter"># </span><span class="org-comment">recent commands from any current sessions</span>
-        <span class="org-builtin">history</span> -a
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Immediately append commands to HISTFILE rather than waiting for logout
+</span>        <span class="org-comment-delimiter"># </span><span class="org-comment">NB this does not affect the current session's history but it does mean that a login will have access to all
+</span>        <span class="org-comment-delimiter"># </span><span class="org-comment">recent commands from any current sessions
+</span>        <span class="org-builtin">history</span> -a
     }
-    <span class="org-comment-delimiter"># </span><span class="org-comment">See https://starship.rs/advanced-config/#custom-pre-prompt-and-pre-execution-commands-in-bash</span>
-    <span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck disable=SC2034</span>
-    <span class="org-variable-name">starship_precmd_user_func</span>=<span class="org-string">'k20e_starship_precmd_user_func'</span>
+    <span class="org-comment-delimiter"># </span><span class="org-comment">See https://starship.rs/advanced-config/#custom-pre-prompt-and-pre-execution-commands-in-bash
+</span>    <span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck disable=SC2034
+</span>    <span class="org-variable-name">starship_precmd_user_func</span>=<span class="org-string">'k20e_starship_precmd_user_func'</span>
 
-    <span class="org-comment-delimiter"># </span><span class="org-comment">Only init one time, I found issues w/ this executing multiple time, e.g., via interactive `source ~/.bashrc`</span>
-    <span class="org-keyword">if</span> [ <span class="org-negation-char">!</span> -v STARSHIP_SHELL ]; <span class="org-keyword">then</span>
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Only init one time, I found issues w/ this executing multiple time, e.g., via interactive `source ~/.bashrc`
+</span>    <span class="org-keyword">if</span> [ <span class="org-negation-char">!</span> -v STARSHIP_SHELL ]; <span class="org-keyword">then</span>
         <span class="org-builtin">eval</span> <span class="org-string">"$(</span><span class="org-sh-quoted-exec">starship init bash</span><span class="org-string">)"</span>
     <span class="org-keyword">fi</span>
 <span class="org-keyword">fi</span>
@@ -2711,58 +2736,58 @@ This section must be first!
 </p>
 
 <div class="org-src-container">
-<pre class="src src-toml"><span class="org-variable-name">format</span> = <span class="org-string">"""</span>
-<span class="org-string">$aws\</span>
-<span class="org-string">$gcloud\</span>
-<span class="org-string">$kubernetes\</span>
-<span class="org-string">$docker_context\</span>
-<span class="org-string">$line_break\</span>
-<span class="org-string">$username\</span>
-<span class="org-string">$hostname\</span>
-<span class="org-string">$localip\</span>
-<span class="org-string">$shlvl\</span>
-<span class="org-string">$directory\</span>
-<span class="org-string">$git_branch\</span>
-<span class="org-string">$git_commit\</span>
-<span class="org-string">$git_state\</span>
-<span class="org-string">$git_metrics\</span>
-<span class="org-string">$git_status\</span>
-<span class="org-string">$package\</span>
-<span class="org-string">$c\</span>
-<span class="org-string">$cmake\</span>
-<span class="org-string">$golang\</span>
-<span class="org-string">$helm\</span>
-<span class="org-string">$java\</span>
-<span class="org-string">$julia\</span>
-<span class="org-string">$kotlin\</span>
-<span class="org-string">$gradle\</span>
-<span class="org-string">$lua\</span>
-<span class="org-string">$nodejs\</span>
-<span class="org-string">$opa\</span>
-<span class="org-string">$perl\</span>
-<span class="org-string">$python\</span>
-<span class="org-string">$ruby\</span>
-<span class="org-string">$rust\</span>
-<span class="org-string">$scala\</span>
-<span class="org-string">$swift\</span>
-<span class="org-string">$terraform\</span>
-<span class="org-string">$zig\</span>
-<span class="org-string">$buf\</span>
-<span class="org-string">$memory_usage\</span>
-<span class="org-string">$env_var\</span>
-<span class="org-string">$crystal\</span>
-<span class="org-string">$custom\</span>
-<span class="org-string">$sudo\</span>
-<span class="org-string">$cmd_duration\</span>
-<span class="org-string">$line_break\</span>
-<span class="org-string">$jobs\</span>
-<span class="org-string">$battery\</span>
-<span class="org-string">$time\</span>
-<span class="org-string">$status\</span>
-<span class="org-string">$os\</span>
-<span class="org-string">$container\</span>
-<span class="org-string">$shell\</span>
-<span class="org-string">$character"""</span>
+<pre class="src src-toml"><span class="org-variable-name">format</span> = <span class="org-string">"""
+$aws\
+$gcloud\
+$kubernetes\
+$docker_context\
+$line_break\
+$username\
+$hostname\
+$localip\
+$shlvl\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$package\
+$c\
+$cmake\
+$golang\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nodejs\
+$opa\
+$perl\
+$python\
+$ruby\
+$rust\
+$scala\
+$swift\
+$terraform\
+$zig\
+$buf\
+$memory_usage\
+$env_var\
+$crystal\
+$custom\
+$sudo\
+$cmd_duration\
+$line_break\
+$jobs\
+$battery\
+$time\
+$status\
+$os\
+$container\
+$shell\
+$character"""</span>
 </pre>
 </div>
 </div>
@@ -2909,10 +2934,6 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 <pre class="src src-toml">[<span class="org-type">gcloud</span>]
 <span class="org-variable-name">symbol</span> = <span class="org-string">'gcp '</span>
 <span class="org-variable-name">format</span> = <span class="org-string">'[$symbol$project(\($region\))]($style) '</span>
-<span class="org-variable-name">detect_env_vars</span> = [ <span class="org-string">'GCLOUD_ACTIVE'</span> ]
-
-[<span class="org-type">gcloud.project_aliases</span>]
-<span class="org-variable-name">gcp-s1-prod-scalyr</span> = <span class="org-string">"prod"</span>
 </pre>
 </div>
 </div>
@@ -2934,8 +2955,8 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 <div class="outline-text-4" id="text-org3f83322">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">git_status</span>]
-<span class="org-comment-delimiter"># </span><span class="org-comment">all_status = '$conflicted$stashed$deleted$renamed$modified$staged$untracked'</span>
-<span class="org-variable-name">format</span> = <span class="org-string">'([$conflicted$deleted$renamed$modified$staged$untracked$ahead_behind]($style) )'</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">all_status = '$conflicted$stashed$deleted$renamed$modified$staged$untracked'
+</span><span class="org-variable-name">format</span> = <span class="org-string">'([$conflicted$deleted$renamed$modified$staged$untracked$ahead_behind]($style) )'</span>
 </pre>
 </div>
 </div>
@@ -2964,8 +2985,8 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-</section>
-<section id="outline-container-org37a066c" class="outline-2">
+</div>
+<div id="outline-container-org37a066c" class="outline-2">
 <h2 id="org37a066c"><a href="https://github.com/alloy/terminal-notifier">terminal-notifier</a></h2>
 <div class="outline-text-2" id="text-org37a066c">
 <pre class="example">
@@ -2977,8 +2998,8 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/599-terminal-notifier.bash
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-orga4ab287" class="outline-2">
+</div>
+<div id="outline-container-orga4ab287" class="outline-2">
 <h2 id="orga4ab287">Terraform</h2>
 <div class="outline-text-2" id="text-orga4ab287">
 <pre class="example">
@@ -2990,10 +3011,17 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/525-terraform.bash
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-orgc36236b" class="outline-2">
+</div>
+<div id="outline-container-orgc36236b" class="outline-2">
 <h2 id="orgc36236b">Television</h2>
 <div class="outline-text-2" id="text-orgc36236b">
+<p>
+A fuzzy finder <a href="https://alexpasmantier.github.io/television/">https://alexpasmantier.github.io/television/</a>
+</p>
+</div>
+<div id="outline-container-org39af42c" class="outline-3">
+<h3 id="org39af42c">Smart Autocomplete &amp; Shell History</h3>
+<div class="outline-text-3" id="text-org39af42c">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/140-television.bash
 </pre>
@@ -3015,8 +3043,8 @@ Modified output of <code>tv init bash</code>:
        <span class="org-variable-name">output</span>=$(<span class="org-sh-quoted-exec">tv --autocomplete-prompt "$current_prompt"</span>)
 
        <span class="org-keyword">if</span> [[ -n $<span class="org-variable-name">output</span> ]]; <span class="org-keyword">then</span>
-           <span class="org-comment-delimiter"># </span><span class="org-comment">add a space if the prompt does not end with one</span>
-           [[ <span class="org-string">"${current_prompt}"</span> != *<span class="org-string">" "</span> ]] &amp;&amp; <span class="org-variable-name">current_prompt</span>=<span class="org-string">"${current_prompt} "</span>
+           <span class="org-comment-delimiter"># </span><span class="org-comment">add a space if the prompt does not end with one
+</span>           [[ <span class="org-string">"${current_prompt}"</span> != *<span class="org-string">" "</span> ]] &amp;&amp; <span class="org-variable-name">current_prompt</span>=<span class="org-string">"${current_prompt} "</span>
 
            <span class="org-variable-name">READLINE_LINE</span>=$<span class="org-variable-name">current_prompt</span>$<span class="org-variable-name">output</span>
            <span class="org-variable-name">READLINE_POINT</span>=${#<span class="org-variable-name">READLINE_LINE</span>}
@@ -3035,15 +3063,16 @@ Modified output of <code>tv init bash</code>:
        <span class="org-keyword">fi</span>
    }
 
-   <span class="org-builtin">bind</span> -x <span class="org-string">'"\C-X\C-T": tv_smart_autocomplete'</span> <span class="org-comment-delimiter"># </span><span class="org-comment">NB I need C-t as transpose-chars</span>
-   <span class="org-builtin">bind</span> -x <span class="org-string">'"\C-R": tv_shell_history'</span>
+   <span class="org-builtin">bind</span> -x <span class="org-string">'"\C-X\C-T": tv_smart_autocomplete'</span> <span class="org-comment-delimiter"># </span><span class="org-comment">NB I need C-t as transpose-chars
+</span>   <span class="org-builtin">bind</span> -x <span class="org-string">'"\C-R": tv_shell_history'</span>
 <span class="org-keyword">fi</span>
 </pre>
 </div>
 </div>
-<div id="outline-container-org39af42c" class="outline-3">
-<h3 id="org39af42c">Configuration</h3>
-<div class="outline-text-3" id="text-org39af42c">
+</div>
+<div id="outline-container-org9c54a6f" class="outline-3">
+<h3 id="org9c54a6f">Configuration</h3>
+<div class="outline-text-3" id="text-org9c54a6f">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/television/config.toml
 </pre>
@@ -3053,174 +3082,132 @@ Modified from <a href="https://github.com/alexpasmantier/television/blob/main/.c
 </p>
 
 <div class="org-src-container">
-<pre class="src src-toml"><span class="org-comment-delimiter"># </span><span class="org-comment">CONFIGURATION FILE LOCATION ON YOUR SYSTEM:</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">-------------------------------------------</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Defaults:</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">---------</span>
-<span class="org-comment-delimiter">#  </span><span class="org-comment">Linux:   `$HOME/.config/television/config.toml`</span>
-<span class="org-comment-delimiter">#  </span><span class="org-comment">macOS:   `$HOME/.config/television/config.toml`</span>
-<span class="org-comment-delimiter">#  </span><span class="org-comment">Windows: `%APPDATA%\television\config.toml`</span>
-<span class="org-comment-delimiter">#</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">XDG dirs:</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">---------</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">You may use XDG_CONFIG_HOME if set on your system.</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">In that case, television will expect the configuration file to be in:</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">`$XDG_CONFIG_HOME/television/config.toml`</span>
-<span class="org-comment-delimiter">#</span>
-
-<span class="org-comment-delimiter"># </span><span class="org-comment">General settings</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">----------------------------------------------------------------------------</span>
-<span class="org-variable-name">frame_rate</span> = 60 <span class="org-comment-delimiter"># </span><span class="org-comment">DEPRECATED: this option is no longer used</span>
-<span class="org-variable-name">tick_rate</span> = 50
+<pre class="src src-toml"><span class="org-comment-delimiter"># </span><span class="org-comment">CONFIGURATION FILE LOCATION ON YOUR SYSTEM:
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">-------------------------------------------
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">Defaults:
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">---------
+</span><span class="org-comment-delimiter">#  </span><span class="org-comment">Linux:   `$HOME/.config/television/config.toml`
+</span><span class="org-comment-delimiter">#  </span><span class="org-comment">macOS:   `$HOME/.config/television/config.toml`
+</span><span class="org-comment-delimiter">#  </span><span class="org-comment">Windows: `%APPDATA%\television\config.toml`
+</span><span class="org-comment-delimiter">#</span><span class="org-comment">
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">XDG dirs:
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">---------
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">You may use XDG_CONFIG_HOME if set on your system.
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">In that case, television will expect the configuration file to be in:
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">`$XDG_CONFIG_HOME/television/config.toml`
+</span><span class="org-comment-delimiter">#</span><span class="org-comment">
+</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">General settings
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">----------------------------------------------------------------------------
+</span><span class="org-variable-name">tick_rate</span> = 50
 
 [<span class="org-type">ui</span>]
-<span class="org-comment-delimiter"># </span><span class="org-comment">Whether to use nerd font icons in the UI</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">This option requires a font patched with Nerd Font in order to properly</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">display glyphs (see https://www.nerdfonts.com/ for more information)</span>
-<span class="org-variable-name">use_nerd_font_icons</span> = <span class="org-keyword">false</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">How much space to allocate for the UI (in percentage of the screen)</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;                                       &#9474;</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;            Terminal screen            &#9474;</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;    &#9474;</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9474;                             &#9474;    &#9474;</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9474;                             &#9474;    &#9474;</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9474;                             &#9474;    &#9474;</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9474;       Television UI         &#9474;    &#9474;</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9474;                             &#9474;    &#9474;</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9474;                             &#9474;    &#9474;</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9474;                             &#9474;    &#9474;</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9474;                             &#9474;    &#9474;</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;    &#9474;</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;                                       &#9474;</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;                                       &#9474;</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span>
-<span class="org-variable-name">ui_scale</span> = 100
-<span class="org-comment-delimiter"># </span><span class="org-comment">Whether to show the top help bar in the UI by default</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">This option can be toggled with the (default) `ctrl-g` keybinding</span>
-<span class="org-variable-name">show_help_bar</span> = <span class="org-keyword">false</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Whether to show the preview panel in the UI by default</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">This option can be toggled with the (default) `ctrl-o` keybinding</span>
-<span class="org-variable-name">show_preview_panel</span> = <span class="org-keyword">true</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Where to place the input bar in the UI (top or bottom)</span>
-<span class="org-variable-name">input_bar_position</span> = <span class="org-string">"bottom"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">DEPRECATED: title is now always displayed at the top as part of the border</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Where to place the preview title in the UI (top or bottom)</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">preview_title_position = "top"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">The theme to use for the UI</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">A list of builtin themes can be found in the `themes` directory of the television</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">repository. You may also create your own theme by creating a new file in a `themes`</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">directory in your configuration directory (see the `config.toml` location above).</span>
-<span class="org-variable-name">theme</span> = <span class="org-string">"default"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Whether to use nerd font icons in the UI
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">This option requires a font patched with Nerd Font in order to properly
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">display glyphs (see https://www.nerdfonts.com/ for more information)
+</span><span class="org-variable-name">use_nerd_font_icons</span> = <span class="org-keyword">false</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">How much space to allocate for the UI (in percentage of the screen)
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;                                       &#9474;
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;            Terminal screen            &#9474;
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;    &#9474;
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9474;                             &#9474;    &#9474;
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9474;                             &#9474;    &#9474;
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9474;                             &#9474;    &#9474;
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9474;       Television UI         &#9474;    &#9474;
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9474;                             &#9474;    &#9474;
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9474;                             &#9474;    &#9474;
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9474;                             &#9474;    &#9474;
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9474;                             &#9474;    &#9474;
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;    &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;    &#9474;
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;                                       &#9474;
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;                                       &#9474;
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+</span><span class="org-variable-name">ui_scale</span> = 100
+<span class="org-comment-delimiter"># </span><span class="org-comment">Whether to show the top help bar in the UI by default
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">This option can be toggled with the (default) `ctrl-g` keybinding
+</span><span class="org-variable-name">show_help_bar</span> = <span class="org-keyword">false</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Whether to show the preview panel in the UI by default
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">This option can be toggled with the (default) `ctrl-o` keybinding
+</span><span class="org-variable-name">show_preview_panel</span> = <span class="org-keyword">true</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Where to place the input bar in the UI (top or bottom)
+</span><span class="org-variable-name">input_bar_position</span> = <span class="org-string">"bottom"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">DEPRECATED: title is now always displayed at the top as part of the border
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">Where to place the preview title in the UI (top or bottom)
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">preview_title_position = "top"
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">The theme to use for the UI
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">A list of builtin themes can be found in the `themes` directory of the television
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">repository. You may also create your own theme by creating a new file in a `themes`
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">directory in your configuration directory (see the `config.toml` location above).
+</span><span class="org-variable-name">theme</span> = <span class="org-string">"default"</span>
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Previewers settings</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">----------------------------------------------------------------------------</span>
-[<span class="org-type">previewers.file</span>]
-<span class="org-comment-delimiter"># </span><span class="org-comment">The theme to use for syntax highlighting.</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Bulitin syntax highlighting uses the same syntax highlighting engine as bat.</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">To get a list of your currently available themes, run `bat --list-themes`</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Note that setting the BAT_THEME environment variable will override this setting.</span>
-<span class="org-variable-name">theme</span> = <span class="org-string">"TwoDark"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Previewers settings
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">----------------------------------------------------------------------------
+</span>[<span class="org-type">previewers.file</span>]
+<span class="org-comment-delimiter"># </span><span class="org-comment">The theme to use for syntax highlighting.
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">Bulitin syntax highlighting uses the same syntax highlighting engine as bat.
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">To get a list of your currently available themes, run `bat --list-themes`
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">Note that setting the BAT_THEME environment variable will override this setting.
+</span><span class="org-variable-name">theme</span> = <span class="org-string">"TwoDark"</span>
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Keybindings</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">----------------------------------------------------------------------------</span>
-<span class="org-comment-delimiter">#</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Channel mode</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">------------------------</span>
-[<span class="org-type">keybindings.Channel</span>]
-<span class="org-comment-delimiter"># </span><span class="org-comment">Quit the application</span>
-<span class="org-variable-name">quit</span> = [<span class="org-string">"esc"</span>, <span class="org-string">"ctrl-c"</span>]
-<span class="org-comment-delimiter"># </span><span class="org-comment">Scrolling through entries</span>
-<span class="org-variable-name">select_next_entry</span> = [<span class="org-string">"down"</span>, <span class="org-string">"ctrl-n"</span>, <span class="org-string">"ctrl-j"</span>]
+<span class="org-comment-delimiter"># </span><span class="org-comment">Keybindings
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">----------------------------------------------------------------------------
+</span><span class="org-comment-delimiter">#</span><span class="org-comment">
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">Channel mode
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">------------------------
+</span>[<span class="org-type">keybindings</span>]
+<span class="org-comment-delimiter"># </span><span class="org-comment">Quit the application
+</span><span class="org-variable-name">quit</span> = [<span class="org-string">"esc"</span>, <span class="org-string">"ctrl-c"</span>, <span class="org-string">"ctrl-g"</span>]
+<span class="org-comment-delimiter"># </span><span class="org-comment">Scrolling through entries
+</span><span class="org-variable-name">select_next_entry</span> = [<span class="org-string">"down"</span>, <span class="org-string">"ctrl-n"</span>, <span class="org-string">"ctrl-j"</span>]
 <span class="org-variable-name">select_prev_entry</span> = [<span class="org-string">"up"</span>, <span class="org-string">"ctrl-p"</span>, <span class="org-string">"ctrl-k"</span>]
 <span class="org-variable-name">select_next_page</span> = <span class="org-string">"pagedown"</span>
 <span class="org-variable-name">select_prev_page</span> = <span class="org-string">"pageup"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Scrolling the preview pane</span>
-<span class="org-variable-name">scroll_preview_half_page_down</span> = <span class="org-string">"ctrl-d"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Scrolling the preview pane
+</span><span class="org-variable-name">scroll_preview_half_page_down</span> = <span class="org-string">"ctrl-d"</span>
 <span class="org-variable-name">scroll_preview_half_page_up</span> = <span class="org-string">"ctrl-u"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Add entry to selection and move to the next entry</span>
-<span class="org-variable-name">toggle_selection_down</span> = <span class="org-string">"tab"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Add entry to selection and move to the previous entry</span>
-<span class="org-variable-name">toggle_selection_up</span> = <span class="org-string">"backtab"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Confirm selection</span>
-<span class="org-variable-name">confirm_selection</span> = <span class="org-string">"enter"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Copy the selected entry to the clipboard</span>
-<span class="org-variable-name">copy_entry_to_clipboard</span> = <span class="org-string">"ctrl-y"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the remote control mode</span>
-<span class="org-variable-name">toggle_remote_control</span> = <span class="org-string">"ctrl-r"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the send to channel mode</span>
-<span class="org-variable-name">toggle_send_to_channel</span> = <span class="org-string">"ctrl-s"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the help bar</span>
-<span class="org-variable-name">toggle_help</span> = <span class="org-string">"ctrl-g"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the preview panel</span>
-<span class="org-variable-name">toggle_preview</span> = <span class="org-string">"ctrl-o"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Add entry to selection and move to the next entry
+</span><span class="org-variable-name">toggle_selection_down</span> = <span class="org-string">"tab"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Add entry to selection and move to the previous entry
+</span><span class="org-variable-name">toggle_selection_up</span> = <span class="org-string">"backtab"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Confirm selection
+</span><span class="org-variable-name">confirm_selection</span> = <span class="org-string">"enter"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Copy the selected entry to the clipboard
+</span><span class="org-variable-name">copy_entry_to_clipboard</span> = <span class="org-string">"ctrl-y"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the remote control mode
+</span><span class="org-variable-name">toggle_remote_control</span> = <span class="org-string">"ctrl-r"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the send to channel mode
+</span><span class="org-variable-name">toggle_send_to_channel</span> = <span class="org-string">"ctrl-s"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the help bar
+</span><span class="org-variable-name">toggle_help</span> = <span class="org-string">"ctrl-h"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the preview panel
+</span><span class="org-variable-name">toggle_preview</span> = <span class="org-string">"ctrl-o"</span>
 
-
-<span class="org-comment-delimiter"># </span><span class="org-comment">Remote control mode</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">-------------------------------</span>
-[<span class="org-type">keybindings.RemoteControl</span>]
-<span class="org-comment-delimiter"># </span><span class="org-comment">Quit the application</span>
-<span class="org-variable-name">quit</span> = <span class="org-string">"esc"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Scrolling through entries</span>
-<span class="org-variable-name">select_next_entry</span> = [<span class="org-string">"down"</span>, <span class="org-string">"ctrl-n"</span>, <span class="org-string">"ctrl-j"</span>]
-<span class="org-variable-name">select_prev_entry</span> = [<span class="org-string">"up"</span>, <span class="org-string">"ctrl-p"</span>, <span class="org-string">"ctrl-k"</span>]
-<span class="org-variable-name">select_next_page</span> = <span class="org-string">"pagedown"</span>
-<span class="org-variable-name">select_prev_page</span> = <span class="org-string">"pageup"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Select an entry</span>
-<span class="org-variable-name">select_entry</span> = <span class="org-string">"enter"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the remote control mode</span>
-<span class="org-variable-name">toggle_remote_control</span> = <span class="org-string">"ctrl-r"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the help bar</span>
-<span class="org-variable-name">toggle_help</span> = <span class="org-string">"ctrl-g"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the preview panel</span>
-<span class="org-variable-name">toggle_preview</span> = <span class="org-string">"ctrl-o"</span>
-
-
-<span class="org-comment-delimiter"># </span><span class="org-comment">Send to channel mode</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">--------------------------------</span>
-[<span class="org-type">keybindings.SendToChannel</span>]
-<span class="org-comment-delimiter"># </span><span class="org-comment">Quit the application</span>
-<span class="org-variable-name">quit</span> = <span class="org-string">"esc"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Scrolling through entries</span>
-<span class="org-variable-name">select_next_entry</span> = [<span class="org-string">"down"</span>, <span class="org-string">"ctrl-n"</span>, <span class="org-string">"ctrl-j"</span>]
-<span class="org-variable-name">select_prev_entry</span> = [<span class="org-string">"up"</span>, <span class="org-string">"ctrl-p"</span>, <span class="org-string">"ctrl-k"</span>]
-<span class="org-variable-name">select_next_page</span> = <span class="org-string">"pagedown"</span>
-<span class="org-variable-name">select_prev_page</span> = <span class="org-string">"pageup"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Select an entry</span>
-<span class="org-variable-name">select_entry</span> = <span class="org-string">"enter"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the send to channel mode</span>
-<span class="org-variable-name">toggle_send_to_channel</span> = <span class="org-string">"ctrl-s"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the help bar</span>
-<span class="org-variable-name">toggle_help</span> = <span class="org-string">"ctrl-g"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the preview panel</span>
-<span class="org-variable-name">toggle_preview</span> = <span class="org-string">"ctrl-o"</span>
-
-
-<span class="org-comment-delimiter"># </span><span class="org-comment">Shell integration</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">----------------------------------------------------------------------------</span>
-<span class="org-comment-delimiter">#</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">The shell integration feature allows you to use television as a picker for</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">your shell commands (as well as your shell history with &lt;CTRL-R&gt;).</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">E.g. typing `git checkout &lt;CTRL-T&gt;` will open television with a list of</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">branches to choose from.</span>
-
+<span class="org-comment-delimiter"># </span><span class="org-comment">Shell integration
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">----------------------------------------------------------------------------
+</span><span class="org-comment-delimiter">#</span><span class="org-comment">
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">The shell integration feature allows you to use television as a picker for
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">your shell commands (as well as your shell history with &lt;CTRL-R&gt;).
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">E.g. typing `git checkout &lt;CTRL-T&gt;` will open television with a list of
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">branches to choose from.
+</span>
 [<span class="org-type">shell_integration.channel_triggers</span>]
-<span class="org-comment-delimiter"># </span><span class="org-comment">Add your channel triggers here. Each key is a channel that will be triggered</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">by the corresponding commands.</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Example: say you want the following commands to trigger the following channels</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">when pressing &lt;CTRL-T&gt;:</span>
-<span class="org-comment-delimiter">#          </span><span class="org-comment">`git checkout`  should trigger the `git-branches` channel</span>
-<span class="org-comment-delimiter">#          </span><span class="org-comment">`ls`            should trigger the `dirs` channel</span>
-<span class="org-comment-delimiter">#          </span><span class="org-comment">`cat` and `cp`  should trigger the `files` channel</span>
-<span class="org-comment-delimiter">#</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">You would add the following to your configuration file:</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">```</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">[shell_integration.channel_triggers]</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">"git-branches" = ["git checkout"]</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">"dirs" = ["ls"]</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">"files" = ["cat", "cp"]</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">```</span>
-<span class="org-string">"alias"</span> = [<span class="org-string">"alias"</span>, <span class="org-string">"unalias"</span>]
+<span class="org-comment-delimiter"># </span><span class="org-comment">Add your channel triggers here. Each key is a channel that will be triggered
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">by the corresponding commands.
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">Example: say you want the following commands to trigger the following channels
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">when pressing &lt;CTRL-T&gt;:
+</span><span class="org-comment-delimiter">#          </span><span class="org-comment">`git checkout`  should trigger the `git-branches` channel
+</span><span class="org-comment-delimiter">#          </span><span class="org-comment">`ls`            should trigger the `dirs` channel
+</span><span class="org-comment-delimiter">#          </span><span class="org-comment">`cat` and `cp`  should trigger the `files` channel
+</span><span class="org-comment-delimiter">#</span><span class="org-comment">
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">You would add the following to your configuration file:
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">```
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">[shell_integration.channel_triggers]
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">"git-branches" = ["git checkout"]
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">"dirs" = ["ls"]
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">"files" = ["cat", "cp"]
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">```
+</span><span class="org-string">"alias"</span> = [<span class="org-string">"alias"</span>, <span class="org-string">"unalias"</span>]
 <span class="org-string">"env"</span> = [<span class="org-string">"export"</span>, <span class="org-string">"unset"</span>]
 <span class="org-string">"dirs"</span> = [
   <span class="org-string">"cd"</span>,
@@ -3270,70 +3257,145 @@ Modified from <a href="https://github.com/alexpasmantier/television/blob/main/.c
 
 
 [<span class="org-type">shell_integration.keybindings</span>]
-<span class="org-comment-delimiter"># </span><span class="org-comment">controls which key binding should trigger tv</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">for shell autocomplete</span>
-<span class="org-string">"smart_autocomplete"</span> = <span class="org-string">"ctrl-t"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">controls which keybinding should trigger tv</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">for command history</span>
-<span class="org-string">"command_history"</span> = <span class="org-string">"ctrl-r"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">controls which key binding should trigger tv
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">for shell autocomplete
+</span><span class="org-string">"smart_autocomplete"</span> = <span class="org-string">"ctrl-t"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">controls which keybinding should trigger tv
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">for command history
+</span><span class="org-string">"command_history"</span> = <span class="org-string">"ctrl-r"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org9c54a6f" class="outline-3">
-<h3 id="org9c54a6f">Cable Channels</h3>
-<div class="outline-text-3" id="text-org9c54a6f">
-<pre class="example">
-header-args: :mkdirp yes :tangle ~/.config/television/cable_channels.toml
-</pre>
+<div id="outline-container-orgb7d0ae3" class="outline-3">
+<h3 id="orgb7d0ae3">Cable Channels</h3>
+<div class="outline-text-3" id="text-orgb7d0ae3">
+<p>
+Modified from <a href="https://github.com/alexpasmantier/television/tree/main/cable/unix">https://github.com/alexpasmantier/television/tree/main/cable/unix</a>
+</p>
 
 <p>
-Modified from <a href="https://github.com/alexpasmantier/television/blob/main/cable/unix-channels.toml">https://github.com/alexpasmantier/television/blob/main/cable/unix-channels.toml</a>
+TODO migrate these to the 0.12+ format :/
 </p>
 
 <div class="org-src-container">
-<pre class="src src-toml"><span class="org-comment-delimiter"># </span><span class="org-comment">Git</span>
-[[<span class="org-type">cable_channel</span>]]
+<pre class="src src-toml"><span class="org-comment-delimiter"># </span><span class="org-comment">Git
+</span>[[<span class="org-type">cable_channel</span>]]
 <span class="org-variable-name">name</span> = <span class="org-string">"git-diff"</span>
 <span class="org-variable-name">source_command</span> = <span class="org-string">"git diff --name-only"</span>
 <span class="org-variable-name">preview_command</span> = <span class="org-string">"git diff --color=always {0}"</span>
-
 [[<span class="org-type">cable_channel</span>]]
 <span class="org-variable-name">name</span> = <span class="org-string">"git-reflog"</span>
 <span class="org-variable-name">source_command</span> = <span class="org-string">'git reflog'</span>
 <span class="org-variable-name">preview_command</span> = <span class="org-string">'git show -p --stat --pretty=fuller --color=always {0}'</span>
-
 [[<span class="org-type">cable_channel</span>]]
 <span class="org-variable-name">name</span> = <span class="org-string">"git-log"</span>
 <span class="org-variable-name">source_command</span> = <span class="org-string">"git log --oneline --date=short --pretty=\"format:%h %s %an %cd\" \"$@\""</span>
 <span class="org-variable-name">preview_command</span> = <span class="org-string">"git show -p --stat --pretty=fuller --color=always {0}"</span>
-
 [[<span class="org-type">cable_channel</span>]]
 <span class="org-variable-name">name</span> = <span class="org-string">"git-branch"</span>
 <span class="org-variable-name">source_command</span> = <span class="org-string">"git --no-pager branch --all --format=\"%(refname:short)\""</span>
 <span class="org-variable-name">preview_command</span> = <span class="org-string">"git show -p --stat --pretty=fuller --color=always {0}"</span>
-
 [[<span class="org-type">cable_channel</span>]]
 <span class="org-variable-name">name</span> = <span class="org-string">"docker-images"</span>
 <span class="org-variable-name">source_command</span> = <span class="org-string">"docker image list --format \"{{.ID}}\""</span>
 <span class="org-variable-name">preview_command</span> = <span class="org-string">"docker image inspect {0} | jq -C"</span>
-
 [[<span class="org-type">cable_channel</span>]]
 <span class="org-variable-name">name</span> = <span class="org-string">"my-dotfiles"</span>
 <span class="org-variable-name">source_command</span> = <span class="org-string">"find $HOME/.bashrc $HOME/.bashrc.d -type f"</span>
 <span class="org-variable-name">preview_command</span> = <span class="org-string">":files:"</span>
-
 [[<span class="org-type">cable_channel</span>]]
 <span class="org-variable-name">name</span> = <span class="org-string">"bash-history"</span>
 <span class="org-variable-name">source_command</span> = <span class="org-string">"sed '1!G;h;$!d' ${HISTFILE:-${HOME}/.bash_history} | rg -v '^#' | nl | sort -k2 -u | sort -n | cut -f 2"</span>
 </pre>
 </div>
 </div>
+<div id="outline-container-org46190d2" class="outline-4">
+<h4 id="org46190d2">Bash History</h4>
+<div class="outline-text-4" id="text-org46190d2">
+<pre class="example">
+header-args: :mkdirp yes :tangle ~/.config/television/cable/bash-history.toml
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-toml"><span class="org-comment-delimiter"># </span><span class="org-comment">UNTESTED
+</span>[<span class="org-type">metadata</span>]
+<span class="org-variable-name">name</span> = <span class="org-string">"bash-history"</span>
+<span class="org-variable-name">description</span> = <span class="org-string">"A channel to select from your bash history"</span>
+<span class="org-variable-name">requirements</span> = [<span class="org-string">"bash"</span>]
+
+[<span class="org-type">source</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"sed '1!G;h;$!d' ${HISTFILE:-${HOME}/.bash_history} | rg -v '^#' | nl | sort -k2 -u | sort -n | cut -f 2"</span>
+</pre>
 </div>
-</section>
-<section id="outline-container-orgb7d0ae3" class="outline-2">
-<h2 id="orgb7d0ae3"><a href="https://wezfurlong.org/wezterm/index.html">WezTerm</a></h2>
-<div class="outline-text-2" id="text-orgb7d0ae3">
+</div>
+</div>
+<div id="outline-container-org4657b25" class="outline-4">
+<h4 id="org4657b25">Files</h4>
+<div class="outline-text-4" id="text-org4657b25">
+<pre class="example">
+header-args: :mkdirp yes :tangle ~/.config/television/cable/files.toml
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-toml">[<span class="org-type">metadata</span>]
+<span class="org-variable-name">name</span> = <span class="org-string">"files"</span>
+<span class="org-variable-name">description</span> = <span class="org-string">"A channel to select files and directories"</span>
+<span class="org-variable-name">requirements</span> = [<span class="org-string">"fd"</span>, <span class="org-string">"bat"</span>]
+
+[<span class="org-type">source</span>]
+<span class="org-variable-name">command</span> = [<span class="org-string">"fd -t f"</span>, <span class="org-string">"fd -t f -H"</span>]
+
+[<span class="org-type">preview</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"bat -n --color=always '{}'"</span>
+<span class="org-variable-name">env</span> = { BAT_THEME = <span class="org-string">"ansi"</span> }
+
+[<span class="org-type">keybindings</span>]
+<span class="org-variable-name">shortcut</span> = <span class="org-string">"f1"</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf4316c4" class="outline-3">
+<h3 id="orgf4316c4">Theme</h3>
+<div class="outline-text-3" id="text-orgf4316c4">
+<pre class="example">
+header-args: :mkdirp yes :tangle ~/.config/television/themes/default.toml
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-toml"><span class="org-comment-delimiter"># </span><span class="org-comment">general
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">background = 'black'
+</span><span class="org-variable-name">border_fg</span> = <span class="org-string">'bright-black'</span>
+<span class="org-variable-name">text_fg</span> = <span class="org-string">'bright-blue'</span>
+<span class="org-variable-name">dimmed_text_fg</span> = <span class="org-string">'white'</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">input
+</span><span class="org-variable-name">input_text_fg</span> = <span class="org-string">'bright-red'</span>
+<span class="org-variable-name">result_count_fg</span> = <span class="org-string">'bright-red'</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">results
+</span><span class="org-variable-name">result_name_fg</span> = <span class="org-string">'bright-blue'</span>
+<span class="org-variable-name">result_line_number_fg</span> = <span class="org-string">'bright-yellow'</span>
+<span class="org-variable-name">result_value_fg</span> = <span class="org-string">'white'</span>
+<span class="org-variable-name">selection_fg</span> = <span class="org-string">'bright-green'</span>
+<span class="org-variable-name">selection_bg</span> = <span class="org-string">'bright-black'</span>
+<span class="org-variable-name">match_fg</span> = <span class="org-string">'bright-red'</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">preview
+</span><span class="org-variable-name">preview_title_fg</span> = <span class="org-string">'bright-magenta'</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">modes
+</span><span class="org-variable-name">channel_mode_fg</span> = <span class="org-string">'black'</span>
+<span class="org-variable-name">channel_mode_bg</span> = <span class="org-string">'green'</span>
+<span class="org-variable-name">remote_control_mode_fg</span> = <span class="org-string">'black'</span>
+<span class="org-variable-name">remote_control_mode_bg</span> = <span class="org-string">'yellow'</span>
+<span class="org-variable-name">send_to_channel_mode_fg</span> = <span class="org-string">'cyan'</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org288531e" class="outline-2">
+<h2 id="org288531e"><a href="https://wezfurlong.org/wezterm/index.html">WezTerm</a></h2>
+<div class="outline-text-2" id="text-org288531e">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.wezterm.lua
 </pre>
@@ -3351,27 +3413,27 @@ header-args: :mkdirp yes :tangle ~/.wezterm.lua
    config = wezterm.config_builder()
 <span class="org-keyword">end</span>
 
-<span class="org-comment-delimiter">-- </span><span class="org-comment">term https://wezfurlong.org/wezterm/config/lua/config/term.html</span>
-config.term = <span class="org-string">"wezterm"</span>
+<span class="org-comment-delimiter">-- </span><span class="org-comment">term https://wezfurlong.org/wezterm/config/lua/config/term.html
+</span>config.term = <span class="org-string">"wezterm"</span>
 
-<span class="org-comment-delimiter">-- </span><span class="org-comment">Shell</span>
-<span class="org-keyword">if</span> wezterm.target_triple == <span class="org-string">'aarch64-apple-darwin'</span> <span class="org-keyword">then</span>
+<span class="org-comment-delimiter">-- </span><span class="org-comment">Shell
+</span><span class="org-keyword">if</span> wezterm.target_triple == <span class="org-string">'aarch64-apple-darwin'</span> <span class="org-keyword">then</span>
    config.default_prog = {<span class="org-string">'/opt/homebrew/bin/bash'</span>}
 <span class="org-keyword">elseif</span> wezterm.target_triple == <span class="org-string">'x86_64-unknown-linux-gnu'</span> <span class="org-keyword">then</span>
    config.default_prog = {<span class="org-string">'/bin/bash'</span>}
 <span class="org-keyword">end</span>
 
-<span class="org-comment-delimiter">-- </span><span class="org-comment">Font</span>
-config.font = wezterm.font(<span class="org-string">'PragmataPro Liga'</span>)
+<span class="org-comment-delimiter">-- </span><span class="org-comment">Font
+</span>config.font = wezterm.font(<span class="org-string">'PragmataPro Liga'</span>)
 config.font_size = 22
 
-<span class="org-comment-delimiter">-- </span><span class="org-comment">GUI</span>
-config.initial_rows = 48
+<span class="org-comment-delimiter">-- </span><span class="org-comment">GUI
+</span>config.initial_rows = 48
 config.initial_cols = 110
 config.enable_tab_bar = <span class="org-constant">false</span>
 
-<span class="org-comment-delimiter">-- </span><span class="org-comment">Theme</span>
-<span class="org-keyword">function</span> <span class="org-function-name">get_appearance</span>()
+<span class="org-comment-delimiter">-- </span><span class="org-comment">Theme
+</span><span class="org-keyword">function</span> <span class="org-function-name">get_appearance</span>()
    <span class="org-keyword">if</span> wezterm.gui <span class="org-keyword">then</span>
       <span class="org-keyword">return</span> wezterm.gui.get_appearance()
    <span class="org-keyword">end</span>
@@ -3388,32 +3450,32 @@ config.enable_tab_bar = <span class="org-constant">false</span>
 
 config.color_scheme = scheme_for_appearance(get_appearance())
 
-<span class="org-comment-delimiter">-- </span><span class="org-comment">Bindings</span>
-config.keys = {
-   <span class="org-comment-delimiter">-- </span><span class="org-comment">macOS move forward/backward by word with &#8984;-f, &#8984;-b</span>
-   { key = <span class="org-string">'b'</span>, mods = <span class="org-string">'CMD'</span>, action = act.SendString <span class="org-string">'\x1bb'</span> },
+<span class="org-comment-delimiter">-- </span><span class="org-comment">Bindings
+</span>config.keys = {
+   <span class="org-comment-delimiter">-- </span><span class="org-comment">macOS move forward/backward by word with &#8984;-f, &#8984;-b
+</span>   { key = <span class="org-string">'b'</span>, mods = <span class="org-string">'CMD'</span>, action = act.SendString <span class="org-string">'\x1bb'</span> },
    { key = <span class="org-string">'f'</span>, mods = <span class="org-string">'CMD'</span>, action = act.SendString <span class="org-string">'\x1bf'</span> },
 
-   <span class="org-comment-delimiter">-- </span><span class="org-comment">macOS backward erase word (see</span>
-   <span class="org-comment-delimiter">-- </span><span class="org-comment">https://apple.stackexchange.com/questions/101754/os-x-disable-cmd-h-or-hide-app-command for re-mapping &#8984;-h from</span>
-   <span class="org-comment-delimiter">-- </span><span class="org-comment">"Hide WezTerm" to something else)</span>
-   { key = <span class="org-string">'h'</span>, mods = <span class="org-string">'CMD'</span>, action = act.SendString <span class="org-string">'\x1b\x7f'</span> },
+   <span class="org-comment-delimiter">-- </span><span class="org-comment">macOS backward erase word (see
+</span>   <span class="org-comment-delimiter">-- </span><span class="org-comment">https://apple.stackexchange.com/questions/101754/os-x-disable-cmd-h-or-hide-app-command for re-mapping &#8984;-h from
+</span>   <span class="org-comment-delimiter">-- </span><span class="org-comment">"Hide WezTerm" to something else)
+</span>   { key = <span class="org-string">'h'</span>, mods = <span class="org-string">'CMD'</span>, action = act.SendString <span class="org-string">'\x1b\x7f'</span> },
 
-   <span class="org-comment-delimiter">-- </span><span class="org-comment">macOS forward erase word</span>
-   { key = <span class="org-string">'d'</span>, mods = <span class="org-string">'CMD'</span>, action = act.SendString <span class="org-string">'\x1bd'</span> },
+   <span class="org-comment-delimiter">-- </span><span class="org-comment">macOS forward erase word
+</span>   { key = <span class="org-string">'d'</span>, mods = <span class="org-string">'CMD'</span>, action = act.SendString <span class="org-string">'\x1bd'</span> },
 
-   <span class="org-comment-delimiter">-- </span><span class="org-comment">Search, rather than &#8984;-f</span>
-   { key = <span class="org-string">'s'</span>, mods = <span class="org-string">'CMD'</span>, action = act.Search <span class="org-string">'CurrentSelectionOrEmptyString'</span> },
+   <span class="org-comment-delimiter">-- </span><span class="org-comment">Search, rather than &#8984;-f
+</span>   { key = <span class="org-string">'s'</span>, mods = <span class="org-string">'CMD'</span>, action = act.Search <span class="org-string">'CurrentSelectionOrEmptyString'</span> },
 }
 
 <span class="org-keyword">return</span> config
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-orgf4316c4" class="outline-2">
-<h2 id="orgf4316c4"><code>yamllint</code></h2>
-<div class="outline-text-2" id="text-orgf4316c4">
+</div>
+<div id="outline-container-orgca4550f" class="outline-2">
+<h2 id="orgca4550f"><code>yamllint</code></h2>
+<div class="outline-text-2" id="text-orgca4550f">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/yamllint/config
 </pre>
@@ -3465,10 +3527,10 @@ See <a href="https://yamllint.readthedocs.io/en/stable/configuration.html">https
 </pre>
 </div>
 </div>
-</section>
-<section id="outline-container-org288531e" class="outline-2">
-<h2 id="org288531e"><code>~/.inputrc</code></h2>
-<div class="outline-text-2" id="text-org288531e">
+</div>
+<div id="outline-container-org3cb68a9" class="outline-2">
+<h2 id="org3cb68a9"><code>~/.inputrc</code></h2>
+<div class="outline-text-2" id="text-org3cb68a9">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.inputrc
 </pre>
@@ -3487,12 +3549,23 @@ header-args: :mkdirp yes :tangle ~/.inputrc
 </pre>
 </div>
 </div>
-</section>
-</article>
-<footer id="postamble" class="status">
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun] </span></span> this document is focused on macOS only after I migrated Linux specific configuration to
+<a href="https://github.com/krismolendyke/dotfiles/blob/master/linux.org">linux.org</a>.
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2025-03-13 Thu 06:26</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 30.1 (<a href="https://orgmode.org">Org</a> mode 9.7.18)</p>
-</footer>
+<p class="date">2025-08-03 Sun 07:25</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 30.1 (<a href="https://orgmode.org">Org</a> mode 9.7.30)</p>
+</div>
 </body>
 </html>
