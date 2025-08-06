@@ -711,6 +711,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
              difftool = true
      [pull]
              rebase = false
+     [push]
+             autoSetupRemote = true
      [init]
              defaultBranch = main
      [credential]
