@@ -705,6 +705,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
              prompt = false
      [difftool "difftastic"]
              cmd = difft --display=inline "$LOCAL" "$REMOTE"
+     [fetch]
+             prune = true
      [help]
              autocorrect = 1
      [pager]
