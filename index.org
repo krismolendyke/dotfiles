@@ -152,7 +152,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      alias ...="cd ../../"
      alias ....="cd ../../.."
      alias dirs="dirs -v"
-     alias j="jobs -l"
      alias r='[ "$(pwd)" != "$(git rev-parse --show-toplevel)" ] && cd "$(git rev-parse --show-toplevel)"'
      alias tree="tree -C"
      alias top="top -ocpu -Orsize"
@@ -737,6 +736,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    #+begin_src gitignore
      # -*- mode: gitignore; -*-
 
+     .jj/
      ~/.bashrc.d/secret/
 
      ##########################################################################
@@ -920,6 +920,36 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 ** TODO krew
 
    Install and configure [[https://krew.sigs.k8s.io/docs/user-guide/setup/install/][krew]].
+
+* Jujutsu
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/102-jujutsu.bash
+  :END:
+
+  =jj= isn't all that bad to type but I'm conditioned to type =g= for =git= after all these years.  So =j= for =jj= it is.
+
+  #+begin_src sh
+    alias j="jj" && complete -F _clap_complete_jj -o nosort -o bashdefault -o default j
+  #+end_src
+
+** =~.config/=
+   :PROPERTIES:
+     :header-args: :mkdirp yes :tangle ~/.config/jj/config.toml
+     :END:
+
+   #+begin_src toml
+     "$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+     [signing]
+     backend = "ssh"
+     backends.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+     behavior = "own"
+     key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPFEgqTPapPtOUOAsoSH2o4VJbp1JFzvXaiuEpdS0KuK"
+
+     [user]
+     name = "Kris Molendyke"
+     email = "krismolendyke@users.noreply.github.com"
+   #+end_src
 
 * [[https://github.com/nvm-sh/nvm][nvm]]
   :PROPERTIES:
