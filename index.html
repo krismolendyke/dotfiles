@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-08-06 Wed 07:17 -->
+<!-- 2025-08-10 Sun 07:51 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1503,6 +1503,7 @@ Aliases:
 <span class="org-builtin">alias</span> ....=<span class="org-string">"cd ../../.."</span>
 <span class="org-builtin">alias</span> <span class="org-variable-name">dirs</span>=<span class="org-string">"dirs -v"</span>
 <span class="org-builtin">alias</span> <span class="org-variable-name">j</span>=<span class="org-string">"jobs -l"</span>
+<span class="org-builtin">alias</span> <span class="org-variable-name">r</span>=<span class="org-string">'[ "$(</span><span class="org-sh-quoted-exec">pwd</span><span class="org-string">)" != "$(</span><span class="org-sh-quoted-exec">git rev-parse --show-toplevel</span><span class="org-string">)" ] &amp;&amp; cd "$(</span><span class="org-sh-quoted-exec">git rev-parse --show-toplevel</span><span class="org-string">)"'</span>
 <span class="org-builtin">alias</span> <span class="org-variable-name">tree</span>=<span class="org-string">"tree -C"</span>
 <span class="org-builtin">alias</span> <span class="org-variable-name">top</span>=<span class="org-string">"top -ocpu -Orsize"</span>
 </pre>
@@ -1571,16 +1572,16 @@ header-args: :mkdirp yes :tangle ~/.Brewfile
 <pre class="src src-sh">tap <span class="org-string">"buo/cask-upgrade"</span>
 tap <span class="org-string">"d12frosted/emacs-plus"</span>
 tap <span class="org-string">"homebrew/autoupdate"</span>
-tap <span class="org-string">"homebrew/bundle"</span>
 tap <span class="org-string">"homebrew/command-not-found"</span>
-tap <span class="org-string">"homebrew/services"</span>
 tap <span class="org-string">"homebrew/test-bot"</span>
 tap <span class="org-string">"tidbyt/tidbyt"</span>
+brew <span class="org-string">"git"</span>
 brew <span class="org-string">"asdf"</span>
 brew <span class="org-string">"aspell"</span>
 brew <span class="org-string">"automake"</span>
 brew <span class="org-string">"bash"</span>
 brew <span class="org-string">"bash-completion@2"</span>
+brew <span class="org-string">"oniguruma"</span>
 brew <span class="org-string">"bat"</span>
 brew <span class="org-string">"bison"</span>
 brew <span class="org-string">"chafa"</span>
@@ -1600,7 +1601,6 @@ brew <span class="org-string">"gawk"</span>
 brew <span class="org-string">"gcc"</span>
 brew <span class="org-string">"gd"</span>
 brew <span class="org-string">"gflags"</span>
-brew <span class="org-string">"git"</span>
 brew <span class="org-string">"gnupg"</span>
 brew <span class="org-string">"go"</span>
 brew <span class="org-string">"gprof2dot"</span>
@@ -1609,7 +1609,7 @@ brew <span class="org-string">"shared-mime-info"</span>
 brew <span class="org-string">"imagemagick"</span>
 brew <span class="org-string">"innoextract"</span>
 brew <span class="org-string">"ispell"</span>
-brew <span class="org-string">"oniguruma"</span>
+brew <span class="org-string">"jj"</span>
 brew <span class="org-string">"jq"</span>
 brew <span class="org-string">"just"</span>
 brew <span class="org-string">"kubernetes-cli"</span>
@@ -1659,13 +1659,12 @@ cask <span class="org-string">"font-symbols-only-nerd-font"</span>
 cask <span class="org-string">"ghostty"</span>
 cask <span class="org-string">"google-chrome"</span>
 cask <span class="org-string">"google-drive"</span>
+cask <span class="org-string">"gzdoom"</span>
 cask <span class="org-string">"heroic"</span>
 cask <span class="org-string">"istat-menus"</span>
 cask <span class="org-string">"lm-studio"</span>
 cask <span class="org-string">"mactex-no-gui"</span>
-cask <span class="org-string">"nova"</span>
 cask <span class="org-string">"orion"</span>
-cask <span class="org-string">"playdate-simulator"</span>
 cask <span class="org-string">"qlmarkdown"</span>
 cask <span class="org-string">"rancher"</span>
 cask <span class="org-string">"rectangle"</span>
@@ -1675,6 +1674,7 @@ cask <span class="org-string">"tomatobar"</span>
 cask <span class="org-string">"vanilla"</span>
 cask <span class="org-string">"vlc"</span>
 cask <span class="org-string">"wezterm"</span>
+cask <span class="org-string">"whisky"</span>
 cask <span class="org-string">"zed"</span>
 cask <span class="org-string">"zoom"</span>
 </pre>
@@ -3160,32 +3160,38 @@ Modified from <a href="https://github.com/alexpasmantier/television/blob/main/.c
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">Channel mode
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">------------------------
 </span>[<span class="org-type">keybindings</span>]
-<span class="org-comment-delimiter"># </span><span class="org-comment">Quit the application
-</span><span class="org-variable-name">quit</span> = [<span class="org-string">"esc"</span>, <span class="org-string">"ctrl-c"</span>, <span class="org-string">"ctrl-g"</span>]
+<span class="org-comment-delimiter"># </span><span class="org-comment">Quit the applicatione
+</span><span class="org-variable-name">esc</span> = <span class="org-string">"quit"</span>
+<span class="org-variable-name">ctrl-c</span> = <span class="org-string">"quit"</span>
+<span class="org-variable-name">ctrl-g</span> = <span class="org-string">"quit"</span>
 <span class="org-comment-delimiter"># </span><span class="org-comment">Scrolling through entries
-</span><span class="org-variable-name">select_next_entry</span> = [<span class="org-string">"down"</span>, <span class="org-string">"ctrl-n"</span>, <span class="org-string">"ctrl-j"</span>]
-<span class="org-variable-name">select_prev_entry</span> = [<span class="org-string">"up"</span>, <span class="org-string">"ctrl-p"</span>, <span class="org-string">"ctrl-k"</span>]
-<span class="org-variable-name">select_next_page</span> = <span class="org-string">"pagedown"</span>
-<span class="org-variable-name">select_prev_page</span> = <span class="org-string">"pageup"</span>
+</span><span class="org-variable-name">down</span> = <span class="org-string">"select_next_entry"</span>
+<span class="org-variable-name">ctrl-n</span> = <span class="org-string">"select_next_entry"</span>
+<span class="org-variable-name">ctrl-j</span> = <span class="org-string">"select_next_entry"</span>
+<span class="org-variable-name">up</span> = <span class="org-string">"select_prev_entry"</span>
+<span class="org-variable-name">ctrl-p</span> = <span class="org-string">"select_prev_entry"</span>
+<span class="org-variable-name">ctrl-k</span> = <span class="org-string">"select_prev_entry"</span>
+<span class="org-variable-name">pagedown</span> = <span class="org-string">"select_next_page"</span>
+<span class="org-variable-name">pageup</span> = <span class="org-string">"select_prev_page"</span>
 <span class="org-comment-delimiter"># </span><span class="org-comment">Scrolling the preview pane
-</span><span class="org-variable-name">scroll_preview_half_page_down</span> = <span class="org-string">"ctrl-d"</span>
-<span class="org-variable-name">scroll_preview_half_page_up</span> = <span class="org-string">"ctrl-u"</span>
+</span><span class="org-variable-name">ctrl-d</span> = <span class="org-string">"scroll_preview_half_page_down"</span>
+<span class="org-variable-name">ctrl-u</span> = <span class="org-string">"scroll_preview_half_page_up"</span>
 <span class="org-comment-delimiter"># </span><span class="org-comment">Add entry to selection and move to the next entry
-</span><span class="org-variable-name">toggle_selection_down</span> = <span class="org-string">"tab"</span>
+</span><span class="org-variable-name">tab</span> = <span class="org-string">"toggle_selection_down"</span>
 <span class="org-comment-delimiter"># </span><span class="org-comment">Add entry to selection and move to the previous entry
-</span><span class="org-variable-name">toggle_selection_up</span> = <span class="org-string">"backtab"</span>
+</span><span class="org-variable-name">backtab</span> = <span class="org-string">"toggle_selection_up"</span>
 <span class="org-comment-delimiter"># </span><span class="org-comment">Confirm selection
-</span><span class="org-variable-name">confirm_selection</span> = <span class="org-string">"enter"</span>
+</span><span class="org-variable-name">enter</span> = <span class="org-string">"confirm_selection"</span>
 <span class="org-comment-delimiter"># </span><span class="org-comment">Copy the selected entry to the clipboard
-</span><span class="org-variable-name">copy_entry_to_clipboard</span> = <span class="org-string">"ctrl-y"</span>
+</span><span class="org-variable-name">ctrl-y</span> = <span class="org-string">"copy_entry_to_clipboard"</span>
 <span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the remote control mode
-</span><span class="org-variable-name">toggle_remote_control</span> = <span class="org-string">"ctrl-r"</span>
+</span><span class="org-variable-name">ctrl-r</span> = <span class="org-string">"toggle_remote_control"</span>
 <span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the send to channel mode
-</span><span class="org-variable-name">toggle_send_to_channel</span> = <span class="org-string">"ctrl-s"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the help bar
-</span><span class="org-variable-name">toggle_help</span> = <span class="org-string">"ctrl-h"</span>
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">ctrl-s = "toggle_send_to_channel"
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the help bar
+</span><span class="org-variable-name">ctrl-h</span> = <span class="org-string">"toggle_help"</span>
 <span class="org-comment-delimiter"># </span><span class="org-comment">Toggle the preview panel
-</span><span class="org-variable-name">toggle_preview</span> = <span class="org-string">"ctrl-o"</span>
+</span><span class="org-variable-name">ctrl-o</span> = <span class="org-string">"toggle_preview"</span>
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Shell integration
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">----------------------------------------------------------------------------
@@ -3568,7 +3574,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun] <
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2025-08-06 Wed 07:16</p>
+<p class="date">2025-08-10 Sun 07:49</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 30.1 (<a href="https://orgmode.org">Org</a> mode 9.7.30)</p>
 </div>
 </body>
