@@ -235,6 +235,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       brew "gcc"
       brew "gd"
       brew "gflags"
+      brew "gh"
       brew "gnupg"
       brew "go"
       brew "gprof2dot"
