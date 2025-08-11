@@ -265,6 +265,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       brew "ripgrep"
       brew "rocksdb"
       brew "ruby", link: true
+      brew "rust"
       brew "scons"
       brew "sevenzip"
       brew "shellcheck"
@@ -1045,8 +1046,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
         pathmunge "${CARGO_HOME}/bin"
     fi
 
-    if [[ -x ${CARGO_HOME}/bin/rustc ]]; then
-        DYLD_LIBRARY_PATH=$("${CARGO_HOME}"/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
+    if [[ -x ${HOMEBREW_PREFIX}/bin/rustc ]]; then
+        DYLD_LIBRARY_PATH=$("${HOMEBREW_PREFIX}"/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
         export DYLD_LIBRARY_PATH
     fi
   #+end_src
