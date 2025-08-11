@@ -1488,10 +1488,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      tick_rate = 50
 
      [ui]
-     # Whether to use nerd font icons in the UI
-     # This option requires a font patched with Nerd Font in order to properly
-     # display glyphs (see https://www.nerdfonts.com/ for more information)
-     use_nerd_font_icons = false
      # How much space to allocate for the UI (in percentage of the screen)
      # ┌───────────────────────────────────────┐
      # │                                       │
@@ -1510,22 +1506,30 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      # │                                       │
      # └───────────────────────────────────────┘
      ui_scale = 100
-     # Whether to show the top help bar in the UI by default
-     # This option can be toggled with the (default) `ctrl-g` keybinding
-     show_help_bar = false
-     # Whether to show the preview panel in the UI by default
-     # This option can be toggled with the (default) `ctrl-o` keybinding
-     show_preview_panel = true
-     # Where to place the input bar in the UI (top or bottom)
-     input_bar_position = "bottom"
-     # DEPRECATED: title is now always displayed at the top as part of the border
-     # Where to place the preview title in the UI (top or bottom)
-     # preview_title_position = "top"
      # The theme to use for the UI
      # A list of builtin themes can be found in the `themes` directory of the television
      # repository. You may also create your own theme by creating a new file in a `themes`
      # directory in your configuration directory (see the `config.toml` location above).
      theme = "default"
+
+     [ui.input_bar]
+     # Where to place the input bar in the UI (top or bottom)
+     position = "bottom"
+
+     [ui.help_panel]
+     # Whether to split the help panel by categories
+     show_categories = true
+     hidden = true
+
+     [ui.preview_panel]
+     # Preview panel size (percentage of screen width/height)
+     size = 50
+     #header = ""
+     #footer = ""
+     scrollbar = true
+     border_type = "rounded"
+     # padding = {"left": 0, "right": 0, "top": 0, "bottom": 0}
+     hidden = false
 
      # Previewers settings
      # ----------------------------------------------------------------------------
