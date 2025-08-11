@@ -949,8 +949,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPFEgqTPapPtOUOAsoSH2o4VJbp1JFzvXaiuEpdS0KuK"
 
      [user]
-     name = "Kris Molendyke"
      email = "krismolendyke@users.noreply.github.com"
+     name = "Kris Molendyke"
 
      [ui]
      default-command = ["log"]
