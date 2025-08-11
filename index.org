@@ -949,6 +949,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      [user]
      name = "Kris Molendyke"
      email = "krismolendyke@users.noreply.github.com"
+
+     [ui]
+     diff-formatter = ["difft", "--color=always", "$left", "$right"]
    #+end_src
 
 * [[https://github.com/nvm-sh/nvm][nvm]]
