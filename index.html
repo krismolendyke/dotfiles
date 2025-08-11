@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-08-11 Mon 07:16 -->
+<!-- 2025-08-11 Mon 09:42 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1635,6 +1635,7 @@ brew <span class="org-string">"repo"</span>
 brew <span class="org-string">"ripgrep"</span>
 brew <span class="org-string">"rocksdb"</span>
 brew <span class="org-string">"ruby"</span>, link: true
+brew <span class="org-string">"rust"</span>
 brew <span class="org-string">"scons"</span>
 brew <span class="org-string">"sevenzip"</span>
 brew <span class="org-string">"shellcheck"</span>
@@ -2590,8 +2591,8 @@ See <a href="https://github.com/rust-lang-nursery/rustfmt#tips">https://github.c
     pathmunge <span class="org-string">"${CARGO_HOME}/bin"</span>
 <span class="org-keyword">fi</span>
 
-<span class="org-keyword">if</span> [[ -x ${<span class="org-variable-name">CARGO_HOME</span>}/bin/rustc ]]; <span class="org-keyword">then</span>
-    <span class="org-variable-name">DYLD_LIBRARY_PATH</span>=$(<span class="org-sh-quoted-exec">"${CARGO_HOME}"/bin/rustc --print sysroot</span>)/lib:${<span class="org-variable-name">DYLD_LIBRARY_PATH</span>}
+<span class="org-keyword">if</span> [[ -x ${<span class="org-variable-name">HOMEBREW_PREFIX</span>}/bin/rustc ]]; <span class="org-keyword">then</span>
+    <span class="org-variable-name">DYLD_LIBRARY_PATH</span>=$(<span class="org-sh-quoted-exec">"${HOMEBREW_PREFIX}"/bin/rustc --print sysroot</span>)/lib:${<span class="org-variable-name">DYLD_LIBRARY_PATH</span>}
     <span class="org-builtin">export</span> DYLD_LIBRARY_PATH
 <span class="org-keyword">fi</span>
 </pre>
@@ -3016,8 +3017,28 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 <div id="outline-container-orgce358c1" class="outline-4">
-<h4 id="orgce358c1"><a href="https://starship.rs/config/#kubernetes">https://starship.rs/config/#kubernetes</a></h4>
+<h4 id="orgce358c1"><a href="https://gitlab.com/lanastara_foss/starship-jj">Jujutsu</a></h4>
 <div class="outline-text-4" id="text-orgce358c1">
+<p>
+No official support yet, need to install this tool before configuring.  See also
+<a href="https://github.com/starship/starship/issues/6076">https://github.com/starship/starship/issues/6076</a>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-toml">[<span class="org-type">custom.jj</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"prompt"</span>
+<span class="org-variable-name">format</span> = <span class="org-string">"$output"</span>
+<span class="org-variable-name">ignore_timeout</span> = <span class="org-keyword">true</span>
+<span class="org-variable-name">shell</span> = [<span class="org-string">"starship-jj"</span>, <span class="org-string">"--ignore-working-copy"</span>, <span class="org-string">"starship"</span>]
+<span class="org-variable-name">use_stdin</span> = <span class="org-keyword">false</span>
+<span class="org-variable-name">when</span> = <span class="org-keyword">true</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga65c73f" class="outline-4">
+<h4 id="orga65c73f"><a href="https://starship.rs/config/#kubernetes">https://starship.rs/config/#kubernetes</a></h4>
+<div class="outline-text-4" id="text-orga65c73f">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">kubernetes</span>]
 <span class="org-variable-name">disabled</span> = <span class="org-keyword">false</span>
@@ -3027,9 +3048,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-orga65c73f" class="outline-4">
-<h4 id="orga65c73f"><a href="https://starship.rs/config/#python">https://starship.rs/config/#python</a></h4>
-<div class="outline-text-4" id="text-orga65c73f">
+<div id="outline-container-org406fa16" class="outline-4">
+<h4 id="org406fa16"><a href="https://starship.rs/config/#python">https://starship.rs/config/#python</a></h4>
+<div class="outline-text-4" id="text-org406fa16">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">python</span>]
 <span class="org-variable-name">symbol</span> = <span class="org-string">'&#57909; '</span>
@@ -3374,9 +3395,9 @@ TODO migrate these to the 0.12+ format :/
 </pre>
 </div>
 </div>
-<div id="outline-container-org1f49030" class="outline-4">
-<h4 id="org1f49030">Bash History</h4>
-<div class="outline-text-4" id="text-org1f49030">
+<div id="outline-container-orgf1e86c7" class="outline-4">
+<h4 id="orgf1e86c7">Bash History</h4>
+<div class="outline-text-4" id="text-orgf1e86c7">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/television/cable/bash-history.toml
 </pre>
@@ -3394,9 +3415,9 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/bash-history.toml
 </div>
 </div>
 </div>
-<div id="outline-container-orgf1e86c7" class="outline-4">
-<h4 id="orgf1e86c7">Files</h4>
-<div class="outline-text-4" id="text-orgf1e86c7">
+<div id="outline-container-orgb1e7d46" class="outline-4">
+<h4 id="orgb1e7d46">Files</h4>
+<div class="outline-text-4" id="text-orgb1e7d46">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/television/cable/files.toml
 </pre>
@@ -3628,7 +3649,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun] <
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2025-08-11 Mon 07:14</p>
+<p class="date">2025-08-11 Mon 09:38</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 30.1 (<a href="https://orgmode.org">Org</a> mode 9.7.30)</p>
 </div>
 </body>
