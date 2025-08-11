@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-08-11 Mon 06:49 -->
+<!-- 2025-08-11 Mon 07:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -2453,6 +2453,7 @@ header-args: :mkdirp yes :tangle ~/.config/jj/config.toml
 <span class="org-variable-name">email</span> = <span class="org-string">"krismolendyke@users.noreply.github.com"</span>
 
 [<span class="org-type">ui</span>]
+<span class="org-variable-name">default-command</span> = [<span class="org-string">"log"</span>]
 <span class="org-variable-name">diff-formatter</span> = [<span class="org-string">"difft"</span>, <span class="org-string">"--color=always"</span>, <span class="org-string">"$left"</span>, <span class="org-string">"$right"</span>]
 </pre>
 </div>
@@ -3154,10 +3155,6 @@ Modified from <a href="https://github.com/alexpasmantier/television/blob/main/.c
 </span><span class="org-variable-name">tick_rate</span> = 50
 
 [<span class="org-type">ui</span>]
-<span class="org-comment-delimiter"># </span><span class="org-comment">Whether to use nerd font icons in the UI
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">This option requires a font patched with Nerd Font in order to properly
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">display glyphs (see https://www.nerdfonts.com/ for more information)
-</span><span class="org-variable-name">use_nerd_font_icons</span> = <span class="org-keyword">false</span>
 <span class="org-comment-delimiter"># </span><span class="org-comment">How much space to allocate for the UI (in percentage of the screen)
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;                                       &#9474;
@@ -3176,22 +3173,30 @@ Modified from <a href="https://github.com/alexpasmantier/television/blob/main/.c
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9474;                                       &#9474;
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
 </span><span class="org-variable-name">ui_scale</span> = 100
-<span class="org-comment-delimiter"># </span><span class="org-comment">Whether to show the top help bar in the UI by default
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">This option can be toggled with the (default) `ctrl-g` keybinding
-</span><span class="org-variable-name">show_help_bar</span> = <span class="org-keyword">false</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Whether to show the preview panel in the UI by default
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">This option can be toggled with the (default) `ctrl-o` keybinding
-</span><span class="org-variable-name">show_preview_panel</span> = <span class="org-keyword">true</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Where to place the input bar in the UI (top or bottom)
-</span><span class="org-variable-name">input_bar_position</span> = <span class="org-string">"bottom"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">DEPRECATED: title is now always displayed at the top as part of the border
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">Where to place the preview title in the UI (top or bottom)
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">preview_title_position = "top"
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">The theme to use for the UI
+<span class="org-comment-delimiter"># </span><span class="org-comment">The theme to use for the UI
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">A list of builtin themes can be found in the `themes` directory of the television
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">repository. You may also create your own theme by creating a new file in a `themes`
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">directory in your configuration directory (see the `config.toml` location above).
 </span><span class="org-variable-name">theme</span> = <span class="org-string">"default"</span>
+
+[<span class="org-type">ui.input_bar</span>]
+<span class="org-comment-delimiter"># </span><span class="org-comment">Where to place the input bar in the UI (top or bottom)
+</span><span class="org-variable-name">position</span> = <span class="org-string">"bottom"</span>
+
+[<span class="org-type">ui.help_panel</span>]
+<span class="org-comment-delimiter"># </span><span class="org-comment">Whether to split the help panel by categories
+</span><span class="org-variable-name">show_categories</span> = <span class="org-keyword">true</span>
+<span class="org-variable-name">hidden</span> = <span class="org-keyword">true</span>
+
+[<span class="org-type">ui.preview_panel</span>]
+<span class="org-comment-delimiter"># </span><span class="org-comment">Preview panel size (percentage of screen width/height)
+</span><span class="org-variable-name">size</span> = 50
+<span class="org-comment-delimiter">#</span><span class="org-comment">header = ""
+</span><span class="org-comment-delimiter">#</span><span class="org-comment">footer = ""
+</span><span class="org-variable-name">scrollbar</span> = <span class="org-keyword">true</span>
+<span class="org-variable-name">border_type</span> = <span class="org-string">"rounded"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">padding = {"left": 0, "right": 0, "top": 0, "bottom": 0}
+</span><span class="org-variable-name">hidden</span> = <span class="org-keyword">false</span>
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Previewers settings
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">----------------------------------------------------------------------------
@@ -3622,7 +3627,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun] <
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2025-08-11 Mon 06:34</p>
+<p class="date">2025-08-11 Mon 07:09</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 30.1 (<a href="https://orgmode.org">Org</a> mode 9.7.30)</p>
 </div>
 </body>
