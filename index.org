@@ -1382,6 +1382,21 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       format = '([$conflicted$deleted$renamed$modified$staged$untracked$ahead_behind]($style) )'
     #+end_src
 
+*** [[https://gitlab.com/lanastara_foss/starship-jj][Jujutsu]]
+
+    No official support yet, need to install this tool before configuring.  See also
+    https://github.com/starship/starship/issues/6076.
+
+    #+begin_src toml
+      [custom.jj]
+      command = "prompt"
+      format = "$output"
+      ignore_timeout = true
+      shell = ["starship-jj", "--ignore-working-copy", "starship"]
+      use_stdin = false
+      when = true
+    #+end_src
+
 *** https://starship.rs/config/#kubernetes
 
      #+begin_src toml
