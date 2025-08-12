@@ -629,7 +629,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       # (see cursor-style)
       shell-integration-features = no-cursor
 
-      theme = light:Tomorrow,dark:Tomorrow Night Bright
+      theme = light:GruvboxLight,dark:GruvboxDark
 
       window-height = 48
       window-width = 110
