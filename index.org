@@ -1197,6 +1197,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     This section must be first!
 
     #+begin_src toml
+      # Get editor completions based on the config schema
+      "$schema" = 'https://starship.rs/config-schema.json'
+
       format = """
       $aws\
       $gcloud\
@@ -1208,7 +1211,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       $localip\
       $shlvl\
       $directory\
-      ${custom.jj}\
+      ${custom.jj} \
       $git_branch\
       $git_commit\
       $git_state\
@@ -1453,7 +1456,12 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     :header-args: :mkdirp yes :tangle ~/.config/starship-jj/starship-jj.toml
     :END:
 
+    https://gitlab.com/lanastara_foss/starship-jj
+
    #+begin_src toml
+     # Get editor completions based on the config schema
+     "$schema" = 'https://gitlab.com/lanastara_foss/starship-jj/-/raw/main/schema.json'
+
      module_separator = " "
      reset_color = false
 
@@ -1463,7 +1471,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      [[module]]
      type = "Symbol"
-     symbol = "󱗆 "
+     symbol = ""
      color = "Blue"
 
      [[module]]
@@ -1471,11 +1479,11 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      separator = " "
      color = "Magenta"
      behind_symbol = "⇡"
-     surround_with_quotes = true
+     surround_with_quotes = false
 
      [[module]]
      type = "Commit"
-     max_length = 24
+     max_length = 48
      empty_text = "(no description set)"
      surround_with_quotes = true
 
@@ -1485,27 +1493,27 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      [module.conflict]
      disabled = false
-     text = "(CONFLICT)"
+     text = "💥"
      color = "Red"
 
      [module.divergent]
      disabled = false
-     text = "(DIVERGENT)"
+     text = "🚧"
      color = "Cyan"
 
      [module.empty]
      disabled = false
-     text = "(EMPTY)"
+     text = "∅"
      color = "Yellow"
 
      [module.immutable]
      disabled = false
-     text = "(IMMUTABLE)"
+     text = "🔒"
      color = "Yellow"
 
      [module.hidden]
      disabled = false
-     text = "(HIDDEN)"
+     text = "👻"
      color = "Yellow"
 
      [[module]]
