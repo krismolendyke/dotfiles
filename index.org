@@ -1208,6 +1208,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       $localip\
       $shlvl\
       $directory\
+      ${custom.jj}\
       $git_branch\
       $git_commit\
       $git_state\
@@ -1375,6 +1376,28 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       always_show_remote = false
       symbol = ''
       format = '[$symbol $branch(:$remote_branch)]($style) '
+      disabled = true
+
+      [custom.git_branch]
+      when = "! jj --ignore-working-copy root"
+      command = "starship module git_branch"
+      description = "Only show git_branch if we're not in a jj repo"
+      style = ""
+      shell = ["bash", "--norc", "--noprofile"]
+    #+end_src
+
+*** https://starship.rs/config/#git-commit
+
+    #+begin_src toml
+      [git_commit]
+      disabled = true
+
+      [custom.git_commit]
+      when = "! jj --ignore-working-copy root"
+      command = "starship module git_commit"
+      style = ""
+      description = "Only show git_commit if we're not in a jj repo"
+      shell = ["bash", "--norc", "--noprofile"]
     #+end_src
 
 *** https://starship.rs/config/#git-status
@@ -1383,6 +1406,14 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       [git_status]
       # all_status = '$conflicted$stashed$deleted$renamed$modified$staged$untracked'
       format = '([$conflicted$deleted$renamed$modified$staged$untracked$ahead_behind]($style) )'
+      disabled = true
+
+      [custom.git_status]
+      when = "! jj --ignore-working-copy root"
+      command = "starship module git_status"
+      style = "" # This disables the default "(bold green)" style
+      description = "Only show git_status if we're not in a jj repo"
+      shell = ["bash", "--norc", "--noprofile"]
     #+end_src
 
 *** [[https://gitlab.com/lanastara_foss/starship-jj][Jujutsu]]
