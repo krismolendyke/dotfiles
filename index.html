@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-08-12 Tue 10:00 -->
+<!-- 2025-08-13 Wed 09:31 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1287,22 +1287,21 @@ at <a href="https://github.com/krismolendyke/dotfiles/blob/master/index.org">ind
 <li><a href="#org37a066c">Starship</a>
 <ul>
 <li><a href="#orga4ab287"><code>~/.config/starship.toml</code></a></li>
-<li><a href="#orgc36236b"><code>~/.config/starship-jj/starship-jj.toml</code></a></li>
 </ul>
 </li>
-<li><a href="#org39af42c">terminal-notifier</a></li>
-<li><a href="#org9c54a6f">Terraform</a></li>
-<li><a href="#orgb7d0ae3">Television</a>
+<li><a href="#orgc36236b">terminal-notifier</a></li>
+<li><a href="#org39af42c">Terraform</a></li>
+<li><a href="#org9c54a6f">Television</a>
 <ul>
-<li><a href="#orgf4316c4">Smart Autocomplete &amp; Shell History</a></li>
-<li><a href="#org288531e">Configuration</a></li>
-<li><a href="#orgca4550f">Cable Channels</a></li>
-<li><a href="#org3cb68a9">Theme</a></li>
+<li><a href="#orgb7d0ae3">Smart Autocomplete &amp; Shell History</a></li>
+<li><a href="#orgf4316c4">Configuration</a></li>
+<li><a href="#org288531e">Cable Channels</a></li>
+<li><a href="#orgca4550f">Theme</a></li>
 </ul>
 </li>
-<li><a href="#org97f457e">WezTerm</a></li>
-<li><a href="#orge449b50"><code>yamllint</code></a></li>
-<li><a href="#orgdf201f6"><code>~/.inputrc</code></a></li>
+<li><a href="#org3cb68a9">WezTerm</a></li>
+<li><a href="#org97f457e"><code>yamllint</code></a></li>
+<li><a href="#orge449b50"><code>~/.inputrc</code></a></li>
 </ul>
 </div>
 </div>
@@ -1566,9 +1565,9 @@ Install: <code>brew bundle</code>
 </pre>
 </div>
 </div>
-<div id="outline-container-org79d85d1" class="outline-4">
-<h4 id="org79d85d1"><code>~/.Brewfile</code></h4>
-<div class="outline-text-4" id="text-org79d85d1">
+<div id="outline-container-orge0e0487" class="outline-4">
+<h4 id="orge0e0487"><code>~/.Brewfile</code></h4>
+<div class="outline-text-4" id="text-orge0e0487">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.Brewfile
 </pre>
@@ -2078,7 +2077,7 @@ header-args: :mkdirp yes :tangle ~/.config/ghostty/config
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">(see cursor-style)
 </span><span class="org-variable-name">shell-integration-features</span> = no-cursor
 
-<span class="org-variable-name">theme</span> = light:Tomorrow,dark:Tomorrow Night Bright
+<span class="org-variable-name">theme</span> = light:GruvboxLight,dark:GruvboxDark
 
 <span class="org-variable-name">window-height</span> = 48
 <span class="org-variable-name">window-width</span> = 110
@@ -2643,7 +2642,7 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/120-skim.bash
 </pre>
 
 <p>
-Possibly replaced by <a href="#orgb7d0ae3">Television</a>.
+Possibly replaced by <a href="#org9c54a6f">Television</a>.
 </p>
 
 <div class="org-src-container">
@@ -2787,9 +2786,9 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/999-starship.bash
 header-args: :mkdirp yes :tangle ~/.config/starship.toml
 </pre>
 </div>
-<div id="outline-container-orgb04f825" class="outline-4">
-<h4 id="orgb04f825"><a href="https://starship.rs/config/#prompt">https://starship.rs/config/#prompt</a></h4>
-<div class="outline-text-4" id="text-orgb04f825">
+<div id="outline-container-org1345e6f" class="outline-4">
+<h4 id="org1345e6f"><a href="https://starship.rs/config/#prompt">https://starship.rs/config/#prompt</a></h4>
+<div class="outline-text-4" id="text-org1345e6f">
 <p>
 This section must be first!
 </p>
@@ -2855,9 +2854,9 @@ $character"""</span>
 </div>
 </div>
 </div>
-<div id="outline-container-org5fa8ea5" class="outline-4">
-<h4 id="org5fa8ea5">Presets</h4>
-<div class="outline-text-4" id="text-org5fa8ea5">
+<div id="outline-container-org2c8b4f1" class="outline-4">
+<h4 id="org2c8b4f1">Presets</h4>
+<div class="outline-text-4" id="text-org2c8b4f1">
 <p>
 Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'll never need.
 </p>
@@ -2902,9 +2901,6 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 <span class="org-variable-name">Ubuntu</span> = <span class="org-string">"&#62235; "</span>
 <span class="org-variable-name">Unknown</span> = <span class="org-string">"&#61997; "</span>
 
-[<span class="org-type">package</span>]
-<span class="org-variable-name">symbol</span> = <span class="org-string">"&#984023; "</span>
-
 [<span class="org-type">ruby</span>]
 <span class="org-variable-name">symbol</span> = <span class="org-string">"&#59281; "</span>
 
@@ -2914,9 +2910,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org0970ed4" class="outline-4">
-<h4 id="org0970ed4"><a href="https://starship.rs/config/#aws">https://starship.rs/config/#aws</a></h4>
-<div class="outline-text-4" id="text-org0970ed4">
+<div id="outline-container-org66bed1d" class="outline-4">
+<h4 id="org66bed1d"><a href="https://starship.rs/config/#aws">https://starship.rs/config/#aws</a></h4>
+<div class="outline-text-4" id="text-org66bed1d">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">aws</span>]
 <span class="org-variable-name">symbol</span> = <span class="org-string">'aws '</span>
@@ -2925,9 +2921,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-orgd43fc94" class="outline-4">
-<h4 id="orgd43fc94"><a href="https://starship.rs/config/#battery">https://starship.rs/config/#battery</a></h4>
-<div class="outline-text-4" id="text-orgd43fc94">
+<div id="outline-container-org225b935" class="outline-4">
+<h4 id="org225b935"><a href="https://starship.rs/config/#battery">https://starship.rs/config/#battery</a></h4>
+<div class="outline-text-4" id="text-org225b935">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">battery</span>]
 <span class="org-variable-name">disabled</span> = <span class="org-keyword">true</span>
@@ -2935,9 +2931,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org8d4c2f8" class="outline-4">
-<h4 id="org8d4c2f8"><a href="https://starship.rs/config/#character">https://starship.rs/config/#character</a></h4>
-<div class="outline-text-4" id="text-org8d4c2f8">
+<div id="outline-container-org0e605d2" class="outline-4">
+<h4 id="org0e605d2"><a href="https://starship.rs/config/#character">https://starship.rs/config/#character</a></h4>
+<div class="outline-text-4" id="text-org0e605d2">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">character</span>]
 <span class="org-variable-name">success_symbol</span> = <span class="org-string">'[#](bold green)'</span>
@@ -2946,9 +2942,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org64c8bb7" class="outline-4">
-<h4 id="org64c8bb7"><a href="https://starship.rs/config/#command-duration">https://starship.rs/config/#command-duration</a></h4>
-<div class="outline-text-4" id="text-org64c8bb7">
+<div id="outline-container-org9fb1fbd" class="outline-4">
+<h4 id="org9fb1fbd"><a href="https://starship.rs/config/#command-duration">https://starship.rs/config/#command-duration</a></h4>
+<div class="outline-text-4" id="text-org9fb1fbd">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">cmd_duration</span>]
 <span class="org-variable-name">format</span> = <span class="org-string">'[$duration]($style) '</span>
@@ -2956,9 +2952,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org4dcf870" class="outline-4">
-<h4 id="org4dcf870"><a href="https://starship.rs/config/#directory">https://starship.rs/config/#directory</a></h4>
-<div class="outline-text-4" id="text-org4dcf870">
+<div id="outline-container-org5ab56b1" class="outline-4">
+<h4 id="org5ab56b1"><a href="https://starship.rs/config/#directory">https://starship.rs/config/#directory</a></h4>
+<div class="outline-text-4" id="text-org5ab56b1">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">directory</span>]
 <span class="org-variable-name">read_only</span> = <span class="org-string">' &#983870;'</span>
@@ -2968,9 +2964,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org7a582ff" class="outline-4">
-<h4 id="org7a582ff"><a href="https://starship.rs/config/#docker-context">https://starship.rs/config/#docker-context</a></h4>
-<div class="outline-text-4" id="text-org7a582ff">
+<div id="outline-container-org5b806d2" class="outline-4">
+<h4 id="org5b806d2"><a href="https://starship.rs/config/#docker-context">https://starship.rs/config/#docker-context</a></h4>
+<div class="outline-text-4" id="text-org5b806d2">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">docker_context</span>]
 <span class="org-variable-name">symbol</span> = <span class="org-string">'&#62216;'</span>
@@ -2979,9 +2975,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org6017210" class="outline-4">
-<h4 id="org6017210"><a href="https://starship.rs/config/#go">https://starship.rs/config/#go</a></h4>
-<div class="outline-text-4" id="text-org6017210">
+<div id="outline-container-org37cd64c" class="outline-4">
+<h4 id="org37cd64c"><a href="https://starship.rs/config/#go">https://starship.rs/config/#go</a></h4>
+<div class="outline-text-4" id="text-org37cd64c">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">golang</span>]
 <span class="org-variable-name">symbol</span> = <span class="org-string">'&#985043; '</span>
@@ -2990,9 +2986,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-orgf945b5f" class="outline-4">
-<h4 id="orgf945b5f"><a href="https://starship.rs/config/#google-cloud-gcloud">https://starship.rs/config/#google-cloud-gcloud</a></h4>
-<div class="outline-text-4" id="text-orgf945b5f">
+<div id="outline-container-org3f83322" class="outline-4">
+<h4 id="org3f83322"><a href="https://starship.rs/config/#google-cloud-gcloud">https://starship.rs/config/#google-cloud-gcloud</a></h4>
+<div class="outline-text-4" id="text-org3f83322">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">gcloud</span>]
 <span class="org-variable-name">symbol</span> = <span class="org-string">'gcp '</span>
@@ -3001,9 +2997,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-orgb2aae9d" class="outline-4">
-<h4 id="orgb2aae9d"><a href="https://starship.rs/config/#git-branch">https://starship.rs/config/#git-branch</a></h4>
-<div class="outline-text-4" id="text-orgb2aae9d">
+<div id="outline-container-orgcc567fb" class="outline-4">
+<h4 id="orgcc567fb"><a href="https://starship.rs/config/#git-branch">https://starship.rs/config/#git-branch</a></h4>
+<div class="outline-text-4" id="text-orgcc567fb">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">git_branch</span>]
 <span class="org-variable-name">always_show_remote</span> = <span class="org-keyword">false</span>
@@ -3021,9 +3017,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-orgff53ab8" class="outline-4">
-<h4 id="orgff53ab8"><a href="https://starship.rs/config/#git-commit">https://starship.rs/config/#git-commit</a></h4>
-<div class="outline-text-4" id="text-orgff53ab8">
+<div id="outline-container-org8843c7d" class="outline-4">
+<h4 id="org8843c7d"><a href="https://starship.rs/config/#git-commit">https://starship.rs/config/#git-commit</a></h4>
+<div class="outline-text-4" id="text-org8843c7d">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">git_commit</span>]
 <span class="org-variable-name">disabled</span> = <span class="org-keyword">true</span>
@@ -3038,9 +3034,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org25cc984" class="outline-4">
-<h4 id="org25cc984"><a href="https://starship.rs/config/#git-status">https://starship.rs/config/#git-status</a></h4>
-<div class="outline-text-4" id="text-org25cc984">
+<div id="outline-container-orgce358c1" class="outline-4">
+<h4 id="orgce358c1"><a href="https://starship.rs/config/#git-status">https://starship.rs/config/#git-status</a></h4>
+<div class="outline-text-4" id="text-orgce358c1">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">git_status</span>]
 <span class="org-comment-delimiter"># </span><span class="org-comment">all_status = '$conflicted$stashed$deleted$renamed$modified$staged$untracked'
@@ -3057,12 +3053,12 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org631bfca" class="outline-4">
-<h4 id="org631bfca"><a href="https://gitlab.com/lanastara_foss/starship-jj">Jujutsu</a></h4>
-<div class="outline-text-4" id="text-org631bfca">
+<div id="outline-container-orga65c73f" class="outline-4">
+<h4 id="orga65c73f"><a href="https://gitlab.com/lanastara_foss/starship-jj">Jujutsu</a></h4>
+<div class="outline-text-4" id="text-orga65c73f">
 <p>
-No official support yet, need to install this tool before configuring.  See also
-<a href="https://github.com/starship/starship/issues/6076">https://github.com/starship/starship/issues/6076</a>.
+No official support yet, need to install this tool <a href="https://gitlab.com/lanastara_foss/starship-jj">https://gitlab.com/lanastara_foss/starship-jj</a> before
+configuring.  See also <a href="https://github.com/starship/starship/issues/6076">https://github.com/starship/starship/issues/6076</a>.
 </p>
 
 <div class="org-src-container">
@@ -3076,34 +3072,9 @@ No official support yet, need to install this tool before configuring.  See also
 </pre>
 </div>
 </div>
-</div>
-<div id="outline-container-org0b91ca2" class="outline-4">
-<h4 id="org0b91ca2"><a href="https://starship.rs/config/#kubernetes">https://starship.rs/config/#kubernetes</a></h4>
-<div class="outline-text-4" id="text-org0b91ca2">
-<div class="org-src-container">
-<pre class="src src-toml">[<span class="org-type">kubernetes</span>]
-<span class="org-variable-name">disabled</span> = <span class="org-keyword">false</span>
-<span class="org-variable-name">symbol</span> = <span class="org-string">'k8s '</span>
-<span class="org-variable-name">format</span> = <span class="org-string">'[$symbol$context( \($namespace\))]($style) '</span>
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org46190d2" class="outline-4">
-<h4 id="org46190d2"><a href="https://starship.rs/config/#python">https://starship.rs/config/#python</a></h4>
-<div class="outline-text-4" id="text-org46190d2">
-<div class="org-src-container">
-<pre class="src src-toml">[<span class="org-type">python</span>]
-<span class="org-variable-name">symbol</span> = <span class="org-string">'&#57909; '</span>
-<span class="org-variable-name">format</span> = <span class="org-string">'[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'</span>
-</pre>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-orgc36236b" class="outline-3">
-<h3 id="orgc36236b"><code>~/.config/starship-jj/starship-jj.toml</code></h3>
-<div class="outline-text-3" id="text-orgc36236b">
+<ul class="org-ul">
+<li><a id="org406fa16"></a><code>~/.config/starship-jj/starship-jj.toml</code><br />
+<div class="outline-text-5" id="text-org406fa16">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/starship-jj/starship-jj.toml
 </pre>
@@ -3192,11 +3163,48 @@ header-args: :mkdirp yes :tangle ~/.config/starship-jj/starship-jj.toml
 </pre>
 </div>
 </div>
+</li>
+</ul>
+</div>
+<div id="outline-container-orgecaf29b" class="outline-4">
+<h4 id="orgecaf29b"><a href="https://starship.rs/config/#kubernetes">https://starship.rs/config/#kubernetes</a></h4>
+<div class="outline-text-4" id="text-orgecaf29b">
+<div class="org-src-container">
+<pre class="src src-toml">[<span class="org-type">kubernetes</span>]
+<span class="org-variable-name">disabled</span> = <span class="org-keyword">false</span>
+<span class="org-variable-name">symbol</span> = <span class="org-string">'k8s '</span>
+<span class="org-variable-name">format</span> = <span class="org-string">'[$symbol$context( \($namespace\))]($style) '</span>
+</pre>
 </div>
 </div>
-<div id="outline-container-org39af42c" class="outline-2">
-<h2 id="org39af42c"><a href="https://github.com/alloy/terminal-notifier">terminal-notifier</a></h2>
-<div class="outline-text-2" id="text-org39af42c">
+</div>
+<div id="outline-container-orgb819978" class="outline-4">
+<h4 id="orgb819978"><a href="https://starship.rs/config/#package-version">https://starship.rs/config/#package-version</a></h4>
+<div class="outline-text-4" id="text-orgb819978">
+<div class="org-src-container">
+<pre class="src src-toml">[<span class="org-type">package</span>]
+<span class="org-variable-name">format</span> = <span class="org-string">'[$symbol$version]($style) '</span>
+<span class="org-variable-name">symbol</span> = <span class="org-string">'&#984023; '</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org84b7ac4" class="outline-4">
+<h4 id="org84b7ac4"><a href="https://starship.rs/config/#python">https://starship.rs/config/#python</a></h4>
+<div class="outline-text-4" id="text-org84b7ac4">
+<div class="org-src-container">
+<pre class="src src-toml">[<span class="org-type">python</span>]
+<span class="org-variable-name">symbol</span> = <span class="org-string">'&#57909; '</span>
+<span class="org-variable-name">format</span> = <span class="org-string">'[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc36236b" class="outline-2">
+<h2 id="orgc36236b"><a href="https://github.com/alloy/terminal-notifier">terminal-notifier</a></h2>
+<div class="outline-text-2" id="text-orgc36236b">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/599-terminal-notifier.bash
 </pre>
@@ -3207,9 +3215,9 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/599-terminal-notifier.bash
 </div>
 </div>
 </div>
-<div id="outline-container-org9c54a6f" class="outline-2">
-<h2 id="org9c54a6f">Terraform</h2>
-<div class="outline-text-2" id="text-org9c54a6f">
+<div id="outline-container-org39af42c" class="outline-2">
+<h2 id="org39af42c">Terraform</h2>
+<div class="outline-text-2" id="text-org39af42c">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/525-terraform.bash
 </pre>
@@ -3220,16 +3228,16 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/525-terraform.bash
 </div>
 </div>
 </div>
-<div id="outline-container-orgb7d0ae3" class="outline-2">
-<h2 id="orgb7d0ae3">Television</h2>
-<div class="outline-text-2" id="text-orgb7d0ae3">
+<div id="outline-container-org9c54a6f" class="outline-2">
+<h2 id="org9c54a6f">Television</h2>
+<div class="outline-text-2" id="text-org9c54a6f">
 <p>
 A fuzzy finder <a href="https://alexpasmantier.github.io/television/">https://alexpasmantier.github.io/television/</a>
 </p>
 </div>
-<div id="outline-container-orgf4316c4" class="outline-3">
-<h3 id="orgf4316c4">Smart Autocomplete &amp; Shell History</h3>
-<div class="outline-text-3" id="text-orgf4316c4">
+<div id="outline-container-orgb7d0ae3" class="outline-3">
+<h3 id="orgb7d0ae3">Smart Autocomplete &amp; Shell History</h3>
+<div class="outline-text-3" id="text-orgb7d0ae3">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.bashrc.d/140-television.bash
 </pre>
@@ -3278,9 +3286,9 @@ Modified output of <code>tv init bash</code>:
 </div>
 </div>
 </div>
-<div id="outline-container-org288531e" class="outline-3">
-<h3 id="org288531e">Configuration</h3>
-<div class="outline-text-3" id="text-org288531e">
+<div id="outline-container-orgf4316c4" class="outline-3">
+<h3 id="orgf4316c4">Configuration</h3>
+<div class="outline-text-3" id="text-orgf4316c4">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/television/config.toml
 </pre>
@@ -3485,9 +3493,9 @@ Modified from <a href="https://github.com/alexpasmantier/television/blob/main/.c
 </div>
 </div>
 </div>
-<div id="outline-container-orgca4550f" class="outline-3">
-<h3 id="orgca4550f">Cable Channels</h3>
-<div class="outline-text-3" id="text-orgca4550f">
+<div id="outline-container-org288531e" class="outline-3">
+<h3 id="org288531e">Cable Channels</h3>
+<div class="outline-text-3" id="text-org288531e">
 <p>
 Modified from <a href="https://github.com/alexpasmantier/television/tree/main/cable/unix">https://github.com/alexpasmantier/television/tree/main/cable/unix</a>
 </p>
@@ -3528,9 +3536,9 @@ TODO migrate these to the 0.12+ format :/
 </pre>
 </div>
 </div>
-<div id="outline-container-org353ca53" class="outline-4">
-<h4 id="org353ca53">Bash History</h4>
-<div class="outline-text-4" id="text-org353ca53">
+<div id="outline-container-org37c0cf1" class="outline-4">
+<h4 id="org37c0cf1">Bash History</h4>
+<div class="outline-text-4" id="text-org37c0cf1">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/television/cable/bash-history.toml
 </pre>
@@ -3548,9 +3556,9 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/bash-history.toml
 </div>
 </div>
 </div>
-<div id="outline-container-org37c0cf1" class="outline-4">
-<h4 id="org37c0cf1">Files</h4>
-<div class="outline-text-4" id="text-org37c0cf1">
+<div id="outline-container-org00e6e4b" class="outline-4">
+<h4 id="org00e6e4b">Files</h4>
+<div class="outline-text-4" id="text-org00e6e4b">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/television/cable/files.toml
 </pre>
@@ -3575,9 +3583,9 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/files.toml
 </div>
 </div>
 </div>
-<div id="outline-container-org3cb68a9" class="outline-3">
-<h3 id="org3cb68a9">Theme</h3>
-<div class="outline-text-3" id="text-org3cb68a9">
+<div id="outline-container-orgca4550f" class="outline-3">
+<h3 id="orgca4550f">Theme</h3>
+<div class="outline-text-3" id="text-orgca4550f">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/television/themes/default.toml
 </pre>
@@ -3611,9 +3619,9 @@ header-args: :mkdirp yes :tangle ~/.config/television/themes/default.toml
 </div>
 </div>
 </div>
-<div id="outline-container-org97f457e" class="outline-2">
-<h2 id="org97f457e"><a href="https://wezfurlong.org/wezterm/index.html">WezTerm</a></h2>
-<div class="outline-text-2" id="text-org97f457e">
+<div id="outline-container-org3cb68a9" class="outline-2">
+<h2 id="org3cb68a9"><a href="https://wezfurlong.org/wezterm/index.html">WezTerm</a></h2>
+<div class="outline-text-2" id="text-org3cb68a9">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.wezterm.lua
 </pre>
@@ -3691,9 +3699,9 @@ config.color_scheme = scheme_for_appearance(get_appearance())
 </div>
 </div>
 </div>
-<div id="outline-container-orge449b50" class="outline-2">
-<h2 id="orge449b50"><code>yamllint</code></h2>
-<div class="outline-text-2" id="text-orge449b50">
+<div id="outline-container-org97f457e" class="outline-2">
+<h2 id="org97f457e"><code>yamllint</code></h2>
+<div class="outline-text-2" id="text-org97f457e">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/yamllint/config
 </pre>
@@ -3746,9 +3754,9 @@ See <a href="https://yamllint.readthedocs.io/en/stable/configuration.html">https
 </div>
 </div>
 </div>
-<div id="outline-container-orgdf201f6" class="outline-2">
-<h2 id="orgdf201f6"><code>~/.inputrc</code></h2>
-<div class="outline-text-2" id="text-orgdf201f6">
+<div id="outline-container-orge449b50" class="outline-2">
+<h2 id="orge449b50"><code>~/.inputrc</code></h2>
+<div class="outline-text-2" id="text-orge449b50">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.inputrc
 </pre>
@@ -3782,7 +3790,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun] <
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2025-08-12 Tue 10:00</p>
+<p class="date">2025-08-13 Wed 09:23</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 30.1 (<a href="https://orgmode.org">Org</a> mode 9.7.30)</p>
 </div>
 </body>
