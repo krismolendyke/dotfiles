@@ -1299,9 +1299,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
        Ubuntu = " "
        Unknown = " "
 
-       [package]
-       symbol = "󰏗 "
-
        [ruby]
        symbol = " "
 
@@ -1442,6 +1439,14 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
        symbol = 'k8s '
        format = '[$symbol$context( \($namespace\))]($style) '
      #+end_src
+
+*** https://starship.rs/config/#package-version
+
+    #+begin_src toml
+      [package]
+      format = '[$symbol$version]($style) '
+      symbol = '󰏗 '
+    #+end_src
 
 *** https://starship.rs/config/#python
 
