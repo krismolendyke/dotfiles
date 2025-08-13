@@ -1421,8 +1421,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 *** [[https://gitlab.com/lanastara_foss/starship-jj][Jujutsu]]
 
-    No official support yet, need to install this tool before configuring.  See also
-    https://github.com/starship/starship/issues/6076.
+    No official support yet, need to install this tool https://gitlab.com/lanastara_foss/starship-jj before
+    configuring.  See also https://github.com/starship/starship/issues/6076.
 
     #+begin_src toml
       [custom.jj]
