@@ -985,6 +985,15 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      [ -e "${HOME}/.opam/opam-init/init.sh" ] && source "${HOME}/.opam/opam-init/init.sh"
    #+end_src
 
+* OpenTofu
+   :PROPERTIES:
+   :header-args: :mkdirp yes :tangle ~/.tofurc
+   :END:
+
+  #+begin_src sh conf
+    plugin_cache_dir = "$HOME/.terraform.d/plugins"
+  #+end_src
+
 * Playdate
    :PROPERTIES:
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/511-playdate.bash
@@ -1205,13 +1214,13 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       $gcloud\
       $kubernetes\
       $docker_context\
+      ${custom.jj} \
       $line_break\
       $username\
       $hostname\
       $localip\
       $shlvl\
       $directory\
-      ${custom.jj} \
       $git_branch\
       $git_commit\
       $git_state\
@@ -1341,7 +1350,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+begin_src toml
       [directory]
       read_only = ' 󰌾'
-      truncation_length = 4
+      truncation_length = 8
+      truncation_symbol = '…/'
+      truncate_to_repo = true
       format ='[$path]($style)[$read_only]($read_only_style) '
     #+end_src
 
