@@ -1542,6 +1542,13 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
     #+end_src
 
+*** https://starship.rs/config/#terraform
+
+    #+begin_src toml
+      [terraform]
+      format = '[$symbol$workspace]($style) '
+    #+end_src
+
 * [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
   :PROPERTIES:
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/599-terminal-notifier.bash
