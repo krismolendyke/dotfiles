@@ -485,6 +485,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      #   Example 2: Use ".gitignore"-style highlighting for ".ignore" files
      #--map-syntax "*.ino:C++"
      #--map-syntax ".ignore:Git Ignore"
+     --plain
    #+end_src
 
 * Emacs
