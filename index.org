@@ -954,6 +954,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    #+begin_src toml
      "$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
 
+     [git]
+     colocate = true
+
      [signing]
      backend = "ssh"
      backends.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
