@@ -1590,7 +1590,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   :END:
 
   #+begin_src sh
-    command -v terraform >/dev/null 2>&1 && complete -C terraform terraform
+    alias terraform="tofu"
   #+end_src
 
 * Television
