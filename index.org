@@ -547,19 +547,30 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 * Gemini CLI
-    :PROPERTIES:
-    :header-args: :mkdirp yes :tangle ~/.gemini/settings.json
-    :END:
 
-    #+begin_src js
-      {
-        "checkpointing": {
-          "enabled": true
-        },
-        "selectedAuthType": "gemini-api-key",
-        "theme": "GitHub Light"
-      }
-    #+end_src
+** =GEMINI.md=
+   :PROPERTIES:
+   :header-args: :mkdirp yes :tangle ~/.gemini/GEMINI.md
+   :END:
+
+   #+begin_src markdown
+     ---
+   #+end_src
+
+** =settings.json=
+   :PROPERTIES:
+   :header-args: :mkdirp yes :tangle ~/.gemini/settings.json
+   :END:
+
+     #+begin_src js
+       {
+         "checkpointing": {
+           "enabled": true
+         },
+         "selectedAuthType": "gemini-api-key",
+         "theme": "GitHub Light"
+       }
+     #+end_src
 
 * Ghostty
     :PROPERTIES:
