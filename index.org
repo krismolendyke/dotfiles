@@ -1013,8 +1013,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    :header-args: :mkdirp yes :tangle ~/.tofurc
    :END:
 
-  #+begin_src sh conf
-    plugin_cache_dir = "$HOME/.terraform.d/plugins"
+  #+begin_src conf
   #+end_src
 
 * Playdate
@@ -1485,7 +1484,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
        [[module]]
        type = "Symbol"
-       symbol = ""
+       symbol = "📚"
        color = "Blue"
 
        [[module]]
@@ -1498,7 +1497,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
        [[module]]
        type = "Commit"
        max_length = 48
-       empty_text = "(no description set)"
+       empty_text = "no description set"
        surround_with_quotes = true
 
        [[module]]
