@@ -1400,7 +1400,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+begin_src toml
       [gcloud]
       symbol = 'gcp '
-      format = '[$symbol$project(\($region\))]($style) '
+      format = '[$symbol$project( \($region\))]($style) '
     #+end_src
 
 *** https://starship.rs/config/#git-branch
