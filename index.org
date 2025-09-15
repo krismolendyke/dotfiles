@@ -649,7 +649,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       # (see cursor-style)
       shell-integration-features = no-cursor
 
-      theme = light:GruvboxLight,dark:GruvboxDark
+      theme = light:Gruvbox Light,dark:Gruvbox Dark
 
       window-height = 48
       window-width = 110
