@@ -564,19 +564,13 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      #+begin_src js
        {
-         "general": {
-           "checkpointing": {
-             "enabled": true
-           },
-         },
-         "ui": {
-             "theme": "GitHub Light"
-         },
-         "security": {
-           "auth": {
-             "selectedType": "gemini-api-key"
-           }
-         }
+         "hideTips": true,
+         "hideBanner": true,
+         "hideSandboxStatus": true,
+         "showMemoryUsage": true,
+         "selectedAuthType": "gemini-api-key",
+         "theme": "GitHub Light",
+         "useRipgrep": true
        }
      #+end_src
 
