@@ -564,6 +564,14 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      #+begin_src js
        {
+         "security": {
+           "auth": {
+             "selectedType": "gemini-api-key"
+           }
+         },
+         "output": {
+           "format": "text"
+         },
          "ui": {
            "hideTips": true,
            "hideBanner": true,
@@ -571,15 +579,17 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
              "hideSandboxStatus": true
            },
            "showMemoryUsage": true,
-           "theme": "GitHub"
-         },
-         "security": {
-           "auth": {
-             "selectedType": "gemini-api-key"
-           }
+           "theme": "GitHub Light"
          },
          "tools": {
-           "useRipgrep": true
+           "shell": {
+             "showColor": true
+           }
+         },
+         "general": {
+           "checkpoint": {
+             "enabled": true
+           }
          }
        }
      #+end_src
