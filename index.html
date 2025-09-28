@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-25 Thu 16:56 -->
+<!-- 2025-09-28 Sun 10:42 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -2018,6 +2018,14 @@ header-args: :mkdirp yes :tangle ~/.gemini/settings.json
 
 <div class="org-src-container">
 <pre class="src src-js">{
+  <span class="org-string">"security"</span>: {
+    <span class="org-string">"auth"</span>: {
+      <span class="org-string">"selectedType"</span>: <span class="org-string">"gemini-api-key"</span>
+    }
+  },
+  <span class="org-string">"output"</span>: {
+    <span class="org-string">"format"</span>: <span class="org-string">"text"</span>
+  },
   <span class="org-string">"ui"</span>: {
     <span class="org-string">"hideTips"</span>: <span class="org-constant">true</span>,
     <span class="org-string">"hideBanner"</span>: <span class="org-constant">true</span>,
@@ -2025,15 +2033,17 @@ header-args: :mkdirp yes :tangle ~/.gemini/settings.json
       <span class="org-string">"hideSandboxStatus"</span>: <span class="org-constant">true</span>
     },
     <span class="org-string">"showMemoryUsage"</span>: <span class="org-constant">true</span>,
-    <span class="org-string">"theme"</span>: <span class="org-string">"GitHub"</span>
-  },
-  <span class="org-string">"security"</span>: {
-    <span class="org-string">"auth"</span>: {
-      <span class="org-string">"selectedType"</span>: <span class="org-string">"gemini-api-key"</span>
-    }
+    <span class="org-string">"theme"</span>: <span class="org-string">"GitHub Light"</span>
   },
   <span class="org-string">"tools"</span>: {
-    <span class="org-string">"useRipgrep"</span>: <span class="org-constant">true</span>
+    <span class="org-string">"shell"</span>: {
+      <span class="org-string">"showColor"</span>: <span class="org-constant">true</span>
+    }
+  },
+  <span class="org-string">"general"</span>: {
+    <span class="org-string">"checkpoint"</span>: {
+      <span class="org-string">"enabled"</span>: <span class="org-constant">true</span>
+    }
   }
 }
 </pre>
@@ -3855,7 +3865,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun] <
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2025-09-25 Thu 16:55</p>
+<p class="date">2025-09-28 Sun 10:41</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 30.2 (<a href="https://orgmode.org">Org</a> mode 9.7.30)</p>
 </div>
 </body>
