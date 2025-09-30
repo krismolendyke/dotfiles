@@ -994,7 +994,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      diff-formatter = ["difft", "--color=always", "$left", "$right"]
 
      [template-aliases]
-     'format_short_id(id)' = 'id.shortest()'
+     "format_short_id(id)" = "id.shortest()"
+     "format_timestamp(timestamp)" = "timestamp.ago()"
    #+end_src
 
 * [[https://github.com/nvm-sh/nvm][nvm]]
