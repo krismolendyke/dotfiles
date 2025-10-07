@@ -991,7 +991,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      [ui]
      default-command = ["log", "--limit", "10"]
-     diff-formatter = ["difft", "--color=always", "$left", "$right"]
+     diff-formatter = ["difft", "--color=always", "--display=side-by-side-show-both", "$left", "$right"]
 
      [template-aliases]
      "format_short_id(id)" = "id.shortest()"
