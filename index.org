@@ -590,6 +590,15 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
            "checkpoint": {
              "enabled": true
            }
+         },
+         "mcpServers": {
+           "github": {
+             "httpUrl": "https://api.githubcopilot.com/mcp/",
+             "headers": {
+               "Authorization": "Bearer ${GITHUB_TOKEN}"
+             },
+             "timeout": 5000
+           }
          }
        }
      #+end_src
