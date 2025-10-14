@@ -1515,7 +1515,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
        type = "Bookmarks"
        separator = " "
        color = "Magenta"
-       behind_symbol = "⇡"
+       behind_symbol = " "
        surround_with_quotes = false
 
        [[module]]
