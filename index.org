@@ -555,6 +555,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
    #+begin_src markdown
      ---
+     - The user uses `jj` (Jujutsu) for version control, not `git`.
    #+end_src
 
 ** =settings.json=
