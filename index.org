@@ -987,6 +987,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      [git]
      colocate = true
+     push-new-bookmarks = true
 
      [signing]
      backend = "ssh"
