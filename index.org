@@ -568,7 +568,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
          "security": {
            "auth": {
              "selectedType": "gemini-api-key"
-           }
+           },
+           "disableYoloMode": true
          },
          "output": {
            "format": "text"
