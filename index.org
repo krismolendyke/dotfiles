@@ -210,6 +210,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       tap "homebrew/test-bot"
       tap "tidbyt/tidbyt"
       brew "git"
+      brew "glow"
       brew "asdf"
       brew "aspell"
       brew "automake"
@@ -914,6 +915,25 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      # Android studio 3.1+ serialized cache file
      .idea/caches/build_file_checksums.ser
    #+end_src
+
+* [[https://github.com/charmbracelet/glow][Glow]]
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/Library/Preferences/glow/glow.yml
+  :END:
+
+  #+begin_src yaml
+    ---
+    # style name or JSON path (default "auto")
+    style: "auto"
+    # mouse support (TUI-mode only)
+    mouse: false
+    # use pager to display markdown
+    pager: true
+    # word-wrap at width
+    width: 120
+    # show all files, including hidden and ignored.
+    all: false
+  #+end_src
 
 * Go
   :PROPERTIES:
