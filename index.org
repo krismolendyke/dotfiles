@@ -593,7 +593,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
            "checkpoint": {
              "enabled": true
            },
-           "previewFeatures": true
+           "previewFeatures": true,
+           "preferredEditor": "zed"
          },
          "mcpServers": {
            "github": {
