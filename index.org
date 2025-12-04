@@ -1013,7 +1013,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      colocate = true
 
      [remotes.origin]
-     auto-track-bookmarks = "glob:*"
+     auto-track-bookmarks = "regex:^(main|master)$"
 
      [signing]
      backend = "ssh"
