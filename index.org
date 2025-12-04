@@ -1011,7 +1011,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      [git]
      colocate = true
-     push-new-bookmarks = true
+
+     [remotes.origin]
+     auto-track-bookmarks = "glob:*"
 
      [signing]
      backend = "ssh"
