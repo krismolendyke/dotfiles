@@ -1543,13 +1543,17 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
        separator = " "
        color = "Magenta"
        behind_symbol = " "
+       ignore_empty_commits = "All"
        surround_with_quotes = false
 
        [[module]]
        type = "Commit"
+       color = "Yellow"
        max_length = 48
        empty_text = "no description set"
-       surround_with_quotes = true
+       surround_with_quotes = false
+       show_previous_if_empty = true
+       previous_message_symbol="⇣"
 
        [[module]]
        type = "State"
