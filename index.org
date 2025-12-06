@@ -1553,7 +1553,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
        empty_text = "no description set"
        surround_with_quotes = false
        show_previous_if_empty = true
-       previous_message_symbol="⇣"
+       previous_message_symbol="↓"
 
        [[module]]
        type = "State"
