@@ -582,7 +582,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
              "hideSandboxStatus": true
            },
            "showMemoryUsage": true,
-           "theme": "GitHub"
+           "theme": "GitHub",
+           "showStatusInTitle": true,
+           "showLineNumbers": false
          },
          "tools": {
            "shell": {
