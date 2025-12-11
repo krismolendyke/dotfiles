@@ -602,7 +602,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
            "github": {
              "httpUrl": "https://api.githubcopilot.com/mcp/",
              "headers": {
-               "Authorization": "Bearer ${GITHUB_TOKEN}"
+               "Authorization": "Bearer ${GITHUB_TOKEN}",
+               "X-MCP-Tools": "add_comment_to_pending_review,get_file_contents,pull_request_read,pull_request_review_write"
              },
              "timeout": 5000
            }
