@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-12-06 Sat 09:05 -->
+<!-- 2025-12-11 Thu 14:36 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -2037,7 +2037,9 @@ header-args: :mkdirp yes :tangle ~/.gemini/settings.json
       <span class="org-string">"hideSandboxStatus"</span>: <span class="org-constant">true</span>
     },
     <span class="org-string">"showMemoryUsage"</span>: <span class="org-constant">true</span>,
-    <span class="org-string">"theme"</span>: <span class="org-string">"GitHub"</span>
+    <span class="org-string">"theme"</span>: <span class="org-string">"GitHub"</span>,
+    <span class="org-string">"showStatusInTitle"</span>: <span class="org-constant">true</span>,
+    <span class="org-string">"showLineNumbers"</span>: <span class="org-constant">false</span>
   },
   <span class="org-string">"tools"</span>: {
     <span class="org-string">"shell"</span>: {
@@ -2055,7 +2057,8 @@ header-args: :mkdirp yes :tangle ~/.gemini/settings.json
     <span class="org-string">"github"</span>: {
       <span class="org-string">"httpUrl"</span>: <span class="org-string">"https://api.githubcopilot.com/mcp/"</span>,
       <span class="org-string">"headers"</span>: {
-        <span class="org-string">"Authorization"</span>: <span class="org-string">"Bearer ${GITHUB_TOKEN}"</span>
+        <span class="org-string">"Authorization"</span>: <span class="org-string">"Bearer ${GITHUB_TOKEN}"</span>,
+        <span class="org-string">"X-MCP-Tools"</span>: <span class="org-string">"add_comment_to_pending_review,get_file_contents,pull_request_read,pull_request_review_write"</span>
       },
       <span class="org-string">"timeout"</span>: 5000
     }
@@ -3911,7 +3914,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun] <
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2025-12-06 Sat 09:04</p>
+<p class="date">2025-12-11 Thu 14:11</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 30.2 (<a href="https://orgmode.org">Org</a> mode 9.7.30)</p>
 </div>
 </body>
