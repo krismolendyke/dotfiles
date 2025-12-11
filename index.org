@@ -633,7 +633,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       cursor-style-blink = true
 
       font-family = ""
-      font-family = PragmataPro Mono Liga
+      font-family = PragmataPro VF Mono Liga
       font-size = 20
 
       # Font features for PragmataPro
