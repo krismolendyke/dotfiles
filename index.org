@@ -1288,6 +1288,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       format = """
       $aws\
       $gcloud\
+      ${custom.gcloud_prod}\
       $kubernetes\
       $docker_context\
       ${custom.jj} \
@@ -1454,6 +1455,37 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       [gcloud]
       symbol = 'gcp '
       format = '[$symbol$project( \($region\))]($style) '
+    #+end_src
+
+*** https://starship.rs/config/#google-cloud-gcloud-prod-warning
+
+    #+begin_src toml
+      [custom.gcloud_prod]
+      command = """
+      project="${CLOUDSDK_CORE_PROJECT:-${GCLOUD_PROJECT}}"
+      if [[ -z "$project" ]]; then
+        conf_dir="${CLOUDSDK_CONFIG:-$HOME/.config/gcloud}"
+        if [[ -r "$conf_dir/active_config" ]]; then
+          active_conf=$(< "$conf_dir/active_config")
+          conf_file="$conf_dir/configurations/config_$active_conf"
+          if [[ -r "$conf_file" ]]; then
+            while read -r line || [[ -n "$line" ]]; do
+              if [[ "$line" =~ ^project[[:space:]]*=[[:space:]]*(.*) ]]; then
+                project="${BASH_REMATCH[1]}"
+                break
+              fi
+            done < "$conf_file"
+          fi
+        fi
+      fi
+      if [[ "$project" == "ufp-prod" ]]; then
+        echo "🚨 PROD 🚨"
+      fi
+      """
+      when = true
+      shell = ["bash", "--norc", "--noprofile"]
+      style = "bold red"
+      format = "[$output]($style) "
     #+end_src
 
 *** https://starship.rs/config/#git-branch
