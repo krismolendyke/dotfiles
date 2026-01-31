@@ -1881,7 +1881,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      # "files" = ["cat", "cp"]
      # ```
      "alias" = ["alias", "unalias"]
-     "env" = ["export", "unset"]
      "dirs" = [
        "cd",
        "ls",
@@ -1889,6 +1888,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
        "ltl",
        "rmdir",
      ]
+     "docker-images" = ["docker run"]
+     "env" = ["export", "unset"]
      "files" = [
        "cat",
        "less",
@@ -1911,22 +1912,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
        "gunzip",
        "xz",
      ]
-     "git-diff" = ["git add", "git restore"]
-     "git-branch" = [
-       "g co",
-       "git checkout",
-       "git branch",
-       "git merge",
-       "git rebase",
-       "git pull",
-       "git push",
-     ]
-     "git-log" = [
-       "g l",
-       "g lo",
-     ]
-     "git-repos" = ["nvim", "code", "hx", "git clone"]
-     "docker-images" = ["docker run"]
+     "jj-log" = ["j show",]
 
 
      [shell_integration.keybindings]
@@ -1945,34 +1931,10 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    TODO migrate these to the 0.12+ format :/
 
    #+begin_src toml
-     # Git
-     [[cable_channel]]
-     name = "git-diff"
-     source_command = "git diff --name-only"
-     preview_command = "git diff --color=always {0}"
-     [[cable_channel]]
-     name = "git-reflog"
-     source_command = 'git reflog'
-     preview_command = 'git show -p --stat --pretty=fuller --color=always {0}'
-     [[cable_channel]]
-     name = "git-log"
-     source_command = "git log --oneline --date=short --pretty=\"format:%h %s %an %cd\" \"$@\""
-     preview_command = "git show -p --stat --pretty=fuller --color=always {0}"
-     [[cable_channel]]
-     name = "git-branch"
-     source_command = "git --no-pager branch --all --format=\"%(refname:short)\""
-     preview_command = "git show -p --stat --pretty=fuller --color=always {0}"
      [[cable_channel]]
      name = "docker-images"
      source_command = "docker image list --format \"{{.ID}}\""
      preview_command = "docker image inspect {0} | jq -C"
-     [[cable_channel]]
-     name = "my-dotfiles"
-     source_command = "find $HOME/.bashrc $HOME/.bashrc.d -type f"
-     preview_command = ":files:"
-     [[cable_channel]]
-     name = "bash-history"
-     source_command = "sed '1!G;h;$!d' ${HISTFILE:-${HOME}/.bash_history} | rg -v '^#' | nl | sort -k2 -u | sort -n | cut -f 2"
    #+end_src
 
 *** Bash History
@@ -1981,7 +1943,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     :END:
 
     #+begin_src toml
-      # UNTESTED
       [metadata]
       name = "bash-history"
       description = "A channel to select from your bash history"
@@ -1989,6 +1950,24 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
       [source]
       command = "sed '1!G;h;$!d' ${HISTFILE:-${HOME}/.bash_history} | rg -v '^#' | nl | sort -k2 -u | sort -n | cut -f 2"
+    #+end_src
+
+*** Bash Dotfiles
+    :PROPERTIES:
+    :header-args: :mkdirp yes :tangle ~/.config/television/cable/bash-dotfiles.toml
+    :END:
+
+    #+begin_src toml
+      [metadata]
+      name = "bash-dotfiles"
+      description = "A channel to select from my bash dotfiles"
+      requirements = ["bash", "bat", "find", "sort"]
+
+      [source]
+      command = "find $HOME/.bashrc $HOME/.bashrc.d -type f | sort"
+
+      [preview]
+      command = "bat -n --color always --theme auto:system --theme-dark gruvbox-dark --theme-light gruvbox-light '{}'"
     #+end_src
 
 *** Files
@@ -2006,11 +1985,84 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       command = ["fd -t f", "fd -t f -H"]
 
       [preview]
-      command = "bat -n --color=always '{}'"
-      env = { BAT_THEME = "ansi" }
+      command = "bat -n --color always --theme auto:system --theme-dark gruvbox-dark --theme-light gruvbox-light '{}'"
 
       [keybindings]
       shortcut = "f1"
+    #+end_src
+
+*** Jujutsu Bookmark
+    :PROPERTIES:
+    :header-args: :mkdirp yes :tangle ~/.config/television/cable/jj-bookmark.toml
+    :END:
+
+    #+begin_src toml
+      [metadata]
+      name = "jj-bookmark"
+      description = "jujutsu bookmark"
+      requirements = ["jj",]
+
+      [source]
+      command = "jj bookmark list --color always"
+      ansi = true
+      no_sort = true
+      output = "{strip_ansi|split: :1}"
+
+      [preview]
+      command = "jj show '{strip_ansi|split: :1}'"
+    #+end_src
+
+*** Jujutsu Log
+    :PROPERTIES:
+    :header-args: :mkdirp yes :tangle ~/.config/television/cable/jj-log.toml
+    :END:
+
+    #+begin_src toml
+      [metadata]
+      name = "jj-log"
+      description = "jujutsu log"
+      requirements = ["jj",]
+
+      [source]
+      command = "jj log --color always --template builtin_log_oneline --revisions ::@"
+      ansi = true
+      no_sort = true
+      output = "{strip_ansi|split: :2}"
+
+      [preview]
+      command = "jj show '{strip_ansi|split: :2}'"
+    #+end_src
+
+*** TODO
+    :PROPERTIES:
+    :header-args: :mkdirp yes :tangle ~/.config/television/cable/todo.toml
+    :END:
+
+    #+begin_src toml
+      [metadata]
+      name = "todo"
+      description = "Find TODO, FIXME, HACK, and XXX comments in codebase"
+      requirements = ["rg", "bat",]
+
+      [source]
+      command = "rg -n --color=always '(TODO|FIXME|HACK|XXX|BUG|WARN):?'"
+      ansi = true
+      output = "{strip_ansi|split:\\::..2}"
+
+      [preview]
+      command = "bat -n --color always --theme auto:system --theme-dark gruvbox-dark --theme-light gruvbox-light --highlight-line '{strip_ansi|split:\\::1}' '{strip_ansi|split:\\::0}'"
+      offset = "{strip_ansi|split:\\::1}"
+
+      [keybindings]
+      enter = "actions:edit"
+
+      [ui.preview_panel]
+      header = "{strip_ansi|split:\\::..2}"
+
+      [actions.edit]
+      description = "Open file in zed at the comment"
+      command = "zed '{strip_ansi|split:\\::..2}'"
+      mode = "execute"
     #+end_src
 
 ** Theme
