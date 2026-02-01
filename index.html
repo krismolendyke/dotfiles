@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-01-31 Sat 20:41 -->
+<!-- 2026-02-01 Sun 07:56 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -3724,58 +3724,8 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/files.toml
 </div>
 </div>
 <div id="outline-container-orgbe2e0c4" class="outline-4">
-<h4 id="orgbe2e0c4">Jujutsu Bookmark</h4>
+<h4 id="orgbe2e0c4">Files With TODO, HACK, etc.</h4>
 <div class="outline-text-4" id="text-orgbe2e0c4">
-<pre class="example">
-header-args: :mkdirp yes :tangle ~/.config/television/cable/jj-bookmark.toml
-</pre>
-
-<div class="org-src-container">
-<pre class="src src-toml">[<span class="org-type">metadata</span>]
-<span class="org-variable-name">name</span> = <span class="org-string">"jj-bookmark"</span>
-<span class="org-variable-name">description</span> = <span class="org-string">"jujutsu bookmark"</span>
-<span class="org-variable-name">requirements</span> = [<span class="org-string">"jj"</span>,]
-
-[<span class="org-type">source</span>]
-<span class="org-variable-name">command</span> = <span class="org-string">"jj bookmark list --color always"</span>
-<span class="org-variable-name">ansi</span> = <span class="org-keyword">true</span>
-<span class="org-variable-name">no_sort</span> = <span class="org-keyword">true</span>
-<span class="org-variable-name">output</span> = <span class="org-string">"{strip_ansi|split: :1}"</span>
-
-[<span class="org-type">preview</span>]
-<span class="org-variable-name">command</span> = <span class="org-string">"jj show '{strip_ansi|split: :1}'"</span>
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-orgce24d19" class="outline-4">
-<h4 id="orgce24d19">Jujutsu Log</h4>
-<div class="outline-text-4" id="text-orgce24d19">
-<pre class="example">
-header-args: :mkdirp yes :tangle ~/.config/television/cable/jj-log.toml
-</pre>
-
-<div class="org-src-container">
-<pre class="src src-toml">[<span class="org-type">metadata</span>]
-<span class="org-variable-name">name</span> = <span class="org-string">"jj-log"</span>
-<span class="org-variable-name">description</span> = <span class="org-string">"jujutsu log"</span>
-<span class="org-variable-name">requirements</span> = [<span class="org-string">"jj"</span>,]
-
-[<span class="org-type">source</span>]
-<span class="org-variable-name">command</span> = <span class="org-string">"jj log --color always --template builtin_log_oneline --revisions ::@"</span>
-<span class="org-variable-name">ansi</span> = <span class="org-keyword">true</span>
-<span class="org-variable-name">no_sort</span> = <span class="org-keyword">true</span>
-<span class="org-variable-name">output</span> = <span class="org-string">"{strip_ansi|split: :2}"</span>
-
-[<span class="org-type">preview</span>]
-<span class="org-variable-name">command</span> = <span class="org-string">"jj show '{strip_ansi|split: :2}'"</span>
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-orgbb2be05" class="outline-4">
-<h4 id="orgbb2be05">Code With TODO, HACK, etc.</h4>
-<div class="outline-text-4" id="text-orgbb2be05">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/television/cable/todo.toml
 </pre>
@@ -3805,6 +3755,56 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/todo.toml
 <span class="org-variable-name">description</span> = <span class="org-string">"Open file in zed at the comment"</span>
 <span class="org-variable-name">command</span> = <span class="org-string">"zed '{strip_ansi|split:\\::..2}'"</span>
 <span class="org-variable-name">mode</span> = <span class="org-string">"execute"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgce24d19" class="outline-4">
+<h4 id="orgce24d19">Jujutsu Bookmark</h4>
+<div class="outline-text-4" id="text-orgce24d19">
+<pre class="example">
+header-args: :mkdirp yes :tangle ~/.config/television/cable/jj-bookmark.toml
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-toml">[<span class="org-type">metadata</span>]
+<span class="org-variable-name">name</span> = <span class="org-string">"jj-bookmark"</span>
+<span class="org-variable-name">description</span> = <span class="org-string">"jujutsu bookmark"</span>
+<span class="org-variable-name">requirements</span> = [<span class="org-string">"jj"</span>,]
+
+[<span class="org-type">source</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"jj bookmark list --color always"</span>
+<span class="org-variable-name">ansi</span> = <span class="org-keyword">true</span>
+<span class="org-variable-name">no_sort</span> = <span class="org-keyword">true</span>
+<span class="org-variable-name">output</span> = <span class="org-string">"{strip_ansi|split: :1}"</span>
+
+[<span class="org-type">preview</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"jj show '{strip_ansi|split: :1}'"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbb2be05" class="outline-4">
+<h4 id="orgbb2be05">Jujutsu Log</h4>
+<div class="outline-text-4" id="text-orgbb2be05">
+<pre class="example">
+header-args: :mkdirp yes :tangle ~/.config/television/cable/jj-log.toml
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-toml">[<span class="org-type">metadata</span>]
+<span class="org-variable-name">name</span> = <span class="org-string">"jj-log"</span>
+<span class="org-variable-name">description</span> = <span class="org-string">"jujutsu log"</span>
+<span class="org-variable-name">requirements</span> = [<span class="org-string">"jj"</span>,]
+
+[<span class="org-type">source</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"jj log --color always --template builtin_log_oneline --revisions ::@"</span>
+<span class="org-variable-name">ansi</span> = <span class="org-keyword">true</span>
+<span class="org-variable-name">no_sort</span> = <span class="org-keyword">true</span>
+<span class="org-variable-name">output</span> = <span class="org-string">"{strip_ansi|split: :2}"</span>
+
+[<span class="org-type">preview</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"jj show '{strip_ansi|split: :2}'"</span>
 </pre>
 </div>
 </div>
@@ -4017,7 +4017,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun] <
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-01-31 Sat 20:40</p>
+<p class="date">2026-01-31 Sat 20:41</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.0.50 (<a href="https://orgmode.org">Org</a> mode 9.7.30)</p>
 </div>
 </body>
