@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-12-11 Thu 14:36 -->
+<!-- 2026-01-31 Sat 20:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -2095,7 +2095,7 @@ header-args: :mkdirp yes :tangle ~/.config/ghostty/config
 <span class="org-variable-name">cursor-style-blink</span> = true
 
 <span class="org-variable-name">font-family</span> = <span class="org-string">""</span>
-<span class="org-variable-name">font-family</span> = PragmataPro Mono Liga
+<span class="org-variable-name">font-family</span> = PragmataPro VF Mono Liga
 <span class="org-variable-name">font-size</span> = 20
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Font features for PragmataPro
@@ -2536,7 +2536,7 @@ header-args: :mkdirp yes :tangle ~/.config/jj/config.toml
 <span class="org-variable-name">colocate</span> = <span class="org-keyword">true</span>
 
 [<span class="org-type">remotes.origin</span>]
-<span class="org-variable-name">auto-track-bookmarks</span> = <span class="org-string">"regex:^(main|master)$"</span>
+<span class="org-variable-name">auto-track-bookmarks</span> = <span class="org-string">'regex:"^(main|master)$"'</span>
 
 [<span class="org-type">signing</span>]
 <span class="org-variable-name">backend</span> = <span class="org-string">"ssh"</span>
@@ -2908,6 +2908,7 @@ This section must be first!
 <span class="org-variable-name">format</span> = <span class="org-string">"""
 $aws\
 $gcloud\
+${custom.gcloud_prod}\
 $kubernetes\
 $docker_context\
 ${custom.jj} \
@@ -3108,8 +3109,42 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 <div id="outline-container-orga65c73f" class="outline-4">
-<h4 id="orga65c73f"><a href="https://starship.rs/config/#git-branch">https://starship.rs/config/#git-branch</a></h4>
+<h4 id="orga65c73f"><a href="https://starship.rs/config/#google-cloud-gcloud-prod-warning">https://starship.rs/config/#google-cloud-gcloud-prod-warning</a></h4>
 <div class="outline-text-4" id="text-orga65c73f">
+<div class="org-src-container">
+<pre class="src src-toml">[<span class="org-type">custom.gcloud_prod</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"""
+project="</span>${CLOUDSDK_CORE_PROJECT:-${GCLOUD_PROJECT}}<span class="org-string">"
+if [[ -z "</span>$project<span class="org-string">" ]]; then
+  conf_dir="</span>${CLOUDSDK_CONFIG:-$HOME/.config/gcloud}<span class="org-string">"
+  if [[ -r "</span>$conf_dir/active_config<span class="org-string">" ]]; then
+    active_conf=$(&lt; "</span>$conf_dir/active_config<span class="org-string">")
+    conf_file="</span>$conf_dir/configurations/config_$active_conf<span class="org-string">"
+    if [[ -r "</span>$conf_file<span class="org-string">" ]]; then
+      while read -r line || [[ -n "</span>$line<span class="org-string">" ]]; do
+        if [[ "</span>$line<span class="org-string">" =~ ^project[[:space:]]*=[[:space:]]*(.*) ]]; then
+          project="</span>${BASH_REMATCH[1]}<span class="org-string">"
+          break
+        fi
+      done &lt; "</span>$conf_file<span class="org-string">"
+    fi
+  fi
+fi
+if [[ "</span>$project<span class="org-string">" == "</span>ufp-prod<span class="org-string">" ]]; then
+  echo "</span>&#128680; PROD &#128680;<span class="org-string">"
+fi
+"""</span>
+<span class="org-variable-name">when</span> = <span class="org-keyword">true</span>
+<span class="org-variable-name">shell</span> = [<span class="org-string">"bash"</span>, <span class="org-string">"--norc"</span>, <span class="org-string">"--noprofile"</span>]
+<span class="org-variable-name">style</span> = <span class="org-string">"bold red"</span>
+<span class="org-variable-name">format</span> = <span class="org-string">"[$output]($style) "</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org406fa16" class="outline-4">
+<h4 id="org406fa16"><a href="https://starship.rs/config/#git-branch">https://starship.rs/config/#git-branch</a></h4>
+<div class="outline-text-4" id="text-org406fa16">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">git_branch</span>]
 <span class="org-variable-name">always_show_remote</span> = <span class="org-keyword">false</span>
@@ -3127,9 +3162,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-org406fa16" class="outline-4">
-<h4 id="org406fa16"><a href="https://starship.rs/config/#git-commit">https://starship.rs/config/#git-commit</a></h4>
-<div class="outline-text-4" id="text-org406fa16">
+<div id="outline-container-orgecaf29b" class="outline-4">
+<h4 id="orgecaf29b"><a href="https://starship.rs/config/#git-commit">https://starship.rs/config/#git-commit</a></h4>
+<div class="outline-text-4" id="text-orgecaf29b">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">git_commit</span>]
 <span class="org-variable-name">disabled</span> = <span class="org-keyword">true</span>
@@ -3144,9 +3179,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-orgecaf29b" class="outline-4">
-<h4 id="orgecaf29b"><a href="https://starship.rs/config/#git-status">https://starship.rs/config/#git-status</a></h4>
-<div class="outline-text-4" id="text-orgecaf29b">
+<div id="outline-container-orgb819978" class="outline-4">
+<h4 id="orgb819978"><a href="https://starship.rs/config/#git-status">https://starship.rs/config/#git-status</a></h4>
+<div class="outline-text-4" id="text-orgb819978">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">git_status</span>]
 <span class="org-comment-delimiter"># </span><span class="org-comment">all_status = '$conflicted$stashed$deleted$renamed$modified$staged$untracked'
@@ -3163,9 +3198,9 @@ Started with <code>starship preset nerd-font-symbols</code> and removed stuff I'
 </div>
 </div>
 </div>
-<div id="outline-container-orgb819978" class="outline-4">
-<h4 id="orgb819978"><a href="https://gitlab.com/lanastara_foss/starship-jj">Jujutsu</a></h4>
-<div class="outline-text-4" id="text-orgb819978">
+<div id="outline-container-org84b7ac4" class="outline-4">
+<h4 id="org84b7ac4"><a href="https://gitlab.com/lanastara_foss/starship-jj">Jujutsu</a></h4>
+<div class="outline-text-4" id="text-org84b7ac4">
 <p>
 No official support yet, need to install this tool <a href="https://gitlab.com/lanastara_foss/starship-jj">https://gitlab.com/lanastara_foss/starship-jj</a> before
 configuring.  See also <a href="https://github.com/starship/starship/issues/6076">https://github.com/starship/starship/issues/6076</a>.
@@ -3183,8 +3218,8 @@ configuring.  See also <a href="https://github.com/starship/starship/issues/6076
 </div>
 </div>
 <ul class="org-ul">
-<li><a id="org84b7ac4"></a><code>~/.config/starship-jj/starship-jj.toml</code><br />
-<div class="outline-text-5" id="text-org84b7ac4">
+<li><a id="orgd604e9a"></a><code>~/.config/starship-jj/starship-jj.toml</code><br />
+<div class="outline-text-5" id="text-orgd604e9a">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/starship-jj/starship-jj.toml
 </pre>
@@ -3280,9 +3315,9 @@ header-args: :mkdirp yes :tangle ~/.config/starship-jj/starship-jj.toml
 </li>
 </ul>
 </div>
-<div id="outline-container-orgd604e9a" class="outline-4">
-<h4 id="orgd604e9a"><a href="https://starship.rs/config/#kubernetes">https://starship.rs/config/#kubernetes</a></h4>
-<div class="outline-text-4" id="text-orgd604e9a">
+<div id="outline-container-org6613e8d" class="outline-4">
+<h4 id="org6613e8d"><a href="https://starship.rs/config/#kubernetes">https://starship.rs/config/#kubernetes</a></h4>
+<div class="outline-text-4" id="text-org6613e8d">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">kubernetes</span>]
 <span class="org-variable-name">disabled</span> = <span class="org-keyword">false</span>
@@ -3292,9 +3327,9 @@ header-args: :mkdirp yes :tangle ~/.config/starship-jj/starship-jj.toml
 </div>
 </div>
 </div>
-<div id="outline-container-org6613e8d" class="outline-4">
-<h4 id="org6613e8d"><a href="https://starship.rs/config/#package-version">https://starship.rs/config/#package-version</a></h4>
-<div class="outline-text-4" id="text-org6613e8d">
+<div id="outline-container-org1110114" class="outline-4">
+<h4 id="org1110114"><a href="https://starship.rs/config/#package-version">https://starship.rs/config/#package-version</a></h4>
+<div class="outline-text-4" id="text-org1110114">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">package</span>]
 <span class="org-variable-name">format</span> = <span class="org-string">'[$symbol$version]($style) '</span>
@@ -3303,9 +3338,9 @@ header-args: :mkdirp yes :tangle ~/.config/starship-jj/starship-jj.toml
 </div>
 </div>
 </div>
-<div id="outline-container-org1110114" class="outline-4">
-<h4 id="org1110114"><a href="https://starship.rs/config/#python">https://starship.rs/config/#python</a></h4>
-<div class="outline-text-4" id="text-org1110114">
+<div id="outline-container-org4a5aef7" class="outline-4">
+<h4 id="org4a5aef7"><a href="https://starship.rs/config/#python">https://starship.rs/config/#python</a></h4>
+<div class="outline-text-4" id="text-org4a5aef7">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">python</span>]
 <span class="org-variable-name">symbol</span> = <span class="org-string">'&#57909; '</span>
@@ -3314,9 +3349,9 @@ header-args: :mkdirp yes :tangle ~/.config/starship-jj/starship-jj.toml
 </div>
 </div>
 </div>
-<div id="outline-container-org4a5aef7" class="outline-4">
-<h4 id="org4a5aef7"><a href="https://starship.rs/config/#terraform">https://starship.rs/config/#terraform</a></h4>
-<div class="outline-text-4" id="text-org4a5aef7">
+<div id="outline-container-org17c6411" class="outline-4">
+<h4 id="org17c6411"><a href="https://starship.rs/config/#terraform">https://starship.rs/config/#terraform</a></h4>
+<div class="outline-text-4" id="text-org17c6411">
 <div class="org-src-container">
 <pre class="src src-toml">[<span class="org-type">terraform</span>]
 <span class="org-variable-name">format</span> = <span class="org-string">'[$symbol$workspace]($style) '</span>
@@ -3558,7 +3593,6 @@ Modified from <a href="https://github.com/alexpasmantier/television/blob/main/.c
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">"files" = ["cat", "cp"]
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">```
 </span><span class="org-string">"alias"</span> = [<span class="org-string">"alias"</span>, <span class="org-string">"unalias"</span>]
-<span class="org-string">"env"</span> = [<span class="org-string">"export"</span>, <span class="org-string">"unset"</span>]
 <span class="org-string">"dirs"</span> = [
   <span class="org-string">"cd"</span>,
   <span class="org-string">"ls"</span>,
@@ -3566,6 +3600,8 @@ Modified from <a href="https://github.com/alexpasmantier/television/blob/main/.c
   <span class="org-string">"ltl"</span>,
   <span class="org-string">"rmdir"</span>,
 ]
+<span class="org-string">"docker-images"</span> = [<span class="org-string">"docker run"</span>]
+<span class="org-string">"env"</span> = [<span class="org-string">"export"</span>, <span class="org-string">"unset"</span>]
 <span class="org-string">"files"</span> = [
   <span class="org-string">"cat"</span>,
   <span class="org-string">"less"</span>,
@@ -3588,22 +3624,7 @@ Modified from <a href="https://github.com/alexpasmantier/television/blob/main/.c
   <span class="org-string">"gunzip"</span>,
   <span class="org-string">"xz"</span>,
 ]
-<span class="org-string">"git-diff"</span> = [<span class="org-string">"git add"</span>, <span class="org-string">"git restore"</span>]
-<span class="org-string">"git-branch"</span> = [
-  <span class="org-string">"g co"</span>,
-  <span class="org-string">"git checkout"</span>,
-  <span class="org-string">"git branch"</span>,
-  <span class="org-string">"git merge"</span>,
-  <span class="org-string">"git rebase"</span>,
-  <span class="org-string">"git pull"</span>,
-  <span class="org-string">"git push"</span>,
-]
-<span class="org-string">"git-log"</span> = [
-  <span class="org-string">"g l"</span>,
-  <span class="org-string">"g lo"</span>,
-]
-<span class="org-string">"git-repos"</span> = [<span class="org-string">"nvim"</span>, <span class="org-string">"code"</span>, <span class="org-string">"hx"</span>, <span class="org-string">"git clone"</span>]
-<span class="org-string">"docker-images"</span> = [<span class="org-string">"docker run"</span>]
+<span class="org-string">"jj-log"</span> = [<span class="org-string">"j show"</span>,]
 
 
 [<span class="org-type">shell_integration.keybindings</span>]
@@ -3629,47 +3650,22 @@ TODO migrate these to the 0.12+ format :/
 </p>
 
 <div class="org-src-container">
-<pre class="src src-toml"><span class="org-comment-delimiter"># </span><span class="org-comment">Git
-</span>[[<span class="org-type">cable_channel</span>]]
-<span class="org-variable-name">name</span> = <span class="org-string">"git-diff"</span>
-<span class="org-variable-name">source_command</span> = <span class="org-string">"git diff --name-only"</span>
-<span class="org-variable-name">preview_command</span> = <span class="org-string">"git diff --color=always {0}"</span>
-[[<span class="org-type">cable_channel</span>]]
-<span class="org-variable-name">name</span> = <span class="org-string">"git-reflog"</span>
-<span class="org-variable-name">source_command</span> = <span class="org-string">'git reflog'</span>
-<span class="org-variable-name">preview_command</span> = <span class="org-string">'git show -p --stat --pretty=fuller --color=always {0}'</span>
-[[<span class="org-type">cable_channel</span>]]
-<span class="org-variable-name">name</span> = <span class="org-string">"git-log"</span>
-<span class="org-variable-name">source_command</span> = <span class="org-string">"git log --oneline --date=short --pretty=\"format:%h %s %an %cd\" \"$@\""</span>
-<span class="org-variable-name">preview_command</span> = <span class="org-string">"git show -p --stat --pretty=fuller --color=always {0}"</span>
-[[<span class="org-type">cable_channel</span>]]
-<span class="org-variable-name">name</span> = <span class="org-string">"git-branch"</span>
-<span class="org-variable-name">source_command</span> = <span class="org-string">"git --no-pager branch --all --format=\"%(refname:short)\""</span>
-<span class="org-variable-name">preview_command</span> = <span class="org-string">"git show -p --stat --pretty=fuller --color=always {0}"</span>
-[[<span class="org-type">cable_channel</span>]]
+<pre class="src src-toml">[[<span class="org-type">cable_channel</span>]]
 <span class="org-variable-name">name</span> = <span class="org-string">"docker-images"</span>
 <span class="org-variable-name">source_command</span> = <span class="org-string">"docker image list --format \"{{.ID}}\""</span>
 <span class="org-variable-name">preview_command</span> = <span class="org-string">"docker image inspect {0} | jq -C"</span>
-[[<span class="org-type">cable_channel</span>]]
-<span class="org-variable-name">name</span> = <span class="org-string">"my-dotfiles"</span>
-<span class="org-variable-name">source_command</span> = <span class="org-string">"find $HOME/.bashrc $HOME/.bashrc.d -type f"</span>
-<span class="org-variable-name">preview_command</span> = <span class="org-string">":files:"</span>
-[[<span class="org-type">cable_channel</span>]]
-<span class="org-variable-name">name</span> = <span class="org-string">"bash-history"</span>
-<span class="org-variable-name">source_command</span> = <span class="org-string">"sed '1!G;h;$!d' ${HISTFILE:-${HOME}/.bash_history} | rg -v '^#' | nl | sort -k2 -u | sort -n | cut -f 2"</span>
 </pre>
 </div>
 </div>
-<div id="outline-container-org8e43c0d" class="outline-4">
-<h4 id="org8e43c0d">Bash History</h4>
-<div class="outline-text-4" id="text-org8e43c0d">
+<div id="outline-container-org452d03f" class="outline-4">
+<h4 id="org452d03f">Bash History</h4>
+<div class="outline-text-4" id="text-org452d03f">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/television/cable/bash-history.toml
 </pre>
 
 <div class="org-src-container">
-<pre class="src src-toml"><span class="org-comment-delimiter"># </span><span class="org-comment">UNTESTED
-</span>[<span class="org-type">metadata</span>]
+<pre class="src src-toml">[<span class="org-type">metadata</span>]
 <span class="org-variable-name">name</span> = <span class="org-string">"bash-history"</span>
 <span class="org-variable-name">description</span> = <span class="org-string">"A channel to select from your bash history"</span>
 <span class="org-variable-name">requirements</span> = [<span class="org-string">"bash"</span>]
@@ -3680,9 +3676,31 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/bash-history.toml
 </div>
 </div>
 </div>
-<div id="outline-container-org452d03f" class="outline-4">
-<h4 id="org452d03f">Files</h4>
-<div class="outline-text-4" id="text-org452d03f">
+<div id="outline-container-org7735d91" class="outline-4">
+<h4 id="org7735d91">Bash Dotfiles</h4>
+<div class="outline-text-4" id="text-org7735d91">
+<pre class="example">
+header-args: :mkdirp yes :tangle ~/.config/television/cable/bash-dotfiles.toml
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-toml">[<span class="org-type">metadata</span>]
+<span class="org-variable-name">name</span> = <span class="org-string">"bash-dotfiles"</span>
+<span class="org-variable-name">description</span> = <span class="org-string">"A channel to select from my bash dotfiles"</span>
+<span class="org-variable-name">requirements</span> = [<span class="org-string">"bash"</span>, <span class="org-string">"bat"</span>, <span class="org-string">"find"</span>, <span class="org-string">"sort"</span>]
+
+[<span class="org-type">source</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"find $HOME/.bashrc $HOME/.bashrc.d -type f | sort"</span>
+
+[<span class="org-type">preview</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"bat -n --color always --theme auto:system --theme-dark gruvbox-dark --theme-light gruvbox-light '{}'"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org95a22c0" class="outline-4">
+<h4 id="org95a22c0">Files</h4>
+<div class="outline-text-4" id="text-org95a22c0">
 <pre class="example">
 header-args: :mkdirp yes :tangle ~/.config/television/cable/files.toml
 </pre>
@@ -3697,11 +3715,96 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/files.toml
 <span class="org-variable-name">command</span> = [<span class="org-string">"fd -t f"</span>, <span class="org-string">"fd -t f -H"</span>]
 
 [<span class="org-type">preview</span>]
-<span class="org-variable-name">command</span> = <span class="org-string">"bat -n --color=always '{}'"</span>
-<span class="org-variable-name">env</span> = { BAT_THEME = <span class="org-string">"ansi"</span> }
+<span class="org-variable-name">command</span> = <span class="org-string">"bat -n --color always --theme auto:system --theme-dark gruvbox-dark --theme-light gruvbox-light '{}'"</span>
 
 [<span class="org-type">keybindings</span>]
 <span class="org-variable-name">shortcut</span> = <span class="org-string">"f1"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbe2e0c4" class="outline-4">
+<h4 id="orgbe2e0c4">Jujutsu Bookmark</h4>
+<div class="outline-text-4" id="text-orgbe2e0c4">
+<pre class="example">
+header-args: :mkdirp yes :tangle ~/.config/television/cable/jj-bookmark.toml
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-toml">[<span class="org-type">metadata</span>]
+<span class="org-variable-name">name</span> = <span class="org-string">"jj-bookmark"</span>
+<span class="org-variable-name">description</span> = <span class="org-string">"jujutsu bookmark"</span>
+<span class="org-variable-name">requirements</span> = [<span class="org-string">"jj"</span>,]
+
+[<span class="org-type">source</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"jj bookmark list --color always"</span>
+<span class="org-variable-name">ansi</span> = <span class="org-keyword">true</span>
+<span class="org-variable-name">no_sort</span> = <span class="org-keyword">true</span>
+<span class="org-variable-name">output</span> = <span class="org-string">"{strip_ansi|split: :1}"</span>
+
+[<span class="org-type">preview</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"jj show '{strip_ansi|split: :1}'"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgce24d19" class="outline-4">
+<h4 id="orgce24d19">Jujutsu Log</h4>
+<div class="outline-text-4" id="text-orgce24d19">
+<pre class="example">
+header-args: :mkdirp yes :tangle ~/.config/television/cable/jj-log.toml
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-toml">[<span class="org-type">metadata</span>]
+<span class="org-variable-name">name</span> = <span class="org-string">"jj-log"</span>
+<span class="org-variable-name">description</span> = <span class="org-string">"jujutsu log"</span>
+<span class="org-variable-name">requirements</span> = [<span class="org-string">"jj"</span>,]
+
+[<span class="org-type">source</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"jj log --color always --template builtin_log_oneline --revisions ::@"</span>
+<span class="org-variable-name">ansi</span> = <span class="org-keyword">true</span>
+<span class="org-variable-name">no_sort</span> = <span class="org-keyword">true</span>
+<span class="org-variable-name">output</span> = <span class="org-string">"{strip_ansi|split: :2}"</span>
+
+[<span class="org-type">preview</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"jj show '{strip_ansi|split: :2}'"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbb2be05" class="outline-4">
+<h4 id="orgbb2be05">Code With TODO, HACK, etc.</h4>
+<div class="outline-text-4" id="text-orgbb2be05">
+<pre class="example">
+header-args: :mkdirp yes :tangle ~/.config/television/cable/todo.toml
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-toml">[<span class="org-type">metadata</span>]
+<span class="org-variable-name">name</span> = <span class="org-string">"todo"</span>
+<span class="org-variable-name">description</span> = <span class="org-string">"Find TODO, FIXME, HACK, and XXX comments in codebase"</span>
+<span class="org-variable-name">requirements</span> = [<span class="org-string">"rg"</span>, <span class="org-string">"bat"</span>,]
+
+[<span class="org-type">source</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"rg -n --color=always '(TODO|FIXME|HACK|XXX|BUG|WARN):?'"</span>
+<span class="org-variable-name">ansi</span> = <span class="org-keyword">true</span>
+<span class="org-variable-name">output</span> = <span class="org-string">"{strip_ansi|split:\\::..2}"</span>
+
+[<span class="org-type">preview</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"bat -n --color always --theme auto:system --theme-dark gruvbox-dark --theme-light gruvbox-light --highlight-line '{strip_ansi|split:\\::1}' '{strip_ansi|split:\\::0}'"</span>
+<span class="org-variable-name">offset</span> = <span class="org-string">"{strip_ansi|split:\\::1}"</span>
+
+[<span class="org-type">keybindings</span>]
+<span class="org-variable-name">enter</span> = <span class="org-string">"actions:edit"</span>
+
+[<span class="org-type">ui.preview_panel</span>]
+<span class="org-variable-name">header</span> = <span class="org-string">"{strip_ansi|split:\\::..2}"</span>
+
+[<span class="org-type">actions.edit</span>]
+<span class="org-variable-name">description</span> = <span class="org-string">"Open file in zed at the comment"</span>
+<span class="org-variable-name">command</span> = <span class="org-string">"zed '{strip_ansi|split:\\::..2}'"</span>
+<span class="org-variable-name">mode</span> = <span class="org-string">"execute"</span>
 </pre>
 </div>
 </div>
@@ -3914,8 +4017,8 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun] <
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2025-12-11 Thu 14:11</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 30.2 (<a href="https://orgmode.org">Org</a> mode 9.7.30)</p>
+<p class="date">2026-01-31 Sat 20:40</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.0.50 (<a href="https://orgmode.org">Org</a> mode 9.7.30)</p>
 </div>
 </body>
 </html>

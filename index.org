@@ -1991,6 +1991,38 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       shortcut = "f1"
     #+end_src
 
+*** Files With TODO, HACK, etc.
+    :PROPERTIES:
+    :header-args: :mkdirp yes :tangle ~/.config/television/cable/todo.toml
+    :END:
+
+    #+begin_src toml
+      [metadata]
+      name = "todo"
+      description = "Find TODO, FIXME, HACK, and XXX comments in codebase"
+      requirements = ["rg", "bat",]
+
+      [source]
+      command = "rg -n --color=always '(TODO|FIXME|HACK|XXX|BUG|WARN):?'"
+      ansi = true
+      output = "{strip_ansi|split:\\::..2}"
+
+      [preview]
+      command = "bat -n --color always --theme auto:system --theme-dark gruvbox-dark --theme-light gruvbox-light --highlight-line '{strip_ansi|split:\\::1}' '{strip_ansi|split:\\::0}'"
+      offset = "{strip_ansi|split:\\::1}"
+
+      [keybindings]
+      enter = "actions:edit"
+
+      [ui.preview_panel]
+      header = "{strip_ansi|split:\\::..2}"
+
+      [actions.edit]
+      description = "Open file in zed at the comment"
+      command = "zed '{strip_ansi|split:\\::..2}'"
+      mode = "execute"
+    #+end_src
+
 *** Jujutsu Bookmark
     :PROPERTIES:
     :header-args: :mkdirp yes :tangle ~/.config/television/cable/jj-bookmark.toml
@@ -2031,38 +2063,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
       [preview]
       command = "jj show '{strip_ansi|split: :2}'"
-    #+end_src
-
-*** TODO
-    :PROPERTIES:
-    :header-args: :mkdirp yes :tangle ~/.config/television/cable/todo.toml
-    :END:
-
-    #+begin_src toml
-      [metadata]
-      name = "todo"
-      description = "Find TODO, FIXME, HACK, and XXX comments in codebase"
-      requirements = ["rg", "bat",]
-
-      [source]
-      command = "rg -n --color=always '(TODO|FIXME|HACK|XXX|BUG|WARN):?'"
-      ansi = true
-      output = "{strip_ansi|split:\\::..2}"
-
-      [preview]
-      command = "bat -n --color always --theme auto:system --theme-dark gruvbox-dark --theme-light gruvbox-light --highlight-line '{strip_ansi|split:\\::1}' '{strip_ansi|split:\\::0}'"
-      offset = "{strip_ansi|split:\\::1}"
-
-      [keybindings]
-      enter = "actions:edit"
-
-      [ui.preview_panel]
-      header = "{strip_ansi|split:\\::..2}"
-
-      [actions.edit]
-      description = "Open file in zed at the comment"
-      command = "zed '{strip_ansi|split:\\::..2}'"
-      mode = "execute"
     #+end_src
 
 ** Theme
