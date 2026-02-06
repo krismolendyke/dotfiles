@@ -1017,6 +1017,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      [remotes.origin]
      auto-track-bookmarks = 'regex:"^(main|master)$"'
+     auto-track-created-bookmarks = "*"
 
      [signing]
      backend = "ssh"
