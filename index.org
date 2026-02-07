@@ -606,6 +606,12 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
                "X-MCP-Tools": "add_comment_to_pending_review,get_file_contents,pull_request_read,pull_request_review_write"
              },
              "timeout": 5000
+           },
+           "google-developer-knowledge": {
+             "httpUrl": "https://developerknowledge.googleapis.com/mcp",
+             "headers": {
+               "X-Goog-Api-Key": "${GOOGLE_DEV_KNOWLEDGE_API_KEY}"
+             }
            }
          }
        }
