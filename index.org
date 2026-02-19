@@ -613,6 +613,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
                "X-Goog-Api-Key": "${GOOGLE_DEV_KNOWLEDGE_API_KEY}"
              }
            }
+         },
+         "model": {
+           "compressionThreshold": 0.7
          }
        }
      #+end_src
