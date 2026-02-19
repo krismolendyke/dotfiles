@@ -1036,7 +1036,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      name = "Kris Molendyke"
 
      [ui]
-     default-command = ["log", "--limit", "10"]
+     default-command = ["log", "--revisions", "trunk()::@"]
      diff-formatter = ["difft", "--color=always", "--display=side-by-side-show-both", "$left", "$right"]
 
      [template-aliases]
