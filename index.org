@@ -452,7 +452,10 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   :END:
 
   #+begin_src sh
-    [ -x "${HOMEBREW_PREFIX}/bin/bat" ] && alias cat='bat --theme auto:system --theme-dark default --theme-light GitHub'
+    if [ -x "${HOMEBREW_PREFIX}/bin/bat" ]; then
+        alias cat='bat --theme auto:system --theme-dark default --theme-light GitHub'
+        alias less='bat --theme auto:system --theme-dark default --theme-light GitHub'
+    fi
   #+end_src
 
 ** =~/.config/bat=
