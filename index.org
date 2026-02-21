@@ -579,15 +579,18 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
            "format": "text"
          },
          "ui": {
+           "autoThemeSwitching": true,
            "hideTips": true,
            "hideBanner": true,
            "footer": {
+             "hideContextPercentage": false,
              "hideSandboxStatus": true
            },
+           "loadingPhrases": "off",
+           "showLineNumbers": false,
            "showMemoryUsage": true,
-           "theme": "GitHub",
-           "showStatusInTitle": true,
-           "showLineNumbers": false
+           "showModelInfoInChat": true,
+           "showStatusInTitle": true
          },
          "tools": {
            "shell": {
