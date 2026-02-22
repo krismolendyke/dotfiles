@@ -590,7 +590,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
            "showLineNumbers": false,
            "showMemoryUsage": true,
            "showModelInfoInChat": true,
-           "showStatusInTitle": true
+           "showStatusInTitle": true,
+           "useBackgroundColor": false
          },
          "tools": {
            "shell": {
@@ -622,6 +623,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
          },
          "model": {
            "compressionThreshold": 0.7
+         },
+         "privacy": {
+           "usageStatisticsEnabled": false
          }
        }
      #+end_src
