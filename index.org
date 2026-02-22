@@ -603,7 +603,12 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
              "enabled": true
            },
            "previewFeatures": true,
-           "preferredEditor": "zed"
+           "preferredEditor": "zed",
+           "sessionRetention": {
+             "warningAcknowledged": true,
+             "enabled": true,
+             "maxAge": "30d"
+           }
          },
          "mcpServers": {
            "github": {
