@@ -1057,6 +1057,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      name = "Kris Molendyke"
 
      [ui]
+     color = "always"
      default-command = ["log", "--revisions", "trunk()::@ | ancestors(trunk(), 2)"]
      diff-formatter = ["difft", "--color=always", "--display=side-by-side-show-both", "$left", "$right"]
 
