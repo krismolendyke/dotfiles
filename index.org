@@ -1046,24 +1046,27 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      auto-track-bookmarks = 'regex:"^(main|master)$"'
      auto-track-created-bookmarks = "*"
 
+     [revsets]
+     bookmark-advance-to = "@-"
+
      [signing]
      backend = "ssh"
      backends.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
      behavior = "own"
      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPFEgqTPapPtOUOAsoSH2o4VJbp1JFzvXaiuEpdS0KuK"
 
-     [user]
-     email = "krismolendyke@users.noreply.github.com"
-     name = "Kris Molendyke"
+     [template-aliases]
+     "format_short_id(id)" = "id.shortest()"
+     "format_timestamp(timestamp)" = "timestamp.ago()"
 
      [ui]
      color = "always"
      default-command = ["log", "--revisions", "trunk()::@ | ancestors(trunk(), 2)"]
      diff-formatter = ["difft", "--color=always", "--display=side-by-side-show-both", "$left", "$right"]
 
-     [template-aliases]
-     "format_short_id(id)" = "id.shortest()"
-     "format_timestamp(timestamp)" = "timestamp.ago()"
+     [user]
+     email = "krismolendyke@users.noreply.github.com"
+     name = "Kris Molendyke"
    #+end_src
 
 * [[https://github.com/nvm-sh/nvm][nvm]]
