@@ -814,6 +814,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      # -*- mode: gitignore; -*-
 
      .jj/
+     .zed/
      ~/.bashrc.d/secret/
 
      ##########################################################################
