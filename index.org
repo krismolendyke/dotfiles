@@ -1299,7 +1299,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
          starship_precmd_user_func='k20e_starship_precmd_user_func'
 
          # Only init one time, I found issues w/ this executing multiple time, e.g., via interactive `source ~/.bashrc`
-         if [ ! -v STARSHIP_SHELL ]; then
+         if [[ -z "${STARSHIP_SHELL-}" ]]; then
              eval "$(starship init bash)"
          fi
      fi
