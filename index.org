@@ -492,6 +492,15 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      --plain
    #+end_src
 
+* Claude
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/111-claude.bash
+  :END:
+
+  #+begin_src sh
+    alias c='claude'
+  #+end_src
+
 * Emacs
   :PROPERTIES:
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/107-emacs.bash
