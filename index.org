@@ -1054,6 +1054,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      [aliases]
      l = ["log", "--limit", "10"]
+     rebase-all-onto-trunk = ["rebase", "--source", "roots(trunk()..local_bookmarks)", "--destination", "trunk()"]
 
      [git]
      colocate = true
