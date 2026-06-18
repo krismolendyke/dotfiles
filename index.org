@@ -1032,6 +1032,12 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/102-jujutsu.bash
   :END:
 
+  Enable [[https://docs.jj-vcs.dev/latest/install-and-setup/#dynamic][dynamic completions]] for things like configured `revset-aliases`, etc.
+
+  #+begin_src sh
+    source <(COMPLETE=bash jj)
+  #+end_src
+
   =jj= isn't all that bad to type but I'm conditioned to type =g= for =git= after all these years.  So =j= for =jj= it is.
 
   #+begin_src sh
