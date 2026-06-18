@@ -1056,6 +1056,10 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      auto-track-bookmarks = 'regex:"^(main|master)$"'
      auto-track-created-bookmarks = "*"
 
+     [revset-aliases]
+     'local_bookmarks'.definition = 'bookmarks() & ~trunk()'
+     'local_bookmarks'.doc = 'Locally tracked bookmarks, not including trunk'
+
      [revsets]
      bookmark-advance-to = "@-"
 
