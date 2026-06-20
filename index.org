@@ -170,6 +170,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
         export HOMEBREW_CASK_OPTS=--require-sha
         export HOMEBREW_INSTALL_CLEANUP=1
         export HOMEBREW_NO_ANALYTICS=1
+        export HOMEBREW_NO_ASK=1
         export HOMEBREW_NO_ENV_HINTS=1
         export HOMEBREW_NO_INSECURE_REDIRECT=1
 
