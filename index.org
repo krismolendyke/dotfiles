@@ -302,6 +302,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       cask "istat-menus"
       cask "lm-studio"
       cask "mactex-no-gui"
+      cask "openusage"
       cask "orion"
       cask "qlmarkdown"
       cask "rancher"
@@ -1123,6 +1124,36 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
   #+begin_src conf
   #+end_src
+
+* OpenRouter
+
+  I route the [[https://docs.claude.com/en/docs/claude-code/overview][Claude Code]] CLI through [[https://openrouter.ai][OpenRouter]] rather than talking to Anthropic directly.  Claude Code
+  honors a handful of =ANTHROPIC_*= environment variables, so pointing =ANTHROPIC_BASE_URL= at OpenRouter and
+  authenticating with an OpenRouter key is enough to redirect it.
+
+  The actual =export=s live with my other [[*Secrets][secrets]] in =~/.bashrc.d/secret/variables.sh= (that is where the secret
+  =OPENROUTER_API_KEY= — grab one at https://openrouter.ai/keys — is kept and where these variables are really set).
+  This section only /documents/ them, so the block below is illustrative and intentionally /not/ tangled; nothing here
+  is exported a second time at runtime.
+
+  #+begin_src sh :tangle no
+    # Route the Claude Code CLI to OpenRouter
+    export ANTHROPIC_BASE_URL="https://openrouter.ai/api"
+    export ANTHROPIC_AUTH_TOKEN="${OPENROUTER_API_KEY}"
+    export ANTHROPIC_API_KEY=""
+    export ANTHROPIC_MODEL="anthropic/claude-opus-4.8"
+    export ANTHROPIC_SMALL_FAST_MODEL="anthropic/claude-haiku-4.5"
+    export ANTHROPIC_DEFAULT_HAIKU_MODEL="anthropic/claude-haiku-4.5"
+  #+end_src
+
+  Note that OpenRouter expects its own model slugs, e.g. =anthropic/claude-opus-4.8=.  Claude Code's native model
+  IDs (e.g. =claude-opus-4-8[1m]=) are rejected by OpenRouter, hence the explicit =ANTHROPIC_MODEL= overrides above.
+
+** openusage
+
+   [[https://www.openusage.ai/][openusage]] tracks my OpenRouter spend.  Its configuration lives at =~/.config/openusage/openrouter.json= and holds
+   only the OpenRouter API key, so like the routing variables above it is treated as secret and is /not/ tangled or
+   reproduced here.
 
 * Playdate
    :PROPERTIES:
