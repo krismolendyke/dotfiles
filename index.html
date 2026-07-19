@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-07-19 Sun 09:00 -->
+<!-- 2026-07-19 Sun 09:17 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1976,13 +1976,11 @@ header-args: :mkdirp yes :tangle ~/.config/eca/config.json
   },
   <span class="org-string">"defaultModel"</span>: <span class="org-string">"openrouter/~anthropic/claude-sonnet-latest"</span>,
   <span class="org-string">"providers"</span>: {
-    <span class="org-string">"google-gemini"</span>: {
-      <span class="org-string">"api"</span>: <span class="org-string">"openai-chat"</span>,
-      <span class="org-string">"url"</span>: <span class="org-string">"https://generativelanguage.googleapis.com/v1beta/openai"</span>,
+    <span class="org-string">"google"</span>: {
       <span class="org-string">"key"</span>: <span class="org-string">"${env:GEMINI_API_KEY}"</span>,
       <span class="org-string">"models"</span>: {
         <span class="org-string">"gemini-3.5-flash"</span>: {},
-        <span class="org-string">"gemini-3.5-pro"</span>: {}
+        <span class="org-string">"gemini-pro-latest"</span>: {}
       }
     },
     <span class="org-string">"openrouter"</span>: {
@@ -1990,10 +1988,34 @@ header-args: :mkdirp yes :tangle ~/.config/eca/config.json
       <span class="org-string">"url"</span>: <span class="org-string">"https://openrouter.ai/api/v1"</span>,
       <span class="org-string">"key"</span>: <span class="org-string">"${env:OPENROUTER_API_KEY}"</span>,
       <span class="org-string">"models"</span>: {
-        <span class="org-string">"~anthropic/claude-sonnet-latest"</span>: {},
-        <span class="org-string">"anthropic/claude-sonnet-4.6"</span>: {},
-        <span class="org-string">"google/gemini-3.5-flash"</span>: {},
-        <span class="org-string">"~google/gemini-pro-latest"</span>: {}
+        <span class="org-string">"~anthropic/claude-sonnet-latest"</span>: {
+          <span class="org-string">"extraPayload"</span>: {
+            <span class="org-string">"provider"</span>: {
+              <span class="org-string">"data_collection"</span>: <span class="org-string">"deny"</span>
+            }
+          }
+        },
+        <span class="org-string">"anthropic/claude-sonnet-4.6"</span>: {
+          <span class="org-string">"extraPayload"</span>: {
+            <span class="org-string">"provider"</span>: {
+              <span class="org-string">"data_collection"</span>: <span class="org-string">"deny"</span>
+            }
+          }
+        },
+        <span class="org-string">"google/gemini-3.5-flash"</span>: {
+          <span class="org-string">"extraPayload"</span>: {
+            <span class="org-string">"provider"</span>: {
+              <span class="org-string">"data_collection"</span>: <span class="org-string">"deny"</span>
+            }
+          }
+        },
+        <span class="org-string">"~google/gemini-pro-latest"</span>: {
+          <span class="org-string">"extraPayload"</span>: {
+            <span class="org-string">"provider"</span>: {
+              <span class="org-string">"data_collection"</span>: <span class="org-string">"deny"</span>
+            }
+          }
+        }
       }
     }
   }
@@ -2749,6 +2771,12 @@ exported a second time at runtime.
 </span><span class="org-builtin">export</span> <span class="org-variable-name">OPENROUTER_API_KEY</span>=<span class="org-string">"..."</span>
 </pre>
 </div>
+
+<p>
+The actual OpenRouter provider/model routing config (which models, privacy/data-collection preferences, etc.) is
+configured as part of <a href="https://eca.dev/">eca</a>'s <code>openrouter</code> provider — see the <code>eca</code> section above — since eca is the thing
+consuming this key.
+</p>
 </div>
 <div id="outline-container-org530237a" class="outline-3">
 <h3 id="org530237a">openusage</h3>
@@ -4170,7 +4198,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun] <
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-07-19 Sun 08:58</p>
+<p class="date">2026-07-19 Sun 09:16</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.0.90 (<a href="https://orgmode.org">Org</a> mode 9.7.30)</p>
 </div>
 </body>
