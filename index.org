@@ -1199,9 +1199,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * OpenRouter
 
-  The actual secret =OPENROUTER_API_KEY= — grab one at https://openrouter.ai/keys — lives with my other [[*Secrets][secrets]] in =~/.bashrc.d/secret/variables.sh=.
-  This section only /documents/ it, so the block below is illustrative and intentionally /not/ tangled; nothing here is
-  exported a second time at runtime.
+  The actual secret =OPENROUTER_API_KEY= from https://openrouter.ai/keys lives with my other [[*Secrets][secrets]] in
+  =~/.bashrc.d/secret/variables.sh=.
 
   #+begin_src sh :tangle no
     # OpenRouter API Key
@@ -1209,14 +1208,13 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   #+end_src
 
   The actual OpenRouter provider/model routing config (which models, privacy/data-collection preferences, etc.) is
-  configured as part of [[https://eca.dev/][eca]]'s =openrouter= provider — see the =eca= section above — since eca is the thing
-  consuming this key.
+  configured as part of [[https://eca.dev/][eca]]'s =openrouter= provider — see the =eca= section above — since eca is the thing consuming this
+  key.
 
-** openusage
+* OpenUsage
 
-   [[https://www.openusage.ai/][openusage]] tracks my OpenRouter spend.  Its configuration lives at =~/.config/openusage/openrouter.json= and holds
-   only the OpenRouter API key, so like the variables above it is treated as secret and is /not/ tangled or reproduced
-   here.
+  [[https://www.openusage.ai/][openusage]] tracks my OpenRouter spend.  Since OpenUsage falls back to checking the =OPENROUTER_API_KEY= environment
+  variable, a local configuration file is not required.
 
 * Playdate
    :PROPERTIES:
