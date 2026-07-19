@@ -529,13 +529,11 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       },
       "defaultModel": "openrouter/~anthropic/claude-sonnet-latest",
       "providers": {
-        "google-gemini": {
-          "api": "openai-chat",
-          "url": "https://generativelanguage.googleapis.com/v1beta/openai",
+        "google": {
           "key": "${env:GEMINI_API_KEY}",
           "models": {
             "gemini-3.5-flash": {},
-            "gemini-3.5-pro": {}
+            "gemini-pro-latest": {}
           }
         },
         "openrouter": {
@@ -543,10 +541,34 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
           "url": "https://openrouter.ai/api/v1",
           "key": "${env:OPENROUTER_API_KEY}",
           "models": {
-            "~anthropic/claude-sonnet-latest": {},
-            "anthropic/claude-sonnet-4.6": {},
-            "google/gemini-3.5-flash": {},
-            "~google/gemini-pro-latest": {}
+            "~anthropic/claude-sonnet-latest": {
+              "extraPayload": {
+                "provider": {
+                  "data_collection": "deny"
+                }
+              }
+            },
+            "anthropic/claude-sonnet-4.6": {
+              "extraPayload": {
+                "provider": {
+                  "data_collection": "deny"
+                }
+              }
+            },
+            "google/gemini-3.5-flash": {
+              "extraPayload": {
+                "provider": {
+                  "data_collection": "deny"
+                }
+              }
+            },
+            "~google/gemini-pro-latest": {
+              "extraPayload": {
+                "provider": {
+                  "data_collection": "deny"
+                }
+              }
+            }
           }
         }
       }
@@ -1185,6 +1207,10 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     # OpenRouter API Key
     export OPENROUTER_API_KEY="..."
   #+end_src
+
+  The actual OpenRouter provider/model routing config (which models, privacy/data-collection preferences, etc.) is
+  configured as part of [[https://eca.dev/][eca]]'s =openrouter= provider — see the =eca= section above — since eca is the thing
+  consuming this key.
 
 ** openusage
 
