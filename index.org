@@ -1131,10 +1131,10 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   honors a handful of =ANTHROPIC_*= environment variables, so pointing =ANTHROPIC_BASE_URL= at OpenRouter and
   authenticating with an OpenRouter key is enough to redirect it.
 
-  The actual =export=s live with my other [[*Secrets][secrets]] in =~/.bashrc.d/secret/variables.sh= (that is where the secret
+  The actual exports live with my other [[*Secrets][secrets]] in =~/.bashrc.d/secret/variables.sh= (that is where the secret
   =OPENROUTER_API_KEY= — grab one at https://openrouter.ai/keys — is kept and where these variables are really set).
-  This section only /documents/ them, so the block below is illustrative and intentionally /not/ tangled; nothing here
-  is exported a second time at runtime.
+  This section only /documents/ them, so the block below is illustrative and intentionally /not/ tangled; nothing here is
+  exported a second time at runtime.
 
   #+begin_src sh :tangle no
     # Route the Claude Code CLI to OpenRouter
