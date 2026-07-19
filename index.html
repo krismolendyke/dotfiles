@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-07-19 Sun 09:17 -->
+<!-- 2026-07-19 Sun 09:49 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1269,11 +1269,8 @@ at <a href="https://github.com/krismolendyke/dotfiles/blob/master/index.org">ind
 <li><a href="#org8b8830a">nvm</a></li>
 <li><a href="#org50a2617">OCaml</a></li>
 <li><a href="#org3f63f7f">OpenTofu</a></li>
-<li><a href="#org648c2f4">OpenRouter</a>
-<ul>
-<li><a href="#org530237a">openusage</a></li>
-</ul>
-</li>
+<li><a href="#org648c2f4">OpenRouter</a></li>
+<li><a href="#org530237a">OpenUsage</a></li>
 <li><a href="#org651f861">Playdate</a></li>
 <li><a href="#org6ee8555">PostgreSQL</a></li>
 <li><a href="#org8948797">Python</a></li>
@@ -2761,9 +2758,8 @@ header-args: :mkdirp yes :tangle ~/.tofurc
 <h2 id="org648c2f4">OpenRouter</h2>
 <div class="outline-text-2" id="text-org648c2f4">
 <p>
-The actual secret <code>OPENROUTER_API_KEY</code> — grab one at <a href="https://openrouter.ai/keys">https://openrouter.ai/keys</a> — lives with my other <a href="#orgde0f8b8">secrets</a> in <code>~/.bashrc.d/secret/variables.sh</code>.
-This section only <i>documents</i> it, so the block below is illustrative and intentionally <i>not</i> tangled; nothing here is
-exported a second time at runtime.
+The actual secret <code>OPENROUTER_API_KEY</code> from <a href="https://openrouter.ai/keys">https://openrouter.ai/keys</a> lives with my other <a href="#orgde0f8b8">secrets</a> in
+<code>~/.bashrc.d/secret/variables.sh</code>.
 </p>
 
 <div class="org-src-container">
@@ -2774,19 +2770,18 @@ exported a second time at runtime.
 
 <p>
 The actual OpenRouter provider/model routing config (which models, privacy/data-collection preferences, etc.) is
-configured as part of <a href="https://eca.dev/">eca</a>'s <code>openrouter</code> provider — see the <code>eca</code> section above — since eca is the thing
-consuming this key.
+configured as part of <a href="https://eca.dev/">eca</a>'s <code>openrouter</code> provider — see the <code>eca</code> section above — since eca is the thing consuming this
+key.
 </p>
 </div>
-<div id="outline-container-org530237a" class="outline-3">
-<h3 id="org530237a">openusage</h3>
-<div class="outline-text-3" id="text-org530237a">
+</div>
+<div id="outline-container-org530237a" class="outline-2">
+<h2 id="org530237a">OpenUsage</h2>
+<div class="outline-text-2" id="text-org530237a">
 <p>
-<a href="https://www.openusage.ai/">openusage</a> tracks my OpenRouter spend.  Its configuration lives at <code>~/.config/openusage/openrouter.json</code> and holds
-only the OpenRouter API key, so like the variables above it is treated as secret and is <i>not</i> tangled or reproduced
-here.
+<a href="https://www.openusage.ai/">openusage</a> tracks my OpenRouter spend.  Since OpenUsage falls back to checking the <code>OPENROUTER_API_KEY</code> environment
+variable, a local configuration file is not required.
 </p>
-</div>
 </div>
 </div>
 <div id="outline-container-org651f861" class="outline-2">
@@ -4198,7 +4193,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun] <
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-07-19 Sun 09:16</p>
+<p class="date">2026-07-19 Sun 09:49</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.0.90 (<a href="https://orgmode.org">Org</a> mode 9.7.30)</p>
 </div>
 </body>
