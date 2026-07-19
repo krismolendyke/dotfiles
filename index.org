@@ -514,6 +514,45 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   Note that OpenRouter expects its own model slugs, e.g. =anthropic/claude-opus-4.8=.  Claude Code's native model
   IDs (e.g. =claude-opus-4-8[1m]=) are rejected by OpenRouter, hence the explicit =ANTHROPIC_MODEL= overrides above.
 
+* [[https://eca.dev/][eca]]
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.config/eca/config.json
+  :END:
+
+  [[https://eca.dev/][ECA]] (Editor Code Assistant) configuration.
+
+  #+begin_src js
+    {
+      "$schema": "https://eca.dev/config.json",
+      "chat": {
+        "defaultTrust": true
+      },
+      "defaultModel": "openrouter/~anthropic/claude-sonnet-latest",
+      "providers": {
+        "google-gemini": {
+          "api": "openai-chat",
+          "url": "https://generativelanguage.googleapis.com/v1beta/openai",
+          "key": "${env:GEMINI_API_KEY}",
+          "models": {
+            "gemini-3.5-flash": {},
+            "gemini-3.5-pro": {}
+          }
+        },
+        "openrouter": {
+          "api": "openai-chat",
+          "url": "https://openrouter.ai/api/v1",
+          "key": "${env:OPENROUTER_API_KEY}",
+          "models": {
+            "~anthropic/claude-sonnet-latest": {},
+            "anthropic/claude-sonnet-4.6": {},
+            "google/gemini-3.5-flash": {},
+            "~google/gemini-pro-latest": {}
+          }
+        }
+      }
+    }
+  #+end_src
+
 * Emacs
   :PROPERTIES:
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/107-emacs.bash
