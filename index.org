@@ -527,6 +527,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       "chat": {
         "defaultTrust": true
       },
+      "extraConfigs": ["~/.config/eca/config.local.json", ".eca/config.local.json"],
       "defaultModel": "openrouter/~anthropic/claude-sonnet-latest",
       "providers": {
         "google": {
