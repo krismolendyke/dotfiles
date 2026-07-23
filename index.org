@@ -1144,6 +1144,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      [revsets]
      bookmark-advance-to = "@-"
+     log = "@ | ancestors(@) | ancestors(immutable_heads().., 2) | trunk()"
 
      [signing]
      backend = "ssh"
