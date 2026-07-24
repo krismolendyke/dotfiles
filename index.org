@@ -503,12 +503,12 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     alias c='claude'
 
     # Route the Claude Code CLI to OpenRouter
-    export ANTHROPIC_BASE_URL="https://openrouter.ai/api"
-    export ANTHROPIC_AUTH_TOKEN="${OPENROUTER_API_KEY}"
-    export ANTHROPIC_API_KEY=""
-    export ANTHROPIC_MODEL="anthropic/claude-opus-4.8"
-    export ANTHROPIC_SMALL_FAST_MODEL="anthropic/claude-haiku-4.5"
-    export ANTHROPIC_DEFAULT_HAIKU_MODEL="anthropic/claude-haiku-4.5"
+    # export ANTHROPIC_BASE_URL="https://openrouter.ai/api"
+    # export ANTHROPIC_AUTH_TOKEN="${OPENROUTER_API_KEY}"
+    # export ANTHROPIC_API_KEY=""
+    # export ANTHROPIC_MODEL="anthropic/claude-opus-4.8"
+    # export ANTHROPIC_SMALL_FAST_MODEL="anthropic/claude-haiku-4.5"
+    # export ANTHROPIC_DEFAULT_HAIKU_MODEL="anthropic/claude-haiku-4.5"
   #+end_src
 
   Note that OpenRouter expects its own model slugs, e.g. =anthropic/claude-opus-4.8=.  Claude Code's native model
