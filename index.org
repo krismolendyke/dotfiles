@@ -1174,11 +1174,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    :END:
 
    #+begin_src nu
-     # config.nu
-     #
-     # Installed by:
-     # version = "0.114.1"
-     #
      # This file is used to override default Nushell settings, define
      # (or import) custom commands, or run any other startup tasks.
      # See https://www.nushell.sh/book/configuration.html
@@ -1192,6 +1187,11 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      # You can also pretty-print and page through the documentation for configuration
      # options using:
      #     config nu --doc | nu-highlight | less -R
+
+     alias g = git
+     alias j = jj
+     alias l = ls
+     alias ll = ls -l
    #+end_src
 
 * [[https://github.com/nvm-sh/nvm][nvm]]
