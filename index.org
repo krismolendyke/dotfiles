@@ -1192,6 +1192,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      alias j = jj
      alias l = ls
      alias ll = ls -l
+     # Starship
+     mkdir ($nu.data-dir | path join "vendor/autoload")
+     starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
    #+end_src
 
 * [[https://github.com/nvm-sh/nvm][nvm]]
@@ -1462,6 +1465,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       "$schema" = 'https://starship.rs/config-schema.json'
 
       format = """
+      ${custom.nushell}\
       $aws\
       $gcloud\
       ${custom.gcloud_prod}\
@@ -1824,6 +1828,19 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
        symbol = 'k8s '
        format = '[$symbol$context( \($namespace\))]($style) '
      #+end_src
+
+*** Nushell
+
+    Show a 🐚 icon when in Nushell
+
+    #+begin_src toml
+      [custom.nushell]
+      when = '''[[ "$STARSHIP_SHELL" == "nu" ]]'''
+      symbol = "🐚"
+      format = "[$symbol]($style) "
+      style = "bold green"
+      shell = ["bash"]
+    #+end_src
 
 *** https://starship.rs/config/#package-version
 
