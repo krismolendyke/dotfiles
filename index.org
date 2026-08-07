@@ -142,8 +142,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      pathmunge "${HOME}/bin"
    #+end_src
 
-   =TODO= If these modify =PATH=, etc., I should figure out a way to pre/post them with the rest of this setup.  For
-   instance, =asdf= tries to shim =PATH= here but then gets overwritten later by =pathmunge=.
+   =TODO= If these modify =PATH=, etc., I should figure out a way to pre/post them with the rest of this setup.
 
    Aliases:
 
@@ -212,7 +211,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       tap "tidbyt/tidbyt"
       brew "git"
       brew "glow"
-      brew "asdf"
       brew "aspell"
       brew "automake"
       brew "bash"
@@ -271,7 +269,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       brew "scons"
       brew "sevenzip"
       brew "shellcheck"
-      brew "sk"
       brew "starship"
       brew "subversion"
       brew "television"
@@ -312,7 +309,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       cask "tomatobar"
       cask "vanilla"
       cask "vlc"
-      cask "wezterm"
       cask "whisky"
       cask "zed"
       cask "zoom"
@@ -420,20 +416,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     # shellcheck source=/dev/null
     [ -e "${HOMEBREW_PREFIX}/etc/bash_completion.d/op" ] && source "${HOMEBREW_PREFIX}/etc/bash_completion.d/op"
   #+end_src
-
-* =asdf=
-   :PROPERTIES:
-   :header-args: :mkdirp yes :tangle ~/.bashrc.d/110-asdf.bash
-   :END:
-
-   Need to add completion for my silly Dvorak alias.  Lookup existing completion function: =complete -p asdf=, then add
-   it below.
-
-   #+begin_src sh
-     alias aoeu='asdf'
-     # shellcheck source=/dev/null
-     [ -e "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh" ] && source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh" && complete -o default -F _asdf aoeu
-   #+end_src
 
 * AWS CLI
   :PROPERTIES:
@@ -1200,19 +1182,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      $env.config.show_banner = false
    #+end_src
 
-* [[https://github.com/nvm-sh/nvm][nvm]]
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/590-nvm.bash
-  :END:
-
-  #+begin_src sh
-    if [ -e "$(brew --prefix nvm)/nvm.sh" ]; then
-        export NVM_DIR="$HOME/.nvm"
-        # shellcheck source=/dev/null
-        source "$(brew --prefix nvm)/nvm.sh"
-    fi
-  #+end_src
-
 * OCaml
    :PROPERTIES:
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/500-opam.bash
@@ -1224,14 +1193,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      # shellcheck source=/dev/null
      [ -e "${HOME}/.opam/opam-init/init.sh" ] && source "${HOME}/.opam/opam-init/init.sh"
    #+end_src
-
-* OpenTofu
-   :PROPERTIES:
-   :header-args: :mkdirp yes :tangle ~/.tofurc
-   :END:
-
-  #+begin_src conf
-  #+end_src
 
 * OpenRouter
 
@@ -1269,10 +1230,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   #+begin_src sh
     [ -d "$(brew --prefix postgresql@16)" ] && pathmunge "$(brew --prefix postgresql@16)/bin"
   #+end_src
-
-* Python
-
-  https://docs.astral.sh/uv/ FTW I'll remove this section soon.
 
 * Rancher
   :PROPERTIES:
@@ -1343,26 +1300,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      color=always
      shell=bash
    #+end_src
-
-* [[https://github.com/lotabout/skim][skim]]
-   :PROPERTIES:
-   :header-args: :mkdirp yes :tangle ~/.bashrc.d/120-skim.bash
-   :END:
-
-   Possibly replaced by [[*Television][Television]].
-
-  #+begin_src sh
-    export SKIM_DEFAULT_COMMAND="git ls-tree -r --name-only HEAD || rg --files || find ."
-    export SKIM_DEFAULT_OPTIONS="--ansi --bind 'alt-a:select-all+accept,ctrl-o:execute(emacsclient --no-wait {})+accept' --prompt '❯ ' --cmd-prompt 'C❯ ' --color 'light' --multi --tiebreak=score,begin,end"
-  #+end_src
-
-  skim [[https://github.com/lotabout/skim/blob/291fc34c58b1670a5e8c95f1e8f930b82c030b19/shell/key-bindings.bash#L82C1-L82C55][takes over]] =C-t= in the terminal.  I live by that key binding to transpose typographical errors.  Set it
-  explicitly:
-
-  #+begin_src sh
-    bind -r '\C-t'
-    bind '\C-t: transpose-chars'
-  #+end_src
 
 * SSH
 
@@ -1868,15 +1805,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       format = '[$symbol$workspace]($style) '
     #+end_src
 
-* [[https://github.com/alloy/terminal-notifier][terminal-notifier]]
-  :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/599-terminal-notifier.bash
-  :END:
-
-  #+begin_src sh
-    command -v terminal-notifier >/dev/null 2>&1 && alias notify=terminal-notifier
-  #+end_src
-
 * Terraform
   :PROPERTIES:
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/525-terraform.bash
@@ -2290,80 +2218,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      remote_control_mode_fg = 'black'
      remote_control_mode_bg = 'yellow'
      send_to_channel_mode_fg = 'cyan'
-   #+end_src
-
-* [[https://wezfurlong.org/wezterm/index.html][WezTerm]]
-   :PROPERTIES:
-   :header-args: :mkdirp yes :tangle ~/.wezterm.lua
-   :END:
-
-   =TERM= setup https://wezfurlong.org/wezterm/config/lua/config/term.html
-
-   #+begin_src lua
-     local wezterm = require 'wezterm'
-     local act = wezterm.action
-     local config = {}
-
-     if wezterm.config_builder then
-        config = wezterm.config_builder()
-     end
-
-     -- term https://wezfurlong.org/wezterm/config/lua/config/term.html
-     config.term = "wezterm"
-
-     -- Shell
-     if wezterm.target_triple == 'aarch64-apple-darwin' then
-        config.default_prog = {'/opt/homebrew/bin/bash'}
-     elseif wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
-        config.default_prog = {'/bin/bash'}
-     end
-
-     -- Font
-     config.font = wezterm.font('PragmataPro Liga')
-     config.font_size = 22
-
-     -- GUI
-     config.initial_rows = 48
-     config.initial_cols = 110
-     config.enable_tab_bar = false
-
-     -- Theme
-     function get_appearance()
-        if wezterm.gui then
-           return wezterm.gui.get_appearance()
-        end
-        return 'Dark'
-     end
-
-     function scheme_for_appearance(appearance)
-        if appearance:find 'Dark' then
-           return 'Tomorrow Night Bright'
-        else
-           return 'Tomorrow'
-        end
-     end
-
-     config.color_scheme = scheme_for_appearance(get_appearance())
-
-     -- Bindings
-     config.keys = {
-        -- macOS move forward/backward by word with ⌘-f, ⌘-b
-        { key = 'b', mods = 'CMD', action = act.SendString '\x1bb' },
-        { key = 'f', mods = 'CMD', action = act.SendString '\x1bf' },
-
-        -- macOS backward erase word (see
-        -- https://apple.stackexchange.com/questions/101754/os-x-disable-cmd-h-or-hide-app-command for re-mapping ⌘-h from
-        -- "Hide WezTerm" to something else)
-        { key = 'h', mods = 'CMD', action = act.SendString '\x1b\x7f' },
-
-        -- macOS forward erase word
-        { key = 'd', mods = 'CMD', action = act.SendString '\x1bd' },
-
-        -- Search, rather than ⌘-f
-        { key = 's', mods = 'CMD', action = act.Search 'CurrentSelectionOrEmptyString' },
-     }
-
-     return config
    #+end_src
 
 * =yamllint=
