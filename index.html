@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-08-07 Fri 22:39 -->
+<!-- 2026-08-08 Sat 15:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -2723,7 +2723,6 @@ header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/config.nu
 
 <span class="org-keyword">alias</span> ec = emacsclient
 <span class="org-keyword">alias</span> g = git
-<span class="org-keyword">alias</span> j = jj
 <span class="org-keyword">alias</span> l = ls
 <span class="org-keyword">alias</span> ll = ls -l
 
@@ -2731,6 +2730,13 @@ header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/config.nu
 <span class="org-keyword">def</span> <span class="org-string">'is-installed'</span> [ <span class="org-variable-name">app</span>: <span class="org-type">string</span> ] {
   which <span class="org-misc-punctuation">$</span><span class="org-variable-use">app</span> | is-not-empty
 }
+
+
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.EDITOR = <span class="org-string">"emacsclient"</span>
+
+
+<span class="org-comment"># Universal LS_COLORS palette optimized for both Light and Dark terminal backgrounds</span>
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.LS_COLORS = <span class="org-string">"di=01;34:ln=01;36:so=01;35:pi=01;33:ex=01;32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"</span>
 
 
 <span class="org-comment">#######################</span>
@@ -2750,22 +2756,31 @@ header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/config.nu
 <span class="org-comment"># Completions #</span>
 <span class="org-comment">###############</span>
 
-<span class="org-keyword">let</span> <span class="org-variable-name">external_completer</span> = {|<span class="org-variable-name">spans</span>: <span class="org-builtin">list</span>&lt;<span class="org-type">string</span>&gt;|
-    <span class="org-keyword">if</span> <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0 == <span class="org-string">"jj"</span> or <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0 == <span class="org-string">"j"</span> {
-        <span class="org-keyword">let</span> <span class="org-variable-name">index</span> = (<span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span> | length) - <span class="org-number">1</span>
-        <span class="org-keyword">let</span> <span class="org-variable-name">cmd_spans</span> = <span class="org-keyword">if</span> <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0 == <span class="org-string">"j"</span> { <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span> | skip <span class="org-number">1</span> | prepend <span class="org-string">"jj"</span> } <span class="org-keyword">else</span> { <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span> }
-        with-env { _CLAP_COMPLETE_INDEX: <span class="org-misc-punctuation">$</span><span class="org-variable-use">index</span>, COMPLETE: <span class="org-string">"bash"</span> } {
-            jj -- <span class="org-misc-punctuation">...$</span><span class="org-variable-use">cmd_spans</span>
-        } | lines | each {|<span class="org-variable-name">l</span>| { value: <span class="org-misc-punctuation">$</span><span class="org-variable-use">l</span> } }
-    } <span class="org-keyword">else</span> {
-        CARAPACE_LENIENT=<span class="org-string">1</span> carapace <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0 <span class="org-string">nushell</span> <span class="org-misc-punctuation">...$</span><span class="org-variable-use">spans</span> | from <span class="org-string">json</span>
-    }
+<span class="org-keyword">def</span> <span class="org-function-name">carapace-completer</span> [<span class="org-variable-name">spans</span>: <span class="org-builtin">list</span>&lt;<span class="org-type">string</span>&gt;] {
+    ^carapace <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0 <span class="org-string">nushell</span> <span class="org-misc-punctuation">...$</span><span class="org-variable-use">spans</span> | from <span class="org-string">json</span>
+}
+
+<span class="org-keyword">def</span> <span class="org-function-name">jj-completer</span> [<span class="org-variable-name">spans</span>: <span class="org-builtin">list</span>&lt;<span class="org-type">string</span>&gt;] {
+    <span class="org-keyword">let</span> <span class="org-variable-name">cmd_spans</span> = <span class="org-keyword">if</span> <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0 == <span class="org-string">"j"</span> { <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span> | skip <span class="org-number">1</span> | prepend <span class="org-string">"jj"</span> } <span class="org-keyword">else</span> { <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span> }
+    with-env { _CLAP_COMPLETE_INDEX: ((<span class="org-misc-punctuation">$</span><span class="org-variable-use">cmd_spans</span> | length) - <span class="org-number">1</span>), COMPLETE: <span class="org-string">"bash"</span> } {
+        ^jj -- <span class="org-misc-punctuation">...$</span><span class="org-variable-use">cmd_spans</span>
+    } | lines | each {|<span class="org-variable-name">l</span>| { value: <span class="org-misc-punctuation">$</span><span class="org-variable-use">l</span> } }
+}
+
+<span class="org-comment"># jj itself: just attach completer to the extern signature (no execution logic needed, real binary exists)</span>
+@complete <span class="org-string">jj-completer</span>
+<span class="org-keyword">extern</span> <span class="org-string">"jj"</span> []
+
+<span class="org-comment"># j: needs an actual implementation now, since it's not a real binary &#8212; forward args to jj</span>
+@complete <span class="org-string">jj-completer</span>
+<span class="org-keyword">def</span> --wrapped <span class="org-function-name">j</span> [...<span class="org-variable-name">args</span>] {
+    ^jj <span class="org-misc-punctuation">...$</span><span class="org-variable-use">args</span>
 }
 
 <span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.completions.external = {
     enable: <span class="org-constant">true</span>
     max_results: <span class="org-number">100</span>
-    completer: <span class="org-misc-punctuation">$</span><span class="org-variable-use">external_completer</span>
+    completer: {|<span class="org-variable-name">spans</span>| carapace-completer <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>}
 }
 
 
@@ -2777,7 +2792,7 @@ mkdir (<span class="org-misc-punctuation">$</span><span class="org-constant">nu<
 starship <span class="org-string">init</span> <span class="org-string">nu</span> | save -f (<span class="org-misc-punctuation">$</span><span class="org-constant">nu</span>.data-dir | path <span class="org-string">join</span> <span class="org-string">"vendor/autoload/starship.nu"</span>)
 
 
-<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.show_banner = <span class="org-constant">false</span>
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.show_banner = <span class="org-string">"short"</span> <span class="org-comment"># just show startup time</span>
 </code></pre>
 </div>
 </div>
@@ -4129,7 +4144,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-08-07 Fri 22:38</p>
+<p class="date">2026-08-08 Sat 15:12</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.0.91 (<a href="https://orgmode.org">Org</a> mode 9.8.8)</p>
 </div>
 </body>
