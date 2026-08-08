@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-08-07 Fri 20:42 -->
+<!-- 2026-08-07 Fri 22:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1908,7 +1908,7 @@ header-args: :mkdirp yes :tangle ~/.config/bat/config
 <h2 id="orga55bdd4">Carapace</h2>
 <div class="outline-text-2" id="text-orga55bdd4">
 <pre class="example">
-header-args: :mkdirp yes :tangle ~/.bashrc.d/502-carapace.bash
+header-args: :mkdirp yes :tangle ~/.bashrc.d/990-carapace.bash
 </pre>
 
 <p>
@@ -1918,7 +1918,7 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/502-carapace.bash
 <div class="org-src-container">
 <pre class="src src-sh"><code><span class="org-builtin">export</span> <span class="org-variable-name">CARAPACE_BRIDGES</span>=<span class="org-string">'bash'</span>
 <span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck disable=SC1090
-</span><span class="org-builtin">source</span> &lt;(carapace _carapace)
+</span><span class="org-builtin">source</span> &lt;(carapace _carapace bash)
 </code></pre>
 </div>
 </div>
@@ -2630,7 +2630,7 @@ Install and configure <a href="https://krew.sigs.k8s.io/docs/user-guide/setup/in
 <h2 id="orgb22ef7e">Jujutsu</h2>
 <div class="outline-text-2" id="text-orgb22ef7e">
 <pre class="example">
-header-args: :mkdirp yes :tangle ~/.bashrc.d/102-jujutsu.bash
+header-args: :mkdirp yes :tangle ~/.bashrc.d/991-jujutsu.bash
 </pre>
 
 <p>
@@ -2640,6 +2640,7 @@ Enable <a href="https://docs.jj-vcs.dev/latest/install-and-setup/#dynamic">dynam
 <div class="org-src-container">
 <pre class="src src-sh"><code><span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck disable=SC1090
 </span><span class="org-builtin">source</span> &lt;(<span class="org-variable-name">COMPLETE</span>=bash jj)
+<span class="org-builtin">complete</span> -F _clap_complete_jj -o nosort -o bashdefault -o default jj
 </code></pre>
 </div>
 
@@ -2737,14 +2738,22 @@ header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/config.nu
 
 
 <span class="org-comment"># Completions</span>
-<span class="org-keyword">let</span> <span class="org-variable-name">carapace_completer</span> = {|<span class="org-variable-name">spans</span>: <span class="org-builtin">list</span>&lt;<span class="org-type">string</span>&gt;|
-    CARAPACE_LENIENT=<span class="org-string">1</span> carapace <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0 <span class="org-string">nushell</span> <span class="org-misc-punctuation">...$</span><span class="org-variable-use">spans</span> | from <span class="org-string">json</span>
+<span class="org-keyword">let</span> <span class="org-variable-name">external_completer</span> = {|<span class="org-variable-name">spans</span>: <span class="org-builtin">list</span>&lt;<span class="org-type">string</span>&gt;|
+    <span class="org-keyword">if</span> <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0 == <span class="org-string">"jj"</span> or <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0 == <span class="org-string">"j"</span> {
+        <span class="org-keyword">let</span> <span class="org-variable-name">index</span> = (<span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span> | length) - <span class="org-number">1</span>
+        <span class="org-keyword">let</span> <span class="org-variable-name">cmd_spans</span> = <span class="org-keyword">if</span> <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0 == <span class="org-string">"j"</span> { <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span> | skip <span class="org-number">1</span> | prepend <span class="org-string">"jj"</span> } <span class="org-keyword">else</span> { <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span> }
+        with-env { _CLAP_COMPLETE_INDEX: <span class="org-misc-punctuation">$</span><span class="org-variable-use">index</span>, COMPLETE: <span class="org-string">"bash"</span> } {
+            jj -- <span class="org-misc-punctuation">...$</span><span class="org-variable-use">cmd_spans</span>
+        } | lines | each {|<span class="org-variable-name">l</span>| { value: <span class="org-misc-punctuation">$</span><span class="org-variable-use">l</span> } }
+    } <span class="org-keyword">else</span> {
+        CARAPACE_LENIENT=<span class="org-string">1</span> carapace <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0 <span class="org-string">nushell</span> <span class="org-misc-punctuation">...$</span><span class="org-variable-use">spans</span> | from <span class="org-string">json</span>
+    }
 }
 
 <span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.completions.external = {
     enable: <span class="org-constant">true</span>
     max_results: <span class="org-number">100</span>
-    completer: <span class="org-misc-punctuation">$</span><span class="org-variable-use">carapace_completer</span>
+    completer: <span class="org-misc-punctuation">$</span><span class="org-variable-use">external_completer</span>
 }
 
 
@@ -4104,7 +4113,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-08-07 Fri 20:40</p>
+<p class="date">2026-08-07 Fri 22:06</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.0.91 (<a href="https://orgmode.org">Org</a> mode 9.8.8)</p>
 </div>
 </body>
