@@ -1178,7 +1178,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      alias ec = emacsclient
      alias g = git
-     alias j = jj
      alias l = ls
      alias ll = ls -l
 
@@ -1212,22 +1211,31 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      # Completions #
      ###############
 
-     let external_completer = {|spans: list<string>|
-         if $spans.0 == "jj" or $spans.0 == "j" {
-             let index = ($spans | length) - 1
-             let cmd_spans = if $spans.0 == "j" { $spans | skip 1 | prepend "jj" } else { $spans }
-             with-env { _CLAP_COMPLETE_INDEX: $index, COMPLETE: "bash" } {
-                 jj -- ...$cmd_spans
-             } | lines | each {|l| { value: $l } }
-         } else {
-             CARAPACE_LENIENT=1 carapace $spans.0 nushell ...$spans | from json
-         }
+     def carapace-completer [spans: list<string>] {
+         ^carapace $spans.0 nushell ...$spans | from json
+     }
+
+     def jj-completer [spans: list<string>] {
+         let cmd_spans = if $spans.0 == "j" { $spans | skip 1 | prepend "jj" } else { $spans }
+         with-env { _CLAP_COMPLETE_INDEX: (($cmd_spans | length) - 1), COMPLETE: "bash" } {
+             ^jj -- ...$cmd_spans
+         } | lines | each {|l| { value: $l } }
+     }
+
+     # jj itself: just attach completer to the extern signature (no execution logic needed, real binary exists)
+     @complete jj-completer
+     extern "jj" []
+
+     # j: needs an actual implementation now, since it's not a real binary — forward args to jj
+     @complete jj-completer
+     def --wrapped j [...args] {
+         ^jj ...$args
      }
 
      $env.config.completions.external = {
          enable: true
          max_results: 100
-         completer: $external_completer
+         completer: {|spans| carapace-completer $spans}
      }
 
 
