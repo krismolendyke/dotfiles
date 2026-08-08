@@ -479,7 +479,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Carapace
   :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/502-carapace.bash
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/990-carapace.bash
   :END:
 
   https://carapace.sh/ for [[*Bash][Bash]] and [[*Nushell][Nushell]] both.
@@ -487,7 +487,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   #+begin_src sh
     export CARAPACE_BRIDGES='bash'
     # shellcheck disable=SC1090
-    source <(carapace _carapace)
+    source <(carapace _carapace bash)
   #+end_src
 
 * Claude
