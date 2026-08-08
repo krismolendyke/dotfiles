@@ -1236,7 +1236,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
 
 
-     $env.config.show_banner = false
+     $env.config.show_banner = "short" # just show startup time
    #+end_src
 
 * OCaml
