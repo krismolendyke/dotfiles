@@ -218,6 +218,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       brew "oniguruma"
       brew "bat"
       brew "bison"
+      brew "carapace"
       brew "chafa"
       brew "cmake"
       brew "dasel"
@@ -475,6 +476,19 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      #--map-syntax ".ignore:Git Ignore"
      --plain
    #+end_src
+
+* Carapace
+  :PROPERTIES:
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/502-carapace.bash
+  :END:
+
+  https://carapace.sh/ for [[*Bash][Bash]] and [[*Nushell][Nushell]] both.
+
+  #+begin_src sh
+    export CARAPACE_BRIDGES='bash'
+    # shellcheck disable=SC1090
+    source <(carapace _carapace)
+  #+end_src
 
 * Claude
   :PROPERTIES:
@@ -1092,6 +1106,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   Enable [[https://docs.jj-vcs.dev/latest/install-and-setup/#dynamic][dynamic completions]] for things like configured `revset-aliases`, etc.
 
   #+begin_src sh
+    # shellcheck disable=SC1090
     source <(COMPLETE=bash jj)
   #+end_src
 
@@ -1174,6 +1189,19 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
          ^cat ...$args
        }
      }
+
+
+     # Completions
+     let carapace_completer = {|spans: list<string>|
+         CARAPACE_LENIENT=1 carapace $spans.0 nushell ...$spans | from json
+     }
+
+     $env.config.completions.external = {
+         enable: true
+         max_results: 100
+         completer: $carapace_completer
+     }
+
 
      # Starship
      mkdir ($nu.data-dir | path join "vendor/autoload")
