@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-08-07 Fri 22:10 -->
+<!-- 2026-08-07 Fri 22:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -2717,17 +2717,26 @@ header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/config.nu
 </pre>
 
 <div class="org-src-container">
-<pre class="src src-nu"><code><span class="org-comment"># Aliases</span>
+<pre class="src src-nu"><code><span class="org-comment">###########</span>
+<span class="org-comment"># Aliases #</span>
+<span class="org-comment">###########</span>
+
+<span class="org-keyword">alias</span> ec = emacsclient
 <span class="org-keyword">alias</span> g = git
 <span class="org-keyword">alias</span> j = jj
 <span class="org-keyword">alias</span> l = ls
 <span class="org-keyword">alias</span> ll = ls -l
 
+
 <span class="org-keyword">def</span> <span class="org-string">'is-installed'</span> [ <span class="org-variable-name">app</span>: <span class="org-type">string</span> ] {
   which <span class="org-misc-punctuation">$</span><span class="org-variable-use">app</span> | is-not-empty
 }
 
-<span class="org-comment"># Conditional aliases</span>
+
+<span class="org-comment">#######################</span>
+<span class="org-comment"># Conditional aliases #</span>
+<span class="org-comment">#######################</span>
+
 <span class="org-keyword">def</span> <span class="org-function-name">cat</span> [...<span class="org-variable-name">args</span>] {
   <span class="org-keyword">if</span> (is-installed <span class="org-string">bat</span>) {
     ^bat --theme <span class="org-string">auto:system</span> --theme-dark <span class="org-string">default</span> --theme-light <span class="org-string">GitHub</span> <span class="org-misc-punctuation">...$</span><span class="org-variable-use">args</span>
@@ -2737,7 +2746,10 @@ header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/config.nu
 }
 
 
-<span class="org-comment"># Completions</span>
+<span class="org-comment">###############</span>
+<span class="org-comment"># Completions #</span>
+<span class="org-comment">###############</span>
+
 <span class="org-keyword">let</span> <span class="org-variable-name">external_completer</span> = {|<span class="org-variable-name">spans</span>: <span class="org-builtin">list</span>&lt;<span class="org-type">string</span>&gt;|
     <span class="org-keyword">if</span> <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0 == <span class="org-string">"jj"</span> or <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0 == <span class="org-string">"j"</span> {
         <span class="org-keyword">let</span> <span class="org-variable-name">index</span> = (<span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span> | length) - <span class="org-number">1</span>
@@ -2757,9 +2769,13 @@ header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/config.nu
 }
 
 
-<span class="org-comment"># Starship</span>
+<span class="org-comment">############</span>
+<span class="org-comment"># Starship #</span>
+<span class="org-comment">############</span>
+
 mkdir (<span class="org-misc-punctuation">$</span><span class="org-constant">nu</span>.data-dir | path <span class="org-string">join</span> <span class="org-string">"vendor/autoload"</span>)
 starship <span class="org-string">init</span> <span class="org-string">nu</span> | save -f (<span class="org-misc-punctuation">$</span><span class="org-constant">nu</span>.data-dir | path <span class="org-string">join</span> <span class="org-string">"vendor/autoload/starship.nu"</span>)
+
 
 <span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.show_banner = <span class="org-constant">false</span>
 </code></pre>
@@ -4113,7 +4129,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-08-07 Fri 22:06</p>
+<p class="date">2026-08-07 Fri 22:38</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.0.91 (<a href="https://orgmode.org">Org</a> mode 9.8.8)</p>
 </div>
 </body>

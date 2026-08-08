@@ -1172,17 +1172,26 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    :END:
 
    #+begin_src nu
-     # Aliases
+     ###########
+     # Aliases #
+     ###########
+
+     alias ec = emacsclient
      alias g = git
      alias j = jj
      alias l = ls
      alias ll = ls -l
 
+
      def 'is-installed' [ app: string ] {
        which $app | is-not-empty
      }
 
-     # Conditional aliases
+
+     #######################
+     # Conditional aliases #
+     #######################
+
      def cat [...args] {
        if (is-installed bat) {
          ^bat --theme auto:system --theme-dark default --theme-light GitHub ...$args
@@ -1192,7 +1201,10 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      }
 
 
-     # Completions
+     ###############
+     # Completions #
+     ###############
+
      let external_completer = {|spans: list<string>|
          if $spans.0 == "jj" or $spans.0 == "j" {
              let index = ($spans | length) - 1
@@ -1212,9 +1224,13 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      }
 
 
-     # Starship
+     ############
+     # Starship #
+     ############
+
      mkdir ($nu.data-dir | path join "vendor/autoload")
      starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+
 
      $env.config.show_banner = false
    #+end_src
