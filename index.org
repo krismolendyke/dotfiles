@@ -1100,7 +1100,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Jujutsu
   :PROPERTIES:
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/102-jujutsu.bash
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/991-jujutsu.bash
   :END:
 
   Enable [[https://docs.jj-vcs.dev/latest/install-and-setup/#dynamic][dynamic completions]] for things like configured `revset-aliases`, etc.
@@ -1108,6 +1108,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   #+begin_src sh
     # shellcheck disable=SC1090
     source <(COMPLETE=bash jj)
+    complete -F _clap_complete_jj -o nosort -o bashdefault -o default jj
   #+end_src
 
   =jj= isn't all that bad to type but I'm conditioned to type =g= for =git= after all these years.  So =j= for =jj= it is.
@@ -1192,14 +1193,22 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 
      # Completions
-     let carapace_completer = {|spans: list<string>|
-         CARAPACE_LENIENT=1 carapace $spans.0 nushell ...$spans | from json
+     let external_completer = {|spans: list<string>|
+         if $spans.0 == "jj" or $spans.0 == "j" {
+             let index = ($spans | length) - 1
+             let cmd_spans = if $spans.0 == "j" { $spans | skip 1 | prepend "jj" } else { $spans }
+             with-env { _CLAP_COMPLETE_INDEX: $index, COMPLETE: "bash" } {
+                 jj -- ...$cmd_spans
+             } | lines | each {|l| { value: $l } }
+         } else {
+             CARAPACE_LENIENT=1 carapace $spans.0 nushell ...$spans | from json
+         }
      }
 
      $env.config.completions.external = {
          enable: true
          max_results: 100
-         completer: $carapace_completer
+         completer: $external_completer
      }
 
 
