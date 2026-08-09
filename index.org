@@ -1596,9 +1596,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       - 0.32
       - 0.7
       cursor_size: 7
-      font_family: '[Apple System Font]'
+      font_family: 'PragmataProVFLiga-Regular'
       font_size_multiplier: 0.4
-      font_weight: 500
+      font_weight: 700
       free_mode_indicator_offset_x: 20.0
       free_mode_indicator_offset_y: 20.0
       free_mode_indicator_rgba:
@@ -1622,7 +1622,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       - 0.2
       name: default
       show_initial_highlight: false
-      subgrid_font_size_multiplier: 0.75
+      subgrid_font_size_multiplier: 1.0
       subgrid_rgba:
       - 1.0
       - 1.0
@@ -1632,20 +1632,20 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       - 1.0
       - 1.0
       - 1.0
-      - 0.5
+      - 0.9
       text_rgba:
       - 1.0
       - 1.0
       - 1.0
       - 1.0
-      text_shadow_blur_radius: 4.0
+      text_shadow_blur_radius: 3.0
       text_shadow_offset:
       - 0.0
       - 0.0
       text_shadow_rgba:
-      - 0.02
-      - 0.04
-      - 0.06
+      - 0.0
+      - 0.0
+      - 0.0
       - 1.0
       text_y_offset: 0.0
       toast_opacity: 0.5
