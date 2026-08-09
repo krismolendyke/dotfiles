@@ -1211,8 +1211,12 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      # Completions #
      ###############
 
+     $env.CARAPACE_BRIDGES = "zsh,fish,bash"
+
      def carapace-completer [spans: list<string>] {
-         ^carapace $spans.0 nushell ...$spans | from json
+         with-env { CARAPACE_LENIENT: "1" } {
+             ^carapace $spans.0 nushell ...$spans
+         } | from json
      }
 
      def jj-completer [spans: list<string>] {
