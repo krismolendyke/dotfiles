@@ -1214,7 +1214,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
         keys: ''
         num_cells_x: 2
         num_cells_y: 1
-      hold_subgrid_key_for_nudge: false
+      hold_subgrid_key_for_nudge: true
       name: position_based_columns
       nudges_per_cell: 4
       strategy: subgrid
@@ -1496,16 +1496,16 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
         right mouse button (w/o overlay): null
         show overlay: CommandLeft tap
         subgrid nudge down:
-        - D
+        - E
         - T
         subgrid nudge left:
-        - S
+        - O
         - H
         subgrid nudge right:
-        - F
+        - U
         - N
         subgrid nudge up:
-        - E
+        - .
         - C
         switch monitor left: ShiftLeft tap
         switch monitor right: ShiftRight tap
