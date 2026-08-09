@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-08-08 Sat 15:15 -->
+<!-- 2026-08-08 Sat 23:09 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1967,7 +1967,7 @@ header-args: :mkdirp yes :tangle ~/.config/eca/config.json
     <span class="org-string">"defaultTrust"</span>: <span class="org-constant">true</span>
   },
   <span class="org-string">"extraConfigs"</span>: [<span class="org-string">"~/.config/eca/config.local.json"</span>, <span class="org-string">".eca/config.local.json"</span>],
-  <span class="org-string">"defaultModel"</span>: <span class="org-string">"openrouter/~anthropic/claude-sonnet-latest"</span>,
+  <span class="org-string">"defaultModel"</span>: <span class="org-string">"openrouter/openrouter/auto-beta"</span>,
   <span class="org-string">"providers"</span>: {
     <span class="org-string">"google"</span>: {
       <span class="org-string">"key"</span>: <span class="org-string">"${env:GEMINI_API_KEY}"</span>,
@@ -2003,6 +2003,20 @@ header-args: :mkdirp yes :tangle ~/.config/eca/config.json
           }
         },
         <span class="org-string">"~google/gemini-pro-latest"</span>: {
+          <span class="org-string">"extraPayload"</span>: {
+            <span class="org-string">"provider"</span>: {
+              <span class="org-string">"data_collection"</span>: <span class="org-string">"deny"</span>
+            }
+          }
+        },
+        <span class="org-string">"openrouter/auto-beta"</span>: {
+          <span class="org-string">"extraPayload"</span>: {
+            <span class="org-string">"provider"</span>: {
+              <span class="org-string">"data_collection"</span>: <span class="org-string">"deny"</span>
+            }
+          }
+        },
+        <span class="org-string">"openrouter/pareto-code"</span>: {
           <span class="org-string">"extraPayload"</span>: {
             <span class="org-string">"provider"</span>: {
               <span class="org-string">"data_collection"</span>: <span class="org-string">"deny"</span>
@@ -2756,8 +2770,12 @@ header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/config.nu
 <span class="org-comment"># Completions #</span>
 <span class="org-comment">###############</span>
 
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.CARAPACE_BRIDGES = <span class="org-string">"zsh,fish,bash"</span>
+
 <span class="org-keyword">def</span> <span class="org-function-name">carapace-completer</span> [<span class="org-variable-name">spans</span>: <span class="org-builtin">list</span>&lt;<span class="org-type">string</span>&gt;] {
-    ^carapace <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0 <span class="org-string">nushell</span> <span class="org-misc-punctuation">...$</span><span class="org-variable-use">spans</span> | from <span class="org-string">json</span>
+    with-env { CARAPACE_LENIENT: <span class="org-string">"1"</span> } {
+        ^carapace <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0 <span class="org-string">nushell</span> <span class="org-misc-punctuation">...$</span><span class="org-variable-use">spans</span>
+    } | from <span class="org-string">json</span>
 }
 
 <span class="org-keyword">def</span> <span class="org-function-name">jj-completer</span> [<span class="org-variable-name">spans</span>: <span class="org-builtin">list</span>&lt;<span class="org-type">string</span>&gt;] {
@@ -4144,7 +4162,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-08-08 Sat 15:12</p>
+<p class="date">2026-08-08 Sat 22:59</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.0.91 (<a href="https://orgmode.org">Org</a> mode 9.8.8)</p>
 </div>
 </body>
