@@ -1200,12 +1200,12 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       grid_defn:
       - border_width: 0.0
         callback: build_cell_strings
-        keys: ASDFG HJKL;
+        keys: AOEUI DHTNS
         num_cells_x: 10
         num_cells_y: 1
       - border_width: 1.0
         callback: build_cell_strings
-        keys: QWERT YUIOP ASDFG HJKL; ZXCVB NM,./
+        keys: "',.PY AOEUI ;QJKX FGCRL DHTNS BMWVZ"
         num_cells_x: 1
         num_cells_y: 30
       - border_width: 0.0
@@ -1220,7 +1220,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       subgrid_dims:
       - 10
       - 3
-      subgrid_mouse_action_keys: QWERT YUIOP ASDFG HJKL; ZXCVB NM,./
+      subgrid_mouse_action_keys: "',.PY AOEUI ;QJKX FGCRL DHTNS BMWVZ"
     keyboard_layout:
       id: com.apple.keylayout.Dvorak
       name: Dvorak
