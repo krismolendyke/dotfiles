@@ -526,46 +526,11 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       "extraConfigs": ["~/.config/eca/config.local.json", ".eca/config.local.json"],
       "defaultModel": "openrouter/openrouter/auto-beta",
       "providers": {
-        "google": {
-          "key": "${env:GEMINI_API_KEY}",
-          "models": {
-            "gemini-3.5-flash": {},
-            "gemini-pro-latest": {}
-          }
-        },
         "openrouter": {
           "api": "openai-chat",
           "url": "https://openrouter.ai/api/v1",
           "key": "${env:OPENROUTER_API_KEY}",
           "models": {
-            "~anthropic/claude-sonnet-latest": {
-              "extraPayload": {
-                "provider": {
-                  "data_collection": "deny"
-                }
-              }
-            },
-            "anthropic/claude-sonnet-4.6": {
-              "extraPayload": {
-                "provider": {
-                  "data_collection": "deny"
-                }
-              }
-            },
-            "google/gemini-3.5-flash": {
-              "extraPayload": {
-                "provider": {
-                  "data_collection": "deny"
-                }
-              }
-            },
-            "~google/gemini-pro-latest": {
-              "extraPayload": {
-                "provider": {
-                  "data_collection": "deny"
-                }
-              }
-            },
             "openrouter/auto-beta": {
               "extraPayload": {
                 "provider": {
