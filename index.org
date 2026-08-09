@@ -524,7 +524,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
         "defaultTrust": true
       },
       "extraConfigs": ["~/.config/eca/config.local.json", ".eca/config.local.json"],
-      "defaultModel": "openrouter/~anthropic/claude-sonnet-latest",
+      "defaultModel": "openrouter/openrouter/auto-beta",
       "providers": {
         "google": {
           "key": "${env:GEMINI_API_KEY}",
@@ -560,6 +560,20 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
               }
             },
             "~google/gemini-pro-latest": {
+              "extraPayload": {
+                "provider": {
+                  "data_collection": "deny"
+                }
+              }
+            },
+            "openrouter/auto-beta": {
+              "extraPayload": {
+                "provider": {
+                  "data_collection": "deny"
+                }
+              }
+            },
+            "openrouter/pareto-code": {
               "extraPayload": {
                 "provider": {
                   "data_collection": "deny"
