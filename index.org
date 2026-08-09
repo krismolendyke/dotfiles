@@ -1154,6 +1154,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #   - keyboard_layout → Dvorak
     #   - grid level 1 & 2 keys → Dvorak positions
     #   - subgrid_mouse_action_keys → Dvorak positions
+    #   - free mode → Dvorak positions
     # ============================================================
 
     app_version: 1.0.0
@@ -1193,7 +1194,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     general_settings:
       automatically_check_for_updates: true
       check_for_preview_releases: false
-      hide_welcome_screen: false
+      hide_welcome_screen: true
       ignore_update_to_version: null
     grid_configs:
     - always_show_subgrid: false
@@ -1439,7 +1440,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     keymaps:
     - entries:
         back click: null
-        back mouse button: Q
+        back mouse button: "'"
         back mouse button (w/o overlay): null
         clear keyboard state: null
         close UI element: Escape
@@ -1457,7 +1458,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
         exit free mode: Escape
         force overlay resize: null
         forward click: null
-        forward mouse button: W
+        forward mouse button: ','
         forward mouse button (w/o overlay): null
         hide overlay: Escape
         hold for back button: null
@@ -1482,30 +1483,30 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
         left mouse button: Space
         left mouse button (w/o overlay): null
         middle click: null
-        middle mouse button: E
+        middle mouse button: D
         middle mouse button (w/o overlay): null
-        move down: K
-        move left: J
-        move right: L
-        move up: I
+        move down: T
+        move left: H
+        move right: N
+        move up: C
         release hold/drag: Escape
         repeat last mouse action: null
         right click: null
-        right mouse button: R
+        right mouse button: P
         right mouse button (w/o overlay): null
         show overlay: CommandLeft tap
         subgrid nudge down:
         - D
-        - K
+        - T
         subgrid nudge left:
         - S
-        - J
+        - H
         subgrid nudge right:
         - F
-        - L
+        - N
         subgrid nudge up:
         - E
-        - I
+        - C
         switch monitor left: ShiftLeft tap
         switch monitor right: ShiftRight tap
         toggle app enabled: null
@@ -1515,11 +1516,11 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
         toggle overlay: null
         toggle overlay lock: null
         undo last key: Backspace
-        wheel down: ','
+        wheel down: K
         wheel down fast: null
-        wheel left: .
+        wheel left: G
         wheel left fast: null
-        wheel right: /
+        wheel right: R
         wheel right fast: null
         wheel step down: null
         wheel step down large: null
@@ -1529,7 +1530,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
         wheel step right large: null
         wheel step up: null
         wheel step up large: null
-        wheel up: M
+        wheel up: L
         wheel up fast: null
       name: mac
     log_level: info
