@@ -1676,7 +1676,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      }
 
 
-     $env.EDITOR = "emacsclient"
+     $env.config.buffer_editor = "emacsclient"
 
 
      # Universal LS_COLORS palette optimized for both Light and Dark terminal backgrounds
