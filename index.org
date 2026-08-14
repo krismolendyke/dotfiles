@@ -1189,7 +1189,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     custom_overlay_scaling: 1.0
     debug_options: {}
     display_input: none
-    event_tap_location: hid_head
+    event_tap_location: session_head
     excluded_input_devices: []
     general_settings:
       automatically_check_for_updates: true
@@ -1442,7 +1442,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
         back click: null
         back mouse button: "'"
         back mouse button (w/o overlay): null
-        clear keyboard state: null
+        clear keyboard state: null  # perhaps ctrl+Escape
         close UI element: Escape
         cycle click count: null
         cycle font: '3'
