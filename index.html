@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-08-15 Sat 09:32 -->
+<!-- 2026-08-16 Sun 07:59 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -2185,6 +2185,7 @@ header-args: :mkdirp yes :tangle ~/.config/ghostty/config
 <pre class="src src-conf"><code><span class="org-comment-delimiter"># </span><span class="org-comment">See https://github.com/ghostty-org/ghostty/discussions/3501#discussioncomment-12102205
 </span><span class="org-variable-name">font-codepoint-map</span> = U+E000-U+E00A,U+E0A0-U+E0A3,U+E0B0-U+E0C8,U+E0CA,U+E0CC-U+E0D7,U+E200-U+E2A9,U+E300-U+E3E3,U+E5FA-U+E6B7,U+E700-U+E8EF,U+EA60-U+EC1E,U+ED00-U+F2FF,U+EE00-U+EE0B,U+F300-U+F381,U+F400-U+F533,U+F0001-U+F1AF0=Symbols Nerd Font
 
+<span class="org-variable-name">adjust-cell-height</span> = 10%
 <span class="org-variable-name">alpha-blending</span> = native
 
 <span class="org-variable-name">background-opacity</span> = 0.80
@@ -2193,10 +2194,12 @@ header-args: :mkdirp yes :tangle ~/.config/ghostty/config
 <span class="org-comment-delimiter"># </span><span class="org-comment">See also shell-integration-features
 </span><span class="org-variable-name">cursor-style</span> = block
 <span class="org-variable-name">cursor-style-blink</span> = true
+<span class="org-variable-name">cursor-click-to-move</span> = true
 
 <span class="org-variable-name">font-family</span> = <span class="org-string">""</span>
 <span class="org-variable-name">font-family</span> = PragmataPro VF Mono Liga
 <span class="org-variable-name">font-size</span> = 20
+<span class="org-variable-name">font-thicken</span> = true
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Font features for PragmataPro
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">Contextual alternate ligatures
@@ -2205,10 +2208,14 @@ header-args: :mkdirp yes :tangle ~/.config/ghostty/config
 </span><span class="org-variable-name">font-feature</span> = liga
 <span class="org-comment-delimiter"># </span><span class="org-comment">Git tree
 </span><span class="org-variable-name">font-feature</span> = ss13
+<span class="org-comment-delimiter"># </span><span class="org-comment">Operational and comparison symbols
+</span><span class="org-variable-name">font-feature</span> = ss14
 <span class="org-comment-delimiter"># </span><span class="org-comment">Serif
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">font-feature = ss16
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">BUG // TODO // HACK tags
 </span><span class="org-variable-name">font-feature</span> = ss18
+<span class="org-comment-delimiter"># </span><span class="org-comment">Slashed zero
+</span><span class="org-variable-name">font-feature</span> = zero
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Backward erase word
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">This binds cmd+h to alt+backspace which will backward erase one word
@@ -2229,9 +2236,14 @@ header-args: :mkdirp yes :tangle ~/.config/ghostty/config
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Quick terminal
 </span><span class="org-variable-name">keybind</span> = global:ctrl+alt+cmd+t=toggle_quick_terminal
+<span class="org-variable-name">quick-terminal-animation-duration</span> = 0.2
+<span class="org-variable-name">quick-terminal-position</span> = top
+<span class="org-variable-name">quick-terminal-screen</span> = mouse
 
 <span class="org-variable-name">macos-option-as-alt</span> = true
-<span class="org-variable-name">macos-titlebar-style</span> = native
+<span class="org-variable-name">macos-titlebar-style</span> = transparent
+
+<span class="org-variable-name">mouse-hide-while-typing</span> = true
 
 <span class="org-variable-name">quit-after-last-window-closed</span> = true
 
@@ -2246,6 +2258,10 @@ header-args: :mkdirp yes :tangle ~/.config/ghostty/config
 
 <span class="org-variable-name">window-height</span> = 48
 <span class="org-variable-name">window-width</span> = 110
+<span class="org-variable-name">window-padding-x</span> = 14
+<span class="org-variable-name">window-padding-y</span> = 12
+<span class="org-variable-name">window-padding-balance</span> = true
+<span class="org-variable-name">window-padding-color</span> = extend
 </code></pre>
 </div>
 </div>
@@ -4714,7 +4730,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-08-14 Fri 11:30</p>
+<p class="date">2026-08-16 Sun 07:57</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.0.91 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>
