@@ -706,6 +706,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       # See https://github.com/ghostty-org/ghostty/discussions/3501#discussioncomment-12102205
       font-codepoint-map = U+E000-U+E00A,U+E0A0-U+E0A3,U+E0B0-U+E0C8,U+E0CA,U+E0CC-U+E0D7,U+E200-U+E2A9,U+E300-U+E3E3,U+E5FA-U+E6B7,U+E700-U+E8EF,U+EA60-U+EC1E,U+ED00-U+F2FF,U+EE00-U+EE0B,U+F300-U+F381,U+F400-U+F533,U+F0001-U+F1AF0=Symbols Nerd Font
 
+      adjust-cell-height = 10%
       alpha-blending = native
 
       background-opacity = 0.80
@@ -714,10 +715,12 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       # See also shell-integration-features
       cursor-style = block
       cursor-style-blink = true
+      cursor-click-to-move = true
 
       font-family = ""
       font-family = PragmataPro VF Mono Liga
       font-size = 20
+      font-thicken = true
 
       # Font features for PragmataPro
       # Contextual alternate ligatures
@@ -726,10 +729,14 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       font-feature = liga
       # Git tree
       font-feature = ss13
+      # Operational and comparison symbols
+      font-feature = ss14
       # Serif
       # font-feature = ss16
       # BUG // TODO // HACK tags
       font-feature = ss18
+      # Slashed zero
+      font-feature = zero
 
       # Backward erase word
       # This binds cmd+h to alt+backspace which will backward erase one word
@@ -750,9 +757,14 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
       # Quick terminal
       keybind = global:ctrl+alt+cmd+t=toggle_quick_terminal
+      quick-terminal-animation-duration = 0.2
+      quick-terminal-position = top
+      quick-terminal-screen = mouse
 
       macos-option-as-alt = true
-      macos-titlebar-style = native
+      macos-titlebar-style = transparent
+
+      mouse-hide-while-typing = true
 
       quit-after-last-window-closed = true
 
@@ -767,6 +779,10 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
       window-height = 48
       window-width = 110
+      window-padding-x = 14
+      window-padding-y = 12
+      window-padding-balance = true
+      window-padding-color = extend
     #+end_src
 
 * [[https://git-scm.com/][Git]]
