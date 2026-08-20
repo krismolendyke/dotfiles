@@ -44,7 +44,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Bash
 
-** =~./bash_profile=
+** =~/.bash_profile=
    :PROPERTIES:
    :header-args: :mkdirp yes :tangle ~/.bash_profile
    :END:
@@ -67,7 +67,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
          # shellcheck source=/dev/null
          source "${f}"
      done
-     unset -v config
+     unset -v f
    #+end_src
 
 ** Configuration
@@ -189,7 +189,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    Install: =brew bundle=
 
    #+begin_src sh
-     if command -v "${HOMEBREW_PREFIX}/bin/bundle" >/dev/null 2>&1; then
+     if command -v brew >/dev/null 2>&1; then
          export HOMEBREW_BREWFILE="${HOME}/.Brewfile"
 
          alias k20e_brew_bundle_dump='brew bundle dump --force --global --verbose && pbcopy < $HOMEBREW_BREWFILE'
@@ -890,7 +890,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      .jj/
      .zed/
-     ~/.bashrc.d/secret/
+     .bashrc.d/secret/
 
      ##########################################################################
      # Below from:                                                            #
@@ -1967,7 +1967,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      k20e_agent_skills_sync() {
          local cache_dir="${XDG_DATA_HOME:-$HOME/.local/share}/agent-skills"
          mkdir -p "$cache_dir"
-         local url name clone_dir skill_file skill_name
+         local url name clone_dir skill_file skill_dir skill_name agent_dir
          for url in "${K20E_AGENT_SKILL_REPOS[@]}"; do
              name="${url##*/}"
              name="${name%.git}"
@@ -1979,19 +1979,16 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
                  jj -R "$clone_dir" new 'main@origin || master@origin' >/dev/null 2>&1
              fi
              while IFS= read -r skill_file; do
-                 skill_name="$(basename "$(dirname "$skill_file")")"
-                 # claude
-                 mkdir -p "$HOME/.claude/skills/$skill_name"
-                 cp "$skill_file" "$HOME/.claude/skills/$skill_name/SKILL.md"
-                 # eca (directory, loaded via "skills" config)
-                 mkdir -p "$HOME/.config/eca/skills/$skill_name"
-                 cp "$skill_file" "$HOME/.config/eca/skills/$skill_name/SKILL.md"
-                 # gemini CLI
-                 mkdir -p "$HOME/.gemini/skills/$skill_name"
-                 cp "$skill_file" "$HOME/.gemini/skills/$skill_name/SKILL.md"
-                 # agy
-                 mkdir -p "$HOME/.gemini/config/skills/$skill_name"
-                 cp "$skill_file" "$HOME/.gemini/config/skills/$skill_name/SKILL.md"
+                 skill_dir="$(dirname "$skill_file")"
+                 skill_name="$(basename "$skill_dir")"
+                 for agent_dir in \
+                     "$HOME/.claude/skills/$skill_name" \
+                     "$HOME/.config/eca/skills/$skill_name" \
+                     "$HOME/.gemini/skills/$skill_name" \
+                     "$HOME/.gemini/config/skills/$skill_name"; do
+                     mkdir -p "$agent_dir"
+                     cp -R "$skill_dir/"* "$agent_dir/"
+                 done
              done < <(find "$clone_dir" -maxdepth 2 -name SKILL.md \
                  -not -path '*/.jj/*' -not -path '*/.git/*')
          done
@@ -2459,8 +2456,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    :PROPERTIES:
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/140-television.bash
    :END:
-
-   This eats =
 
    Modified output of =tv init bash=:
 
