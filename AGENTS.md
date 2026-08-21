@@ -7,7 +7,7 @@ This repository contains literate programming dotfiles created and maintained in
 - **Primary Source of Truth**: All configuration logic resides in `index.org` (and `linux.org` for Linux-specific setups).
 - **Never Modify Tangled Files Directly**: Do not directly edit files generated in home directories (e.g., `~/.bashrc`, `~/.gitconfig`, `~/.config/*`). Always apply edits to `index.org` within the appropriate Org mode header block and source code blocks.
 - **Org Mode Tangling**: Subtrees in `index.org` use properties like `:tangle <path>` and `:mkdirp yes` to define output locations when tangled (`C-c C-v t` in Emacs or via headless command `emacs --batch --eval "(require 'org)" --eval '(org-babel-tangle-file "index.org")'`).
-- **Org Mode HTML Export**: Exporting `index.org` to HTML generates `index.html` for GitHub Pages.
+- **Org Mode HTML Export**: Exporting `index.org` to HTML generates `index.html` for GitHub Pages. Styling/config (Font Awesome, Google Fonts, Tufte CSS, `org.css`) is NOT defined in this repo — it comes from `~/.emacs.d/elisp/k20e-org-html-export.el`, documented at https://krismolendyke.github.io/.emacs.d/#html-export. Do not export with stock `ox-html` alone; it produces unstyled output.
 
 ## Environment & Tooling Context
 
@@ -48,8 +48,12 @@ This repository contains literate programming dotfiles created and maintained in
    - JSON configurations should validate with `jq .`.
 5. **Org HTML Export (Required)**:
    - An `(org-export-dispatch &optional ARG)` to HTML of the `index.org` file (generating `index.html`) MUST accompany any and all edits to `index.org` after the quality gate has been passed and immediately before `jj commit` / describing the revision.
-   - Interactive (Emacs): `C-c C-e h h`
-   - Headless CLI:
+   - Interactive (Emacs): `C-c C-e h h`. An already-running Emacs already loads the custom export config below via `custom.org`'s *Export* section, so nothing extra is needed here.
+   - Headless CLI: MUST load the custom export config from the `~/.emacs.d` repo (`k20e-org-html-export.el`) — it sets `org-html-prefer-user-labels`, the postamble format, and inlines `org.css` plus the Font Awesome/Google Fonts/Tufte CSS head-extras that `index.html` actually ships with. Plain `ox-html` produces unstyled, non-matching output. Requires the `~/.emacs.d` repo to be checked out:
      ```bash
-     emacs --batch --eval "(require 'org)" --eval "(require 'ox-html)" --eval '(find-file "index.org")' --eval '(org-html-export-to-html)'
+     emacs --batch \
+           --directory "$(dirname "$(find ~/.emacs.d/elpa -name htmlize.el | head -1)")" \
+           --load ~/.emacs.d/elisp/k20e-org-html-export.el \
+           --visit index.org \
+           --execute '(org-html-export-to-html)'
      ```
