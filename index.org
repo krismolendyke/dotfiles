@@ -800,7 +800,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   Diff highlighting (need to review if this is necessary now since I've configured [[https://github.com/Wilfred/difftastic][difftastic]] below).
 
   #+begin_src sh
-    [ -e "$(brew --prefix git)/share/git-core/contrib/diff-highlight/" ] && pathmunge "$(brew --prefix git)/share/git-core/contrib/diff-highlight/"
+    [ -e "${HOMEBREW_PREFIX}/opt/git/share/git-core/contrib/diff-highlight/" ] && pathmunge "${HOMEBREW_PREFIX}/opt/git/share/git-core/contrib/diff-highlight/"
   #+end_src
 
 ** =~/.gitconfig=
@@ -891,6 +891,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      .jj/
      .zed/
      .bashrc.d/secret/
+     .claude/
+     .gemini/
+     .eca/
 
      ##########################################################################
      # Below from:                                                            #
@@ -1121,8 +1124,10 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      "$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
 
      [aliases]
+     d = ["diff", "--git"]
      l = ["log", "--limit", "10"]
      rebase-all-onto-trunk = ["rebase", "--source", "roots(trunk()..local_bookmarks)", "--destination", "trunk()"]
+     tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
 
      [git]
      colocate = true
@@ -1136,7 +1141,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      'local_bookmarks'.doc = 'Locally tracked bookmarks, not including trunk'
 
      [revsets]
-     bookmark-advance-to = "@-"
      log = "@ | ancestors(@) | ancestors(immutable_heads().., 2) | trunk()"
 
      [signing]
@@ -1805,7 +1809,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    :END:
 
   #+begin_src sh
-    [ -d "$(brew --prefix postgresql@16)" ] && pathmunge "$(brew --prefix postgresql@16)/bin"
+    [ -d "${HOMEBREW_PREFIX}/opt/postgresql@16" ] && pathmunge "${HOMEBREW_PREFIX}/opt/postgresql@16/bin"
   #+end_src
 
 * Rancher
@@ -1865,7 +1869,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   shell will actually execute.
 
   #+begin_src sh
-    command -v shellcheck >/dev/null 2>&1 && alias k20e_shellcheck='find $HOME/.bash_profile $HOME/.bashrc $K20E_BASHRC_DIR -type f -exec shellcheck '\''{}'\'' \;'
+    command -v shellcheck >/dev/null 2>&1 && alias k20e_shellcheck='find $HOME/.bash_profile $HOME/.bashrc $K20E_BASHRC_DIR -type f -exec shellcheck '\''{}'\'' +'
   #+end_src
 
 ** =~/.shellcheckrc=
