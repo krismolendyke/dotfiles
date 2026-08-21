@@ -8,15 +8,24 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 #+TOC: headlines 2
 
 * Build Configuration Files
+  :PROPERTIES:
+  :CUSTOM_ID: build-configuration-files
+  :END:
 
   Open this Org document in Emacs and [[http://orgmode.org/manual/tangle.html#tangle][tangle]] it (=C-c C-v t=).  Configuration files, e.g., =~/.bashrc=, will be generated.
 
 * Bootstrap
+  :PROPERTIES:
+  :CUSTOM_ID: bootstrap
+  :END:
 
   - Install [[https://brew.sh/][Homebrew]]
   - Install [[https://github.com/Homebrew/homebrew-bundle][Homebrew Bundle]]: =brew bundle=
 
 ** Change Default Shell
+   :PROPERTIES:
+   :CUSTOM_ID: change-default-shell
+   :END:
 
    I prefer =bash= over =zsh=.
 
@@ -30,6 +39,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    #+end_src
 
 ** Set =HOSTNAME=
+   :PROPERTIES:
+   :CUSTOM_ID: set-hostname
+   :END:
 
    #+begin_src sh
      export HOSTNAME='TODO' && \
@@ -37,15 +49,22 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    #+end_src
 
 ** Accessibility
+   :PROPERTIES:
+   :CUSTOM_ID: accessibility
+   :END:
 
    #+begin_src sh
      defaults write com.apple.Accessibility ReduceMotionEnabled -bool true
    #+end_src
 
 * Bash
+  :PROPERTIES:
+  :CUSTOM_ID: bash
+  :END:
 
 ** =~/.bash_profile=
    :PROPERTIES:
+   :CUSTOM_ID: bash-profile
    :header-args: :mkdirp yes :tangle ~/.bash_profile
    :END:
 
@@ -56,6 +75,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** =~/.bashrc=
    :PROPERTIES:
+   :CUSTOM_ID: bashrc
    :header-args: :mkdirp yes :tangle ~/.bashrc
    :END:
 
@@ -72,6 +92,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** Configuration
    :PROPERTIES:
+   :CUSTOM_ID: configuration
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/000-bash.bash
    :END:
 
@@ -158,6 +179,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * [[https://brew.sh/][Homebrew]]
   :PROPERTIES:
+  :CUSTOM_ID: homebrew
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/010-brew.bash
   :END:
 
@@ -185,6 +207,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    #+end_src
 
 ** Homebrew Bundle
+   :PROPERTIES:
+   :CUSTOM_ID: homebrew-bundle
+   :END:
 
    Install: =brew bundle=
 
@@ -199,6 +224,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 *** =~/.Brewfile=
     :PROPERTIES:
+    :CUSTOM_ID: brewfile
     :header-args: :mkdirp yes :tangle ~/.Brewfile
     :END:
 
@@ -317,6 +343,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Secrets
   :PROPERTIES:
+  :CUSTOM_ID: secrets
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/011-secrets.bash
   :END:
 
@@ -356,6 +383,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Functions
   :PROPERTIES:
+  :CUSTOM_ID: functions
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/800-functions.bash
   :END:
 
@@ -406,6 +434,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * 1Password
   :PROPERTIES:
+  :CUSTOM_ID: 1password
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/501-1password.bash
   :END:
 
@@ -420,6 +449,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * AWS CLI
   :PROPERTIES:
+  :CUSTOM_ID: aws-cli
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/440-awscli.bash
   :END:
 
@@ -433,6 +463,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * bat
   :PROPERTIES:
+  :CUSTOM_ID: bat
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/108-bat.bash
   :END:
 
@@ -445,6 +476,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** =~/.config/bat=
    :PROPERTIES:
+   :CUSTOM_ID: config-bat
    :header-args: :mkdirp yes :tangle ~/.config/bat/config
    :END:
 
@@ -479,6 +511,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Carapace
   :PROPERTIES:
+  :CUSTOM_ID: carapace
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/990-carapace.bash
   :END:
 
@@ -492,6 +525,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Claude
   :PROPERTIES:
+  :CUSTOM_ID: claude
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/111-claude.bash
   :END:
 
@@ -512,6 +546,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * [[https://eca.dev/][eca]]
   :PROPERTIES:
+  :CUSTOM_ID: eca
   :header-args: :mkdirp yes :tangle ~/.config/eca/config.json
   :END:
 
@@ -553,6 +588,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Emacs
   :PROPERTIES:
+  :CUSTOM_ID: emacs
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/107-emacs.bash
   :END:
 
@@ -580,6 +616,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * [[https://github.com/eza-community/eza][eza]]
    :PROPERTIES:
+  :CUSTOM_ID: eza
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/130-eza.bash
    :END:
 
@@ -600,6 +637,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** Theme
     :PROPERTIES:
+   :CUSTOM_ID: theme
     :header-args: :mkdirp yes :tangle ~/.config/eza/theme.yml
     :END:
 
@@ -610,9 +648,13 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 * Gemini CLI
+  :PROPERTIES:
+  :CUSTOM_ID: gemini-cli
+  :END:
 
 ** =GEMINI.md=
    :PROPERTIES:
+   :CUSTOM_ID: gemini-md
    :header-args: :mkdirp yes :tangle ~/.gemini/GEMINI.md
    :END:
 
@@ -623,6 +665,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** =settings.json=
    :PROPERTIES:
+   :CUSTOM_ID: settings-json
    :header-args: :mkdirp yes :tangle ~/.gemini/settings.json
    :END:
 
@@ -696,6 +739,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Ghostty
     :PROPERTIES:
+  :CUSTOM_ID: ghostty
     :header-args: :mkdirp yes :tangle ~/.config/ghostty/config
     :END:
 
@@ -787,6 +831,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * [[https://git-scm.com/][Git]]
   :PROPERTIES:
+  :CUSTOM_ID: git
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/105-git.bash
   :END:
 
@@ -805,6 +850,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** =~/.gitconfig=
    :PROPERTIES:
+   :CUSTOM_ID: gitconfig
    :header-args: :mkdirp yes :tangle ~/.gitconfig
    :END:
 
@@ -881,6 +927,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** =~/.gitignore-global=
    :PROPERTIES:
+   :CUSTOM_ID: gitignore-global
    :header-args: :mkdirp yes :tangle ~/.gitignore-global
    :custom_id: gitignore-global
    :END:
@@ -1025,6 +1072,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * [[https://github.com/charmbracelet/glow][Glow]]
   :PROPERTIES:
+  :CUSTOM_ID: glow
   :header-args: :mkdirp yes :tangle ~/Library/Preferences/glow/glow.yml
   :END:
 
@@ -1044,6 +1092,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Go
   :PROPERTIES:
+  :CUSTOM_ID: go
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/106-go.bash
   :END:
 
@@ -1053,6 +1102,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Google Cloud SDK
   :PROPERTIES:
+  :CUSTOM_ID: google-cloud-sdk
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/450-google-cloud-sdk.bash
   :END:
 
@@ -1067,6 +1117,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * =kubectl=, =k=, =kctx=, =kns=, =krew=
   :PROPERTIES:
+  :CUSTOM_ID: kubectl-k-kctx-kns-krew
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/104-kubectl.bash
   :END:
 
@@ -1093,11 +1144,15 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   #+end_src
 
 ** TODO krew
+   :PROPERTIES:
+   :CUSTOM_ID: krew
+   :END:
 
    Install and configure [[https://krew.sigs.k8s.io/docs/user-guide/setup/install/][krew]].
 
 * Jujutsu
   :PROPERTIES:
+  :CUSTOM_ID: jujutsu
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/991-jujutsu.bash
   :END:
 
@@ -1117,6 +1172,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** =~.config/=
    :PROPERTIES:
+   :CUSTOM_ID: config
      :header-args: :mkdirp yes :tangle ~/.config/jj/config.toml
      :END:
 
@@ -1165,6 +1221,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * [[https://mouseless.click/][mouseless]]
   :PROPERTIES:
+  :CUSTOM_ID: mouseless
   :header-args: :mkdirp yes :tangle ~/Library/Application Support/Mouseless/configs/config.yaml
   :END:
 
@@ -1674,9 +1731,13 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   #+end_src
 
 * Nushell
+  :PROPERTIES:
+  :CUSTOM_ID: nushell
+  :END:
 
 ** =config.nu=
    :PROPERTIES:
+   :CUSTOM_ID: config-nu
    :header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/config.nu
    :END:
 
@@ -1765,6 +1826,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * OCaml
    :PROPERTIES:
+  :CUSTOM_ID: ocaml
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/500-opam.bash
    :END:
 
@@ -1776,6 +1838,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    #+end_src
 
 * OpenRouter
+  :PROPERTIES:
+  :CUSTOM_ID: openrouter
+  :END:
 
   The actual secret =OPENROUTER_API_KEY= from https://openrouter.ai/keys lives with my other [[*Secrets][secrets]] in
   =~/.bashrc.d/secret/variables.sh=.
@@ -1790,12 +1855,16 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   key.
 
 * OpenUsage
+  :PROPERTIES:
+  :CUSTOM_ID: openusage
+  :END:
 
   [[https://www.openusage.ai/][openusage]] tracks my OpenRouter spend.  Since OpenUsage falls back to checking the =OPENROUTER_API_KEY= environment
   variable, a local configuration file is not required.
 
 * Playdate
    :PROPERTIES:
+  :CUSTOM_ID: playdate
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/511-playdate.bash
    :END:
 
@@ -1805,6 +1874,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * PostgreSQL
    :PROPERTIES:
+  :CUSTOM_ID: postgresql
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/515-postgresql.bash
    :END:
 
@@ -1814,6 +1884,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Rancher
   :PROPERTIES:
+  :CUSTOM_ID: rancher
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/560-rancher.bash
   :END:
 
@@ -1823,6 +1894,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * =ripgrep=
   :PROPERTIES:
+  :CUSTOM_ID: ripgrep
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/510-ripgrep.bash
   :END:
 
@@ -1832,6 +1904,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** =~/.ripgreprc=
    :PROPERTIES:
+   :CUSTOM_ID: ripgreprc
    :header-args: :mkdirp yes :tangle ~/.ripgreprc
    :END:
 
@@ -1843,6 +1916,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Rust
   :PROPERTIES:
+  :CUSTOM_ID: rust
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/550-rust.bash
   :END:
 
@@ -1862,6 +1936,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * [[https://www.shellcheck.net/][ShellCheck]]
   :PROPERTIES:
+  :CUSTOM_ID: shellcheck
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/300-shellcheck.bash
   :END:
 
@@ -1874,6 +1949,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** =~/.shellcheckrc=
    :PROPERTIES:
+   :CUSTOM_ID: shellcheckrc
    :header-args: :mkdirp yes :tangle ~/.shellcheckrc
    :END:
 
@@ -1883,6 +1959,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    #+end_src
 
 * SSH
+  :PROPERTIES:
+  :CUSTOM_ID: ssh
+  :END:
 
   On macOS, 1Password requires this to work with the [[*Environment][Environment]] properly:
 
@@ -1892,6 +1971,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** =~/.ssh/config=
    :PROPERTIES:
+   :CUSTOM_ID: ssh-config
    :header-args: :mkdirp yes :tangle ~/.ssh/config
    :END:
 
@@ -1908,6 +1988,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** Personal
    :PROPERTIES:
+   :CUSTOM_ID: personal
    :header-args: :mkdirp yes :tangle ~/.ssh/config.d/personal
    :END:
 
@@ -1926,6 +2007,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** Work
    :PROPERTIES:
+   :CUSTOM_ID: work
    :header-args: :mkdirp yes :tangle ~/.ssh/config.d/work
    :END:
 
@@ -1941,6 +2023,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** Environment
    :PROPERTIES:
+   :CUSTOM_ID: environment
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/101-ssh-env.bash
    :END:
 
@@ -1950,6 +2033,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Skills
    :PROPERTIES:
+  :CUSTOM_ID: skills
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/109-skills.bash
    :END:
 
@@ -2007,6 +2091,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Starship
    :PROPERTIES:
+  :CUSTOM_ID: starship
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/999-starship.bash
    :END:
 
@@ -2031,10 +2116,14 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** =~/.config/starship.toml=
     :PROPERTIES:
+   :CUSTOM_ID: config-starship-toml
     :header-args: :mkdirp yes :tangle ~/.config/starship.toml
     :END:
 
 *** https://starship.rs/config/#prompt
+    :PROPERTIES:
+    :CUSTOM_ID: prompt
+    :END:
 
     This section must be first!
 
@@ -2100,6 +2189,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 *** Presets
+    :PROPERTIES:
+    :CUSTOM_ID: presets
+    :END:
 
      Started with =starship preset nerd-font-symbols= and removed stuff I'll never need.
 
@@ -2151,6 +2243,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      #+end_src
 
 *** https://starship.rs/config/#aws
+    :PROPERTIES:
+    :CUSTOM_ID: aws
+    :END:
 
     #+begin_src toml
       [aws]
@@ -2159,6 +2254,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 *** https://starship.rs/config/#battery
+    :PROPERTIES:
+    :CUSTOM_ID: battery
+    :END:
 
     #+begin_src toml
       [battery]
@@ -2166,6 +2264,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 *** https://starship.rs/config/#character
+    :PROPERTIES:
+    :CUSTOM_ID: character
+    :END:
 
     #+begin_src toml
       [character]
@@ -2174,6 +2275,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 *** https://starship.rs/config/#command-duration
+    :PROPERTIES:
+    :CUSTOM_ID: command-duration
+    :END:
 
     #+begin_src toml
       [cmd_duration]
@@ -2181,6 +2285,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 *** https://starship.rs/config/#directory
+    :PROPERTIES:
+    :CUSTOM_ID: directory
+    :END:
 
     #+begin_src toml
       [directory]
@@ -2192,6 +2299,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 *** https://starship.rs/config/#docker-context
+    :PROPERTIES:
+    :CUSTOM_ID: docker-context
+    :END:
 
     #+begin_src toml
       [docker_context]
@@ -2200,6 +2310,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 *** https://starship.rs/config/#go
+    :PROPERTIES:
+    :CUSTOM_ID: config-starship-toml-go
+    :END:
 
     #+begin_src toml
       [golang]
@@ -2208,6 +2321,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 *** https://starship.rs/config/#google-cloud-gcloud
+    :PROPERTIES:
+    :CUSTOM_ID: google-cloud-gcloud
+    :END:
 
     #+begin_src toml
       [gcloud]
@@ -2216,6 +2332,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 *** https://starship.rs/config/#google-cloud-gcloud-prod-warning
+    :PROPERTIES:
+    :CUSTOM_ID: google-cloud-gcloud-prod-warning
+    :END:
 
     #+begin_src toml
       [custom.gcloud_prod]
@@ -2247,6 +2366,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 *** https://starship.rs/config/#git-branch
+    :PROPERTIES:
+    :CUSTOM_ID: git-branch
+    :END:
 
     #+begin_src toml
       [git_branch]
@@ -2264,6 +2386,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 *** https://starship.rs/config/#git-commit
+    :PROPERTIES:
+    :CUSTOM_ID: git-commit
+    :END:
 
     #+begin_src toml
       [git_commit]
@@ -2278,6 +2403,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 *** https://starship.rs/config/#git-status
+    :PROPERTIES:
+    :CUSTOM_ID: git-status
+    :END:
 
     #+begin_src toml
       [git_status]
@@ -2294,6 +2422,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 *** [[https://gitlab.com/lanastara_foss/starship-jj][Jujutsu]]
+    :PROPERTIES:
+    :CUSTOM_ID: config-starship-toml-jujutsu
+    :END:
 
     No official support yet, need to install this tool https://gitlab.com/lanastara_foss/starship-jj before
     configuring.  See also https://github.com/starship/starship/issues/6076.
@@ -2310,6 +2441,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 **** =~/.config/starship-jj/starship-jj.toml=
      :PROPERTIES:
+     :CUSTOM_ID: config-starship-jj-starship-jj-toml
      :header-args: :mkdirp yes :tangle ~/.config/starship-jj/starship-jj.toml
      :END:
 
@@ -2399,6 +2531,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      #+end_src
 
 *** https://starship.rs/config/#kubernetes
+    :PROPERTIES:
+    :CUSTOM_ID: kubernetes
+    :END:
 
      #+begin_src toml
        [kubernetes]
@@ -2408,6 +2543,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      #+end_src
 
 *** Nushell
+    :PROPERTIES:
+    :CUSTOM_ID: config-starship-toml-nushell
+    :END:
 
     Show a 🐚 icon when in Nushell
 
@@ -2421,6 +2559,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 *** https://starship.rs/config/#package-version
+    :PROPERTIES:
+    :CUSTOM_ID: package-version
+    :END:
 
     #+begin_src toml
       [package]
@@ -2429,6 +2570,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 *** https://starship.rs/config/#python
+    :PROPERTIES:
+    :CUSTOM_ID: python
+    :END:
 
     #+begin_src toml
       [python]
@@ -2437,6 +2581,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     #+end_src
 
 *** https://starship.rs/config/#terraform
+    :PROPERTIES:
+    :CUSTOM_ID: config-starship-toml-terraform
+    :END:
 
     #+begin_src toml
       [terraform]
@@ -2445,6 +2592,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * Terraform
   :PROPERTIES:
+  :CUSTOM_ID: terraform
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/525-terraform.bash
   :END:
 
@@ -2453,11 +2601,15 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   #+end_src
 
 * Television
+  :PROPERTIES:
+  :CUSTOM_ID: television
+  :END:
 
   A fuzzy finder https://alexpasmantier.github.io/television/
 
 ** Smart Autocomplete & Shell History
    :PROPERTIES:
+   :CUSTOM_ID: smart-autocomplete-shell-history
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/140-television.bash
    :END:
 
@@ -2499,6 +2651,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** Configuration
    :PROPERTIES:
+   :CUSTOM_ID: television-configuration
    :header-args: :mkdirp yes :tangle ~/.config/television/config.toml
    :END:
 
@@ -2685,6 +2838,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    #+end_src
 
 ** Cable Channels
+   :PROPERTIES:
+   :CUSTOM_ID: cable-channels
+   :END:
 
    Modified from https://github.com/alexpasmantier/television/tree/main/cable/unix
 
@@ -2699,6 +2855,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 *** Bash History
     :PROPERTIES:
+    :CUSTOM_ID: bash-history
     :header-args: :mkdirp yes :tangle ~/.config/television/cable/bash-history.toml
     :END:
 
@@ -2714,6 +2871,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 *** Bash Dotfiles
     :PROPERTIES:
+    :CUSTOM_ID: bash-dotfiles
     :header-args: :mkdirp yes :tangle ~/.config/television/cable/bash-dotfiles.toml
     :END:
 
@@ -2732,6 +2890,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 *** Files
     :PROPERTIES:
+    :CUSTOM_ID: files
     :header-args: :mkdirp yes :tangle ~/.config/television/cable/files.toml
     :END:
 
@@ -2753,6 +2912,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 *** Files With TODO, HACK, etc.
     :PROPERTIES:
+    :CUSTOM_ID: files-with-todo-hack-etc
     :header-args: :mkdirp yes :tangle ~/.config/television/cable/todo.toml
     :END:
 
@@ -2785,6 +2945,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 *** Jujutsu Bookmark
     :PROPERTIES:
+    :CUSTOM_ID: jujutsu-bookmark
     :header-args: :mkdirp yes :tangle ~/.config/television/cable/jj-bookmark.toml
     :END:
 
@@ -2806,6 +2967,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 *** Jujutsu Log
     :PROPERTIES:
+    :CUSTOM_ID: jujutsu-log
     :header-args: :mkdirp yes :tangle ~/.config/television/cable/jj-log.toml
     :END:
 
@@ -2827,6 +2989,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 ** Theme
    :PROPERTIES:
+   :CUSTOM_ID: television-theme
    :header-args: :mkdirp yes :tangle ~/.config/television/themes/default.toml
    :END:
 
@@ -2858,6 +3021,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * =yamllint=
   :PROPERTIES:
+  :CUSTOM_ID: yamllint
   :header-args: :mkdirp yes :tangle ~/.config/yamllint/config
   :END:
 
@@ -2907,6 +3071,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 * =~/.inputrc=
   :PROPERTIES:
+  :CUSTOM_ID: inputrc
   :header-args: :mkdirp yes :tangle ~/.inputrc
   :END:
 
@@ -2924,6 +3089,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   #+end_src
 
 * Footnotes
+  :PROPERTIES:
+  :CUSTOM_ID: footnotes
+  :END:
 
 [fn:1] As of [2025-01-12 Sun] this document is focused on macOS only after I migrated Linux specific configuration to
 [[https://github.com/krismolendyke/dotfiles/blob/master/linux.org][linux.org]].
