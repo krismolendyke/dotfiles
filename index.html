@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-08-20 Thu 20:59 -->
+<!-- 2026-08-22 Sat 09:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1544,7 +1544,11 @@ Aliases:
 <span class="org-builtin">alias</span> ...=<span class="org-string">"cd ../../"</span>
 <span class="org-builtin">alias</span> ....=<span class="org-string">"cd ../../.."</span>
 <span class="org-builtin">alias</span> <span class="org-variable-name">dirs</span>=<span class="org-string">"dirs -v"</span>
-<span class="org-builtin">alias</span> <span class="org-variable-name">r</span>=<span class="org-string">'[ "$(</span><span class="org-sh-quoted-exec">pwd</span><span class="org-string">)" != "$(</span><span class="org-sh-quoted-exec">git rev-parse --show-toplevel</span><span class="org-string">)" ] &amp;&amp; cd "$(</span><span class="org-sh-quoted-exec">git rev-parse --show-toplevel</span><span class="org-string">)"'</span>
+<span class="org-keyword">function</span> <span class="org-function-name">k20e_cd_root</span>() {
+    <span class="org-builtin">local</span> root
+    <span class="org-variable-name">root</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">jj root 2&gt;/dev/null || git rev-parse --show-toplevel 2&gt;/dev/null</span><span class="org-string">)"</span> &amp;&amp; [ -n <span class="org-string">"$root"</span> ] &amp;&amp; [ <span class="org-string">"${PWD}"</span> != <span class="org-string">"$root"</span> ] &amp;&amp; { <span class="org-builtin">cd</span> <span class="org-string">"$root"</span> || <span class="org-keyword">return</span>; }
+}
+<span class="org-builtin">alias</span> <span class="org-variable-name">r</span>=k20e_cd_root
 <span class="org-builtin">alias</span> <span class="org-variable-name">tree</span>=<span class="org-string">"tree -C"</span>
 <span class="org-builtin">alias</span> <span class="org-variable-name">top</span>=<span class="org-string">"top -ocpu -Orsize"</span>
 </code></pre>
@@ -1780,7 +1784,7 @@ Adjust permissions.
 
 <div class="org-src-container">
 <pre class="src src-sh"><code>chmod 0700 <span class="org-string">"${K20E_SECRET_HOME}"</span>
-chmod -Rf 0600 <span class="org-string">"${K20E_SECRET_HOME}"</span>/*
+[ -n <span class="org-string">"$(</span><span class="org-sh-quoted-exec">find "${K20E_SECRET_HOME}" -mindepth 1 -maxdepth 1 2&gt;/dev/null</span><span class="org-string">)"</span> ] &amp;&amp; chmod -Rf 0600 <span class="org-string">"${K20E_SECRET_HOME}"</span>/*
 </code></pre>
 </div>
 </div>
@@ -2432,7 +2436,6 @@ when making sure that the config values are set properly.
 <pre class="example">
 CUSTOM_ID: gitignore-global
 header-args: :mkdirp yes :tangle ~/.gitignore-global
-custom_id: gitignore-global
 </pre>
 
 <div class="org-src-container">
@@ -3308,6 +3311,23 @@ alias ec = emacsclient
 alias g = git
 alias l = ls
 alias ll = ls -l
+
+def --env r [] {
+    let jj_root = (do { ^jj root } | complete)
+    let root = if $jj_root.exit_code == 0 {
+        $jj_root.stdout | str trim
+    } else {
+        let git_root = (do { ^git rev-parse --show-toplevel } | complete)
+        if $git_root.exit_code == 0 {
+            $git_root.stdout | str trim
+        } else {
+            ""
+        }
+    }
+    if ($root | is-not-empty) and ($root != $env.PWD) {
+        cd $root
+    }
+}
 
 
 def 'is-installed' [ app: string ] {
@@ -4924,7 +4944,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-08-20 Thu 20:58</p>
+<p class="date">2026-08-22 Sat 09:13</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>

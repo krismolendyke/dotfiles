@@ -172,7 +172,11 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      alias ...="cd ../../"
      alias ....="cd ../../.."
      alias dirs="dirs -v"
-     alias r='[ "$(pwd)" != "$(git rev-parse --show-toplevel)" ] && cd "$(git rev-parse --show-toplevel)"'
+     function k20e_cd_root() {
+         local root
+         root="$(jj root 2>/dev/null || git rev-parse --show-toplevel 2>/dev/null)" && [ -n "$root" ] && [ "${PWD}" != "$root" ] && { cd "$root" || return; }
+     }
+     alias r=k20e_cd_root
      alias tree="tree -C"
      alias top="top -ocpu -Orsize"
    #+end_src
@@ -378,7 +382,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
   #+begin_src sh
     chmod 0700 "${K20E_SECRET_HOME}"
-    chmod -Rf 0600 "${K20E_SECRET_HOME}"/*
+    [ -n "$(find "${K20E_SECRET_HOME}" -mindepth 1 -maxdepth 1 2>/dev/null)" ] && chmod -Rf 0600 "${K20E_SECRET_HOME}"/*
   #+end_src
 
 * Functions
@@ -929,7 +933,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    :PROPERTIES:
    :CUSTOM_ID: gitignore-global
    :header-args: :mkdirp yes :tangle ~/.gitignore-global
-   :custom_id: gitignore-global
    :END:
 
    #+begin_src gitignore
@@ -1750,6 +1753,23 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      alias g = git
      alias l = ls
      alias ll = ls -l
+
+     def --env r [] {
+         let jj_root = (do { ^jj root } | complete)
+         let root = if $jj_root.exit_code == 0 {
+             $jj_root.stdout | str trim
+         } else {
+             let git_root = (do { ^git rev-parse --show-toplevel } | complete)
+             if $git_root.exit_code == 0 {
+                 $git_root.stdout | str trim
+             } else {
+                 ""
+             }
+         }
+         if ($root | is-not-empty) and ($root != $env.PWD) {
+             cd $root
+         }
+     }
 
 
      def 'is-installed' [ app: string ] {
