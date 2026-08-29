@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-08-23 Sun 08:01 -->
+<!-- 2026-08-29 Sat 08:13 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -3703,7 +3703,7 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/109-skills.bash
 </pre>
 
 <p>
-Synchronizes external agent skills (e.g. <code>danverbraganza/jujutsu-skill</code>) to
+Synchronizes external agent skills (e.g. <code>krismolendyke/jujutsu-skill</code>) to
 each configured agent's skills location. Each skill is kept as a canonical
 <code>jj</code> clone under <code>~/.local/share/agent-skills/&lt;name&gt;/</code> and materialized
 (copied) into all four agents, so one <code>jj git fetch</code> keeps all current.
@@ -3717,24 +3717,26 @@ appending a repo URL.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><code><span class="org-variable-name">K20E_AGENT_SKILL_REPOS</span>=(
-    <span class="org-string">"https://github.com/danverbraganza/jujutsu-skill"</span>
-)
+<pre class="src src-bash"><code> <span class="org-variable-name">K20E_AGENT_SKILL_REPOS</span>=(
+     <span class="org-string">"https://github.com/krismolendyke/jujutsu-skill"</span>
+ )
 
-<span class="org-function-name">k20e_agent_skills_sync</span>() {
+ k20e_agent_skills_sync() {
     <span class="org-builtin">local</span> <span class="org-variable-name">cache_dir</span>=<span class="org-string">"${XDG_DATA_HOME:-$HOME/.local/share}/agent-skills"</span>
     mkdir -p <span class="org-string">"$cache_dir"</span>
-    <span class="org-builtin">local</span> url name clone_dir skill_file skill_dir skill_name agent_dir
+    <span class="org-builtin">local</span> url name clone_dir trunk_info skill_file skill_dir skill_name agent_dir
     <span class="org-keyword">for</span> url<span class="org-keyword"> in</span> <span class="org-string">"${K20E_AGENT_SKILL_REPOS[@]}"</span>; <span class="org-keyword">do</span>
         <span class="org-variable-name">name</span>=<span class="org-string">"${url##*/}"</span>
         <span class="org-variable-name">name</span>=<span class="org-string">"${name%.git}"</span>
         <span class="org-variable-name">clone_dir</span>=<span class="org-string">"$cache_dir/$name"</span>
         <span class="org-keyword">if</span> [[ <span class="org-negation-char">!</span> -d <span class="org-string">"$clone_dir/.jj"</span> &amp;&amp; <span class="org-negation-char">!</span> -d <span class="org-string">"$clone_dir/.git"</span> ]]; <span class="org-keyword">then</span>
-            jj git clone <span class="org-string">"$url"</span> <span class="org-string">"$clone_dir"</span>
+            jj git clone <span class="org-string">"$url"</span> <span class="org-string">"$clone_dir"</span> &gt;/dev/null 2&gt;&amp;1
         <span class="org-keyword">else</span>
-            jj -R <span class="org-string">"$clone_dir"</span> git fetch --remote origin
-            jj -R <span class="org-string">"$clone_dir"</span> new <span class="org-string">'main@origin || master@origin'</span> &gt;/dev/null 2&gt;&amp;1
+            jj -R <span class="org-string">"$clone_dir"</span> git remote set-url origin <span class="org-string">"$url"</span> 2&gt;/dev/null || true
+            jj -R <span class="org-string">"$clone_dir"</span> git fetch --remote origin --quiet
+            jj -R <span class="org-string">"$clone_dir"</span> new <span class="org-string">'trunk()'</span> &gt;/dev/null 2&gt;&amp;1
         <span class="org-keyword">fi</span>
+        <span class="org-variable-name">trunk_info</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">jj -R "$clone_dir" log -r 'trunk(</span><span class="org-string">)' --no-graph -T 'change_id.shortest() ++ ": " ++ description.first_line()' 2&gt;/dev/null)"</span>
         <span class="org-keyword">while</span> <span class="org-variable-name">IFS</span>= read -r skill_file; <span class="org-keyword">do</span>
             <span class="org-variable-name">skill_dir</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">dirname "$skill_file"</span><span class="org-string">)"</span>
             <span class="org-variable-name">skill_name</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">basename "$skill_dir"</span><span class="org-string">)"</span>
@@ -3746,6 +3748,10 @@ appending a repo URL.
                 mkdir -p <span class="org-string">"$agent_dir"</span>
                 cp -R <span class="org-string">"$skill_dir/"</span>* <span class="org-string">"$agent_dir/"</span>
             <span class="org-keyword">done</span>
+            <span class="org-builtin">echo</span> <span class="org-string">"&#10003; Synced $skill_name from $url"</span>
+            <span class="org-keyword">if</span> [[ -n <span class="org-string">"$trunk_info"</span> ]]; <span class="org-keyword">then</span>
+                <span class="org-builtin">echo</span> <span class="org-string">"  Trunk tip: $trunk_info"</span>
+            <span class="org-keyword">fi</span>
         <span class="org-keyword">done</span> &lt; &lt;(find <span class="org-string">"$clone_dir"</span> -maxdepth 2 -name SKILL.md <span class="org-sh-escaped-newline">\</span>
             -not -path <span class="org-string">'*/.jj/*'</span> -not -path <span class="org-string">'*/.git/*'</span>)
     <span class="org-keyword">done</span>
@@ -4945,7 +4951,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-08-23 Sun 08:01</p>
+<p class="date">2026-08-29 Sat 08:12</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>

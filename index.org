@@ -2058,7 +2058,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    :header-args: :mkdirp yes :tangle ~/.bashrc.d/109-skills.bash
    :END:
 
-   Synchronizes external agent skills (e.g. =danverbraganza/jujutsu-skill=) to
+   Synchronizes external agent skills (e.g. =krismolendyke/jujutsu-skill=) to
    each configured agent's skills location. Each skill is kept as a canonical
    =jj= clone under =~/.local/share/agent-skills/<name>/= and materialized
    (copied) into all four agents, so one =jj git fetch= keeps all current.
@@ -2070,38 +2070,44 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
    #+begin_src bash
      K20E_AGENT_SKILL_REPOS=(
-         "https://github.com/danverbraganza/jujutsu-skill"
+         "https://github.com/krismolendyke/jujutsu-skill"
      )
 
      k20e_agent_skills_sync() {
-         local cache_dir="${XDG_DATA_HOME:-$HOME/.local/share}/agent-skills"
-         mkdir -p "$cache_dir"
-         local url name clone_dir skill_file skill_dir skill_name agent_dir
-         for url in "${K20E_AGENT_SKILL_REPOS[@]}"; do
-             name="${url##*/}"
-             name="${name%.git}"
-             clone_dir="$cache_dir/$name"
-             if [[ ! -d "$clone_dir/.jj" && ! -d "$clone_dir/.git" ]]; then
-                 jj git clone "$url" "$clone_dir"
-             else
-                 jj -R "$clone_dir" git fetch --remote origin
-                 jj -R "$clone_dir" new 'main@origin || master@origin' >/dev/null 2>&1
-             fi
-             while IFS= read -r skill_file; do
-                 skill_dir="$(dirname "$skill_file")"
-                 skill_name="$(basename "$skill_dir")"
-                 for agent_dir in \
-                     "$HOME/.claude/skills/$skill_name" \
-                     "$HOME/.config/eca/skills/$skill_name" \
-                     "$HOME/.gemini/skills/$skill_name" \
-                     "$HOME/.gemini/config/skills/$skill_name"; do
-                     mkdir -p "$agent_dir"
-                     cp -R "$skill_dir/"* "$agent_dir/"
-                 done
-             done < <(find "$clone_dir" -maxdepth 2 -name SKILL.md \
-                 -not -path '*/.jj/*' -not -path '*/.git/*')
-         done
-     }
+        local cache_dir="${XDG_DATA_HOME:-$HOME/.local/share}/agent-skills"
+        mkdir -p "$cache_dir"
+        local url name clone_dir trunk_info skill_file skill_dir skill_name agent_dir
+        for url in "${K20E_AGENT_SKILL_REPOS[@]}"; do
+            name="${url##*/}"
+            name="${name%.git}"
+            clone_dir="$cache_dir/$name"
+            if [[ ! -d "$clone_dir/.jj" && ! -d "$clone_dir/.git" ]]; then
+                jj git clone "$url" "$clone_dir" >/dev/null 2>&1
+            else
+                jj -R "$clone_dir" git remote set-url origin "$url" 2>/dev/null || true
+                jj -R "$clone_dir" git fetch --remote origin --quiet
+                jj -R "$clone_dir" new 'trunk()' >/dev/null 2>&1
+            fi
+            trunk_info="$(jj -R "$clone_dir" log -r 'trunk()' --no-graph -T 'change_id.shortest() ++ ": " ++ description.first_line()' 2>/dev/null)"
+            while IFS= read -r skill_file; do
+                skill_dir="$(dirname "$skill_file")"
+                skill_name="$(basename "$skill_dir")"
+                for agent_dir in \
+                    "$HOME/.claude/skills/$skill_name" \
+                    "$HOME/.config/eca/skills/$skill_name" \
+                    "$HOME/.gemini/skills/$skill_name" \
+                    "$HOME/.gemini/config/skills/$skill_name"; do
+                    mkdir -p "$agent_dir"
+                    cp -R "$skill_dir/"* "$agent_dir/"
+                done
+                echo "✓ Synced $skill_name from $url"
+                if [[ -n "$trunk_info" ]]; then
+                    echo "  Trunk tip: $trunk_info"
+                fi
+            done < <(find "$clone_dir" -maxdepth 2 -name SKILL.md \
+                -not -path '*/.jj/*' -not -path '*/.git/*')
+        done
+    }
    #+end_src
 
    Trigger the sync from Emacs: put point in the block below and run =C-c C-c=.
