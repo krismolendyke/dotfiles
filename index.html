@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-08-30 Sun 13:21 -->
+<!-- 2026-08-30 Sun 14:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1223,7 +1223,6 @@ at <a href="https://github.com/krismolendyke/dotfiles/blob/master/index.org">ind
 </ul>
 </li>
 <li><a href="#secrets">Secrets</a></li>
-<li><a href="#functions">Functions</a></li>
 <li><a href="#1password">1Password</a></li>
 <li><a href="#aws-cli">AWS CLI</a></li>
 <li><a href="#bat">bat</a>
@@ -1303,7 +1302,6 @@ at <a href="https://github.com/krismolendyke/dotfiles/blob/master/index.org">ind
 <li><a href="#config-starship-toml"><code>~/.config/starship.toml</code></a></li>
 </ul>
 </li>
-<li><a href="#terraform">Terraform</a></li>
 <li><a href="#television">Television</a>
 <ul>
 <li><a href="#smart-autocomplete-shell-history">Smart Autocomplete &amp; Shell History</a></li>
@@ -1691,7 +1689,6 @@ brew <span class="org-string">"shellcheck"</span>
 brew <span class="org-string">"starship"</span>
 brew <span class="org-string">"subversion"</span>
 brew <span class="org-string">"television"</span>
-brew <span class="org-string">"terminal-notifier"</span>
 brew <span class="org-string">"texi2html"</span>
 brew <span class="org-string">"tree"</span>
 brew <span class="org-string">"uv"</span>
@@ -1782,73 +1779,9 @@ Setup environment, create &amp; source secrets for aliases, functions, <code>PAT
 Adjust permissions.
 </p>
 
-<div class="org-src-container">
-<pre class="src src-sh"><code>chmod 0700 <span class="org-string">"${K20E_SECRET_HOME}"</span>
-[ -n <span class="org-string">"$(</span><span class="org-sh-quoted-exec">find "${K20E_SECRET_HOME}" -mindepth 1 -maxdepth 1 2&gt;/dev/null</span><span class="org-string">)"</span> ] &amp;&amp; chmod -Rf 0600 <span class="org-string">"${K20E_SECRET_HOME}"</span>/*
-</code></pre>
-</div>
-</div>
-</div>
-<div id="outline-container-functions" class="outline-2">
-<h2 id="functions">Functions</h2>
-<div class="outline-text-2" id="text-functions">
-<pre class="example">
-CUSTOM_ID: functions
-header-args: :mkdirp yes :tangle ~/.bashrc.d/800-functions.bash
-</pre>
-
 <p>
-Random functions.
+#+end_src
 </p>
-
-<p>
-Strip exif information out of images like geoloc data:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh"><code><span class="org-keyword">function</span> <span class="org-function-name">k20e_exif_strip</span>() {
-    <span class="org-builtin">local</span> <span class="org-variable-name">path</span>=<span class="org-string">"$1"</span>
-
-    <span class="org-keyword">if</span> [ <span class="org-negation-char">!</span> -e <span class="org-string">"${path}"</span> ]; <span class="org-keyword">then</span>
-        <span class="org-builtin">echo</span> <span class="org-string">"Image at path \"${path}\" does not exist"</span>
-        <span class="org-keyword">return</span>
-    <span class="org-keyword">fi</span>
-
-    <span class="org-builtin">echo</span> <span class="org-string">"Before:"</span>
-    <span class="org-builtin">echo</span>
-    identify -verbose <span class="org-string">"${path}"</span> | rg exif
-
-    mogrify -strip <span class="org-string">"${path}"</span>
-
-    <span class="org-builtin">echo</span>
-    <span class="org-builtin">echo</span> <span class="org-string">"After:"</span>
-    <span class="org-builtin">echo</span>
-    identify -verbose <span class="org-string">"${path}"</span> | rg exif
-}
-</code></pre>
-</div>
-
-<p>
-Use <code>jq</code> to reformat messy JSON files:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh"><code><span class="org-keyword">function</span> <span class="org-function-name">k20e_jqf</span>() {
-    <span class="org-builtin">local</span> <span class="org-variable-name">path</span>=<span class="org-string">"$1"</span>
-    <span class="org-builtin">local</span> tmpPath
-
-    <span class="org-keyword">if</span> [ <span class="org-negation-char">!</span> -e <span class="org-string">"${path}"</span> ]; <span class="org-keyword">then</span>
-        <span class="org-builtin">echo</span> <span class="org-string">"File at path \"${path}\" does not exist"</span>
-        <span class="org-keyword">return</span>
-    <span class="org-keyword">fi</span>
-
-    <span class="org-variable-name">tmpPath</span>=$(<span class="org-sh-quoted-exec">mktemp</span>)
-    cp <span class="org-string">"${path}"</span> <span class="org-string">"${tmpPath}"</span>
-    jq . <span class="org-string">"${tmpPath}"</span> &gt; <span class="org-string">"${path}"</span>
-    rm <span class="org-string">"${tmpPath}"</span>
-}
-</code></pre>
-</div>
 </div>
 </div>
 <div id="outline-container-1password" class="outline-2">
@@ -4418,20 +4351,6 @@ CUSTOM_ID: config-starship-toml-terraform
 </div>
 </div>
 </div>
-<div id="outline-container-terraform" class="outline-2">
-<h2 id="terraform">Terraform</h2>
-<div class="outline-text-2" id="text-terraform">
-<pre class="example">
-CUSTOM_ID: terraform
-header-args: :mkdirp yes :tangle ~/.bashrc.d/525-terraform.bash
-</pre>
-
-<div class="org-src-container">
-<pre class="src src-sh"><code><span class="org-builtin">alias</span> <span class="org-variable-name">terraform</span>=<span class="org-string">"tofu"</span>
-</code></pre>
-</div>
-</div>
-</div>
 <div id="outline-container-television" class="outline-2">
 <h2 id="television">Television</h2>
 <div class="outline-text-2" id="text-television">
@@ -4997,7 +4916,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-08-30 Sun 13:19</p>
+<p class="date">2026-08-30 Sun 14:28</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>

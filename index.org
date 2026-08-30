@@ -303,7 +303,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       brew "starship"
       brew "subversion"
       brew "television"
-      brew "terminal-notifier"
       brew "texi2html"
       brew "tree"
       brew "uv"
@@ -380,60 +379,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
   Adjust permissions.
 
-  #+begin_src sh
-    chmod 0700 "${K20E_SECRET_HOME}"
-    [ -n "$(find "${K20E_SECRET_HOME}" -mindepth 1 -maxdepth 1 2>/dev/null)" ] && chmod -Rf 0600 "${K20E_SECRET_HOME}"/*
-  #+end_src
-
-* Functions
-  :PROPERTIES:
-  :CUSTOM_ID: functions
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/800-functions.bash
-  :END:
-
-  Random functions.
-
-  Strip exif information out of images like geoloc data:
-
-  #+begin_src sh
-    function k20e_exif_strip() {
-        local path="$1"
-
-        if [ ! -e "${path}" ]; then
-            echo "Image at path \"${path}\" does not exist"
-            return
-        fi
-
-        echo "Before:"
-        echo
-        identify -verbose "${path}" | rg exif
-
-        mogrify -strip "${path}"
-
-        echo
-        echo "After:"
-        echo
-        identify -verbose "${path}" | rg exif
-    }
-  #+end_src
-
-  Use =jq= to reformat messy JSON files:
-
-  #+begin_src sh
-    function k20e_jqf() {
-        local path="$1"
-        local tmpPath
-
-        if [ ! -e "${path}" ]; then
-            echo "File at path \"${path}\" does not exist"
-            return
-        fi
-
-        tmpPath=$(mktemp)
-        cp "${path}" "${tmpPath}"
-        jq . "${tmpPath}" > "${path}"
-        rm "${tmpPath}"
-    }
   #+end_src
 
 * 1Password
@@ -2662,16 +2607,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       [terraform]
       format = '[$symbol$workspace]($style) '
     #+end_src
-
-* Terraform
-  :PROPERTIES:
-  :CUSTOM_ID: terraform
-  :header-args: :mkdirp yes :tangle ~/.bashrc.d/525-terraform.bash
-  :END:
-
-  #+begin_src sh
-    alias terraform="tofu"
-  #+end_src
 
 * Television
   :PROPERTIES:
