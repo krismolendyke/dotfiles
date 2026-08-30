@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-08-30 Sun 07:55 -->
+<!-- 2026-08-30 Sun 08:02 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -3334,6 +3334,9 @@ header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/config.nu
 
 alias ec = emacsclient
 alias g = git
+alias j = jj
+alias k = kubectl
+alias c = claude
 alias l = ls
 alias ll = ls -l
 
@@ -3386,6 +3389,11 @@ def cat [...args] {
 
 $env.CARAPACE_BRIDGES = "zsh,fish,bash"
 
+mkdir ($nu.data-dir | path join "vendor/autoload")
+if (is-installed carapace) {
+    carapace _carapace nushell | save -f ($nu.data-dir | path join "vendor/autoload/carapace.nu")
+}
+
 let carapace_aliases = {
     g: "git"
     j: "jj"
@@ -3406,10 +3414,6 @@ def carapace-completer [spans: list&lt;string&gt;] {
     with-env { CARAPACE_LENIENT: "1" } {
         ^carapace $expanded_spans.0 nushell ...$expanded_spans
     } | from json
-}
-
-def --wrapped j [...args] {
-    ^jj ...$args
 }
 
 $env.config.completions.external = {
@@ -4978,7 +4982,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-08-30 Sun 07:54</p>
+<p class="date">2026-08-30 Sun 08:01</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>

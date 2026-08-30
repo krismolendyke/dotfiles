@@ -1776,6 +1776,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      alias ec = emacsclient
      alias g = git
+     alias j = jj
+     alias k = kubectl
+     alias c = claude
      alias l = ls
      alias ll = ls -l
 
@@ -1828,6 +1831,11 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      $env.CARAPACE_BRIDGES = "zsh,fish,bash"
 
+     mkdir ($nu.data-dir | path join "vendor/autoload")
+     if (is-installed carapace) {
+         carapace _carapace nushell | save -f ($nu.data-dir | path join "vendor/autoload/carapace.nu")
+     }
+
      let carapace_aliases = {
          g: "git"
          j: "jj"
@@ -1848,10 +1856,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
          with-env { CARAPACE_LENIENT: "1" } {
              ^carapace $expanded_spans.0 nushell ...$expanded_spans
          } | from json
-     }
-
-     def --wrapped j [...args] {
-         ^jj ...$args
      }
 
      $env.config.completions.external = {
