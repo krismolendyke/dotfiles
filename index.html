@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-08-30 Sun 08:02 -->
+<!-- 2026-08-30 Sun 08:04 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -2139,7 +2139,7 @@ See <a href="https://github.com/eza-community/eza-themes">https://github.com/eza
 </p>
 
 <div class="org-src-container">
-<pre class="src src-yaml"><code>---
+<pre class="src src-yaml"><code><span class="org-comment">---</span>
 </code></pre>
 </div>
 </div>
@@ -2161,8 +2161,8 @@ header-args: :mkdirp yes :tangle ~/.gemini/GEMINI.md
 </pre>
 
 <div class="org-src-container">
-<pre class="src src-markdown"><code>---
-- The user uses `jj` (Jujutsu) for version control, not `git`.
+<pre class="src src-markdown"><code><span class="org-markdown-hr">---</span>
+<span class="org-markdown-list">-</span> The user uses <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">jj</span><span class="org-markdown-markup">`</span> (Jujutsu) for version control, not <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">git</span><span class="org-markdown-markup">`</span>.
 </code></pre>
 </div>
 </div>
@@ -2463,54 +2463,54 @@ header-args: :mkdirp yes :tangle ~/.gitignore-global
 </pre>
 
 <div class="org-src-container">
-<pre class="src src-gitignore"><code># -*- mode: gitignore; -*-
+<pre class="src src-gitignore"><code><span class="org-comment"># -*- mode: gitignore; -*-</span>
 
-.jj/
-.zed/
-.bashrc.d/secret/
-.claude/
-.gemini/
-.eca/
+.jj<span class="org-constant">/</span>
+.zed<span class="org-constant">/</span>
+.bashrc.d<span class="org-constant">/</span>secret<span class="org-constant">/</span>
+.claude<span class="org-constant">/</span>
+.gemini<span class="org-constant">/</span>
+.eca<span class="org-constant">/</span>
 
-##########################################################################
-# Below from:                                                            #
-#                                                                        #
-# https://github.com/github/gitignore/blob/master/Global/Linux.gitignore #
-##########################################################################
+<span class="org-comment">##########################################################################</span>
+<span class="org-comment"># Below from:                                                            #</span>
+<span class="org-comment">#                                                                        #</span>
+<span class="org-comment"># https://github.com/github/gitignore/blob/master/Global/Linux.gitignore #</span>
+<span class="org-comment">##########################################################################</span>
 
-*~
+<span class="org-keyword">*</span>~
 
-# temporary files which can be created if a process still has a handle open of a deleted file
-.fuse_hidden*
+<span class="org-comment"># temporary files which can be created if a process still has a handle open of a deleted file</span>
+.fuse_hidden<span class="org-keyword">*</span>
 
-# KDE directory preferences
+<span class="org-comment"># KDE directory preferences</span>
 .directory
 
-# Linux trash folder which might appear on any partition or disk
-.Trash-*
+<span class="org-comment"># Linux trash folder which might appear on any partition or disk</span>
+.Trash-<span class="org-keyword">*</span>
 
-# .nfs files are created when an open file is removed but is still being accessed
-.nfs*
+<span class="org-comment"># .nfs files are created when an open file is removed but is still being accessed</span>
+.nfs<span class="org-keyword">*</span>
 
 
-##########################################################################
-# Below from:                                                            #
-#                                                                        #
-# https://github.com/github/gitignore/blob/master/Global/macOS.gitignore #
-##########################################################################
+<span class="org-comment">##########################################################################</span>
+<span class="org-comment"># Below from:                                                            #</span>
+<span class="org-comment">#                                                                        #</span>
+<span class="org-comment"># https://github.com/github/gitignore/blob/master/Global/macOS.gitignore #</span>
+<span class="org-comment">##########################################################################</span>
 
 .DS_Store
 .AppleDouble
 .LSOverride
 
-# Icon must end with two \r
+<span class="org-comment"># Icon must end with two \r</span>
 Icon
 
 
-# Thumbnails
-._*
+<span class="org-comment"># Thumbnails</span>
+._<span class="org-keyword">*</span>
 
-# Files that might appear in the root of a volume
+<span class="org-comment"># Files that might appear in the root of a volume</span>
 .DocumentRevisions-V100
 .fseventsd
 .Spotlight-V100
@@ -2518,7 +2518,7 @@ Icon
 .Trashes
 .VolumeIcon.icns
 
-# Directories potentially created on remote AFP share
+<span class="org-comment"># Directories potentially created on remote AFP share</span>
 .AppleDB
 .AppleDesktop
 Network Trash Folder
@@ -2526,78 +2526,78 @@ Temporary Items
 .apdisk
 
 
-##############################################################################
-# Below from:                                                                #
-#                                                                            #
-# https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore #
-##############################################################################
+<span class="org-comment">##############################################################################</span>
+<span class="org-comment"># Below from:                                                                #</span>
+<span class="org-comment">#                                                                            #</span>
+<span class="org-comment"># https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore #</span>
+<span class="org-comment">##############################################################################</span>
 
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+<span class="org-comment"># Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm</span>
+<span class="org-comment"># Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839</span>
 
-# User-specific stuff
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/**/usage.statistics.xml
-.idea/**/dictionaries
-.idea/**/shelf
+<span class="org-comment"># User-specific stuff</span>
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>workspace.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>tasks.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>usage.statistics.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dictionaries
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>shelf
 
-# Generated files
-.idea/**/contentModel.xml
+<span class="org-comment"># Generated files</span>
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>contentModel.xml
 
-# Sensitive or high-churn files
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.local.xml
-.idea/**/sqlDataSources.xml
-.idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
-.idea/**/dbnavigator.xml
+<span class="org-comment"># Sensitive or high-churn files</span>
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dataSources<span class="org-constant">/</span>
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dataSources.ids
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dataSources.local.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>sqlDataSources.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dynamic.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>uiDesigner.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dbnavigator.xml
 
-# Gradle
-.idea/**/gradle.xml
-.idea/**/libraries
+<span class="org-comment"># Gradle</span>
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>gradle.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>libraries
 
-# Gradle and Maven with auto-import
-# When using Gradle or Maven with auto-import, you should exclude module files,
-# since they will be recreated, and may cause churn.  Uncomment if using
-# auto-import.
-.idea/modules.xml
-.idea/*.iml
-.idea/modules
+<span class="org-comment"># Gradle and Maven with auto-import</span>
+<span class="org-comment"># When using Gradle or Maven with auto-import, you should exclude module files,</span>
+<span class="org-comment"># since they will be recreated, and may cause churn.  Uncomment if using</span>
+<span class="org-comment"># auto-import.</span>
+.idea<span class="org-constant">/</span>modules.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">*</span>.iml
+.idea<span class="org-constant">/</span>modules
 
-# CMake
-cmake-build-*/
+<span class="org-comment"># CMake</span>
+cmake-build-<span class="org-keyword">*</span><span class="org-constant">/</span>
 
-# Mongo Explorer plugin
-.idea/**/mongoSettings.xml
+<span class="org-comment"># Mongo Explorer plugin</span>
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>mongoSettings.xml
 
-# File-based project format
-*.iws
+<span class="org-comment"># File-based project format</span>
+<span class="org-keyword">*</span>.iws
 
-# IntelliJ
-out/
+<span class="org-comment"># IntelliJ</span>
+out<span class="org-constant">/</span>
 
-# mpeltonen/sbt-idea plugin
-.idea_modules/
+<span class="org-comment"># mpeltonen/sbt-idea plugin</span>
+.idea_modules<span class="org-constant">/</span>
 
-# JIRA plugin
+<span class="org-comment"># JIRA plugin</span>
 atlassian-ide-plugin.xml
 
-# Cursive Clojure plugin
-.idea/replstate.xml
+<span class="org-comment"># Cursive Clojure plugin</span>
+.idea<span class="org-constant">/</span>replstate.xml
 
-# Crashlytics plugin (for Android Studio and IntelliJ)
+<span class="org-comment"># Crashlytics plugin (for Android Studio and IntelliJ)</span>
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-# Editor-based Rest Client
-.idea/httpRequests
+<span class="org-comment"># Editor-based Rest Client</span>
+.idea<span class="org-constant">/</span>httpRequests
 
-# Android studio 3.1+ serialized cache file
-.idea/caches/build_file_checksums.ser
+<span class="org-comment"># Android studio 3.1+ serialized cache file</span>
+.idea<span class="org-constant">/</span>caches<span class="org-constant">/</span>build_file_checksums.ser
 </code></pre>
 </div>
 </div>
@@ -2612,17 +2612,17 @@ header-args: :mkdirp yes :tangle ~/Library/Preferences/glow/glow.yml
 </pre>
 
 <div class="org-src-container">
-<pre class="src src-yaml"><code>---
-# style name or JSON path (default "auto")
-style: "auto"
-# mouse support (TUI-mode only)
-mouse: false
-# use pager to display markdown
-pager: true
-# word-wrap at width
-width: 120
-# show all files, including hidden and ignored.
-all: false
+<pre class="src src-yaml"><code><span class="org-comment">---</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">style name or JSON path (default "auto")
+</span><span class="org-variable-name">style</span>: <span class="org-string">"auto"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">mouse support (TUI-mode only)
+</span><span class="org-variable-name">mouse</span>: <span class="org-constant">false</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">use pager to display markdown
+</span><span class="org-variable-name">pager</span>: <span class="org-constant">true</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">word-wrap at width
+</span><span class="org-variable-name">width</span>: 120
+<span class="org-comment-delimiter"># </span><span class="org-comment">show all files, including hidden and ignored.
+</span><span class="org-variable-name">all</span>: <span class="org-constant">false</span>
 </code></pre>
 </div>
 </div>
@@ -2806,508 +2806,508 @@ header-args: :mkdirp yes :tangle ~/Library/Application Support/Mouseless/configs
 </pre>
 
 <div class="org-src-container">
-<pre class="src src-yaml"><code># ============================================================
-# Dvorak customizations (everything else is v1.0.0 defaults):
-#   - keyboard_layout → Dvorak
-#   - grid level 1 &amp; 2 keys → Dvorak positions
-#   - subgrid_mouse_action_keys → Dvorak positions
-#   - free mode → Dvorak positions
-# ============================================================
-
-app_version: 1.0.0
-behavior_configs:
-- base_move_speed: 5.0
-  base_wheel_speed: 16.0
-  default_mouse_action: click
-  free_mode_after_move: false
-  free_mode_auto_off_s: 10
-  grid_action_level: subgrid
-  hide_cursor_on_click: false
-  hide_location: bottom_left
-  initial_action_location: system_cursor
-  initial_overlay_monitor: with_mouse
-  mouse_value_cycle_behavior: once
-  move_duration_ms: 100
-  move_real_cursor_with_virtual: false
-  move_speed_multiplier: 3.0
-  movement_easing: 0.2
-  multi_action_timeout_ms: 400
-  name: main_behavior
-  send_escape_after_global_alt_tap__windows: true
-  tap_threshold_ms: 250
-  wheel_easing: 0.3
-  wheel_speed_multiplier: 4.0
-  wheel_step_size: 100.0
-  wheel_step_size_large: 500.0
-classname: AppConfig
-custom_monitor_assignments: []
-custom_mouse_scaling: 1.0
-custom_mouse_screen_offset_scaling: 1.0
-custom_overlay_scaling: 1.0
-debug_options: {}
-display_input: none
-event_tap_location: session_head
-excluded_input_devices: []
-general_settings:
-  automatically_check_for_updates: true
-  check_for_preview_releases: false
-  hide_welcome_screen: true
-  ignore_update_to_version: null
-grid_configs:
-- always_show_subgrid: false
-  grid_defn:
-  - border_width: 0.0
-    callback: build_cell_strings
-    keys: AOEUI DHTNS
-    num_cells_x: 10
-    num_cells_y: 1
-  - border_width: 1.0
-    callback: build_cell_strings
-    keys: "',.PY AOEUI ;QJKX FGCRL DHTNS BMWVZ"
-    num_cells_x: 1
-    num_cells_y: 30
-  - border_width: 0.0
-    callback: apply_strings_and_subgrid_to_cells
-    keys: ''
-    num_cells_x: 2
-    num_cells_y: 1
-  hold_subgrid_key_for_nudge: true
-  name: position_based_columns
-  nudges_per_cell: 4
-  strategy: subgrid
-  subgrid_dims:
+<pre class="src src-yaml"><code><span class="org-comment-delimiter"># </span><span class="org-comment">============================================================
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">Dvorak customizations (everything else is v1.0.0 defaults):
+</span><span class="org-comment-delimiter">#   </span><span class="org-comment">- keyboard_layout &#8594; Dvorak
+</span><span class="org-comment-delimiter">#   </span><span class="org-comment">- grid level 1 &amp; 2 keys &#8594; Dvorak positions
+</span><span class="org-comment-delimiter">#   </span><span class="org-comment">- subgrid_mouse_action_keys &#8594; Dvorak positions
+</span><span class="org-comment-delimiter">#   </span><span class="org-comment">- free mode &#8594; Dvorak positions
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">============================================================
+</span>
+<span class="org-variable-name">app_version</span>: 1.0.0
+<span class="org-variable-name">behavior_configs</span>:
+- <span class="org-variable-name">base_move_speed</span>: 5.0
+  <span class="org-variable-name">base_wheel_speed</span>: 16.0
+  <span class="org-variable-name">default_mouse_action</span>: click
+  <span class="org-variable-name">free_mode_after_move</span>: <span class="org-constant">false</span>
+  <span class="org-variable-name">free_mode_auto_off_s</span>: 10
+  <span class="org-variable-name">grid_action_level</span>: subgrid
+  <span class="org-variable-name">hide_cursor_on_click</span>: <span class="org-constant">false</span>
+  <span class="org-variable-name">hide_location</span>: bottom_left
+  <span class="org-variable-name">initial_action_location</span>: system_cursor
+  <span class="org-variable-name">initial_overlay_monitor</span>: with_mouse
+  <span class="org-variable-name">mouse_value_cycle_behavior</span>: once
+  <span class="org-variable-name">move_duration_ms</span>: 100
+  <span class="org-variable-name">move_real_cursor_with_virtual</span>: <span class="org-constant">false</span>
+  <span class="org-variable-name">move_speed_multiplier</span>: 3.0
+  <span class="org-variable-name">movement_easing</span>: 0.2
+  <span class="org-variable-name">multi_action_timeout_ms</span>: 400
+  <span class="org-variable-name">name</span>: main_behavior
+  <span class="org-variable-name">send_escape_after_global_alt_tap__windows</span>: <span class="org-constant">true</span>
+  <span class="org-variable-name">tap_threshold_ms</span>: 250
+  <span class="org-variable-name">wheel_easing</span>: 0.3
+  <span class="org-variable-name">wheel_speed_multiplier</span>: 4.0
+  <span class="org-variable-name">wheel_step_size</span>: 100.0
+  <span class="org-variable-name">wheel_step_size_large</span>: 500.0
+<span class="org-variable-name">classname</span>: AppConfig
+<span class="org-variable-name">custom_monitor_assignments</span>: []
+<span class="org-variable-name">custom_mouse_scaling</span>: 1.0
+<span class="org-variable-name">custom_mouse_screen_offset_scaling</span>: 1.0
+<span class="org-variable-name">custom_overlay_scaling</span>: 1.0
+<span class="org-variable-name">debug_options</span>: {<span class="org-variable-name">}
+display_input</span>: none
+<span class="org-variable-name">event_tap_location</span>: session_head
+<span class="org-variable-name">excluded_input_devices</span>: []
+<span class="org-variable-name">general_settings</span>:
+  <span class="org-variable-name">automatically_check_for_updates</span>: <span class="org-constant">true</span>
+  <span class="org-variable-name">check_for_preview_releases</span>: <span class="org-constant">false</span>
+  <span class="org-variable-name">hide_welcome_screen</span>: <span class="org-constant">true</span>
+  <span class="org-variable-name">ignore_update_to_version</span>: <span class="org-constant">null</span>
+<span class="org-variable-name">grid_configs</span>:
+- <span class="org-variable-name">always_show_subgrid</span>: <span class="org-constant">false</span>
+  <span class="org-variable-name">grid_defn</span>:
+  - <span class="org-variable-name">border_width</span>: 0.0
+    <span class="org-variable-name">callback</span>: build_cell_strings
+    <span class="org-variable-name">keys</span>: AOEUI DHTNS
+    <span class="org-variable-name">num_cells_x</span>: 10
+    <span class="org-variable-name">num_cells_y</span>: 1
+  - <span class="org-variable-name">border_width</span>: 1.0
+    <span class="org-variable-name">callback</span>: build_cell_strings
+    <span class="org-variable-name">keys</span>: <span class="org-string">"',.PY AOEUI ;QJKX FGCRL DHTNS BMWVZ"</span>
+    <span class="org-variable-name">num_cells_x</span>: 1
+    <span class="org-variable-name">num_cells_y</span>: 30
+  - <span class="org-variable-name">border_width</span>: 0.0
+    <span class="org-variable-name">callback</span>: apply_strings_and_subgrid_to_cells
+    <span class="org-variable-name">keys</span>: <span class="org-string">''</span>
+    <span class="org-variable-name">num_cells_x</span>: 2
+    <span class="org-variable-name">num_cells_y</span>: 1
+  <span class="org-variable-name">hold_subgrid_key_for_nudge</span>: <span class="org-constant">true</span>
+  <span class="org-variable-name">name</span>: position_based_columns
+  <span class="org-variable-name">nudges_per_cell</span>: 4
+  <span class="org-variable-name">strategy</span>: subgrid
+  <span class="org-variable-name">subgrid_dims</span>:
   - 10
-  - 3
-  subgrid_mouse_action_keys: "',.PY AOEUI ;QJKX FGCRL DHTNS BMWVZ"
-keyboard_layout:
-  id: com.apple.keylayout.Dvorak
-  name: Dvorak
-  vk_to_char:
-    0:
+  - <span class="org-variable-name">3
+  subgrid_mouse_action_keys</span>: <span class="org-string">"',.PY AOEUI ;QJKX FGCRL DHTNS BMWVZ"</span>
+<span class="org-variable-name">keyboard_layout</span>:
+  <span class="org-variable-name">id</span>: com.apple.keylayout.Dvorak
+  <span class="org-variable-name">name</span>: Dvorak
+  <span class="org-variable-name">vk_to_char</span>:
+    <span class="org-variable-name">0</span>:
     - a
-    - A
-    1:
+    - <span class="org-variable-name">A
+    1</span>:
     - o
-    - O
-    2:
+    - <span class="org-variable-name">O
+    2</span>:
     - e
-    - E
-    3:
+    - <span class="org-variable-name">E
+    3</span>:
     - u
-    - U
-    4:
+    - <span class="org-variable-name">U
+    4</span>:
     - d
-    - D
-    5:
+    - <span class="org-variable-name">D
+    5</span>:
     - i
-    - I
-    6:
+    - <span class="org-variable-name">I
+    6</span>:
     - ;
-    - ':'
-    7:
+    - <span class="org-string">':'</span>
+    <span class="org-variable-name">7</span>:
     - q
-    - Q
-    8:
+    - <span class="org-variable-name">Q
+    8</span>:
     - j
-    - J
-    9:
+    - <span class="org-variable-name">J
+    9</span>:
     - k
-    - K
-    10:
-    - "\xA7"
-    - "\xB1"
-    11:
+    - <span class="org-variable-name">K
+    10</span>:
+    - <span class="org-string">"\xA7"</span>
+    - <span class="org-string">"\xB1"</span>
+    <span class="org-variable-name">11</span>:
     - x
-    - X
-    12:
-    - ''''
-    - '"'
-    13:
-    - ','
-    - &lt;
-    14:
+    - <span class="org-variable-name">X
+    12</span>:
+    - <span class="org-string">''''</span>
+    - <span class="org-string">'"'</span>
+    <span class="org-variable-name">13</span>:
+    - <span class="org-string">','</span>
+    - <span class="org-variable-name">&lt;
+    14</span>:
     - .
-    - '&gt;'
-    15:
+    - <span class="org-string">'&gt;'</span>
+    <span class="org-variable-name">15</span>:
     - p
-    - P
-    16:
+    - <span class="org-variable-name">P
+    16</span>:
     - f
-    - F
-    17:
-    - y
-    - Y
+    - <span class="org-variable-name">F
+    17</span>:
+    - <span class="org-constant">y</span>
+    - <span class="org-constant">Y</span>
     18:
-    - '1'
-    - '!'
-    19:
-    - '2'
-    - '@'
-    20:
-    - '3'
-    - '#'
-    21:
-    - '4'
-    - $
-    22:
-    - '6'
-    - ^
-    23:
-    - '5'
-    - '%'
-    24:
-    - ']'
-    - '}'
-    25:
-    - '9'
-    - (
-    26:
-    - '7'
-    - '&amp;'
-    27:
-    - '['
-    - '{'
+    - <span class="org-string">'1'</span>
+    - <span class="org-string">'!'</span>
+    <span class="org-variable-name">19</span>:
+    - <span class="org-string">'2'</span>
+    - <span class="org-string">'@'</span>
+    <span class="org-variable-name">20</span>:
+    - <span class="org-string">'3'</span>
+    - <span class="org-string">'#'</span>
+    <span class="org-variable-name">21</span>:
+    - <span class="org-string">'4'</span>
+    - <span class="org-variable-name">$
+    22</span>:
+    - <span class="org-string">'6'</span>
+    - <span class="org-variable-name">^
+    23</span>:
+    - <span class="org-string">'5'</span>
+    - <span class="org-string">'%'</span>
+    <span class="org-variable-name">24</span>:
+    - <span class="org-string">']'</span>
+    - <span class="org-string">'}'</span>
+    <span class="org-variable-name">25</span>:
+    - <span class="org-string">'9'</span>
+    - <span class="org-variable-name">(
+    26</span>:
+    - <span class="org-string">'7'</span>
+    - <span class="org-string">'&amp;'</span>
+    <span class="org-variable-name">27</span>:
+    - <span class="org-string">'['</span>
+    - <span class="org-string">'{'</span>
     28:
-    - '8'
-    - '*'
-    29:
-    - '0'
-    - )
-    30:
-    - '='
-    - +
-    31:
+    - <span class="org-string">'8'</span>
+    - <span class="org-string">'*'</span>
+    <span class="org-variable-name">29</span>:
+    - <span class="org-string">'0'</span>
+    - <span class="org-variable-name">)
+    30</span>:
+    - <span class="org-string">'='</span>
+    - <span class="org-variable-name">+
+    31</span>:
     - r
-    - R
-    32:
+    - <span class="org-variable-name">R
+    32</span>:
     - g
-    - G
-    33:
+    - <span class="org-variable-name">G
+    33</span>:
     - /
-    - '?'
-    34:
+    - <span class="org-string">'?'</span>
+    <span class="org-variable-name">34</span>:
     - c
-    - C
-    35:
+    - <span class="org-variable-name">C
+    35</span>:
     - l
-    - L
-    36: "\r"
-    37:
-    - n
-    - N
+    - <span class="org-variable-name">L
+    36</span>: <span class="org-string">"\r"</span>
+    <span class="org-variable-name">37</span>:
+    - <span class="org-constant">n</span>
+    - <span class="org-constant">N</span>
     38:
     - h
-    - H
-    39:
-    - '-'
-    - _
-    40:
+    - <span class="org-variable-name">H
+    39</span>:
+    - <span class="org-string">'-'</span>
+    - <span class="org-variable-name">_
+    40</span>:
     - t
-    - T
-    41:
+    - <span class="org-variable-name">T
+    41</span>:
     - s
-    - S
-    42:
+    - <span class="org-variable-name">S
+    42</span>:
     - \
-    - '|'
-    43:
+    - <span class="org-string">'|'</span>
+    <span class="org-variable-name">43</span>:
     - w
-    - W
-    44:
+    - <span class="org-variable-name">W
+    44</span>:
     - z
-    - Z
-    45:
+    - <span class="org-variable-name">Z
+    45</span>:
     - b
-    - B
-    46:
+    - <span class="org-variable-name">B
+    46</span>:
     - m
-    - M
-    47:
+    - <span class="org-variable-name">M
+    47</span>:
     - v
-    - V
-    48: "\t"
-    49: ' '
-    50:
-    - '`'
-    - '~'
-    51: "\b"
-    52: "\x03"
-    53: "\e"
-    65: .
-    66:
-    - "\x1D"
-    - '*'
-    67: '*'
-    69: +
-    70:
-    - "\x1C"
-    - +
-    71: "\e"
-    72:
-    - "\x1F"
-    - '='
-    75: /
-    76: "\x03"
-    77:
-    - "\x1E"
-    - /
-    78: '-'
-    81: '='
-    82: '0'
-    83: '1'
-    84: '2'
-    85: '3'
-    86: '4'
-    87: '5'
-    88: '6'
-    89: '7'
-    91: '8'
-    92: '9'
-    96: "\x10"
-    97: "\x10"
-    98: "\x10"
-    99: "\x10"
-    100: "\x10"
-    101: "\x10"
-    102: "\x10"
-    103: "\x10"
-    104: "\x10"
-    105: "\x10"
-    106: "\x10"
-    107: "\x10"
-    108: "\x10"
-    109: "\x10"
-    110: "\x10"
-    111: "\x10"
-    112: "\x10"
-    113: "\x10"
-    114: "\x05"
-    115: "\x01"
-    116: "\v"
-    117: "\x7F"
-    118: "\x10"
-    119: "\x04"
-    120: "\x10"
-    121: "\f"
-    122: "\x10"
-    123: "\x1C"
-    124: "\x1D"
-    125: "\x1F"
-    126: "\x1E"
-keymaps:
-- entries:
-    back click: null
-    back mouse button: "'"
-    back mouse button (w/o overlay): null
-    clear keyboard state: null  # perhaps ctrl+Escape
-    close UI element: Escape
-    cycle click count: null
-    cycle font: '3'
-    cycle font reverse: shift+3
-    cycle grid action level: '2'
-    cycle mouse action type: null
-    cycle mouse button: null
-    decrease overlay opacity: ArrowDown
-    edit config: Tab
-    enter free mode: null
-    execute mouse action: Space
-    execute mouse move: OptionLeft tap
-    exit free mode: Escape
-    force overlay resize: null
-    forward click: null
-    forward mouse button: ','
-    forward mouse button (w/o overlay): null
-    hide overlay: Escape
-    hold for back button: null
-    hold for drag: CommandLeft
-    hold for forward button: null
-    hold for free mode: null
-    hold for middle button: null
-    hold for move: OptionLeft
-    hold for right button: CommandRight
-    hold for speed decrease: A
-    hold for speed increase:
+    - <span class="org-variable-name">V
+    48</span>: <span class="org-string">"\t"</span>
+    <span class="org-variable-name">49</span>: <span class="org-string">' '</span>
+    <span class="org-variable-name">50</span>:
+    - <span class="org-string">'`'</span>
+    - <span class="org-string">'~'</span>
+    <span class="org-variable-name">51</span>: <span class="org-string">"\b"</span>
+    <span class="org-variable-name">52</span>: <span class="org-string">"\x03"</span>
+    <span class="org-variable-name">53</span>: <span class="org-string">"\e"</span>
+    <span class="org-variable-name">65</span>: .
+    <span class="org-variable-name">66</span>:
+    - <span class="org-string">"\x1D"</span>
+    - <span class="org-string">'*'</span>
+    <span class="org-variable-name">67</span>: <span class="org-string">'*'</span>
+    <span class="org-variable-name">69</span>: +
+    <span class="org-variable-name">70</span>:
+    - <span class="org-string">"\x1C"</span>
+    - <span class="org-variable-name">+
+    71</span>: <span class="org-string">"\e"</span>
+    <span class="org-variable-name">72</span>:
+    - <span class="org-string">"\x1F"</span>
+    - <span class="org-string">'='</span>
+    <span class="org-variable-name">75</span>: /
+    <span class="org-variable-name">76</span>: <span class="org-string">"\x03"</span>
+    <span class="org-variable-name">77</span>:
+    - <span class="org-string">"\x1E"</span>
+    - <span class="org-variable-name">/
+    78</span>: <span class="org-string">'-'</span>
+    <span class="org-variable-name">81</span>: <span class="org-string">'='</span>
+    <span class="org-variable-name">82</span>: <span class="org-string">'0'</span>
+    <span class="org-variable-name">83</span>: <span class="org-string">'1'</span>
+    <span class="org-variable-name">84</span>: <span class="org-string">'2'</span>
+    <span class="org-variable-name">85</span>: <span class="org-string">'3'</span>
+    <span class="org-variable-name">86</span>: <span class="org-string">'4'</span>
+    <span class="org-variable-name">87</span>: <span class="org-string">'5'</span>
+    <span class="org-variable-name">88</span>: <span class="org-string">'6'</span>
+    <span class="org-variable-name">89</span>: <span class="org-string">'7'</span>
+    <span class="org-variable-name">91</span>: <span class="org-string">'8'</span>
+    <span class="org-variable-name">92</span>: <span class="org-string">'9'</span>
+    <span class="org-variable-name">96</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">97</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">98</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">99</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">100</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">101</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">102</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">103</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">104</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">105</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">106</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">107</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">108</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">109</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">110</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">111</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">112</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">113</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">114</span>: <span class="org-string">"\x05"</span>
+    <span class="org-variable-name">115</span>: <span class="org-string">"\x01"</span>
+    <span class="org-variable-name">116</span>: <span class="org-string">"\v"</span>
+    <span class="org-variable-name">117</span>: <span class="org-string">"\x7F"</span>
+    <span class="org-variable-name">118</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">119</span>: <span class="org-string">"\x04"</span>
+    <span class="org-variable-name">120</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">121</span>: <span class="org-string">"\f"</span>
+    <span class="org-variable-name">122</span>: <span class="org-string">"\x10"</span>
+    <span class="org-variable-name">123</span>: <span class="org-string">"\x1C"</span>
+    <span class="org-variable-name">124</span>: <span class="org-string">"\x1D"</span>
+    <span class="org-variable-name">125</span>: <span class="org-string">"\x1F"</span>
+    <span class="org-variable-name">126</span>: <span class="org-string">"\x1E"</span>
+<span class="org-variable-name">keymaps</span>:
+- <span class="org-variable-name">entries</span>:
+    <span class="org-variable-name">back click</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">back mouse button</span>: <span class="org-string">"'"</span>
+    <span class="org-variable-name">back mouse button (w/o overlay)</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">clear keyboard state</span>: <span class="org-constant">null</span>  <span class="org-comment-delimiter"># </span><span class="org-comment">perhaps ctrl+Escape
+</span>    <span class="org-variable-name">close UI element</span>: Escape
+    <span class="org-variable-name">cycle click count</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">cycle font</span>: <span class="org-string">'3'</span>
+    <span class="org-variable-name">cycle font reverse</span>: shift+3
+    <span class="org-variable-name">cycle grid action level</span>: <span class="org-string">'2'</span>
+    <span class="org-variable-name">cycle mouse action type</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">cycle mouse button</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">decrease overlay opacity</span>: ArrowDown
+    <span class="org-variable-name">edit config</span>: Tab
+    <span class="org-variable-name">enter free mode</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">execute mouse action</span>: Space
+    <span class="org-variable-name">execute mouse move</span>: OptionLeft tap
+    <span class="org-variable-name">exit free mode</span>: Escape
+    <span class="org-variable-name">force overlay resize</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">forward click</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">forward mouse button</span>: <span class="org-string">','</span>
+    <span class="org-variable-name">forward mouse button (w/o overlay)</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">hide overlay</span>: Escape
+    <span class="org-variable-name">hold for back button</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">hold for drag</span>: CommandLeft
+    <span class="org-variable-name">hold for forward button</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">hold for free mode</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">hold for middle button</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">hold for move</span>: OptionLeft
+    <span class="org-variable-name">hold for right button</span>: CommandRight
+    <span class="org-variable-name">hold for speed decrease</span>: A
+    <span class="org-variable-name">hold for speed increase</span>:
     - S
     - D
-    - F
-    increase overlay opacity: ArrowUp
-    invert colors: null
-    jump to bottom: null
-    jump to left edge: null
-    jump to right edge: null
-    jump to top: null
-    left click: null
-    left mouse button: Space
-    left mouse button (w/o overlay): null
-    middle click: null
-    middle mouse button: D
-    middle mouse button (w/o overlay): null
-    move down: T
-    move left: H
-    move right: N
-    move up: C
-    release hold/drag: Escape
-    repeat last mouse action: null
-    right click: null
-    right mouse button: P
-    right mouse button (w/o overlay): null
-    show overlay: CommandLeft tap
-    subgrid nudge down:
+    - <span class="org-variable-name">F
+    increase overlay opacity</span>: ArrowUp
+    <span class="org-variable-name">invert colors</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">jump to bottom</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">jump to left edge</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">jump to right edge</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">jump to top</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">left click</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">left mouse button</span>: Space
+    <span class="org-variable-name">left mouse button (w/o overlay)</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">middle click</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">middle mouse button</span>: D
+    <span class="org-variable-name">middle mouse button (w/o overlay)</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">move down</span>: T
+    <span class="org-variable-name">move left</span>: H
+    <span class="org-variable-name">move right</span>: <span class="org-constant">N</span>
+    <span class="org-variable-name">move up</span>: C
+    <span class="org-variable-name">release hold/drag</span>: Escape
+    <span class="org-variable-name">repeat last mouse action</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">right click</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">right mouse button</span>: P
+    <span class="org-variable-name">right mouse button (w/o overlay)</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">show overlay</span>: CommandLeft tap
+    <span class="org-variable-name">subgrid nudge down</span>:
     - E
-    - T
-    subgrid nudge left:
+    - <span class="org-variable-name">T
+    subgrid nudge left</span>:
     - O
-    - H
-    subgrid nudge right:
+    - <span class="org-variable-name">H
+    subgrid nudge right</span>:
     - U
-    - N
+    - <span class="org-constant">N</span>
     subgrid nudge up:
     - .
-    - C
-    switch monitor left: ShiftLeft tap
-    switch monitor right: ShiftRight tap
-    toggle app enabled: null
-    toggle continuous mode: null
-    toggle continuous mode until closed: '1'
-    toggle free mode: OptionLeft tap
-    toggle overlay: null
-    toggle overlay lock: null
-    undo last key: Backspace
-    wheel down: K
-    wheel down fast: null
-    wheel left: G
-    wheel left fast: null
-    wheel right: R
-    wheel right fast: null
-    wheel step down: null
-    wheel step down large: null
-    wheel step left: null
-    wheel step left large: null
-    wheel step right: null
-    wheel step right large: null
-    wheel step up: null
-    wheel step up large: null
-    wheel up: L
-    wheel up fast: null
-  name: mac
-log_level: info
-mac_hud_window_level: 1001
-monitor_assignment_mode: auto
-mouse_scaling: auto
-mouse_screen_offset_scaling: auto
-name: ''
-overlay_scaling: auto
-style_configs:
-- always_on_subgrid_rgba:
+    - <span class="org-variable-name">C
+    switch monitor left</span>: ShiftLeft tap
+    <span class="org-variable-name">switch monitor right</span>: ShiftRight tap
+    <span class="org-variable-name">toggle app enabled</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">toggle continuous mode</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">toggle continuous mode until closed</span>: <span class="org-string">'1'</span>
+    <span class="org-variable-name">toggle free mode</span>: OptionLeft tap
+    <span class="org-variable-name">toggle overlay</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">toggle overlay lock</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">undo last key</span>: Backspace
+    <span class="org-variable-name">wheel down</span>: K
+    <span class="org-variable-name">wheel down fast</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">wheel left</span>: G
+    <span class="org-variable-name">wheel left fast</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">wheel right</span>: R
+    <span class="org-variable-name">wheel right fast</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">wheel step down</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">wheel step down large</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">wheel step left</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">wheel step left large</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">wheel step right</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">wheel step right large</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">wheel step up</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">wheel step up large</span>: <span class="org-constant">null</span>
+    <span class="org-variable-name">wheel up</span>: L
+    <span class="org-variable-name">wheel up fast</span>: <span class="org-constant">null</span>
+  <span class="org-variable-name">name</span>: mac
+<span class="org-variable-name">log_level</span>: info
+<span class="org-variable-name">mac_hud_window_level</span>: 1001
+<span class="org-variable-name">monitor_assignment_mode</span>: auto
+<span class="org-variable-name">mouse_scaling</span>: auto
+<span class="org-variable-name">mouse_screen_offset_scaling</span>: auto
+<span class="org-variable-name">name</span>: <span class="org-string">''</span>
+<span class="org-variable-name">overlay_scaling</span>: auto
+<span class="org-variable-name">style_configs</span>:
+- <span class="org-variable-name">always_on_subgrid_rgba</span>:
   - 1.0
   - 1.0
   - 1.0
   - 0.2
-  background_colors:
+  <span class="org-variable-name">background_colors</span>:
   - - 0.49
     - 0.4
     - 0.0
     - 0.35
-  bg_color_block_size: 1
-  bg_color_transforms_level_1:
+  <span class="org-variable-name">bg_color_block_size</span>: 1
+  <span class="org-variable-name">bg_color_transforms_level_1</span>:
   - - hsla_add
     - 0.0
     - 0.0
     - 0.0
     - 0.0
-  bg_color_transforms_level_2:
+  <span class="org-variable-name">bg_color_transforms_level_2</span>:
   - - hsla_add
     - 0.0
     - 0.0
     - 0.0
     - 0.0
-  char_anchor: center
-  char_display: all
-  char_spacing_cell_width_ratio: 0.5
-  char_spacing_font_size_ratio: 0.5
-  char_spacing_strategy: cell_width_relative
-  colorParamInput: none
-  cursor_drag_rgba:
+  <span class="org-variable-name">char_anchor</span>: center
+  <span class="org-variable-name">char_display</span>: all
+  <span class="org-variable-name">char_spacing_cell_width_ratio</span>: 0.5
+  <span class="org-variable-name">char_spacing_font_size_ratio</span>: 0.5
+  <span class="org-variable-name">char_spacing_strategy</span>: cell_width_relative
+  <span class="org-variable-name">colorParamInput</span>: none
+  <span class="org-variable-name">cursor_drag_rgba</span>:
   - 0.0
   - 0.5
   - 1.0
   - 0.7
-  cursor_move_rgba:
+  <span class="org-variable-name">cursor_move_rgba</span>:
   - 0.75
   - 0.41
   - 0.92
   - 0.7
-  cursor_other_rgba:
+  <span class="org-variable-name">cursor_other_rgba</span>:
   - 1.0
   - 1.0
   - 1.0
   - 0.7
-  cursor_rgba:
+  <span class="org-variable-name">cursor_rgba</span>:
   - 0.3
   - 0.42
   - 0.58
   - 0.8
-  cursor_right_button_rgba:
+  <span class="org-variable-name">cursor_right_button_rgba</span>:
   - 0.92
   - 0.32
   - 0.32
   - 0.7
-  cursor_size: 7
-  font_family: 'PragmataProVFLiga-Regular'
-  font_size_multiplier: 0.4
-  font_weight: 700
-  free_mode_indicator_offset_x: 20.0
-  free_mode_indicator_offset_y: 20.0
-  free_mode_indicator_rgba:
+  <span class="org-variable-name">cursor_size</span>: 7
+  <span class="org-variable-name">font_family</span>: <span class="org-string">'PragmataProVFLiga-Regular'</span>
+  <span class="org-variable-name">font_size_multiplier</span>: 0.4
+  <span class="org-variable-name">font_weight</span>: 700
+  <span class="org-variable-name">free_mode_indicator_offset_x</span>: 20.0
+  <span class="org-variable-name">free_mode_indicator_offset_y</span>: 20.0
+  <span class="org-variable-name">free_mode_indicator_rgba</span>:
   - 0.3
   - 0.42
   - 0.58
   - 0.9
-  free_mode_indicator_size: 10
-  free_mode_status_display: both
-  grid_line_style: lines
-  grid_rgba:
+  <span class="org-variable-name">free_mode_indicator_size</span>: 10
+  <span class="org-variable-name">free_mode_status_display</span>: both
+  <span class="org-variable-name">grid_line_style</span>: lines
+  <span class="org-variable-name">grid_rgba</span>:
   - 1.0
   - 1.0
   - 1.0
   - 0.5
-  highlight_animation_ms: 0
-  highlight_rgba:
+  <span class="org-variable-name">highlight_animation_ms</span>: 0
+  <span class="org-variable-name">highlight_rgba</span>:
   - 0.21
   - 0.48
   - 0.95
   - 0.2
-  name: default
-  show_initial_highlight: false
-  subgrid_font_size_multiplier: 1.0
-  subgrid_rgba:
+  <span class="org-variable-name">name</span>: default
+  <span class="org-variable-name">show_initial_highlight</span>: <span class="org-constant">false</span>
+  <span class="org-variable-name">subgrid_font_size_multiplier</span>: 1.0
+  <span class="org-variable-name">subgrid_rgba</span>:
   - 1.0
   - 1.0
   - 1.0
   - 0.5
-  subgrid_text_rgba:
+  <span class="org-variable-name">subgrid_text_rgba</span>:
   - 1.0
   - 1.0
   - 1.0
   - 0.9
-  text_rgba:
+  <span class="org-variable-name">text_rgba</span>:
   - 1.0
   - 1.0
   - 1.0
   - 1.0
-  text_shadow_blur_radius: 3.0
-  text_shadow_offset:
+  <span class="org-variable-name">text_shadow_blur_radius</span>: 3.0
+  <span class="org-variable-name">text_shadow_offset</span>:
   - 0.0
   - 0.0
-  text_shadow_rgba:
+  <span class="org-variable-name">text_shadow_rgba</span>:
   - 0.0
   - 0.0
   - 0.0
   - 1.0
-  text_y_offset: 0.0
-  toast_opacity: 0.5
-  use_bg_color_transforms: false
-  window_opacity: 1.0
+  <span class="org-variable-name">text_y_offset</span>: 0.0
+  <span class="org-variable-name">toast_opacity</span>: 0.5
+  <span class="org-variable-name">use_bg_color_transforms</span>: <span class="org-constant">false</span>
+  <span class="org-variable-name">window_opacity</span>: 1.0
 </code></pre>
 </div>
 </div>
@@ -3328,110 +3328,110 @@ header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/config.nu
 </pre>
 
 <div class="org-src-container">
-<pre class="src src-nu"><code>###########
-# Aliases #
-###########
+<pre class="src src-nu"><code><span class="org-comment">###########</span>
+<span class="org-comment"># Aliases #</span>
+<span class="org-comment">###########</span>
 
-alias ec = emacsclient
-alias g = git
-alias j = jj
-alias k = kubectl
-alias c = claude
-alias l = ls
-alias ll = ls -l
+<span class="org-keyword">alias</span> ec = emacsclient
+<span class="org-keyword">alias</span> g = git
+<span class="org-keyword">alias</span> j = jj
+<span class="org-keyword">alias</span> k = kubectl
+<span class="org-keyword">alias</span> c = claude
+<span class="org-keyword">alias</span> l = ls
+<span class="org-keyword">alias</span> ll = ls -l
 
-def --env r [] {
-    let jj_root = (do { ^jj root } | complete)
-    let root = if $jj_root.exit_code == 0 {
-        $jj_root.stdout | str trim
-    } else {
-        let git_root = (do { ^git rev-parse --show-toplevel } | complete)
-        if $git_root.exit_code == 0 {
-            $git_root.stdout | str trim
-        } else {
-            ""
+<span class="org-keyword">def</span> --env <span class="org-function-name">r</span> [] {
+    <span class="org-keyword">let</span> <span class="org-variable-name">jj_root</span> = (<span class="org-keyword">do</span> { ^jj <span class="org-string">root</span> } | complete)
+    <span class="org-keyword">let</span> <span class="org-variable-name">root</span> = <span class="org-keyword">if</span> <span class="org-misc-punctuation">$</span><span class="org-variable-use">jj_root</span>.exit_code == <span class="org-number">0</span> {
+        <span class="org-misc-punctuation">$</span><span class="org-variable-use">jj_root</span>.stdout | str <span class="org-string">trim</span>
+    } <span class="org-keyword">else</span> {
+        <span class="org-keyword">let</span> <span class="org-variable-name">git_root</span> = (<span class="org-keyword">do</span> { ^git <span class="org-string">rev-parse</span> --show-toplevel } | complete)
+        <span class="org-keyword">if</span> <span class="org-misc-punctuation">$</span><span class="org-variable-use">git_root</span>.exit_code == <span class="org-number">0</span> {
+            <span class="org-misc-punctuation">$</span><span class="org-variable-use">git_root</span>.stdout | str <span class="org-string">trim</span>
+        } <span class="org-keyword">else</span> {
+            <span class="org-string">""</span>
         }
     }
-    if ($root | is-not-empty) and ($root != $env.PWD) {
-        cd $root
+    <span class="org-keyword">if</span> (<span class="org-misc-punctuation">$</span><span class="org-variable-use">root</span> | is-not-empty) and (<span class="org-misc-punctuation">$</span><span class="org-variable-use">root</span> != <span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.PWD) {
+        cd <span class="org-misc-punctuation">$</span><span class="org-variable-use">root</span>
     }
 }
 
 
-def 'is-installed' [ app: string ] {
-  which $app | is-not-empty
+<span class="org-keyword">def</span> <span class="org-string">'is-installed'</span> [ <span class="org-variable-name">app</span>: <span class="org-type">string</span> ] {
+  which <span class="org-misc-punctuation">$</span><span class="org-variable-use">app</span> | is-not-empty
 }
 
 
-$env.config.buffer_editor = "emacsclient"
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.buffer_editor = <span class="org-string">"emacsclient"</span>
 
 
-# Universal LS_COLORS palette optimized for both Light and Dark terminal backgrounds
-$env.LS_COLORS = "di=01;34:ln=01;36:so=01;35:pi=01;33:ex=01;32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+<span class="org-comment"># Universal LS_COLORS palette optimized for both Light and Dark terminal backgrounds</span>
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.LS_COLORS = <span class="org-string">"di=01;34:ln=01;36:so=01;35:pi=01;33:ex=01;32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"</span>
 
 
-#######################
-# Conditional aliases #
-#######################
+<span class="org-comment">#######################</span>
+<span class="org-comment"># Conditional aliases #</span>
+<span class="org-comment">#######################</span>
 
-def cat [...args] {
-  if (is-installed bat) {
-    ^bat --theme auto:system --theme-dark default --theme-light GitHub ...$args
-  } else {
-    ^cat ...$args
+<span class="org-keyword">def</span> <span class="org-function-name">cat</span> [...<span class="org-variable-name">args</span>] {
+  <span class="org-keyword">if</span> (is-installed <span class="org-string">bat</span>) {
+    ^bat --theme <span class="org-string">auto:system</span> --theme-dark <span class="org-string">default</span> --theme-light <span class="org-string">GitHub</span> <span class="org-misc-punctuation">...$</span><span class="org-variable-use">args</span>
+  } <span class="org-keyword">else</span> {
+    ^cat <span class="org-misc-punctuation">...$</span><span class="org-variable-use">args</span>
   }
 }
 
 
-###############
-# Completions #
-###############
+<span class="org-comment">###############</span>
+<span class="org-comment"># Completions #</span>
+<span class="org-comment">###############</span>
 
-$env.CARAPACE_BRIDGES = "zsh,fish,bash"
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.CARAPACE_BRIDGES = <span class="org-string">"zsh,fish,bash"</span>
 
-mkdir ($nu.data-dir | path join "vendor/autoload")
-if (is-installed carapace) {
-    carapace _carapace nushell | save -f ($nu.data-dir | path join "vendor/autoload/carapace.nu")
+mkdir (<span class="org-misc-punctuation">$</span><span class="org-constant">nu</span>.data-dir | path <span class="org-string">join</span> <span class="org-string">"vendor/autoload"</span>)
+<span class="org-keyword">if</span> (is-installed <span class="org-string">carapace</span>) {
+    carapace <span class="org-string">_carapace</span> <span class="org-string">nushell</span> | save -f (<span class="org-misc-punctuation">$</span><span class="org-constant">nu</span>.data-dir | path <span class="org-string">join</span> <span class="org-string">"vendor/autoload/carapace.nu"</span>)
 }
 
-let carapace_aliases = {
-    g: "git"
-    j: "jj"
-    k: "kubectl"
-    c: "claude"
-    ec: "emacsclient"
-    l: "ls"
-    ll: "ls"
+<span class="org-keyword">let</span> <span class="org-variable-name">carapace_aliases</span> = {
+    g: <span class="org-string">"git"</span>
+    j: <span class="org-string">"jj"</span>
+    k: <span class="org-string">"kubectl"</span>
+    c: <span class="org-string">"claude"</span>
+    ec: <span class="org-string">"emacsclient"</span>
+    l: <span class="org-string">"ls"</span>
+    ll: <span class="org-string">"ls"</span>
 }
 
-def carapace-completer [spans: list&lt;string&gt;] {
-    let expanded_spans = if ($spans.0 in $carapace_aliases) {
-        $spans | skip 1 | prepend ($carapace_aliases | get $spans.0)
-    } else {
-        $spans
+<span class="org-keyword">def</span> <span class="org-function-name">carapace-completer</span> [<span class="org-variable-name">spans</span>: <span class="org-builtin">list</span>&lt;<span class="org-type">string</span>&gt;] {
+    <span class="org-keyword">let</span> <span class="org-variable-name">expanded_spans</span> = <span class="org-keyword">if</span> (<span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0 in <span class="org-misc-punctuation">$</span><span class="org-variable-use">carapace_aliases</span>) {
+        <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span> | skip <span class="org-number">1</span> | prepend (<span class="org-misc-punctuation">$</span><span class="org-variable-use">carapace_aliases</span> | get <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>.0)
+    } <span class="org-keyword">else</span> {
+        <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>
     }
 
-    with-env { CARAPACE_LENIENT: "1" } {
-        ^carapace $expanded_spans.0 nushell ...$expanded_spans
-    } | from json
+    with-env { CARAPACE_LENIENT: <span class="org-string">"1"</span> } {
+        ^carapace <span class="org-misc-punctuation">$</span><span class="org-variable-use">expanded_spans</span>.0 <span class="org-string">nushell</span> <span class="org-misc-punctuation">...$</span><span class="org-variable-use">expanded_spans</span>
+    } | from <span class="org-string">json</span>
 }
 
-$env.config.completions.external = {
-    enable: true
-    max_results: 100
-    completer: {|spans| carapace-completer $spans}
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.completions.external = {
+    enable: <span class="org-constant">true</span>
+    max_results: <span class="org-number">100</span>
+    completer: {|<span class="org-variable-name">spans</span>| carapace-completer <span class="org-misc-punctuation">$</span><span class="org-variable-use">spans</span>}
 }
 
 
-############
-# Starship #
-############
+<span class="org-comment">############</span>
+<span class="org-comment"># Starship #</span>
+<span class="org-comment">############</span>
 
-mkdir ($nu.data-dir | path join "vendor/autoload")
-starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+mkdir (<span class="org-misc-punctuation">$</span><span class="org-constant">nu</span>.data-dir | path <span class="org-string">join</span> <span class="org-string">"vendor/autoload"</span>)
+starship <span class="org-string">init</span> <span class="org-string">nu</span> | save -f (<span class="org-misc-punctuation">$</span><span class="org-constant">nu</span>.data-dir | path <span class="org-string">join</span> <span class="org-string">"vendor/autoload/starship.nu"</span>)
 
 
-$env.config.show_banner = "short" # just show startup time
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.show_banner = <span class="org-string">"short"</span> <span class="org-comment"># just show startup time</span>
 </code></pre>
 </div>
 </div>
@@ -4903,44 +4903,44 @@ See <a href="https://yamllint.readthedocs.io/en/stable/configuration.html">https
 </p>
 
 <div class="org-src-container">
-<pre class="src src-yaml"><code>---
+<pre class="src src-yaml"><code><span class="org-comment">---</span>
 
-yaml-files:
-  - '*.yaml'
-  - '*.yml'
-  - '.yamllint'
+<span class="org-variable-name">yaml-files</span>:
+  - <span class="org-string">'*.yaml'</span>
+  - <span class="org-string">'*.yml'</span>
+  - <span class="org-string">'.yamllint'</span>
 
-rules:
-  braces:
-    level: warning
-  brackets: enable
-  colons:
-    level: warning
-  commas: enable
-  comments:
-    level: warning
-  comments-indentation:
-    level: warning
-  document-end: disable
-  document-start:
-    level: warning
-  empty-lines: enable
-  empty-values: disable
-  float-values: disable
-  hyphens: enable
-  indentation: enable
-  key-duplicates: enable
-  key-ordering: disable
-  line-length: disable
-  new-line-at-end-of-file:
-    level: warning
-  new-lines: enable
-  octal-values: disable
-  quoted-strings: disable
-  trailing-spaces:
-    level: warning
-  truthy:
-    level: warning
+<span class="org-variable-name">rules</span>:
+  <span class="org-variable-name">braces</span>:
+    <span class="org-variable-name">level</span>: warning
+  <span class="org-variable-name">brackets</span>: enable
+  <span class="org-variable-name">colons</span>:
+    <span class="org-variable-name">level</span>: warning
+  <span class="org-variable-name">commas</span>: enable
+  <span class="org-variable-name">comments</span>:
+    <span class="org-variable-name">level</span>: warning
+  <span class="org-variable-name">comments-indentation</span>:
+    <span class="org-variable-name">level</span>: warning
+  <span class="org-variable-name">document-end</span>: disable
+  <span class="org-variable-name">document-start</span>:
+    <span class="org-variable-name">level</span>: warning
+  <span class="org-variable-name">empty-lines</span>: enable
+  <span class="org-variable-name">empty-values</span>: disable
+  <span class="org-variable-name">float-values</span>: disable
+  <span class="org-variable-name">hyphens</span>: enable
+  <span class="org-variable-name">indentation</span>: enable
+  <span class="org-variable-name">key-duplicates</span>: enable
+  <span class="org-variable-name">key-ordering</span>: disable
+  <span class="org-variable-name">line-length</span>: disable
+  <span class="org-variable-name">new-line-at-end-of-file</span>:
+    <span class="org-variable-name">level</span>: warning
+  <span class="org-variable-name">new-lines</span>: enable
+  <span class="org-variable-name">octal-values</span>: disable
+  <span class="org-variable-name">quoted-strings</span>: disable
+  <span class="org-variable-name">trailing-spaces</span>:
+    <span class="org-variable-name">level</span>: warning
+  <span class="org-variable-name">truthy</span>:
+    <span class="org-variable-name">level</span>: warning
 </code></pre>
 </div>
 </div>
@@ -4983,7 +4983,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
 <p class="date">2026-08-30 Sun 08:01</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.9)</p>
 </div>
 </body>
 </html>
