@@ -1865,6 +1865,21 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      }
 
 
+     ###############
+     # Keybindings #
+     ###############
+
+     $env.config.keybindings = ($env.config.keybindings | append [
+         {
+             name: emacs_cancel_abort
+             modifier: control
+             keycode: char_g
+             mode: [emacs, vi_insert, vi_normal]
+             event: { send: ctrlc }
+         }
+     ])
+
+
      ############
      # Starship #
      ############
