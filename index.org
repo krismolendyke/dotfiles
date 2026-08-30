@@ -522,9 +522,33 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   https://carapace.sh/ for [[*Bash][Bash]] and [[*Nushell][Nushell]] both.
 
   #+begin_src sh
-    export CARAPACE_BRIDGES='bash'
-    # shellcheck disable=SC1090
-    source <(carapace _carapace bash)
+    if command -v carapace >/dev/null 2>&1; then
+        export CARAPACE_BRIDGES='zsh,fish,bash'
+        # shellcheck disable=SC1090
+        source <(carapace _carapace bash)
+
+        # Bridge common aliases to their underlying carapace completer
+        _carapace_alias_completer() {
+            local alias_name="${COMP_WORDS[0]}"
+            local target=""
+            case "$alias_name" in
+                g) target="git" ;;
+                j) target="jj" ;;
+                k) target="kubectl" ;;
+                c) target="claude" ;;
+            esac
+            if [[ -n "$target" ]]; then
+                COMP_WORDS[0]="$target"
+                local prefix="${COMP_LINE:0:${#alias_name}}"
+                if [[ "$prefix" == "$alias_name" ]]; then
+                    COMP_LINE="${target}${COMP_LINE:${#alias_name}}"
+                    ((COMP_POINT += ${#target} - ${#alias_name}))
+                fi
+            fi
+            _carapace_completer "$@"
+        }
+        complete -o default -o bashdefault -F _carapace_alias_completer g j k c 2>/dev/null || true
+    fi
   #+end_src
 
 * Claude
@@ -843,7 +867,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
   #+begin_src sh
     alias g="git"
-    __git_complete g __git_main
+    type __git_complete >/dev/null 2>&1 && __git_complete g __git_main || true
   #+end_src
 
   Diff highlighting (need to review if this is necessary now since I've configured [[https://github.com/Wilfred/difftastic][difftastic]] below).
@@ -1804,25 +1828,28 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      $env.CARAPACE_BRIDGES = "zsh,fish,bash"
 
+     let carapace_aliases = {
+         g: "git"
+         j: "jj"
+         k: "kubectl"
+         c: "claude"
+         ec: "emacsclient"
+         l: "ls"
+         ll: "ls"
+     }
+
      def carapace-completer [spans: list<string>] {
+         let expanded_spans = if ($spans.0 in $carapace_aliases) {
+             $spans | skip 1 | prepend ($carapace_aliases | get $spans.0)
+         } else {
+             $spans
+         }
+
          with-env { CARAPACE_LENIENT: "1" } {
-             ^carapace $spans.0 nushell ...$spans
+             ^carapace $expanded_spans.0 nushell ...$expanded_spans
          } | from json
      }
 
-     def jj-completer [spans: list<string>] {
-         let cmd_spans = if $spans.0 == "j" { $spans | skip 1 | prepend "jj" } else { $spans }
-         with-env { _CLAP_COMPLETE_INDEX: (($cmd_spans | length) - 1), COMPLETE: "bash" } {
-             ^jj -- ...$cmd_spans
-         } | lines | each {|l| { value: $l } }
-     }
-
-     # jj itself: just attach completer to the extern signature (no execution logic needed, real binary exists)
-     @complete jj-completer
-     extern "jj" []
-
-     # j: needs an actual implementation now, since it's not a real binary — forward args to jj
-     @complete jj-completer
      def --wrapped j [...args] {
          ^jj ...$args
      }
