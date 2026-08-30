@@ -357,28 +357,25 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     mkdir -p "${K20E_SECRET_HOME}"
   #+end_src
 
-  Setup environment, create & source secrets for aliases, functions, =PATH= and environment variables:
+  Setup environment and source secrets:
 
   #+begin_src sh
-    export K20E_SECRET_ALIASES="${K20E_SECRET_HOME}/aliases.sh" && touch -a "${K20E_SECRET_ALIASES}"
-    # shellcheck source=/dev/null
-    source "${K20E_SECRET_ALIASES}"
+    export K20E_SECRET_ENV="${K20E_SECRET_HOME}/secrets.env"
+    touch -a "${K20E_SECRET_ENV}"
 
-    export K20E_SECRET_FUNCTIONS="${K20E_SECRET_HOME}/functions.sh" && touch -a "${K20E_SECRET_FUNCTIONS}"
-    # shellcheck source=/dev/null
-    source "${K20E_SECRET_FUNCTIONS}"
-
-    export K20E_SECRET_PATH="${K20E_SECRET_HOME}/path.sh" && touch -a "${K20E_SECRET_PATH}"
-    # shellcheck source=/dev/null
-    source "${K20E_SECRET_PATH}"
-
-    export K20E_SECRET_VARIABLES="${K20E_SECRET_HOME}/variables.sh" && touch -a "${K20E_SECRET_VARIABLES}"
-    # shellcheck source=/dev/null
-    source "${K20E_SECRET_VARIABLES}"
+    if [ -f "${K20E_SECRET_ENV}" ]; then
+        set -a
+        # shellcheck source=/dev/null
+        source "${K20E_SECRET_ENV}"
+        set +a
+    fi
   #+end_src
 
   Adjust permissions.
 
+  #+begin_src sh
+    chmod 0700 "${K20E_SECRET_HOME}"
+    [ -f "${K20E_SECRET_ENV}" ] && chmod 0600 "${K20E_SECRET_ENV}"
   #+end_src
 
 * 1Password
@@ -1715,6 +1712,47 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    :END:
 
    #+begin_src nu
+     ###############
+     # Environment #
+     ###############
+
+     $env.SSH_AUTH_SOCK = ($env.HOME | path join ".1password/agent.sock")
+     $env.GOPATH = ($env.HOME | path join "code/go")
+     $env.EDITOR = "emacsclient"
+     $env.VISUAL = "emacsclient"
+
+     $env.PATH = (
+         $env.PATH
+         | split row (char esep)
+         | prepend '/opt/homebrew/bin'
+         | prepend '/opt/homebrew/sbin'
+         | prepend '/usr/local/bin'
+         | prepend '/usr/local/sbin'
+         | prepend ($env.HOME | path join '.cargo/bin')
+         | prepend ($env.HOME | path join 'code/go/bin')
+         | prepend ($env.HOME | path join '.local/bin')
+         | prepend ($env.HOME | path join 'bin')
+         | prepend '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin'
+         | uniq
+     )
+
+
+     ###########
+     # Secrets #
+     ###########
+
+     # Load secrets from ~/.bashrc.d/secret/secrets.env
+     let secrets_env = ($env.HOME | path join ".bashrc.d/secret/secrets.env")
+     if ($secrets_env | path exists) {
+         open $secrets_env
+         | lines
+         | where { $in =~ '^[A-Za-z0-9_]+=' }
+         | parse "{key}={value}"
+         | reduce -f {} {|it, acc| $acc | insert $it.key ($it.value | str trim -c '"' | str trim -c "'") }
+         | load-env
+     }
+
+
      ###########
      # Aliases #
      ###########
@@ -1855,11 +1893,11 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   :END:
 
   The actual secret =OPENROUTER_API_KEY= from https://openrouter.ai/keys lives with my other [[*Secrets][secrets]] in
-  =~/.bashrc.d/secret/variables.sh=.
+  =~/.bashrc.d/secret/secrets.env=.
 
   #+begin_src sh :tangle no
     # OpenRouter API Key
-    export OPENROUTER_API_KEY="..."
+    OPENROUTER_API_KEY="..."
   #+end_src
 
   The actual OpenRouter provider/model routing config (which models, privacy/data-collection preferences, etc.) is
@@ -1882,16 +1920,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
   #+begin_src sh
     [ -e "${HOME}/Developer/PlaydateSDK" ] && export PLAYDATE_SDK_PATH="${HOME}/Developer/PlaydateSDK" && pathmunge "${PLAYDATE_SDK_PATH}/bin"
-  #+end_src
-
-* PostgreSQL
-   :PROPERTIES:
-  :CUSTOM_ID: postgresql
-   :header-args: :mkdirp yes :tangle ~/.bashrc.d/515-postgresql.bash
-   :END:
-
-  #+begin_src sh
-    [ -d "${HOMEBREW_PREFIX}/opt/postgresql@16" ] && pathmunge "${HOMEBREW_PREFIX}/opt/postgresql@16/bin"
   #+end_src
 
 * Rancher
@@ -2046,7 +2074,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 * Skills
    :PROPERTIES:
   :CUSTOM_ID: skills
-   :header-args: :mkdirp yes :tangle ~/.bashrc.d/109-skills.bash
    :END:
 
    Synchronizes external agent skills (e.g. =krismolendyke/jujutsu-skill=) to
@@ -2059,52 +2086,69 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    the skill name is taken from the folder holding it. Add a new skill by
    appending a repo URL.
 
+** Standalone CLI (=~/.local/bin/k20e-skills-sync=)
+   :PROPERTIES:
+   :CUSTOM_ID: skills-sync-cli
+   :header-args: :mkdirp yes :tangle ~/.local/bin/k20e-skills-sync :shebang "#!/usr/bin/env bash"
+   :END:
+
    #+begin_src bash
+     set -euo pipefail
+
      K20E_AGENT_SKILL_REPOS=(
          "https://github.com/krismolendyke/jujutsu-skill"
      )
 
+     cache_dir="${XDG_DATA_HOME:-$HOME/.local/share}/agent-skills"
+     mkdir -p "$cache_dir"
+     for url in "${K20E_AGENT_SKILL_REPOS[@]}"; do
+         name="${url##*/}"
+         name="${name%.git}"
+         clone_dir="$cache_dir/$name"
+         if [[ ! -d "$clone_dir/.jj" && ! -d "$clone_dir/.git" ]]; then
+             jj git clone "$url" "$clone_dir" >/dev/null 2>&1
+         else
+             jj -R "$clone_dir" git remote set-url origin "$url" 2>/dev/null || true
+             jj -R "$clone_dir" git fetch --remote origin --quiet
+             jj -R "$clone_dir" new 'trunk()' >/dev/null 2>&1
+         fi
+         trunk_info="$(jj -R "$clone_dir" log -r 'trunk()' --no-graph -T 'change_id.shortest() ++ ": " ++ description.first_line()' 2>/dev/null || true)"
+         while IFS= read -r skill_file; do
+             skill_dir="$(dirname "$skill_file")"
+             skill_name="$(basename "$skill_dir")"
+             for agent_dir in \
+                 "$HOME/.claude/skills/$skill_name" \
+                 "$HOME/.config/eca/skills/$skill_name" \
+                 "$HOME/.gemini/skills/$skill_name" \
+                 "$HOME/.gemini/config/skills/$skill_name"; do
+                 mkdir -p "$agent_dir"
+                 cp -R "$skill_dir/"* "$agent_dir/"
+             done
+             echo "✓ Synced $skill_name from $url"
+             if [[ -n "$trunk_info" ]]; then
+                 echo "  Trunk tip: $trunk_info"
+             fi
+         done < <(find "$clone_dir" -maxdepth 2 -name SKILL.md \
+             -not -path '*/.jj/*' -not -path '*/.git/*')
+     done
+   #+end_src
+
+** Bash Wrapper (=109-skills.bash=)
+   :PROPERTIES:
+   :CUSTOM_ID: skills-bash-wrapper
+   :header-args: :mkdirp yes :tangle ~/.bashrc.d/109-skills.bash
+   :END:
+
+   #+begin_src bash
      k20e_agent_skills_sync() {
-        local cache_dir="${XDG_DATA_HOME:-$HOME/.local/share}/agent-skills"
-        mkdir -p "$cache_dir"
-        local url name clone_dir trunk_info skill_file skill_dir skill_name agent_dir
-        for url in "${K20E_AGENT_SKILL_REPOS[@]}"; do
-            name="${url##*/}"
-            name="${name%.git}"
-            clone_dir="$cache_dir/$name"
-            if [[ ! -d "$clone_dir/.jj" && ! -d "$clone_dir/.git" ]]; then
-                jj git clone "$url" "$clone_dir" >/dev/null 2>&1
-            else
-                jj -R "$clone_dir" git remote set-url origin "$url" 2>/dev/null || true
-                jj -R "$clone_dir" git fetch --remote origin --quiet
-                jj -R "$clone_dir" new 'trunk()' >/dev/null 2>&1
-            fi
-            trunk_info="$(jj -R "$clone_dir" log -r 'trunk()' --no-graph -T 'change_id.shortest() ++ ": " ++ description.first_line()' 2>/dev/null)"
-            while IFS= read -r skill_file; do
-                skill_dir="$(dirname "$skill_file")"
-                skill_name="$(basename "$skill_dir")"
-                for agent_dir in \
-                    "$HOME/.claude/skills/$skill_name" \
-                    "$HOME/.config/eca/skills/$skill_name" \
-                    "$HOME/.gemini/skills/$skill_name" \
-                    "$HOME/.gemini/config/skills/$skill_name"; do
-                    mkdir -p "$agent_dir"
-                    cp -R "$skill_dir/"* "$agent_dir/"
-                done
-                echo "✓ Synced $skill_name from $url"
-                if [[ -n "$trunk_info" ]]; then
-                    echo "  Trunk tip: $trunk_info"
-                fi
-            done < <(find "$clone_dir" -maxdepth 2 -name SKILL.md \
-                -not -path '*/.jj/*' -not -path '*/.git/*')
-        done
-    }
+         k20e-skills-sync "$@"
+     }
    #+end_src
 
    Trigger the sync from Emacs: put point in the block below and run =C-c C-c=.
 
    #+begin_src bash :tangle no :results none
-     k20e_agent_skills_sync
+     k20e-skills-sync
    #+end_src
 
 * Starship

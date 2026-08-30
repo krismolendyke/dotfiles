@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-08-30 Sun 14:28 -->
+<!-- 2026-08-31 Mon 10:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1275,7 +1275,6 @@ at <a href="https://github.com/krismolendyke/dotfiles/blob/master/index.org">ind
 <li><a href="#openrouter">OpenRouter</a></li>
 <li><a href="#openusage">OpenUsage</a></li>
 <li><a href="#playdate">Playdate</a></li>
-<li><a href="#postgresql">PostgreSQL</a></li>
 <li><a href="#rancher">Rancher</a></li>
 <li><a href="#ripgrep"><code>ripgrep</code></a>
 <ul>
@@ -1296,7 +1295,12 @@ at <a href="https://github.com/krismolendyke/dotfiles/blob/master/index.org">ind
 <li><a href="#environment">Environment</a></li>
 </ul>
 </li>
-<li><a href="#skills">Skills</a></li>
+<li><a href="#skills">Skills</a>
+<ul>
+<li><a href="#skills-sync-cli">Standalone CLI (<code>~/.local/bin/k20e-skills-sync</code>)</a></li>
+<li><a href="#skills-bash-wrapper">Bash Wrapper (<code>109-skills.bash</code>)</a></li>
+</ul>
+</li>
 <li><a href="#starship">Starship</a>
 <ul>
 <li><a href="#config-starship-toml"><code>~/.config/starship.toml</code></a></li>
@@ -1753,25 +1757,19 @@ mkdir -p <span class="org-string">"${K20E_SECRET_HOME}"</span>
 </div>
 
 <p>
-Setup environment, create &amp; source secrets for aliases, functions, <code>PATH</code> and environment variables:
+Setup environment and source secrets:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><code><span class="org-builtin">export</span> <span class="org-variable-name">K20E_SECRET_ALIASES</span>=<span class="org-string">"${K20E_SECRET_HOME}/aliases.sh"</span> &amp;&amp; touch -a <span class="org-string">"${K20E_SECRET_ALIASES}"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
-</span><span class="org-builtin">source</span> <span class="org-string">"${K20E_SECRET_ALIASES}"</span>
+<pre class="src src-sh"><code><span class="org-builtin">export</span> <span class="org-variable-name">K20E_SECRET_ENV</span>=<span class="org-string">"${K20E_SECRET_HOME}/secrets.env"</span>
+touch -a <span class="org-string">"${K20E_SECRET_ENV}"</span>
 
-<span class="org-builtin">export</span> <span class="org-variable-name">K20E_SECRET_FUNCTIONS</span>=<span class="org-string">"${K20E_SECRET_HOME}/functions.sh"</span> &amp;&amp; touch -a <span class="org-string">"${K20E_SECRET_FUNCTIONS}"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
-</span><span class="org-builtin">source</span> <span class="org-string">"${K20E_SECRET_FUNCTIONS}"</span>
-
-<span class="org-builtin">export</span> <span class="org-variable-name">K20E_SECRET_PATH</span>=<span class="org-string">"${K20E_SECRET_HOME}/path.sh"</span> &amp;&amp; touch -a <span class="org-string">"${K20E_SECRET_PATH}"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
-</span><span class="org-builtin">source</span> <span class="org-string">"${K20E_SECRET_PATH}"</span>
-
-<span class="org-builtin">export</span> <span class="org-variable-name">K20E_SECRET_VARIABLES</span>=<span class="org-string">"${K20E_SECRET_HOME}/variables.sh"</span> &amp;&amp; touch -a <span class="org-string">"${K20E_SECRET_VARIABLES}"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
-</span><span class="org-builtin">source</span> <span class="org-string">"${K20E_SECRET_VARIABLES}"</span>
+<span class="org-keyword">if</span> [ -f <span class="org-string">"${K20E_SECRET_ENV}"</span> ]; <span class="org-keyword">then</span>
+    <span class="org-builtin">set</span> -a
+    <span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
+</span>    <span class="org-builtin">source</span> <span class="org-string">"${K20E_SECRET_ENV}"</span>
+    <span class="org-builtin">set</span> +a
+<span class="org-keyword">fi</span>
 </code></pre>
 </div>
 
@@ -1779,9 +1777,11 @@ Setup environment, create &amp; source secrets for aliases, functions, <code>PAT
 Adjust permissions.
 </p>
 
-<p>
-#+end_src
-</p>
+<div class="org-src-container">
+<pre class="src src-sh"><code>chmod 0700 <span class="org-string">"${K20E_SECRET_HOME}"</span>
+[ -f <span class="org-string">"${K20E_SECRET_ENV}"</span> ] &amp;&amp; chmod 0600 <span class="org-string">"${K20E_SECRET_ENV}"</span>
+</code></pre>
+</div>
 </div>
 </div>
 <div id="outline-container-1password" class="outline-2">
@@ -3261,7 +3261,48 @@ header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/config.nu
 </pre>
 
 <div class="org-src-container">
-<pre class="src src-nu"><code>###########
+<pre class="src src-nu"><code>###############
+# Environment #
+###############
+
+$env.SSH_AUTH_SOCK = ($env.HOME | path join ".1password/agent.sock")
+$env.GOPATH = ($env.HOME | path join "code/go")
+$env.EDITOR = "emacsclient"
+$env.VISUAL = "emacsclient"
+
+$env.PATH = (
+    $env.PATH
+    | split row (char esep)
+    | prepend '/opt/homebrew/bin'
+    | prepend '/opt/homebrew/sbin'
+    | prepend '/usr/local/bin'
+    | prepend '/usr/local/sbin'
+    | prepend ($env.HOME | path join '.cargo/bin')
+    | prepend ($env.HOME | path join 'code/go/bin')
+    | prepend ($env.HOME | path join '.local/bin')
+    | prepend ($env.HOME | path join 'bin')
+    | prepend '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin'
+    | uniq
+)
+
+
+###########
+# Secrets #
+###########
+
+# Load secrets from ~/.bashrc.d/secret/secrets.env
+let secrets_env = ($env.HOME | path join ".bashrc.d/secret/secrets.env")
+if ($secrets_env | path exists) {
+    open $secrets_env
+    | lines
+    | where { $in =~ '^[A-Za-z0-9_]+=' }
+    | parse "{key}={value}"
+    | reduce -f {} {|it, acc| $acc | insert $it.key ($it.value | str trim -c '"' | str trim -c "'") }
+    | load-env
+}
+
+
+###########
 # Aliases #
 ###########
 
@@ -3413,12 +3454,12 @@ CUSTOM_ID: openrouter
 
 <p>
 The actual secret <code>OPENROUTER_API_KEY</code> from <a href="https://openrouter.ai/keys">https://openrouter.ai/keys</a> lives with my other <a href="#secrets">secrets</a> in
-<code>~/.bashrc.d/secret/variables.sh</code>.
+<code>~/.bashrc.d/secret/secrets.env</code>.
 </p>
 
 <div class="org-src-container">
 <pre class="src src-sh"><code><span class="org-comment-delimiter"># </span><span class="org-comment">OpenRouter API Key
-</span><span class="org-builtin">export</span> <span class="org-variable-name">OPENROUTER_API_KEY</span>=<span class="org-string">"..."</span>
+</span><span class="org-variable-name">OPENROUTER_API_KEY</span>=<span class="org-string">"..."</span>
 </code></pre>
 </div>
 
@@ -3452,20 +3493,6 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/511-playdate.bash
 
 <div class="org-src-container">
 <pre class="src src-sh"><code>[ -e <span class="org-string">"${HOME}/Developer/PlaydateSDK"</span> ] &amp;&amp; <span class="org-builtin">export</span> <span class="org-variable-name">PLAYDATE_SDK_PATH</span>=<span class="org-string">"${HOME}/Developer/PlaydateSDK"</span> &amp;&amp; pathmunge <span class="org-string">"${PLAYDATE_SDK_PATH}/bin"</span>
-</code></pre>
-</div>
-</div>
-</div>
-<div id="outline-container-postgresql" class="outline-2">
-<h2 id="postgresql">PostgreSQL</h2>
-<div class="outline-text-2" id="text-postgresql">
-<pre class="example">
-CUSTOM_ID: postgresql
-header-args: :mkdirp yes :tangle ~/.bashrc.d/515-postgresql.bash
-</pre>
-
-<div class="org-src-container">
-<pre class="src src-sh"><code>[ -d <span class="org-string">"${HOMEBREW_PREFIX}/opt/postgresql@16"</span> ] &amp;&amp; pathmunge <span class="org-string">"${HOMEBREW_PREFIX}/opt/postgresql@16/bin"</span>
 </code></pre>
 </div>
 </div>
@@ -3678,7 +3705,6 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/101-ssh-env.bash
 <div class="outline-text-2" id="text-skills">
 <pre class="example">
 CUSTOM_ID: skills
-header-args: :mkdirp yes :tangle ~/.bashrc.d/109-skills.bash
 </pre>
 
 <p>
@@ -3694,46 +3720,69 @@ level deep) is installed to all four agents (claude, eca, gemini, and agy);
 the skill name is taken from the folder holding it. Add a new skill by
 appending a repo URL.
 </p>
+</div>
+<div id="outline-container-skills-sync-cli" class="outline-3">
+<h3 id="skills-sync-cli">Standalone CLI (<code>~/.local/bin/k20e-skills-sync</code>)</h3>
+<div class="outline-text-3" id="text-skills-sync-cli">
+<pre class="example">
+CUSTOM_ID: skills-sync-cli
+header-args: :mkdirp yes :tangle ~/.local/bin/k20e-skills-sync :shebang "#!/usr/bin/env bash"
+</pre>
 
 <div class="org-src-container">
-<pre class="src src-bash"><code> <span class="org-variable-name">K20E_AGENT_SKILL_REPOS</span>=(
-     <span class="org-string">"https://github.com/krismolendyke/jujutsu-skill"</span>
- )
+<pre class="src src-bash"><code><span class="org-builtin">set</span> -euo pipefail
 
- k20e_agent_skills_sync() {
-    <span class="org-builtin">local</span> <span class="org-variable-name">cache_dir</span>=<span class="org-string">"${XDG_DATA_HOME:-$HOME/.local/share}/agent-skills"</span>
-    mkdir -p <span class="org-string">"$cache_dir"</span>
-    <span class="org-builtin">local</span> url name clone_dir trunk_info skill_file skill_dir skill_name agent_dir
-    <span class="org-keyword">for</span> url<span class="org-keyword"> in</span> <span class="org-string">"${K20E_AGENT_SKILL_REPOS[@]}"</span>; <span class="org-keyword">do</span>
-        <span class="org-variable-name">name</span>=<span class="org-string">"${url##*/}"</span>
-        <span class="org-variable-name">name</span>=<span class="org-string">"${name%.git}"</span>
-        <span class="org-variable-name">clone_dir</span>=<span class="org-string">"$cache_dir/$name"</span>
-        <span class="org-keyword">if</span> [[ <span class="org-negation-char">!</span> -d <span class="org-string">"$clone_dir/.jj"</span> &amp;&amp; <span class="org-negation-char">!</span> -d <span class="org-string">"$clone_dir/.git"</span> ]]; <span class="org-keyword">then</span>
-            jj git clone <span class="org-string">"$url"</span> <span class="org-string">"$clone_dir"</span> &gt;/dev/null 2&gt;&amp;1
-        <span class="org-keyword">else</span>
-            jj -R <span class="org-string">"$clone_dir"</span> git remote set-url origin <span class="org-string">"$url"</span> 2&gt;/dev/null || true
-            jj -R <span class="org-string">"$clone_dir"</span> git fetch --remote origin --quiet
-            jj -R <span class="org-string">"$clone_dir"</span> new <span class="org-string">'trunk()'</span> &gt;/dev/null 2&gt;&amp;1
+<span class="org-variable-name">K20E_AGENT_SKILL_REPOS</span>=(
+    <span class="org-string">"https://github.com/krismolendyke/jujutsu-skill"</span>
+)
+
+<span class="org-variable-name">cache_dir</span>=<span class="org-string">"${XDG_DATA_HOME:-$HOME/.local/share}/agent-skills"</span>
+mkdir -p <span class="org-string">"$cache_dir"</span>
+<span class="org-keyword">for</span> url<span class="org-keyword"> in</span> <span class="org-string">"${K20E_AGENT_SKILL_REPOS[@]}"</span>; <span class="org-keyword">do</span>
+    <span class="org-variable-name">name</span>=<span class="org-string">"${url##*/}"</span>
+    <span class="org-variable-name">name</span>=<span class="org-string">"${name%.git}"</span>
+    <span class="org-variable-name">clone_dir</span>=<span class="org-string">"$cache_dir/$name"</span>
+    <span class="org-keyword">if</span> [[ <span class="org-negation-char">!</span> -d <span class="org-string">"$clone_dir/.jj"</span> &amp;&amp; <span class="org-negation-char">!</span> -d <span class="org-string">"$clone_dir/.git"</span> ]]; <span class="org-keyword">then</span>
+        jj git clone <span class="org-string">"$url"</span> <span class="org-string">"$clone_dir"</span> &gt;/dev/null 2&gt;&amp;1
+    <span class="org-keyword">else</span>
+        jj -R <span class="org-string">"$clone_dir"</span> git remote set-url origin <span class="org-string">"$url"</span> 2&gt;/dev/null || true
+        jj -R <span class="org-string">"$clone_dir"</span> git fetch --remote origin --quiet
+        jj -R <span class="org-string">"$clone_dir"</span> new <span class="org-string">'trunk()'</span> &gt;/dev/null 2&gt;&amp;1
+    <span class="org-keyword">fi</span>
+    <span class="org-variable-name">trunk_info</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">jj -R "$clone_dir" log -r 'trunk(</span><span class="org-string">)' --no-graph -T 'change_id.shortest() ++ ": " ++ description.first_line()' 2&gt;/dev/null || true)"</span>
+    <span class="org-keyword">while</span> <span class="org-variable-name">IFS</span>= read -r skill_file; <span class="org-keyword">do</span>
+        <span class="org-variable-name">skill_dir</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">dirname "$skill_file"</span><span class="org-string">)"</span>
+        <span class="org-variable-name">skill_name</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">basename "$skill_dir"</span><span class="org-string">)"</span>
+        <span class="org-keyword">for</span> agent_dir<span class="org-keyword"> in</span> <span class="org-sh-escaped-newline">\</span>
+            <span class="org-string">"$HOME/.claude/skills/$skill_name"</span> <span class="org-sh-escaped-newline">\</span>
+            <span class="org-string">"$HOME/.config/eca/skills/$skill_name"</span> <span class="org-sh-escaped-newline">\</span>
+            <span class="org-string">"$HOME/.gemini/skills/$skill_name"</span> <span class="org-sh-escaped-newline">\</span>
+            <span class="org-string">"$HOME/.gemini/config/skills/$skill_name"</span>; <span class="org-keyword">do</span>
+            mkdir -p <span class="org-string">"$agent_dir"</span>
+            cp -R <span class="org-string">"$skill_dir/"</span>* <span class="org-string">"$agent_dir/"</span>
+        <span class="org-keyword">done</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"&#10003; Synced $skill_name from $url"</span>
+        <span class="org-keyword">if</span> [[ -n <span class="org-string">"$trunk_info"</span> ]]; <span class="org-keyword">then</span>
+            <span class="org-builtin">echo</span> <span class="org-string">"  Trunk tip: $trunk_info"</span>
         <span class="org-keyword">fi</span>
-        <span class="org-variable-name">trunk_info</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">jj -R "$clone_dir" log -r 'trunk(</span><span class="org-string">)' --no-graph -T 'change_id.shortest() ++ ": " ++ description.first_line()' 2&gt;/dev/null)"</span>
-        <span class="org-keyword">while</span> <span class="org-variable-name">IFS</span>= read -r skill_file; <span class="org-keyword">do</span>
-            <span class="org-variable-name">skill_dir</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">dirname "$skill_file"</span><span class="org-string">)"</span>
-            <span class="org-variable-name">skill_name</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">basename "$skill_dir"</span><span class="org-string">)"</span>
-            <span class="org-keyword">for</span> agent_dir<span class="org-keyword"> in</span> <span class="org-sh-escaped-newline">\</span>
-                <span class="org-string">"$HOME/.claude/skills/$skill_name"</span> <span class="org-sh-escaped-newline">\</span>
-                <span class="org-string">"$HOME/.config/eca/skills/$skill_name"</span> <span class="org-sh-escaped-newline">\</span>
-                <span class="org-string">"$HOME/.gemini/skills/$skill_name"</span> <span class="org-sh-escaped-newline">\</span>
-                <span class="org-string">"$HOME/.gemini/config/skills/$skill_name"</span>; <span class="org-keyword">do</span>
-                mkdir -p <span class="org-string">"$agent_dir"</span>
-                cp -R <span class="org-string">"$skill_dir/"</span>* <span class="org-string">"$agent_dir/"</span>
-            <span class="org-keyword">done</span>
-            <span class="org-builtin">echo</span> <span class="org-string">"&#10003; Synced $skill_name from $url"</span>
-            <span class="org-keyword">if</span> [[ -n <span class="org-string">"$trunk_info"</span> ]]; <span class="org-keyword">then</span>
-                <span class="org-builtin">echo</span> <span class="org-string">"  Trunk tip: $trunk_info"</span>
-            <span class="org-keyword">fi</span>
-        <span class="org-keyword">done</span> &lt; &lt;(find <span class="org-string">"$clone_dir"</span> -maxdepth 2 -name SKILL.md <span class="org-sh-escaped-newline">\</span>
-            -not -path <span class="org-string">'*/.jj/*'</span> -not -path <span class="org-string">'*/.git/*'</span>)
-    <span class="org-keyword">done</span>
+    <span class="org-keyword">done</span> &lt; &lt;(find <span class="org-string">"$clone_dir"</span> -maxdepth 2 -name SKILL.md <span class="org-sh-escaped-newline">\</span>
+        -not -path <span class="org-string">'*/.jj/*'</span> -not -path <span class="org-string">'*/.git/*'</span>)
+<span class="org-keyword">done</span>
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-skills-bash-wrapper" class="outline-3">
+<h3 id="skills-bash-wrapper">Bash Wrapper (<code>109-skills.bash</code>)</h3>
+<div class="outline-text-3" id="text-skills-bash-wrapper">
+<pre class="example">
+CUSTOM_ID: skills-bash-wrapper
+header-args: :mkdirp yes :tangle ~/.bashrc.d/109-skills.bash
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-bash"><code><span class="org-function-name">k20e_agent_skills_sync</span>() {
+    k20e-skills-sync <span class="org-string">"$@"</span>
 }
 </code></pre>
 </div>
@@ -3743,8 +3792,9 @@ Trigger the sync from Emacs: put point in the block below and run <code>C-c C-c<
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><code>k20e_agent_skills_sync
+<pre class="src src-bash"><code>k20e-skills-sync
 </code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -4916,7 +4966,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-08-30 Sun 14:28</p>
+<p class="date">2026-08-31 Mon 10:39</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>
