@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-08-31 Mon 10:40 -->
+<!-- 2026-09-02 Wed 19:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -2013,6 +2013,7 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/107-emacs.bash
 [ -x <span class="org-string">"${HOMEBREW_PREFIX}/bin/emacsclient"</span> ] &amp;&amp; <span class="org-builtin">alias</span> <span class="org-variable-name">emacsclient</span>=<span class="org-string">'$HOMEBREW_PREFIX/bin/emacsclient --no-wait'</span>
 
 <span class="org-builtin">export</span> <span class="org-variable-name">EDITOR</span>=emacsclient
+<span class="org-builtin">export</span> <span class="org-variable-name">VISUAL</span>=emacsclient
 </code></pre>
 </div>
 
@@ -2144,7 +2145,7 @@ header-args: :mkdirp yes :tangle ~/.gemini/settings.json
       <span class="org-string">"enabled"</span>: <span class="org-constant">true</span>
     },
     <span class="org-string">"previewFeatures"</span>: <span class="org-constant">true</span>,
-    <span class="org-string">"preferredEditor"</span>: <span class="org-string">"zed"</span>,
+    <span class="org-string">"preferredEditor"</span>: <span class="org-string">"emacsclient"</span>,
     <span class="org-string">"sessionRetention"</span>: {
       <span class="org-string">"warningAcknowledged"</span>: <span class="org-constant">true</span>,
       <span class="org-string">"enabled"</span>: <span class="org-constant">true</span>,
@@ -4776,8 +4777,8 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/todo.toml
 <span class="org-variable-name">header</span> = <span class="org-string">"{strip_ansi|split:\\::..2}"</span>
 
 [<span class="org-type">actions.edit</span>]
-<span class="org-variable-name">description</span> = <span class="org-string">"Open file in zed at the comment"</span>
-<span class="org-variable-name">command</span> = <span class="org-string">"zed '{strip_ansi|split:\\::..2}'"</span>
+<span class="org-variable-name">description</span> = <span class="org-string">"Open file in Emacs at the comment"</span>
+<span class="org-variable-name">command</span> = <span class="org-string">"emacsclient -n '+{strip_ansi|split:\\::1}' '{strip_ansi|split:\\::0}'"</span>
 <span class="org-variable-name">mode</span> = <span class="org-string">"execute"</span>
 </code></pre>
 </div>
@@ -4966,7 +4967,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-08-31 Mon 10:39</p>
+<p class="date">2026-09-02 Wed 19:38</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>

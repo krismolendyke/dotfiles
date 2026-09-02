@@ -567,6 +567,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     [ -x "${HOMEBREW_PREFIX}/bin/emacsclient" ] && alias emacsclient='$HOMEBREW_PREFIX/bin/emacsclient --no-wait'
 
     export EDITOR=emacsclient
+    export VISUAL=emacsclient
   #+end_src
 
    This is a clever =emacsclient= hack to support opening files at a line number with the =:linum= suffix that I stumbled
@@ -675,7 +676,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
              "enabled": true
            },
            "previewFeatures": true,
-           "preferredEditor": "zed",
+           "preferredEditor": "emacsclient",
            "sessionRetention": {
              "warningAcknowledged": true,
              "enabled": true,
@@ -2990,8 +2991,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       header = "{strip_ansi|split:\\::..2}"
 
       [actions.edit]
-      description = "Open file in zed at the comment"
-      command = "zed '{strip_ansi|split:\\::..2}'"
+      description = "Open file in Emacs at the comment"
+      command = "emacsclient -n '+{strip_ansi|split:\\::1}' '{strip_ansi|split:\\::0}'"
       mode = "execute"
     #+end_src
 

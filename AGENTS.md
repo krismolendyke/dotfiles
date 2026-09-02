@@ -15,7 +15,7 @@ This repository contains literate programming dotfiles created and maintained in
 - **Shell**: Homebrew Bash (`/opt/homebrew/bin/bash`), loaded via `~/.bash_profile` -> `~/.bashrc` -> `~/.bashrc.d/*.bash`.
 - **Version Control**: Jujutsu (`jj`), colocated with Git. Alias `j="jj"`.
 - **Package Management**: Homebrew (`brew bundle`), tangled to `~/.Brewfile`.
-- **Editors**: Zed (`zed`) and Emacs (`emacsclient` / `emacs`).
+- **Editors**: Emacs (`emacsclient` / `emacs`).
 - **Diff Tool**: `difftastic` (`difft`).
 - **Secrets**: Stored in `~/.bashrc.d/secret/` (git-ignored).
 
