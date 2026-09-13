@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-09-13 Sun 09:19 -->
+<!-- 2026-09-13 Sun 09:27 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -4838,6 +4838,27 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/bash-history.toml
 </div>
 </div>
 </div>
+<div id="outline-container-nushell-history" class="outline-4">
+<h4 id="nushell-history">Nushell History</h4>
+<div class="outline-text-4" id="text-nushell-history">
+<pre class="example">
+CUSTOM_ID: nushell-history
+header-args: :mkdirp yes :tangle ~/.config/television/cable/nu-history.toml
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-toml"><code>[<span class="org-type">metadata</span>]
+<span class="org-variable-name">name</span> = <span class="org-string">"nu-history"</span>
+<span class="org-variable-name">description</span> = <span class="org-string">"A channel to select from your nu history"</span>
+
+[<span class="org-type">source</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"nu -c 'open $nu.history-path | lines | uniq | reverse | to text'"</span>
+<span class="org-variable-name">no_sort</span> = <span class="org-keyword">true</span>
+<span class="org-variable-name">frecency</span> = <span class="org-keyword">false</span>
+</code></pre>
+</div>
+</div>
+</div>
 <div id="outline-container-bash-dotfiles" class="outline-4">
 <h4 id="bash-dotfiles">Bash Dotfiles</h4>
 <div class="outline-text-4" id="text-bash-dotfiles">
@@ -5107,7 +5128,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-09-13 Sun 09:18</p>
+<p class="date">2026-09-13 Sun 09:25</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>
