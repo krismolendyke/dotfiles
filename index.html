@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-09-02 Wed 19:39 -->
+<!-- 2026-09-13 Sun 09:19 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1233,9 +1233,14 @@ at <a href="https://github.com/krismolendyke/dotfiles/blob/master/index.org">ind
 <li><a href="#carapace">Carapace</a></li>
 <li><a href="#claude">Claude</a></li>
 <li><a href="#eca">eca</a></li>
-<li><a href="#emacs">Emacs</a></li>
+<li><a href="#emacs">Emacs</a>
+<ul>
+<li><a href="#emacs-nushell">Nushell</a></li>
+</ul>
+</li>
 <li><a href="#eza">eza</a>
 <ul>
+<li><a href="#eza-nushell">Nushell</a></li>
 <li><a href="#theme">Theme</a></li>
 </ul>
 </li>
@@ -1299,6 +1304,7 @@ at <a href="https://github.com/krismolendyke/dotfiles/blob/master/index.org">ind
 <ul>
 <li><a href="#skills-sync-cli">Standalone CLI (<code>~/.local/bin/k20e-skills-sync</code>)</a></li>
 <li><a href="#skills-bash-wrapper">Bash Wrapper (<code>109-skills.bash</code>)</a></li>
+<li><a href="#skills-nushell-wrapper">Nushell Wrapper (<code>109-skills.nu</code>)</a></li>
 </ul>
 </li>
 <li><a href="#starship">Starship</a>
@@ -1309,6 +1315,7 @@ at <a href="https://github.com/krismolendyke/dotfiles/blob/master/index.org">ind
 <li><a href="#television">Television</a>
 <ul>
 <li><a href="#smart-autocomplete-shell-history">Smart Autocomplete &amp; Shell History</a></li>
+<li><a href="#television-nushell">Nushell</a></li>
 <li><a href="#television-configuration">Configuration</a></li>
 <li><a href="#cable-channels">Cable Channels</a></li>
 <li><a href="#television-theme">Theme</a></li>
@@ -1890,7 +1897,7 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/990-carapace.bash
 </pre>
 
 <p>
-<a href="https://carapace.sh/">https://carapace.sh/</a> for <a href="#bash">Bash</a> and <a href="#config-starship-toml-nushell">Nushell</a> both.
+<a href="https://carapace.sh/">https://carapace.sh/</a> for <a href="#bash">Bash</a> and <a href="#television-nushell">Nushell</a> both.
 </p>
 
 <div class="org-src-container">
@@ -2035,6 +2042,30 @@ across at <a href="https://stuff-things.net/2019/07/31/opening-files-with-line-n
 </code></pre>
 </div>
 </div>
+<div id="outline-container-emacs-nushell" class="outline-3">
+<h3 id="emacs-nushell">Nushell</h3>
+<div class="outline-text-3" id="text-emacs-nushell">
+<pre class="example">
+CUSTOM_ID: emacs-nushell
+header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/autoload/107-emacs.nu
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-nu"><code># Support opening files at a line number with the :linum suffix, mirroring k20e_ec
+def ec [file?: string, ...rest] {
+    if ($file != null) and ($file =~ '^(.+):(\d+)(?::\d+)?$') {
+        let m = ($file | parse -r '^(?P&lt;path&gt;.+):(?P&lt;line&gt;\d+)')
+        ^emacsclient -n $"+($m.0.line)" $m.0.path ...$rest
+    } else if ($file != null) {
+        ^emacsclient -n $file ...$rest
+    } else {
+        ^emacsclient -n ...$rest
+    }
+}
+</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div id="outline-container-eza" class="outline-2">
 <h2 id="eza"><a href="https://github.com/eza-community/eza">eza</a></h2>
@@ -2058,6 +2089,21 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/130-eza.bash
     <span class="org-builtin">alias</span> <span class="org-variable-name">ltl</span>=<span class="org-string">"eza --classify --git --git-repos --tree --long --header --smart-group"</span>
 <span class="org-keyword">fi</span>
 </code></pre>
+</div>
+</div>
+<div id="outline-container-eza-nushell" class="outline-3">
+<h3 id="eza-nushell">Nushell</h3>
+<div class="outline-text-3" id="text-eza-nushell">
+<pre class="example">
+CUSTOM_ID: eza-nushell
+header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/autoload/130-eza.nu
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-nu"><code>alias lt = ^eza --classify --git --git-repos --tree
+alias ltl = ^eza --classify --git --git-repos --tree --long --header --smart-group
+</code></pre>
+</div>
 </div>
 </div>
 <div id="outline-container-theme" class="outline-3">
@@ -3307,13 +3353,17 @@ if ($secrets_env | path exists) {
 # Aliases #
 ###########
 
-alias ec = emacsclient
 alias g = git
 alias j = jj
 alias k = kubectl
 alias c = claude
 alias l = ls
 alias ll = ls -l
+
+# Quick runner for bash one-liners / scripts
+def --wrapped b [...cmd] {
+    ^bash -c ($cmd | str join ' ')
+}
 
 def --env r [] {
     let jj_root = (do { ^jj root } | complete)
@@ -3364,9 +3414,10 @@ def cat [...args] {
 
 $env.CARAPACE_BRIDGES = "zsh,fish,bash"
 
-mkdir ($nu.data-dir | path join "vendor/autoload")
-if (is-installed carapace) {
-    carapace _carapace nushell | save -f ($nu.data-dir | path join "vendor/autoload/carapace.nu")
+let carapace_cache = ($nu.data-dir | path join "vendor/autoload/carapace.nu")
+if not ($carapace_cache | path exists) and (is-installed carapace) {
+    mkdir ($nu.data-dir | path join "vendor/autoload")
+    carapace _carapace nushell | save -f $carapace_cache
 }
 
 let carapace_aliases = {
@@ -3417,8 +3468,11 @@ $env.config.keybindings = ($env.config.keybindings | append [
 # Starship #
 ############
 
-mkdir ($nu.data-dir | path join "vendor/autoload")
-starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+let starship_cache = ($nu.data-dir | path join "vendor/autoload/starship.nu")
+if not ($starship_cache | path exists) and (is-installed starship) {
+    mkdir ($nu.data-dir | path join "vendor/autoload")
+    starship init nu | save -f $starship_cache
+}
 
 
 $env.config.show_banner = "short" # just show startup time
@@ -3784,6 +3838,22 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/109-skills.bash
 <div class="org-src-container">
 <pre class="src src-bash"><code><span class="org-function-name">k20e_agent_skills_sync</span>() {
     k20e-skills-sync <span class="org-string">"$@"</span>
+}
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-skills-nushell-wrapper" class="outline-3">
+<h3 id="skills-nushell-wrapper">Nushell Wrapper (<code>109-skills.nu</code>)</h3>
+<div class="outline-text-3" id="text-skills-nushell-wrapper">
+<pre class="example">
+CUSTOM_ID: skills-nushell-wrapper
+header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/autoload/109-skills.nu
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-nu"><code>def k20e_agent_skills_sync [...args] {
+    ^k20e-skills-sync ...$args
 }
 </code></pre>
 </div>
@@ -4461,6 +4531,76 @@ Modified output of <code>tv init bash</code>:
 </div>
 </div>
 </div>
+<div id="outline-container-television-nushell" class="outline-3">
+<h3 id="television-nushell">Nushell</h3>
+<div class="outline-text-3" id="text-television-nushell">
+<pre class="example">
+CUSTOM_ID: television-nushell
+header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/autoload/140-television.nu
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-nu"><code>def tv_smart_autocomplete [] {
+    let line = (commandline)
+    let cursor = (commandline get-cursor)
+    let lhs = ($line | str substring 0..$cursor)
+    let rhs = ($line | str substring $cursor..)
+    let output = (tv --no-status-bar --inline --autocomplete-prompt $lhs | str trim)
+
+    if ($output | str length) &gt; 0 {
+        let needs_space = not ($lhs | str ends-with " ")
+        let lhs_with_space = if $needs_space { $"($lhs) " } else { $lhs }
+        let new_line = $lhs_with_space + $output + $rhs
+        let new_cursor = ($lhs_with_space + $output | str length)
+        commandline edit --replace $new_line
+        commandline set-cursor $new_cursor
+    }
+}
+
+def tv_shell_history [] {
+    let current_prompt = (commandline)
+    let cursor = (commandline get-cursor)
+    let current_prompt = ($current_prompt | str substring 0..$cursor)
+
+    let output = (tv nu-history --no-status-bar --inline --input $current_prompt | str trim)
+
+    if ($output | is-not-empty) {
+        commandline edit --replace $output
+        commandline set-cursor --end
+    }
+}
+
+if (which tv | is-not-empty) {
+    $env.config.keybindings = (
+        $env.config.keybindings
+        | append [
+            {
+                name: tv_completion
+                modifier: control
+                keycode: char_t
+                mode: [vi_normal, vi_insert, emacs]
+                event: {
+                    send: executehostcommand
+                    cmd: "tv_smart_autocomplete"
+                }
+            }
+            {
+                name: tv_history
+                modifier: control
+                keycode: char_r
+                mode: [vi_normal, vi_insert, emacs]
+                event: {
+                    send: executehostcommand
+                    cmd: "tv_shell_history"
+                }
+            }
+        ]
+    )
+}
+</code></pre>
+</div>
+</div>
+</div>
 <div id="outline-container-television-configuration" class="outline-3">
 <h3 id="television-configuration">Configuration</h3>
 <div class="outline-text-3" id="text-television-configuration">
@@ -4967,7 +5107,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-09-02 Wed 19:38</p>
+<p class="date">2026-09-13 Sun 09:18</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>

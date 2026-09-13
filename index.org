@@ -585,6 +585,26 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     alias ec=k20e_ec
   #+end_src
 
+** Nushell
+   :PROPERTIES:
+   :CUSTOM_ID: emacs-nushell
+   :header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/autoload/107-emacs.nu
+   :END:
+
+   #+begin_src nu
+     # Support opening files at a line number with the :linum suffix, mirroring k20e_ec
+     def ec [file?: string, ...rest] {
+         if ($file != null) and ($file =~ '^(.+):(\d+)(?::\d+)?$') {
+             let m = ($file | parse -r '^(?P<path>.+):(?P<line>\d+)')
+             ^emacsclient -n $"+($m.0.line)" $m.0.path ...$rest
+         } else if ($file != null) {
+             ^emacsclient -n $file ...$rest
+         } else {
+             ^emacsclient -n ...$rest
+         }
+     }
+   #+end_src
+
 * [[https://github.com/eza-community/eza][eza]]
    :PROPERTIES:
   :CUSTOM_ID: eza
@@ -605,6 +625,17 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
         alias ltl="eza --classify --git --git-repos --tree --long --header --smart-group"
     fi
   #+end_src
+
+** Nushell
+   :PROPERTIES:
+   :CUSTOM_ID: eza-nushell
+   :header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/autoload/130-eza.nu
+   :END:
+
+   #+begin_src nu
+     alias lt = ^eza --classify --git --git-repos --tree
+     alias ltl = ^eza --classify --git --git-repos --tree --long --header --smart-group
+   #+end_src
 
 ** Theme
     :PROPERTIES:
@@ -1758,13 +1789,17 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      # Aliases #
      ###########
 
-     alias ec = emacsclient
      alias g = git
      alias j = jj
      alias k = kubectl
      alias c = claude
      alias l = ls
      alias ll = ls -l
+
+     # Quick runner for bash one-liners / scripts
+     def --wrapped b [...cmd] {
+         ^bash -c ($cmd | str join ' ')
+     }
 
      def --env r [] {
          let jj_root = (do { ^jj root } | complete)
@@ -1815,9 +1850,10 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      $env.CARAPACE_BRIDGES = "zsh,fish,bash"
 
-     mkdir ($nu.data-dir | path join "vendor/autoload")
-     if (is-installed carapace) {
-         carapace _carapace nushell | save -f ($nu.data-dir | path join "vendor/autoload/carapace.nu")
+     let carapace_cache = ($nu.data-dir | path join "vendor/autoload/carapace.nu")
+     if not ($carapace_cache | path exists) and (is-installed carapace) {
+         mkdir ($nu.data-dir | path join "vendor/autoload")
+         carapace _carapace nushell | save -f $carapace_cache
      }
 
      let carapace_aliases = {
@@ -1868,8 +1904,11 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      # Starship #
      ############
 
-     mkdir ($nu.data-dir | path join "vendor/autoload")
-     starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+     let starship_cache = ($nu.data-dir | path join "vendor/autoload/starship.nu")
+     if not ($starship_cache | path exists) and (is-installed starship) {
+         mkdir ($nu.data-dir | path join "vendor/autoload")
+         starship init nu | save -f $starship_cache
+     }
 
 
      $env.config.show_banner = "short" # just show startup time
@@ -2143,6 +2182,18 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    #+begin_src bash
      k20e_agent_skills_sync() {
          k20e-skills-sync "$@"
+     }
+   #+end_src
+
+** Nushell Wrapper (=109-skills.nu=)
+   :PROPERTIES:
+   :CUSTOM_ID: skills-nushell-wrapper
+   :header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/autoload/109-skills.nu
+   :END:
+
+   #+begin_src nu
+     def k20e_agent_skills_sync [...args] {
+         ^k20e-skills-sync ...$args
      }
    #+end_src
 
@@ -2700,6 +2751,72 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
         bind -x '"\C-X\C-T": tv_smart_autocomplete' # NB I need C-t as transpose-chars
         bind -x '"\C-R": tv_shell_history'
      fi
+   #+end_src
+
+** Nushell
+   :PROPERTIES:
+   :CUSTOM_ID: television-nushell
+   :header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/autoload/140-television.nu
+   :END:
+
+   #+begin_src nu
+     def tv_smart_autocomplete [] {
+         let line = (commandline)
+         let cursor = (commandline get-cursor)
+         let lhs = ($line | str substring 0..$cursor)
+         let rhs = ($line | str substring $cursor..)
+         let output = (tv --no-status-bar --inline --autocomplete-prompt $lhs | str trim)
+
+         if ($output | str length) > 0 {
+             let needs_space = not ($lhs | str ends-with " ")
+             let lhs_with_space = if $needs_space { $"($lhs) " } else { $lhs }
+             let new_line = $lhs_with_space + $output + $rhs
+             let new_cursor = ($lhs_with_space + $output | str length)
+             commandline edit --replace $new_line
+             commandline set-cursor $new_cursor
+         }
+     }
+
+     def tv_shell_history [] {
+         let current_prompt = (commandline)
+         let cursor = (commandline get-cursor)
+         let current_prompt = ($current_prompt | str substring 0..$cursor)
+
+         let output = (tv nu-history --no-status-bar --inline --input $current_prompt | str trim)
+
+         if ($output | is-not-empty) {
+             commandline edit --replace $output
+             commandline set-cursor --end
+         }
+     }
+
+     if (which tv | is-not-empty) {
+         $env.config.keybindings = (
+             $env.config.keybindings
+             | append [
+                 {
+                     name: tv_completion
+                     modifier: control
+                     keycode: char_t
+                     mode: [vi_normal, vi_insert, emacs]
+                     event: {
+                         send: executehostcommand
+                         cmd: "tv_smart_autocomplete"
+                     }
+                 }
+                 {
+                     name: tv_history
+                     modifier: control
+                     keycode: char_r
+                     mode: [vi_normal, vi_insert, emacs]
+                     event: {
+                         send: executehostcommand
+                         cmd: "tv_shell_history"
+                     }
+                 }
+             ]
+         )
+     }
    #+end_src
 
 ** Configuration
