@@ -1814,7 +1814,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      alias g = git
      alias j = jj
-     alias k = kubectl
      alias c = claude
      alias l = ls
      alias ll = ls -l
@@ -1883,6 +1882,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
          g: "git"
          j: "jj"
          k: "kubectl"
+         kctx: "kubectx"
+         kns: "kubens"
          c: "claude"
          ec: "emacsclient"
          l: "ls"
@@ -1936,6 +1937,47 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
 
      $env.config.show_banner = "short" # just show startup time
+   #+end_src
+
+** Homebrew
+   :PROPERTIES:
+   :CUSTOM_ID: homebrew-nushell
+   :header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/autoload/010-brew.nu
+   :END:
+
+   See [[#homebrew][Homebrew]].
+
+   #+begin_src nu
+     $env.HOMEBREW_BREWFILE = ($env.HOME | path join ".Brewfile")
+     $env.HOMEBREW_CASK_OPTS = "--require-sha"
+     $env.HOMEBREW_INSTALL_CLEANUP = "1"
+     $env.HOMEBREW_NO_ANALYTICS = "1"
+     $env.HOMEBREW_NO_ASK = "1"
+     $env.HOMEBREW_NO_ENV_HINTS = "1"
+     $env.HOMEBREW_NO_INSECURE_REDIRECT = "1"
+
+     def k20e_brew_bundle_dump [] {
+         ^brew bundle dump --force --global --verbose
+         open $env.HOMEBREW_BREWFILE | pbcopy
+     }
+
+     def k20e_brew_bundle_install [] {
+         ^brew bundle --global
+     }
+   #+end_src
+
+** =kubectl=, =k=, =kctx=, =kns=
+   :PROPERTIES:
+   :CUSTOM_ID: kubectl-nushell
+   :header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/autoload/104-kubectl.nu
+   :END:
+
+   See [[#kubectl-k-kctx-kns-krew][=kubectl=, =k=, =kctx=, =kns=, =krew=]].
+
+   #+begin_src nu
+     alias k = kubectl
+     alias kctx = kubectx
+     alias kns = kubens
    #+end_src
 
 ** Emacs
@@ -2070,6 +2112,38 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       no_sort = true
       frecency = false
     #+end_src
+
+*** Dotfiles Channel
+    :PROPERTIES:
+    :CUSTOM_ID: nu-dotfiles
+    :header-args: :mkdirp yes :tangle ~/.config/television/cable/nu-dotfiles.toml
+    :END:
+
+    #+begin_src toml
+      [metadata]
+      name = "nu-dotfiles"
+      description = "A channel to select from my nushell dotfiles"
+      requirements = ["bat", "find", "sort"]
+
+      [source]
+      command = "find \"${HOME}/Library/Application Support/nushell\" -name '*.nu' -type f | sort"
+
+      [preview]
+      command = "bat -n --color always '{}'"
+    #+end_src
+
+** AWS CLI
+   :PROPERTIES:
+   :CUSTOM_ID: awscli-nushell
+   :header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/autoload/440-awscli.nu
+   :END:
+
+   See [[#aws-cli][AWS CLI]].
+
+   #+begin_src nu
+     $env.AWS_SDK_LOAD_CONFIG = "1"
+     $env.AWS_VAULT_KEYCHAIN_NAME = "login"
+   #+end_src
 
 * OCaml
    :PROPERTIES:

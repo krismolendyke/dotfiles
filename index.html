@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-06 Fri 19:24 -->
+<!-- 2026-11-07 Sat 07:32 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1270,10 +1270,13 @@ at <a href="https://github.com/krismolendyke/dotfiles/blob/master/index.org">ind
 <li><a href="#nushell">Nushell</a>
 <ul>
 <li><a href="#config-nu"><code>config.nu</code></a></li>
+<li><a href="#homebrew-nushell">Homebrew</a></li>
+<li><a href="#kubectl-nushell"><code>kubectl</code>, <code>k</code>, <code>kctx</code>, <code>kns</code></a></li>
 <li><a href="#emacs-nushell">Emacs</a></li>
 <li><a href="#skills-nushell-wrapper">Skills Wrapper</a></li>
 <li><a href="#eza-nushell">eza</a></li>
 <li><a href="#television-nushell">Television</a></li>
+<li><a href="#awscli-nushell">AWS CLI</a></li>
 </ul>
 </li>
 <li><a href="#ocaml">OCaml</a></li>
@@ -3388,7 +3391,6 @@ k20e_load_secrets
 
 <span class="org-keyword">alias</span> g = git
 <span class="org-keyword">alias</span> j = jj
-<span class="org-keyword">alias</span> k = kubectl
 <span class="org-keyword">alias</span> c = claude
 <span class="org-keyword">alias</span> l = ls
 <span class="org-keyword">alias</span> ll = ls -l
@@ -3457,6 +3459,8 @@ k20e_load_secrets
     g: <span class="org-string">"git"</span>
     j: <span class="org-string">"jj"</span>
     k: <span class="org-string">"kubectl"</span>
+    kctx: <span class="org-string">"kubectx"</span>
+    kns: <span class="org-string">"kubens"</span>
     c: <span class="org-string">"claude"</span>
     ec: <span class="org-string">"emacsclient"</span>
     l: <span class="org-string">"ls"</span>
@@ -3510,6 +3514,59 @@ k20e_load_secrets
 
 
 <span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.show_banner = <span class="org-string">"short"</span> <span class="org-comment"># just show startup time</span>
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-homebrew-nushell" class="outline-3">
+<h3 id="homebrew-nushell">Homebrew</h3>
+<div class="outline-text-3" id="text-homebrew-nushell">
+<pre class="example">
+CUSTOM_ID: homebrew-nushell
+header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/autoload/010-brew.nu
+</pre>
+
+<p>
+See <a href="#homebrew">Homebrew</a>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-nu"><code><span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.HOMEBREW_BREWFILE = (<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.HOME | path <span class="org-string">join</span> <span class="org-string">".Brewfile"</span>)
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.HOMEBREW_CASK_OPTS = <span class="org-string">"--require-sha"</span>
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.HOMEBREW_INSTALL_CLEANUP = <span class="org-string">"1"</span>
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.HOMEBREW_NO_ANALYTICS = <span class="org-string">"1"</span>
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.HOMEBREW_NO_ASK = <span class="org-string">"1"</span>
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.HOMEBREW_NO_ENV_HINTS = <span class="org-string">"1"</span>
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.HOMEBREW_NO_INSECURE_REDIRECT = <span class="org-string">"1"</span>
+
+<span class="org-keyword">def</span> <span class="org-function-name">k20e_brew_bundle_dump</span> [] {
+    ^brew <span class="org-string">bundle</span> <span class="org-string">dump</span> --force --global --verbose
+    open <span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.HOMEBREW_BREWFILE | pbcopy
+}
+
+<span class="org-keyword">def</span> <span class="org-function-name">k20e_brew_bundle_install</span> [] {
+    ^brew <span class="org-string">bundle</span> --global
+}
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-kubectl-nushell" class="outline-3">
+<h3 id="kubectl-nushell"><code>kubectl</code>, <code>k</code>, <code>kctx</code>, <code>kns</code></h3>
+<div class="outline-text-3" id="text-kubectl-nushell">
+<pre class="example">
+CUSTOM_ID: kubectl-nushell
+header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/autoload/104-kubectl.nu
+</pre>
+
+<p>
+See <a href="#kubectl-k-kctx-kns-krew"><code>kubectl</code>, <code>k</code>, <code>kctx</code>, <code>kns</code>, <code>krew</code></a>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-nu"><code><span class="org-keyword">alias</span> k = kubectl
+<span class="org-keyword">alias</span> kctx = kubectx
+<span class="org-keyword">alias</span> kns = kubens
 </code></pre>
 </div>
 </div>
@@ -3672,6 +3729,48 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/nu-history.toml
 <span class="org-variable-name">frecency</span> = <span class="org-keyword">false</span>
 </code></pre>
 </div>
+</div>
+</div>
+<div id="outline-container-nu-dotfiles" class="outline-4">
+<h4 id="nu-dotfiles">Dotfiles Channel</h4>
+<div class="outline-text-4" id="text-nu-dotfiles">
+<pre class="example">
+CUSTOM_ID: nu-dotfiles
+header-args: :mkdirp yes :tangle ~/.config/television/cable/nu-dotfiles.toml
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-toml"><code>[<span class="org-type">metadata</span>]
+<span class="org-variable-name">name</span> = <span class="org-string">"nu-dotfiles"</span>
+<span class="org-variable-name">description</span> = <span class="org-string">"A channel to select from my nushell dotfiles"</span>
+<span class="org-variable-name">requirements</span> = [<span class="org-string">"bat"</span>, <span class="org-string">"find"</span>, <span class="org-string">"sort"</span>]
+
+[<span class="org-type">source</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"find \"${HOME}/Library/Application Support/nushell\" -name '*.nu' -type f | sort"</span>
+
+[<span class="org-type">preview</span>]
+<span class="org-variable-name">command</span> = <span class="org-string">"bat -n --color always '{}'"</span>
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-awscli-nushell" class="outline-3">
+<h3 id="awscli-nushell">AWS CLI</h3>
+<div class="outline-text-3" id="text-awscli-nushell">
+<pre class="example">
+CUSTOM_ID: awscli-nushell
+header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/autoload/440-awscli.nu
+</pre>
+
+<p>
+See <a href="#aws-cli">AWS CLI</a>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-nu"><code><span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.AWS_SDK_LOAD_CONFIG = <span class="org-string">"1"</span>
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.AWS_VAULT_KEYCHAIN_NAME = <span class="org-string">"login"</span>
+</code></pre>
 </div>
 </div>
 </div>
@@ -5306,8 +5405,8 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-11-06 Fri 19:24</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
+<p class="date">2026-11-07 Sat 07:32</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.10)</p>
 </div>
 </body>
 </html>
