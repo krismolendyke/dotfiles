@@ -27,16 +27,6 @@ This repository contains literate programming dotfiles created and maintained in
 - **Claude CLI**: Configured via alias in `~/.bashrc.d/111-claude.bash`.
 - **Agent Skills Sync**: `k20e_agent_skills_sync` in `~/.bashrc.d/109-skills.bash` synchronizes skills to Claude, ECA, Gemini CLI, and Antigravity.
 
-## Jujutsu (jj) Guidelines for AI Agents
-
-- **Always prioritize Jujutsu (`jj`)**: This repository uses Jujutsu colocated with Git.
-- **Do NOT run raw mutating Git commands**: Avoid `git commit`, `git checkout`, `git rebase`, `git merge`, or `git reset`, which can create detached states or desync with `jj`.
-- **Standard JJ Workflow**:
-  - Check status: `jj status`
-  - View changes: `jj --no-pager diff --git`
-  - Describe current revision: `jj desc -m "imperative commit message"`
-  - Create new change: `jj new`
-
 ## Guidelines for Making Changes
 
 1. **Locate the Target Section**: Find the relevant Org headline in `index.org` corresponding to the tool or shell configuration.
@@ -47,7 +37,7 @@ This repository contains literate programming dotfiles created and maintained in
    - YAML files should pass `yamllint`.
    - JSON configurations should validate with `jq .`.
 5. **Org HTML Export (Required)**:
-   - An `(org-export-dispatch &optional ARG)` to HTML of the `index.org` file (generating `index.html`) MUST accompany any and all edits to `index.org` after the quality gate has been passed and immediately before `jj commit` / describing the revision.
+   - An `(org-export-dispatch &optional ARG)` to HTML of the `index.org` file (generating `index.html`) MUST accompany any and all edits to `index.org` after the quality gate has been passed and immediately before describing the revision / creating a new change.
    - Interactive (Emacs): `C-c C-e h h`. An already-running Emacs already loads the custom export config below via `custom.org`'s *Export* section, so nothing extra is needed here.
    - Headless CLI: MUST load the custom export config from the `~/.emacs.d` repo (`k20e-org-html-export.el`) — it sets `org-html-prefer-user-labels`, the postamble format, and inlines `org.css` plus the Font Awesome/Google Fonts/Tufte CSS head-extras that `index.html` actually ships with. Plain `ox-html` produces unstyled, non-matching output. Requires the `~/.emacs.d` repo to be checked out:
      ```bash
