@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-09-13 Sun 09:27 -->
+<!-- 2026-09-18 Fri 22:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -4525,7 +4525,8 @@ Modified output of <code>tv init bash</code>:
    }
 
    <span class="org-builtin">bind</span> -x <span class="org-string">'"\C-X\C-T": tv_smart_autocomplete'</span> <span class="org-comment-delimiter"># </span><span class="org-comment">NB I need C-t as transpose-chars
-</span>   <span class="org-builtin">bind</span> -x <span class="org-string">'"\C-R": tv_shell_history'</span>
+</span>   <span class="org-builtin">bind</span> <span class="org-string">'"\C-t": transpose-chars'</span>
+   <span class="org-builtin">bind</span> -x <span class="org-string">'"\C-R": tv_shell_history'</span>
 <span class="org-keyword">fi</span>
 </code></pre>
 </div>
@@ -4787,8 +4788,8 @@ Modified from <a href="https://github.com/alexpasmantier/television/blob/main/.c
 [<span class="org-type">shell_integration.keybindings</span>]
 <span class="org-comment-delimiter"># </span><span class="org-comment">controls which key binding should trigger tv
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">for shell autocomplete
-</span><span class="org-string">"smart_autocomplete"</span> = <span class="org-string">"ctrl-t"</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">controls which keybinding should trigger tv
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">"smart_autocomplete" = "ctrl-t"
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">controls which keybinding should trigger tv
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">for command history
 </span><span class="org-string">"command_history"</span> = <span class="org-string">"ctrl-r"</span>
 </code></pre>
@@ -5128,7 +5129,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-09-13 Sun 09:25</p>
+<p class="date">2026-09-18 Fri 22:28</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>

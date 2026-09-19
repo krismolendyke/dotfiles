@@ -2749,6 +2749,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
         }
 
         bind -x '"\C-X\C-T": tv_smart_autocomplete' # NB I need C-t as transpose-chars
+        bind '"\C-t": transpose-chars'
         bind -x '"\C-R": tv_shell_history'
      fi
    #+end_src
@@ -3001,7 +3002,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      [shell_integration.keybindings]
      # controls which key binding should trigger tv
      # for shell autocomplete
-     "smart_autocomplete" = "ctrl-t"
+     # "smart_autocomplete" = "ctrl-t"
      # controls which keybinding should trigger tv
      # for command history
      "command_history" = "ctrl-r"
