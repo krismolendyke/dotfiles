@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-09-19 Sat 07:00 -->
+<!-- 2026-09-19 Sat 08:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -3334,16 +3334,21 @@ $env.PATH = (
 # Secrets #
 ###########
 
-# Load secrets from ~/.bashrc.d/secret/secrets.env
-let secrets_env = ($env.HOME | path join ".bashrc.d/secret/secrets.env")
-if ($secrets_env | path exists) {
-    open $secrets_env
-    | lines
-    | where { $in =~ '^[A-Za-z0-9_]+=' }
-    | parse "{key}={value}"
-    | reduce -f {} {|it, acc| $acc | insert $it.key ($it.value | str trim -c '"' | str trim -c "'") }
-    | load-env
+# Load secrets from ~/.bashrc.d/secret/secrets.env or an optional specified file
+def --env k20e_load_secrets [file?: path] {
+    let secrets_env = ($file | default ($env.HOME | path join ".bashrc.d/secret/secrets.env"))
+    if ($secrets_env | path exists) {
+        open $secrets_env
+        | lines
+        | where { $in =~ '^[A-Za-z0-9_]+=' }
+        | parse "{key}={value}"
+        | reduce -f {} {|it, acc| $acc | insert $it.key ($it.value | str trim -c '"' | str trim -c "'") }
+        | load-env
+    }
 }
+
+# Initial load of secrets on shell startup
+k20e_load_secrets
 
 
 ###########
@@ -5169,7 +5174,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-09-19 Sat 07:00</p>
+<p class="date">2026-09-19 Sat 08:13</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>
