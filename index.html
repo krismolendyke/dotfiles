@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-09-18 Fri 22:36 -->
+<!-- 2026-09-19 Sat 07:00 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1277,7 +1277,12 @@ at <a href="https://github.com/krismolendyke/dotfiles/blob/master/index.org">ind
 </ul>
 </li>
 <li><a href="#ocaml">OCaml</a></li>
-<li><a href="#openrouter">OpenRouter</a></li>
+<li><a href="#openrouter">OpenRouter</a>
+<ul>
+<li><a href="#ori">ori</a></li>
+<li><a href="#openrouter-env">Environment &amp; Downstream Tools</a></li>
+</ul>
+</li>
 <li><a href="#openusage">OpenUsage</a></li>
 <li><a href="#playdate">Playdate</a></li>
 <li><a href="#rancher">Rancher</a></li>
@@ -1942,20 +1947,12 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/111-claude.bash
 
 <div class="org-src-container">
 <pre class="src src-sh"><code><span class="org-builtin">alias</span> <span class="org-variable-name">c</span>=<span class="org-string">'claude'</span>
-
-<span class="org-comment-delimiter"># </span><span class="org-comment">Route the Claude Code CLI to OpenRouter
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">export ANTHROPIC_BASE_URL="https://openrouter.ai/api"
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">export ANTHROPIC_AUTH_TOKEN="${OPENROUTER_API_KEY}"
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">export ANTHROPIC_API_KEY=""
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">export ANTHROPIC_MODEL="anthropic/claude-opus-4.8"
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">export ANTHROPIC_SMALL_FAST_MODEL="anthropic/claude-haiku-4.5"
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">export ANTHROPIC_DEFAULT_HAIKU_MODEL="anthropic/claude-haiku-4.5"</span>
 </code></pre>
 </div>
 
 <p>
-Note that OpenRouter expects its own model slugs, e.g. <code>anthropic/claude-opus-4.8</code>.  Claude Code's native model
-IDs (e.g. <code>claude-opus-4-8[1m]</code>) are rejected by OpenRouter, hence the explicit <code>ANTHROPIC_MODEL</code> overrides above.
+To route Claude Code through OpenRouter on personal machines without polluting the ambient environment or
+interfering with enterprise credentials on work machines, use OpenRouter's official <a href="#ori">ori</a> harness: <code>ori claude</code>.
 </p>
 </div>
 </div>
@@ -3506,10 +3503,55 @@ Modified output of <code>opam init</code>:
 <pre class="example">
 CUSTOM_ID: openrouter
 </pre>
+</div>
+<div id="outline-container-ori" class="outline-3">
+<h3 id="ori"><a href="https://openrouter.ai/ori/harness">ori</a></h3>
+<div class="outline-text-3" id="text-ori">
+<pre class="example">
+CUSTOM_ID: ori
+</pre>
 
 <p>
-The actual secret <code>OPENROUTER_API_KEY</code> from <a href="https://openrouter.ai/keys">https://openrouter.ai/keys</a> lives with my other <a href="#secrets">secrets</a> in
-<code>~/.bashrc.d/secret/secrets.env</code>.
+<a href="https://openrouter.ai/ori/harness">ori</a> is OpenRouter's official harness for running coding agent CLIs (Claude Code, Codex, Hermes, OpenCode, Pi, etc.)
+on OpenRouter models with OAuth PKCE authentication.  Because <code>ori</code> authenticates via browser OAuth and wraps agent
+processes directly, it avoids the need to export global <code>ANTHROPIC_*</code> environment variables, ensuring enterprise
+credentials remain completely untouched on work machines.
+</p>
+
+<p>
+Install or update:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code><span class="org-comment-delimiter"># </span><span class="org-comment">Install standalone ori to ~/.local/bin/ori (on PATH for Bash and Nushell)
+</span>curl -fsSL https://openrouter.ai/labs/ori/install.sh | bash
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Update
+</span>ori update
+</code></pre>
+</div>
+
+<p>
+Launch Claude Code via OpenRouter:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>ori claude
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-openrouter-env" class="outline-3">
+<h3 id="openrouter-env">Environment &amp; Downstream Tools</h3>
+<div class="outline-text-3" id="text-openrouter-env">
+<pre class="example">
+CUSTOM_ID: openrouter-env
+</pre>
+
+<p>
+For non-harness tools that consume OpenRouter directly (such as <a href="#eca">eca</a>, <a href="#openusage">OpenUsage</a>, LiteLLM, or local routers like
+<a href="https://github.com/prismhq/jev-router">jev-router</a>), the secret <code>OPENROUTER_API_KEY</code> from <a href="https://openrouter.ai/keys">https://openrouter.ai/keys</a> lives with my other <a href="#secrets">secrets</a> in
+<code>~/.bashrc.d/secret/secrets.env</code> (managed via personal 1Password vault).
 </p>
 
 <div class="org-src-container">
@@ -3519,10 +3561,10 @@ The actual secret <code>OPENROUTER_API_KEY</code> from <a href="https://openrout
 </div>
 
 <p>
-The actual OpenRouter provider/model routing config (which models, privacy/data-collection preferences, etc.) is
-configured as part of <a href="https://eca.dev/">eca</a>'s <code>openrouter</code> provider — see the <code>eca</code> section above — since eca is the thing consuming this
-key.
+The actual OpenRouter provider/model routing config (which models, privacy/data-collection preferences, etc.) for eca is
+configured as part of <a href="https://eca.dev/">eca</a>'s <code>openrouter</code> provider — see the <code>eca</code> section above.
 </p>
+</div>
 </div>
 </div>
 <div id="outline-container-openusage" class="outline-2">
@@ -5127,7 +5169,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-09-18 Fri 22:34</p>
+<p class="date">2026-09-19 Sat 07:00</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>

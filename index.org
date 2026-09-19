@@ -501,18 +501,10 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
   #+begin_src sh
     alias c='claude'
-
-    # Route the Claude Code CLI to OpenRouter
-    # export ANTHROPIC_BASE_URL="https://openrouter.ai/api"
-    # export ANTHROPIC_AUTH_TOKEN="${OPENROUTER_API_KEY}"
-    # export ANTHROPIC_API_KEY=""
-    # export ANTHROPIC_MODEL="anthropic/claude-opus-4.8"
-    # export ANTHROPIC_SMALL_FAST_MODEL="anthropic/claude-haiku-4.5"
-    # export ANTHROPIC_DEFAULT_HAIKU_MODEL="anthropic/claude-haiku-4.5"
   #+end_src
 
-  Note that OpenRouter expects its own model slugs, e.g. =anthropic/claude-opus-4.8=.  Claude Code's native model
-  IDs (e.g. =claude-opus-4-8[1m]=) are rejected by OpenRouter, hence the explicit =ANTHROPIC_MODEL= overrides above.
+  To route Claude Code through OpenRouter on personal machines without polluting the ambient environment or
+  interfering with enterprise credentials on work machines, use OpenRouter's official [[#ori][ori]] harness: =ori claude=.
 
 * [[https://eca.dev/][eca]]
   :PROPERTIES:
@@ -1932,17 +1924,48 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   :CUSTOM_ID: openrouter
   :END:
 
-  The actual secret =OPENROUTER_API_KEY= from https://openrouter.ai/keys lives with my other [[*Secrets][secrets]] in
-  =~/.bashrc.d/secret/secrets.env=.
+** [[https://openrouter.ai/ori/harness][ori]]
+   :PROPERTIES:
+   :CUSTOM_ID: ori
+   :END:
 
-  #+begin_src sh :tangle no
-    # OpenRouter API Key
-    OPENROUTER_API_KEY="..."
-  #+end_src
+   [[https://openrouter.ai/ori/harness][ori]] is OpenRouter's official harness for running coding agent CLIs (Claude Code, Codex, Hermes, OpenCode, Pi, etc.)
+   on OpenRouter models with OAuth PKCE authentication.  Because =ori= authenticates via browser OAuth and wraps agent
+   processes directly, it avoids the need to export global =ANTHROPIC_*= environment variables, ensuring enterprise
+   credentials remain completely untouched on work machines.
 
-  The actual OpenRouter provider/model routing config (which models, privacy/data-collection preferences, etc.) is
-  configured as part of [[https://eca.dev/][eca]]'s =openrouter= provider — see the =eca= section above — since eca is the thing consuming this
-  key.
+   Install or update:
+
+   #+begin_src sh :tangle no
+     # Install standalone ori to ~/.local/bin/ori (on PATH for Bash and Nushell)
+     curl -fsSL https://openrouter.ai/labs/ori/install.sh | bash
+
+     # Update
+     ori update
+   #+end_src
+
+   Launch Claude Code via OpenRouter:
+
+   #+begin_src sh :tangle no
+     ori claude
+   #+end_src
+
+** Environment & Downstream Tools
+   :PROPERTIES:
+   :CUSTOM_ID: openrouter-env
+   :END:
+
+   For non-harness tools that consume OpenRouter directly (such as [[#eca][eca]], [[#openusage][OpenUsage]], LiteLLM, or local routers like
+   [[https://github.com/prismhq/jev-router][jev-router]]), the secret =OPENROUTER_API_KEY= from https://openrouter.ai/keys lives with my other [[*Secrets][secrets]] in
+   =~/.bashrc.d/secret/secrets.env= (managed via personal 1Password vault).
+
+   #+begin_src sh :tangle no
+     # OpenRouter API Key
+     OPENROUTER_API_KEY="..."
+   #+end_src
+
+   The actual OpenRouter provider/model routing config (which models, privacy/data-collection preferences, etc.) for eca is
+   configured as part of [[https://eca.dev/][eca]]'s =openrouter= provider — see the =eca= section above.
 
 * OpenUsage
   :PROPERTIES:
