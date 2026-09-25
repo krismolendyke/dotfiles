@@ -1736,6 +1736,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      $env.EDITOR = "emacsclient"
      $env.VISUAL = "emacsclient"
      $env.DFT_DISPLAY = "side-by-side-show-both"
+     $env.RIPGREP_CONFIG_PATH = ($env.HOME | path join ".ripgreprc")
 
      $env.PATH = (
          $env.PATH
@@ -2133,6 +2134,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   #+begin_src sh
     export RIPGREP_CONFIG_PATH=${HOME}/.ripgreprc
   #+end_src
+
+  The [[#config-nu][Nushell]] equivalent lives in =config.nu=.
 
 ** =~/.ripgreprc=
    :PROPERTIES:
