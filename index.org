@@ -506,6 +506,26 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   To route Claude Code through OpenRouter on personal machines without polluting the ambient environment or
   interfering with enterprise credentials on work machines, use OpenRouter's official [[#ori][ori]] harness: =ori claude=.
 
+* [[https://difftastic.wilfred.me.uk/][Difftastic]]
+  :PROPERTIES:
+  :CUSTOM_ID: difftastic
+  :header-args: :mkdirp yes :tangle ~/.bashrc.d/112-difftastic.bash
+  :END:
+
+  =difft= has no configuration file; its defaults are set through =DFT_*= environment variables (see =difft --help=).
+  Explicit flags win over these, which lets callers that want something else override them, e.g. [[#git][Git]] passes
+  =--display=inline=.
+
+  Setting the display mode here, rather than in [[#jujutsu][Jujutsu]]'s =ui.diff-formatter= argv, lets =jj= use its built-in
+  =merge-tools.difft= invocation unmodified.  That invocation passes =--width=$width=, which =difft= needs because its
+  output is piped to a pager and it therefore cannot detect the terminal width on its own (it falls back to 80 columns).
+
+  #+begin_src sh
+    export DFT_DISPLAY=side-by-side-show-both
+  #+end_src
+
+  The [[#config-nu][Nushell]] equivalent lives in =config.nu=.
+
 * [[https://eca.dev/][eca]]
   :PROPERTIES:
   :CUSTOM_ID: eca
@@ -1175,7 +1195,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      [ui]
      color = "always"
      default-command = ["log", "--revisions", "trunk()::@ | ancestors(trunk(), 2)"]
-     diff-formatter = ["difft", "--color=always", "--display=side-by-side-show-both", "$left", "$right"]
+     diff-formatter = "difft"
 
      [user]
      email = "krismolendyke@users.noreply.github.com"
@@ -1715,6 +1735,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      $env.GOPATH = ($env.HOME | path join "code/go")
      $env.EDITOR = "emacsclient"
      $env.VISUAL = "emacsclient"
+     $env.DFT_DISPLAY = "side-by-side-show-both"
 
      $env.PATH = (
          $env.PATH

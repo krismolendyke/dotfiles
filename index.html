@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-09-20 Sun 14:19 -->
+<!-- 2026-09-25 Fri 14:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1232,6 +1232,7 @@ at <a href="https://github.com/krismolendyke/dotfiles/blob/master/index.org">ind
 </li>
 <li><a href="#carapace">Carapace</a></li>
 <li><a href="#claude">Claude</a></li>
+<li><a href="#difftastic">Difftastic</a></li>
 <li><a href="#eca">eca</a></li>
 <li><a href="#emacs">Emacs</a></li>
 <li><a href="#eza">eza</a>
@@ -1950,6 +1951,36 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/111-claude.bash
 <p>
 To route Claude Code through OpenRouter on personal machines without polluting the ambient environment or
 interfering with enterprise credentials on work machines, use OpenRouter's official <a href="#ori">ori</a> harness: <code>ori claude</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-difftastic" class="outline-2">
+<h2 id="difftastic"><a href="https://difftastic.wilfred.me.uk/">Difftastic</a></h2>
+<div class="outline-text-2" id="text-difftastic">
+<pre class="example">
+CUSTOM_ID: difftastic
+header-args: :mkdirp yes :tangle ~/.bashrc.d/112-difftastic.bash
+</pre>
+
+<p>
+<code>difft</code> has no configuration file; its defaults are set through <code>DFT_*</code> environment variables (see <code>difft --help</code>).
+Explicit flags win over these, which lets callers that want something else override them, e.g. <a href="#git">Git</a> passes
+<code>--display=inline</code>.
+</p>
+
+<p>
+Setting the display mode here, rather than in <a href="#jujutsu">Jujutsu</a>'s <code>ui.diff-formatter</code> argv, lets <code>jj</code> use its built-in
+<code>merge-tools.difft</code> invocation unmodified.  That invocation passes <code>--width=$width</code>, which <code>difft</code> needs because its
+output is piped to a pager and it therefore cannot detect the terminal width on its own (it falls back to 80 columns).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code><span class="org-builtin">export</span> <span class="org-variable-name">DFT_DISPLAY</span>=side-by-side-show-both
+</code></pre>
+</div>
+
+<p>
+The <a href="#config-nu">Nushell</a> equivalent lives in <code>config.nu</code>.
 </p>
 </div>
 </div>
@@ -2722,7 +2753,7 @@ header-args: :mkdirp yes :tangle ~/.config/jj/config.toml
 [<span class="org-type">ui</span>]
 <span class="org-variable-name">color</span> = <span class="org-string">"always"</span>
 <span class="org-variable-name">default-command</span> = [<span class="org-string">"log"</span>, <span class="org-string">"--revisions"</span>, <span class="org-string">"trunk()::@ | ancestors(trunk(), 2)"</span>]
-<span class="org-variable-name">diff-formatter</span> = [<span class="org-string">"difft"</span>, <span class="org-string">"--color=always"</span>, <span class="org-string">"--display=side-by-side-show-both"</span>, <span class="org-string">"$left"</span>, <span class="org-string">"$right"</span>]
+<span class="org-variable-name">diff-formatter</span> = <span class="org-string">"difft"</span>
 
 [<span class="org-type">user</span>]
 <span class="org-variable-name">email</span> = <span class="org-string">"krismolendyke@users.noreply.github.com"</span>
@@ -3275,6 +3306,7 @@ $env.SSH_AUTH_SOCK = ($env.HOME | path join ".1password/agent.sock")
 $env.GOPATH = ($env.HOME | path join "code/go")
 $env.EDITOR = "emacsclient"
 $env.VISUAL = "emacsclient"
+$env.DFT_DISPLAY = "side-by-side-show-both"
 
 $env.PATH = (
     $env.PATH
@@ -5191,7 +5223,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-09-20 Sun 14:18</p>
+<p class="date">2026-09-25 Fri 14:13</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>
