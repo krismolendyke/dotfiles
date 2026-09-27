@@ -1935,6 +1935,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    See [[#skills][Skills]].
 
    #+begin_src nu
+     # Fetch latest jj skill and install everywhere
      def k20e_agent_skills_sync [...args] {
          ^k20e-skills-sync ...$args
      }
