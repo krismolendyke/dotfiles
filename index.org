@@ -1158,7 +1158,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      :header-args: :mkdirp yes :tangle ~/.config/jj/config.toml
      :END:
 
-   =git.colocate= stays =true=. As of jj 0.46.0, =jj workspace add= also creates a Git worktree when the current workspace is colocated. Pass =--no-colocate= for a jj-only workspace.
+   =git.colocate= stays =true=. As of jj 0.46.0, =jj workspace add= also creates a Git worktree when the current workspace is colocated. Keep that worktree so tools that require a Git repo keep working.
 
    Snapshots do not sign. =signing.behavior= is =drop= so a locked 1Password agent does not fail every =jj= command. =git.sign-on-push= signs my commits at push time.
 
