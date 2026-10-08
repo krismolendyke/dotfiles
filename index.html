@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-09-25 Fri 14:19 -->
+<!-- 2026-10-08 Thu 08:08 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -2716,17 +2716,34 @@ CUSTOM_ID: config
 header-args: :mkdirp yes :tangle ~/.config/jj/config.toml
 </pre>
 
+<p>
+<code>git.colocate</code> stays <code>true</code>. As of jj 0.46.0, <code>jj workspace add</code> also creates a Git worktree when the current workspace is colocated. Pass <code>--no-colocate</code> for a jj-only workspace.
+</p>
+
+<p>
+Snapshots do not sign. <code>signing.behavior</code> is <code>drop</code> so a locked 1Password agent does not fail every <code>jj</code> command. <code>git.sign-on-push</code> signs my commits at push time.
+</p>
+
+<p>
+<code>tug</code> is <code>bookmark advance</code>. <code>revsets.bookmark-advance-to</code> is already <code>@-</code>, the same destination the old <code>bookmark move</code> alias used.
+</p>
+
+<p>
+<code>ui.editor</code> is <code>emacsclient</code> with jj 0.46.0's <code>$line</code> and <code>$path</code> substitutions, matching <code>EDITOR</code>.
+</p>
+
 <div class="org-src-container">
 <pre class="src src-toml"><code><span class="org-string">"$schema"</span> = <span class="org-string">"https://jj-vcs.github.io/jj/latest/config-schema.json"</span>
 
 [<span class="org-type">aliases</span>]
 <span class="org-variable-name">d</span> = [<span class="org-string">"diff"</span>, <span class="org-string">"--git"</span>]
 <span class="org-variable-name">l</span> = [<span class="org-string">"log"</span>, <span class="org-string">"--limit"</span>, <span class="org-string">"10"</span>]
-<span class="org-variable-name">rebase-all-onto-trunk</span> = [<span class="org-string">"rebase"</span>, <span class="org-string">"--source"</span>, <span class="org-string">"roots(trunk()..local_bookmarks)"</span>, <span class="org-string">"--destination"</span>, <span class="org-string">"trunk()"</span>]
-<span class="org-variable-name">tug</span> = [<span class="org-string">"bookmark"</span>, <span class="org-string">"move"</span>, <span class="org-string">"--from"</span>, <span class="org-string">"heads(::@- &amp; bookmarks())"</span>, <span class="org-string">"--to"</span>, <span class="org-string">"@-"</span>]
+<span class="org-variable-name">rebase-all-onto-trunk</span> = [<span class="org-string">"rebase"</span>, <span class="org-string">"--source"</span>, <span class="org-string">"roots(trunk()..local_bookmarks)"</span>, <span class="org-string">"--onto"</span>, <span class="org-string">"trunk()"</span>]
+<span class="org-variable-name">tug</span> = [<span class="org-string">"bookmark"</span>, <span class="org-string">"advance"</span>]
 
 [<span class="org-type">git</span>]
 <span class="org-variable-name">colocate</span> = <span class="org-keyword">true</span>
+<span class="org-variable-name">sign-on-push</span> = <span class="org-keyword">true</span>
 
 [<span class="org-type">remotes.origin</span>]
 <span class="org-variable-name">auto-track-bookmarks</span> = <span class="org-string">'regex:"^(main|master)$"'</span>
@@ -2743,7 +2760,7 @@ header-args: :mkdirp yes :tangle ~/.config/jj/config.toml
 [<span class="org-type">signing</span>]
 <span class="org-variable-name">backend</span> = <span class="org-string">"ssh"</span>
 <span class="org-variable-name">backends.ssh.program</span> = <span class="org-string">"/Applications/1Password.app/Contents/MacOS/op-ssh-sign"</span>
-<span class="org-variable-name">behavior</span> = <span class="org-string">"own"</span>
+<span class="org-variable-name">behavior</span> = <span class="org-string">"drop"</span>
 <span class="org-variable-name">key</span> = <span class="org-string">"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPFEgqTPapPtOUOAsoSH2o4VJbp1JFzvXaiuEpdS0KuK"</span>
 
 [<span class="org-type">template-aliases</span>]
@@ -2754,6 +2771,7 @@ header-args: :mkdirp yes :tangle ~/.config/jj/config.toml
 <span class="org-variable-name">color</span> = <span class="org-string">"always"</span>
 <span class="org-variable-name">default-command</span> = [<span class="org-string">"log"</span>, <span class="org-string">"--revisions"</span>, <span class="org-string">"trunk()::@ | ancestors(trunk(), 2)"</span>]
 <span class="org-variable-name">diff-formatter</span> = <span class="org-string">"difft"</span>
+<span class="org-variable-name">editor</span> = [<span class="org-string">"emacsclient"</span>, <span class="org-string">"+$line"</span>, <span class="org-string">"$path"</span>]
 
 [<span class="org-type">user</span>]
 <span class="org-variable-name">email</span> = <span class="org-string">"krismolendyke@users.noreply.github.com"</span>
@@ -3518,7 +3536,8 @@ See <a href="#skills">Skills</a>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-nu"><code>def k20e_agent_skills_sync [...args] {
+<pre class="src src-nu"><code># Fetch latest jj skill and install everywhere
+def k20e_agent_skills_sync [...args] {
     ^k20e-skills-sync ...$args
 }
 </code></pre>
@@ -5228,7 +5247,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-09-25 Fri 14:19</p>
+<p class="date">2026-10-08 Thu 08:05</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>
