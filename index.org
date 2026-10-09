@@ -1160,7 +1160,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
    =git.colocate= stays =true=. As of jj 0.46.0, =jj workspace add= also creates a Git worktree when the current workspace is colocated. Keep that worktree so tools that require a Git repo keep working.
 
-   Snapshots do not sign. =signing.behavior= is =drop= so a locked 1Password agent does not fail every =jj= command. =git.sign-on-push= signs my commits at push time.
+   Snapshots do not sign. =signing.behavior= is =drop= so a locked 1Password agent does not fail every =jj= command. =git.sign-on-push= signs my commits at push time. =ui.show-cryptographic-signatures= is on so =jj log= shows which of those commits are signed. That check is slower on large logs.
 
    =tug= is =bookmark advance=. =revsets.bookmark-advance-to= is already =@-=, the same destination the old =bookmark move= alias used.
 
@@ -1206,6 +1206,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      default-command = ["log", "--revisions", "trunk()::@ | ancestors(trunk(), 2)"]
      diff-formatter = "difft"
      editor = ["emacsclient", "+$line", "$path"]
+     show-cryptographic-signatures = true
 
      [user]
      email = "krismolendyke@users.noreply.github.com"
@@ -3215,13 +3216,13 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       requirements = ["jj",]
 
       [source]
-      command = "jj bookmark list --color always"
+      command = "jj --no-pager bookmark list --color always"
       ansi = true
       no_sort = true
       output = "{strip_ansi|split: :1}"
 
       [preview]
-      command = "jj show '{strip_ansi|split: :1}'"
+      command = "jj --no-pager show --git '{strip_ansi|split: :1}'"
     #+end_src
 
 *** Jujutsu Log
@@ -3237,13 +3238,13 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       requirements = ["jj",]
 
       [source]
-      command = "jj log --color always --template builtin_log_oneline --revisions ::@"
+      command = "jj --no-pager log --color always --template builtin_log_oneline --revisions ::@"
       ansi = true
       no_sort = true
       output = "{strip_ansi|split: :2}"
 
       [preview]
-      command = "jj show '{strip_ansi|split: :2}'"
+      command = "jj --no-pager show --git '{strip_ansi|split: :2}'"
     #+end_src
 
 ** Theme
