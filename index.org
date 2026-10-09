@@ -1160,7 +1160,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
    =git.colocate= stays =true=. As of jj 0.46.0, =jj workspace add= also creates a Git worktree when the current workspace is colocated. Keep that worktree so tools that require a Git repo keep working.
 
-   Snapshots do not sign. =signing.behavior= is =drop= so a locked 1Password agent does not fail every =jj= command. =git.sign-on-push= signs my commits at push time. =ui.show-cryptographic-signatures= is on so =jj log= shows which of those commits are signed. That check is slower on large logs.
+   Snapshots do not sign. =signing.behavior= is =drop= so a locked 1Password agent does not fail every =jj= command. =git.sign-on-push= signs my commits at push time. =ui.show-cryptographic-signatures= stays off. Unverified SSH signatures would otherwise show up in =jj log= as =[?]=.
 
    =tug= is =bookmark advance=. =revsets.bookmark-advance-to= is already =@-=, the same destination the old =bookmark move= alias used.
 
@@ -1206,7 +1206,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      default-command = ["log", "--revisions", "trunk()::@ | ancestors(trunk(), 2)"]
      diff-formatter = "difft"
      editor = ["emacsclient", "+$line", "$path"]
-     show-cryptographic-signatures = true
+     show-cryptographic-signatures = false
 
      [user]
      email = "krismolendyke@users.noreply.github.com"

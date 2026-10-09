@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-08 Thu 20:05 -->
+<!-- 2026-10-08 Thu 20:11 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -2721,7 +2721,7 @@ header-args: :mkdirp yes :tangle ~/.config/jj/config.toml
 </p>
 
 <p>
-Snapshots do not sign. <code>signing.behavior</code> is <code>drop</code> so a locked 1Password agent does not fail every <code>jj</code> command. <code>git.sign-on-push</code> signs my commits at push time. <code>ui.show-cryptographic-signatures</code> is on so <code>jj log</code> shows which of those commits are signed. That check is slower on large logs.
+Snapshots do not sign. <code>signing.behavior</code> is <code>drop</code> so a locked 1Password agent does not fail every <code>jj</code> command. <code>git.sign-on-push</code> signs my commits at push time. <code>ui.show-cryptographic-signatures</code> stays off. Unverified SSH signatures would otherwise show up in <code>jj log</code> as <code>[?]</code>.
 </p>
 
 <p>
@@ -2772,7 +2772,7 @@ Snapshots do not sign. <code>signing.behavior</code> is <code>drop</code> so a l
 <span class="org-variable-name">default-command</span> = [<span class="org-string">"log"</span>, <span class="org-string">"--revisions"</span>, <span class="org-string">"trunk()::@ | ancestors(trunk(), 2)"</span>]
 <span class="org-variable-name">diff-formatter</span> = <span class="org-string">"difft"</span>
 <span class="org-variable-name">editor</span> = [<span class="org-string">"emacsclient"</span>, <span class="org-string">"+$line"</span>, <span class="org-string">"$path"</span>]
-<span class="org-variable-name">show-cryptographic-signatures</span> = <span class="org-keyword">true</span>
+<span class="org-variable-name">show-cryptographic-signatures</span> = <span class="org-keyword">false</span>
 
 [<span class="org-type">user</span>]
 <span class="org-variable-name">email</span> = <span class="org-string">"krismolendyke@users.noreply.github.com"</span>
@@ -5248,7 +5248,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-10-08 Thu 20:05</p>
+<p class="date">2026-10-08 Thu 20:10</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>
