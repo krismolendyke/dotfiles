@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-08 Thu 20:11 -->
+<!-- 2026-10-13 Tue 10:26 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -3446,7 +3446,8 @@ let carapace_aliases = {
     ll: "ls"
 }
 
-def carapace-completer [spans: list&lt;string&gt;] {
+def carapace-completer [place] {
+    let spans = $place.command
     let expanded_spans = if ($spans.0 in $carapace_aliases) {
         $spans | skip 1 | prepend ($carapace_aliases | get $spans.0)
     } else {
@@ -3461,7 +3462,7 @@ def carapace-completer [spans: list&lt;string&gt;] {
 $env.config.completions.external = {
     enable: true
     max_results: 100
-    completer: {|spans| carapace-completer $spans}
+    completer: {|place| carapace-completer $place}
 }
 
 
@@ -5248,7 +5249,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-10-08 Thu 20:10</p>
+<p class="date">2026-10-13 Tue 10:25</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>

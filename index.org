@@ -1867,7 +1867,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
          ll: "ls"
      }
 
-     def carapace-completer [spans: list<string>] {
+     def carapace-completer [place] {
+         let spans = $place.command
          let expanded_spans = if ($spans.0 in $carapace_aliases) {
              $spans | skip 1 | prepend ($carapace_aliases | get $spans.0)
          } else {
@@ -1882,7 +1883,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      $env.config.completions.external = {
          enable: true
          max_results: 100
-         completer: {|spans| carapace-completer $spans}
+         completer: {|place| carapace-completer $place}
      }
 
 
