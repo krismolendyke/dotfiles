@@ -2138,6 +2138,33 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     [ -d "${HOME}/.rd/bin" ] && pathmunge "${HOME}/.rd/bin"
   #+end_src
 
+* [[https://www.superlogical.com/rex/docs/][Rex]]
+  :PROPERTIES:
+  :CUSTOM_ID: rex
+  :header-args: :mkdirp yes :tangle ~/.config/rex/init.lua
+  :END:
+
+  Rex is configured in Lua.  See https://www.superlogical.com/rex/docs/customize/keyboard-shortcuts.md
+
+  After tangling, run =rex config check= and then =rex config reload=.  =rex keymap= lists what loaded.
+
+  Word movement and deletion match the [[#ghostty][Ghostty]] =keybind= entries, using =pane.send_key= with the =alt= equivalents.
+
+  - Remember to change the "Hide Rex" menu shortcut, as with Ghostty, so =cmd+h= reaches the terminal.
+  - =cmd+d= replaces a default Rex shortcut.
+  - Shortcuts set in the app win over this file.
+
+  #+begin_src lua
+    -- Backward word
+    rex.bind("cmd+b", "pane.send_key", { key = "alt+b" })
+    -- Forward word
+    rex.bind("cmd+f", "pane.send_key", { key = "alt+f" })
+    -- Forward erase word
+    rex.bind("cmd+d", "pane.send_key", { key = "alt+d" })
+    -- Backward erase word
+    rex.bind("cmd+h", "pane.send_key", { key = "alt+backspace" })
+  #+end_src
+
 * =ripgrep=
   :PROPERTIES:
   :CUSTOM_ID: ripgrep
