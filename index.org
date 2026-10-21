@@ -917,12 +917,15 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    #+begin_src gitignore
      # -*- mode: gitignore; -*-
 
+     .bashrc.d/secret/
+     .claude/agent-memory/
+     .claude/scheduled_tasks.lock
+     .claude/settings.local.json
+     .claude/worktrees/
+     .eca/
+     .gemini/
      .jj/
      .zed/
-     .bashrc.d/secret/
-     .claude/
-     .gemini/
-     .eca/
 
      ##########################################################################
      # Below from:                                                            #
