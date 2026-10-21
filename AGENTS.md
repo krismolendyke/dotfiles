@@ -39,11 +39,5 @@ This repository contains literate programming dotfiles created and maintained in
 5. **Org HTML Export (Required)**:
    - An `(org-export-dispatch &optional ARG)` to HTML of the `index.org` file (generating `index.html`) MUST accompany any and all edits to `index.org` after the quality gate has been passed and immediately before describing the revision / creating a new change.
    - Interactive (Emacs): `C-c C-e h h`. An already-running Emacs already loads the custom export config below via `custom.org`'s *Export* section, so nothing extra is needed here.
-   - Headless CLI: MUST load the custom export config from the `~/.emacs.d` repo (`k20e-org-html-export.el`) — it sets `org-html-prefer-user-labels`, the postamble format, and inlines `org.css` plus the Font Awesome/Google Fonts/Tufte CSS head-extras that `index.html` actually ships with. Plain `ox-html` produces unstyled, non-matching output. Requires the `~/.emacs.d` repo to be checked out:
-     ```bash
-     emacs --batch \
-           --directory "$(dirname "$(find ~/.emacs.d/elpa -name htmlize.el | head -1)")" \
-           --load ~/.emacs.d/elisp/k20e-org-html-export.el \
-           --visit index.org \
-           --execute '(org-html-export-to-html)'
-     ```
+   - Headless CLI: run `just publish`. It loads the custom export config from the `~/.emacs.d` repo (`k20e-org-html-export.el`) — it sets `org-html-prefer-user-labels`, the postamble format, and inlines `org.css` plus the Font Awesome/Google Fonts/Tufte CSS head-extras that `index.html` actually ships with. Plain `ox-html` produces unstyled, non-matching output. Requires the `~/.emacs.d` repo to be checked out.
+   - Do not hand-roll the `emacs --batch` command. That config does not activate the installed packages or register `nu-ts-mode`, so a bare batch export loses syntax highlighting for YAML, Markdown, gitignore and Nushell blocks and churns well over a thousand lines of `index.html`. The `Justfile` recipe supplies both. A correct export differs from the committed `index.html` only in the timestamps.
