@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-10-21 Wed 12:53 -->
+<!-- 2026-10-22 Thu 10:05 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -2430,144 +2430,145 @@ header-args: :mkdirp yes :tangle ~/.gitignore-global
 </pre>
 
 <div class="org-src-container">
-<pre class="src src-gitignore"><code> # -<span class="org-keyword">*</span>- mode: gitignore; -<span class="org-keyword">*</span>-
+<pre class="src src-gitignore"><code><span class="org-comment"># -*- mode: gitignore; -*-</span>
 
 .bashrc.d<span class="org-constant">/</span>secret<span class="org-constant">/</span>
- .claude<span class="org-constant">/</span>agent-memory<span class="org-constant">/</span>
- .claude<span class="org-constant">/</span>scheduled_tasks.lock
- .claude<span class="org-constant">/</span>settings.local.json
- .claude<span class="org-constant">/</span>worktrees<span class="org-constant">/</span>
- .eca<span class="org-constant">/</span>
- .gemini<span class="org-constant">/</span>
- .jj<span class="org-constant">/</span>
- .zed<span class="org-constant">/</span>
+.claude<span class="org-constant">/</span>agent-memory<span class="org-constant">/</span>
+.claude<span class="org-constant">/</span>scheduled_tasks.lock
+.claude<span class="org-constant">/</span>settings.local.json
+.claude<span class="org-constant">/</span>worktrees<span class="org-constant">/</span>
+.eca<span class="org-constant">/</span>
+.gemini<span class="org-constant">/</span>
+.jj<span class="org-constant">/</span>
+.jj-workspaces<span class="org-constant">/</span>
+.zed<span class="org-constant">/</span>
 
- ##########################################################################
- # Below from:                                                            #
- #                                                                        #
- # https:<span class="org-constant">//</span>github.com<span class="org-constant">/</span>github<span class="org-constant">/</span>gitignore<span class="org-constant">/</span>blob<span class="org-constant">/</span>master<span class="org-constant">/</span>Global<span class="org-constant">/</span>Linux.gitignore #
- ##########################################################################
+<span class="org-comment">##########################################################################</span>
+<span class="org-comment"># Below from:                                                            #</span>
+<span class="org-comment">#                                                                        #</span>
+<span class="org-comment"># https://github.com/github/gitignore/blob/master/Global/Linux.gitignore #</span>
+<span class="org-comment">##########################################################################</span>
 
- <span class="org-keyword">*</span>~
+<span class="org-keyword">*</span>~
 
- # temporary files which can be created if a process still has a handle open of a deleted file
- .fuse_hidden<span class="org-keyword">*</span>
+<span class="org-comment"># temporary files which can be created if a process still has a handle open of a deleted file</span>
+.fuse_hidden<span class="org-keyword">*</span>
 
- # KDE directory preferences
- .directory
+<span class="org-comment"># KDE directory preferences</span>
+.directory
 
- # Linux trash folder which might appear on any partition or disk
- .Trash-<span class="org-keyword">*</span>
+<span class="org-comment"># Linux trash folder which might appear on any partition or disk</span>
+.Trash-<span class="org-keyword">*</span>
 
- # .nfs files are created when an open file is removed but is still being accessed
- .nfs<span class="org-keyword">*</span>
-
-
- ##########################################################################
- # Below from:                                                            #
- #                                                                        #
- # https:<span class="org-constant">//</span>github.com<span class="org-constant">/</span>github<span class="org-constant">/</span>gitignore<span class="org-constant">/</span>blob<span class="org-constant">/</span>master<span class="org-constant">/</span>Global<span class="org-constant">/</span>macOS.gitignore #
- ##########################################################################
-
- .DS_Store
- .AppleDouble
- .LSOverride
-
- # Icon must end with two \r
- Icon
+<span class="org-comment"># .nfs files are created when an open file is removed but is still being accessed</span>
+.nfs<span class="org-keyword">*</span>
 
 
- # Thumbnails
- ._<span class="org-keyword">*</span>
+<span class="org-comment">##########################################################################</span>
+<span class="org-comment"># Below from:                                                            #</span>
+<span class="org-comment">#                                                                        #</span>
+<span class="org-comment"># https://github.com/github/gitignore/blob/master/Global/macOS.gitignore #</span>
+<span class="org-comment">##########################################################################</span>
 
- # Files that might appear in the root of a volume
- .DocumentRevisions-V100
- .fseventsd
- .Spotlight-V100
- .TemporaryItems
- .Trashes
- .VolumeIcon.icns
+.DS_Store
+.AppleDouble
+.LSOverride
 
- # Directories potentially created on remote AFP share
- .AppleDB
- .AppleDesktop
- Network Trash Folder
- Temporary Items
- .apdisk
+<span class="org-comment"># Icon must end with two \r</span>
+Icon
 
 
- ##############################################################################
- # Below from:                                                                #
- #                                                                            #
- # https:<span class="org-constant">//</span>github.com<span class="org-constant">/</span>github<span class="org-constant">/</span>gitignore<span class="org-constant">/</span>blob<span class="org-constant">/</span>master<span class="org-constant">/</span>Global<span class="org-constant">/</span>JetBrains.gitignore #
- ##############################################################################
+<span class="org-comment"># Thumbnails</span>
+._<span class="org-keyword">*</span>
 
- # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
- # Reference: https:<span class="org-constant">//</span>intellij-support.jetbrains.com<span class="org-constant">/</span>hc<span class="org-constant">/</span>en-us<span class="org-constant">/</span>articles<span class="org-constant">/</span>206544839
+<span class="org-comment"># Files that might appear in the root of a volume</span>
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
 
- # User-specific stuff
- .idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>workspace.xml
- .idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>tasks.xml
- .idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>usage.statistics.xml
- .idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dictionaries
- .idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>shelf
+<span class="org-comment"># Directories potentially created on remote AFP share</span>
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
 
- # Generated files
- .idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>contentModel.xml
 
- # Sensitive or high-churn files
- .idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dataSources<span class="org-constant">/</span>
- .idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dataSources.ids
- .idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dataSources.local.xml
- .idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>sqlDataSources.xml
- .idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dynamic.xml
- .idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>uiDesigner.xml
- .idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dbnavigator.xml
+<span class="org-comment">##############################################################################</span>
+<span class="org-comment"># Below from:                                                                #</span>
+<span class="org-comment">#                                                                            #</span>
+<span class="org-comment"># https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore #</span>
+<span class="org-comment">##############################################################################</span>
 
- # Gradle
- .idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>gradle.xml
- .idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>libraries
+<span class="org-comment"># Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm</span>
+<span class="org-comment"># Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839</span>
 
- # Gradle and Maven with auto-import
- # When using Gradle or Maven with auto-import, you should exclude module files,
- # since they will be recreated, and may cause churn.  Uncomment if using
- # auto-import.
- .idea<span class="org-constant">/</span>modules.xml
- .idea<span class="org-constant">/</span><span class="org-keyword">*</span>.iml
- .idea<span class="org-constant">/</span>modules
+<span class="org-comment"># User-specific stuff</span>
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>workspace.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>tasks.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>usage.statistics.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dictionaries
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>shelf
 
- # CMake
- cmake-build-<span class="org-keyword">*</span><span class="org-constant">/</span>
+<span class="org-comment"># Generated files</span>
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>contentModel.xml
 
- # Mongo Explorer plugin
- .idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>mongoSettings.xml
+<span class="org-comment"># Sensitive or high-churn files</span>
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dataSources<span class="org-constant">/</span>
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dataSources.ids
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dataSources.local.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>sqlDataSources.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dynamic.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>uiDesigner.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>dbnavigator.xml
 
- # File-based project format
- <span class="org-keyword">*</span>.iws
+<span class="org-comment"># Gradle</span>
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>gradle.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>libraries
 
- # IntelliJ
- out<span class="org-constant">/</span>
+<span class="org-comment"># Gradle and Maven with auto-import</span>
+<span class="org-comment"># When using Gradle or Maven with auto-import, you should exclude module files,</span>
+<span class="org-comment"># since they will be recreated, and may cause churn.  Uncomment if using</span>
+<span class="org-comment"># auto-import.</span>
+.idea<span class="org-constant">/</span>modules.xml
+.idea<span class="org-constant">/</span><span class="org-keyword">*</span>.iml
+.idea<span class="org-constant">/</span>modules
 
- # mpeltonen<span class="org-constant">/</span>sbt-idea plugin
- .idea_modules<span class="org-constant">/</span>
+<span class="org-comment"># CMake</span>
+cmake-build-<span class="org-keyword">*</span><span class="org-constant">/</span>
 
- # JIRA plugin
- atlassian-ide-plugin.xml
+<span class="org-comment"># Mongo Explorer plugin</span>
+.idea<span class="org-constant">/</span><span class="org-keyword">**</span><span class="org-constant">/</span>mongoSettings.xml
 
- # Cursive Clojure plugin
- .idea<span class="org-constant">/</span>replstate.xml
+<span class="org-comment"># File-based project format</span>
+<span class="org-keyword">*</span>.iws
 
- # Crashlytics plugin (for Android Studio and IntelliJ)
- com_crashlytics_export_strings.xml
- crashlytics.properties
- crashlytics-build.properties
- fabric.properties
+<span class="org-comment"># IntelliJ</span>
+out<span class="org-constant">/</span>
 
- # Editor-based Rest Client
- .idea<span class="org-constant">/</span>httpRequests
+<span class="org-comment"># mpeltonen/sbt-idea plugin</span>
+.idea_modules<span class="org-constant">/</span>
 
- # Android studio 3.1+ serialized cache file
- .idea<span class="org-constant">/</span>caches<span class="org-constant">/</span>build_file_checksums.ser
+<span class="org-comment"># JIRA plugin</span>
+atlassian-ide-plugin.xml
+
+<span class="org-comment"># Cursive Clojure plugin</span>
+.idea<span class="org-constant">/</span>replstate.xml
+
+<span class="org-comment"># Crashlytics plugin (for Android Studio and IntelliJ)</span>
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+<span class="org-comment"># Editor-based Rest Client</span>
+.idea<span class="org-constant">/</span>httpRequests
+
+<span class="org-comment"># Android studio 3.1+ serialized cache file</span>
+.idea<span class="org-constant">/</span>caches<span class="org-constant">/</span>build_file_checksums.ser
 </code></pre>
 </div>
 </div>
@@ -5294,7 +5295,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-10-21 Wed 12:39</p>
+<p class="date">2026-10-22 Thu 10:05</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>
