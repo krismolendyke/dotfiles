@@ -1164,7 +1164,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
    =git.colocate= stays =true=. As of jj 0.46.0, =jj workspace add= also creates a Git worktree when the current workspace is colocated. Keep that worktree so tools that require a Git repo keep working.
 
-   Snapshots do not sign. =signing.behavior= is =drop= so a locked 1Password agent does not fail every =jj= command. =git.sign-on-push= signs my commits at push time. =ui.show-cryptographic-signatures= stays off. Unverified SSH signatures would otherwise show up in =jj log= as =[?]=.
+   Snapshots do not sign. =signing.behavior= is =drop= so a locked 1Password agent does not fail every =jj= command. =revsets.git-sign-on-push= signs my commits at push time. =ui.show-cryptographic-signatures= stays off. Unverified SSH signatures would otherwise show up in =jj log= as =[?]=.
 
    =tug= is =bookmark advance=. =revsets.bookmark-advance-to= is already =@-=, the same destination the old =bookmark move= alias used.
 
@@ -1181,7 +1181,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      [git]
      colocate = true
-     sign-on-push = true
 
      [remotes.origin]
      auto-track-bookmarks = 'regex:"^(main|master)$"'
@@ -1193,6 +1192,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      [revsets]
      bookmark-advance-to = "@-"
+     git-sign-on-push = "~signed() & mine()"
      log = "@ | ancestors(@) | ancestors(immutable_heads().., 2) | trunk()"
 
      [signing]
