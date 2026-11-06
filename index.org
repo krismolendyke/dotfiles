@@ -3268,13 +3268,13 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       requirements = ["jj",]
 
       [source]
-      command = "jj --no-pager log --color always --template builtin_log_oneline --revisions ::@"
+      command = "jj --no-pager log --no-graph --color always --template builtin_log_oneline --revisions ::@"
       ansi = true
       no_sort = true
-      output = "{strip_ansi|split: :2}"
+      output = "{strip_ansi|split: :0}"
 
       [preview]
-      command = "jj --no-pager --color always show --git '{strip_ansi|split: :2}'"
+      command = "jj --no-pager --color always show --git '{strip_ansi|split: :0}'"
     #+end_src
 
 ** Theme

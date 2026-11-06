@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-05 Thu 21:24 -->
+<!-- 2026-11-05 Thu 21:32 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -5146,13 +5146,13 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/jj-log.toml
 <span class="org-variable-name">requirements</span> = [<span class="org-string">"jj"</span>,]
 
 [<span class="org-type">source</span>]
-<span class="org-variable-name">command</span> = <span class="org-string">"jj --no-pager log --color always --template builtin_log_oneline --revisions ::@"</span>
+<span class="org-variable-name">command</span> = <span class="org-string">"jj --no-pager log --no-graph --color always --template builtin_log_oneline --revisions ::@"</span>
 <span class="org-variable-name">ansi</span> = <span class="org-keyword">true</span>
 <span class="org-variable-name">no_sort</span> = <span class="org-keyword">true</span>
-<span class="org-variable-name">output</span> = <span class="org-string">"{strip_ansi|split: :2}"</span>
+<span class="org-variable-name">output</span> = <span class="org-string">"{strip_ansi|split: :0}"</span>
 
 [<span class="org-type">preview</span>]
-<span class="org-variable-name">command</span> = <span class="org-string">"jj --no-pager --color always show --git '{strip_ansi|split: :2}'"</span>
+<span class="org-variable-name">command</span> = <span class="org-string">"jj --no-pager --color always show --git '{strip_ansi|split: :0}'"</span>
 </code></pre>
 </div>
 </div>
@@ -5288,7 +5288,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-11-05 Thu 21:23</p>
+<p class="date">2026-11-05 Thu 21:32</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>
