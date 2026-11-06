@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-05 Thu 21:02 -->
+<!-- 2026-11-05 Thu 21:20 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1559,7 +1559,7 @@ Aliases:
 <span class="org-builtin">alias</span> <span class="org-variable-name">dirs</span>=<span class="org-string">"dirs -v"</span>
 <span class="org-keyword">function</span> <span class="org-function-name">k20e_cd_root</span>() {
     <span class="org-builtin">local</span> root
-    <span class="org-variable-name">root</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">jj root 2&gt;/dev/null || git rev-parse --show-toplevel 2&gt;/dev/null</span><span class="org-string">)"</span> &amp;&amp; [ -n <span class="org-string">"$root"</span> ] &amp;&amp; [ <span class="org-string">"${PWD}"</span> != <span class="org-string">"$root"</span> ] &amp;&amp; { <span class="org-builtin">cd</span> <span class="org-string">"$root"</span> || <span class="org-keyword">return</span>; }
+    <span class="org-variable-name">root</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">jj --ignore-working-copy --no-pager --color=never root 2&gt;/dev/null || git rev-parse --show-toplevel 2&gt;/dev/null</span><span class="org-string">)"</span> &amp;&amp; [ -n <span class="org-string">"$root"</span> ] &amp;&amp; [ <span class="org-string">"${PWD}"</span> != <span class="org-string">"$root"</span> ] &amp;&amp; { <span class="org-builtin">cd</span> <span class="org-string">"$root"</span> || <span class="org-keyword">return</span>; }
 }
 <span class="org-builtin">alias</span> <span class="org-variable-name">r</span>=k20e_cd_root
 <span class="org-builtin">alias</span> <span class="org-variable-name">tree</span>=<span class="org-string">"tree -C"</span>
@@ -2773,7 +2773,7 @@ Snapshots do not sign. <code>signing.behavior</code> is <code>drop</code> so a l
 <span class="org-string">"format_timestamp(timestamp)"</span> = <span class="org-string">"timestamp.ago()"</span>
 
 [<span class="org-type">ui</span>]
-<span class="org-variable-name">color</span> = <span class="org-string">"always"</span>
+<span class="org-variable-name">color</span> = <span class="org-string">"auto"</span>
 <span class="org-variable-name">default-command</span> = <span class="org-string">"log"</span>
 <span class="org-variable-name">diff-formatter</span> = <span class="org-string">"difft"</span>
 <span class="org-variable-name">editor</span> = [<span class="org-string">"emacsclient"</span>, <span class="org-string">"+$line"</span>, <span class="org-string">"$path"</span>]
@@ -3387,7 +3387,7 @@ k20e_load_secrets
 }
 
 <span class="org-keyword">def</span> --env <span class="org-function-name">r</span> [] {
-    <span class="org-keyword">let</span> <span class="org-variable-name">jj_root</span> = (<span class="org-keyword">do</span> { ^jj <span class="org-string">root</span> } | complete)
+    <span class="org-keyword">let</span> <span class="org-variable-name">jj_root</span> = (<span class="org-keyword">do</span> { ^jj --ignore-working-copy --no-pager --color=<span class="org-string">never</span> <span class="org-string">root</span> } | complete)
     <span class="org-keyword">let</span> <span class="org-variable-name">root</span> = <span class="org-keyword">if</span> <span class="org-misc-punctuation">$</span><span class="org-variable-use">jj_root</span>.exit_code == <span class="org-number">0</span> {
         <span class="org-misc-punctuation">$</span><span class="org-variable-use">jj_root</span>.stdout | str <span class="org-string">trim</span>
     } <span class="org-keyword">else</span> {
@@ -4075,7 +4075,7 @@ mkdir -p <span class="org-string">"$cache_dir"</span>
         jj -R <span class="org-string">"$clone_dir"</span> git fetch --remote origin --quiet
         jj -R <span class="org-string">"$clone_dir"</span> new <span class="org-string">'trunk()'</span> &gt;/dev/null 2&gt;&amp;1
     <span class="org-keyword">fi</span>
-    <span class="org-variable-name">trunk_info</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">jj -R "$clone_dir" log -r 'trunk(</span><span class="org-string">)' --no-graph -T 'change_id.shortest() ++ ": " ++ description.first_line()' 2&gt;/dev/null || true)"</span>
+    <span class="org-variable-name">trunk_info</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">jj --no-pager --color=never -R "$clone_dir" log -r 'trunk(</span><span class="org-string">)' --no-graph -T 'change_id.shortest() ++ ": " ++ description.first_line()' 2&gt;/dev/null || true)"</span>
     <span class="org-keyword">while</span> <span class="org-variable-name">IFS</span>= read -r skill_file; <span class="org-keyword">do</span>
         <span class="org-variable-name">skill_dir</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">dirname "$skill_file"</span><span class="org-string">)"</span>
         <span class="org-variable-name">skill_name</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">basename "$skill_dir"</span><span class="org-string">)"</span>
@@ -5133,7 +5133,7 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/jj-bookmark.toml
 <span class="org-variable-name">output</span> = <span class="org-string">"{strip_ansi|split: :1}"</span>
 
 [<span class="org-type">preview</span>]
-<span class="org-variable-name">command</span> = <span class="org-string">"jj --no-pager show --git '{strip_ansi|split: :1}'"</span>
+<span class="org-variable-name">command</span> = <span class="org-string">"jj --no-pager --color always show --git '{strip_ansi|split: :1}'"</span>
 </code></pre>
 </div>
 </div>
@@ -5159,7 +5159,7 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/jj-log.toml
 <span class="org-variable-name">output</span> = <span class="org-string">"{strip_ansi|split: :2}"</span>
 
 [<span class="org-type">preview</span>]
-<span class="org-variable-name">command</span> = <span class="org-string">"jj --no-pager show --git '{strip_ansi|split: :2}'"</span>
+<span class="org-variable-name">command</span> = <span class="org-string">"jj --no-pager --color always show --git '{strip_ansi|split: :2}'"</span>
 </code></pre>
 </div>
 </div>
@@ -5295,7 +5295,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-11-05 Thu 21:02</p>
+<p class="date">2026-11-05 Thu 21:14</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>

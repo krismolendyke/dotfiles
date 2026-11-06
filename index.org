@@ -174,7 +174,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      alias dirs="dirs -v"
      function k20e_cd_root() {
          local root
-         root="$(jj root 2>/dev/null || git rev-parse --show-toplevel 2>/dev/null)" && [ -n "$root" ] && [ "${PWD}" != "$root" ] && { cd "$root" || return; }
+         root="$(jj --ignore-working-copy --no-pager --color=never root 2>/dev/null || git rev-parse --show-toplevel 2>/dev/null)" && [ -n "$root" ] && [ "${PWD}" != "$root" ] && { cd "$root" || return; }
      }
      alias r=k20e_cd_root
      alias tree="tree -C"
@@ -1206,7 +1206,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      "format_timestamp(timestamp)" = "timestamp.ago()"
 
      [ui]
-     color = "always"
+     color = "auto"
      default-command = "log"
      diff-formatter = "difft"
      editor = ["emacsclient", "+$line", "$path"]
@@ -1807,7 +1807,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      }
 
      def --env r [] {
-         let jj_root = (do { ^jj root } | complete)
+         let jj_root = (do { ^jj --ignore-working-copy --no-pager --color=never root } | complete)
          let root = if $jj_root.exit_code == 0 {
              $jj_root.stdout | str trim
          } else {
@@ -2351,7 +2351,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
              jj -R "$clone_dir" git fetch --remote origin --quiet
              jj -R "$clone_dir" new 'trunk()' >/dev/null 2>&1
          fi
-         trunk_info="$(jj -R "$clone_dir" log -r 'trunk()' --no-graph -T 'change_id.shortest() ++ ": " ++ description.first_line()' 2>/dev/null || true)"
+         trunk_info="$(jj --no-pager --color=never -R "$clone_dir" log -r 'trunk()' --no-graph -T 'change_id.shortest() ++ ": " ++ description.first_line()' 2>/dev/null || true)"
          while IFS= read -r skill_file; do
              skill_dir="$(dirname "$skill_file")"
              skill_name="$(basename "$skill_dir")"
@@ -3256,7 +3256,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       output = "{strip_ansi|split: :1}"
 
       [preview]
-      command = "jj --no-pager show --git '{strip_ansi|split: :1}'"
+      command = "jj --no-pager --color always show --git '{strip_ansi|split: :1}'"
     #+end_src
 
 *** Jujutsu Log
@@ -3278,7 +3278,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       output = "{strip_ansi|split: :2}"
 
       [preview]
-      command = "jj --no-pager show --git '{strip_ansi|split: :2}'"
+      command = "jj --no-pager --color always show --git '{strip_ansi|split: :2}'"
     #+end_src
 
 ** Theme
