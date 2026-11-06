@@ -475,7 +475,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
             local target=""
             case "$alias_name" in
                 g) target="git" ;;
-                j) target="jj" ;;
                 k) target="kubectl" ;;
                 c) target="claude" ;;
             esac
@@ -489,7 +488,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
             fi
             _carapace_completer "$@"
         }
-        complete -o default -o bashdefault -F _carapace_alias_completer g j k c 2>/dev/null || true
+        complete -o default -o bashdefault -F _carapace_alias_completer g k c 2>/dev/null || true
     fi
   #+end_src
 
@@ -1142,18 +1141,15 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/991-jujutsu.bash
   :END:
 
-  Enable [[https://docs.jj-vcs.dev/latest/install-and-setup/#dynamic][dynamic completions]] for things like configured `revset-aliases`, etc.
+  Enable [[https://docs.jj-vcs.dev/latest/install-and-setup/#dynamic][dynamic completions]] for things like configured `revset-aliases`, etc., and wire up =j= as an alias for =jj= (to match =g= for =git=):
 
   #+begin_src sh
-    # shellcheck disable=SC1090
-    source <(COMPLETE=bash jj)
-    complete -F _clap_complete_jj -o nosort -o bashdefault -o default jj
-  #+end_src
-
-  =jj= isn't all that bad to type but I'm conditioned to type =g= for =git= after all these years.  So =j= for =jj= it is.
-
-  #+begin_src sh
-    alias j="jj" && complete -F _clap_complete_jj -o nosort -o bashdefault -o default j
+    if command -v jj >/dev/null 2>&1; then
+        # shellcheck disable=SC1090
+        source <(COMPLETE=bash jj)
+        alias j="jj"
+        complete -o nospace -o bashdefault -o nosort -F _clap_complete_jj j
+    fi
   #+end_src
 
 ** =~.config/=
