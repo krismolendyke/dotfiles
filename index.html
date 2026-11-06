@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-05 Thu 10:22 -->
+<!-- 2026-11-05 Thu 21:02 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -2730,7 +2730,7 @@ Snapshots do not sign. <code>signing.behavior</code> is <code>drop</code> so a l
 </p>
 
 <p>
-<code>tug</code> is <code>bookmark advance</code>. <code>revsets.bookmark-advance-to</code> is already <code>@-</code>, the same destination the old <code>bookmark move</code> alias used.
+<code>tug</code> is <code>bookmark advance</code> with <code>revsets.bookmark-advance-to</code> set to <code>@-</code>, the same destination the old <code>bookmark move</code> alias used.
 </p>
 
 <p>
@@ -2760,7 +2760,7 @@ Snapshots do not sign. <code>signing.behavior</code> is <code>drop</code> so a l
 [<span class="org-type">revsets</span>]
 <span class="org-variable-name">bookmark-advance-to</span> = <span class="org-string">"@-"</span>
 <span class="org-variable-name">git-sign-on-push</span> = <span class="org-string">"~signed() &amp; mine()"</span>
-<span class="org-variable-name">log</span> = <span class="org-string">"@ | ancestors(@) | ancestors(immutable_heads().., 2) | trunk()"</span>
+<span class="org-variable-name">log</span> = <span class="org-string">"present(@) | trunk()..@ | ancestors(immutable_heads().., 2) | ancestors(trunk(), 2)"</span>
 
 [<span class="org-type">signing</span>]
 <span class="org-variable-name">backend</span> = <span class="org-string">"ssh"</span>
@@ -2774,7 +2774,7 @@ Snapshots do not sign. <code>signing.behavior</code> is <code>drop</code> so a l
 
 [<span class="org-type">ui</span>]
 <span class="org-variable-name">color</span> = <span class="org-string">"always"</span>
-<span class="org-variable-name">default-command</span> = [<span class="org-string">"log"</span>, <span class="org-string">"--revisions"</span>, <span class="org-string">"trunk()::@ | ancestors(trunk(), 2)"</span>]
+<span class="org-variable-name">default-command</span> = <span class="org-string">"log"</span>
 <span class="org-variable-name">diff-formatter</span> = <span class="org-string">"difft"</span>
 <span class="org-variable-name">editor</span> = [<span class="org-string">"emacsclient"</span>, <span class="org-string">"+$line"</span>, <span class="org-string">"$path"</span>]
 <span class="org-variable-name">show-cryptographic-signatures</span> = <span class="org-keyword">false</span>
@@ -5295,7 +5295,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-11-05 Thu 10:14</p>
+<p class="date">2026-11-05 Thu 21:02</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>

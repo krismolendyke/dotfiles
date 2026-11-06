@@ -1166,7 +1166,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
    Snapshots do not sign. =signing.behavior= is =drop= so a locked 1Password agent does not fail every =jj= command. =revsets.git-sign-on-push= signs my commits at push time. =ui.show-cryptographic-signatures= stays off. Unverified SSH signatures would otherwise show up in =jj log= as =[?]=.
 
-   =tug= is =bookmark advance=. =revsets.bookmark-advance-to= is already =@-=, the same destination the old =bookmark move= alias used.
+   =tug= is =bookmark advance= with =revsets.bookmark-advance-to= set to =@-=, the same destination the old =bookmark move= alias used.
 
    =ui.editor= is =emacsclient= with jj 0.46.0's =$line= and =$path= substitutions, matching =EDITOR=.
 
@@ -1193,7 +1193,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      [revsets]
      bookmark-advance-to = "@-"
      git-sign-on-push = "~signed() & mine()"
-     log = "@ | ancestors(@) | ancestors(immutable_heads().., 2) | trunk()"
+     log = "present(@) | trunk()..@ | ancestors(immutable_heads().., 2) | ancestors(trunk(), 2)"
 
      [signing]
      backend = "ssh"
@@ -1207,7 +1207,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      [ui]
      color = "always"
-     default-command = ["log", "--revisions", "trunk()::@ | ancestors(trunk(), 2)"]
+     default-command = "log"
      diff-formatter = "difft"
      editor = ["emacsclient", "+$line", "$path"]
      show-cryptographic-signatures = false
