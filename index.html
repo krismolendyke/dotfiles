@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-06 Fri 19:22 -->
+<!-- 2026-11-06 Fri 19:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1849,8 +1849,8 @@ header-args: :mkdirp yes :tangle ~/.bashrc.d/108-bat.bash
 
 <div class="org-src-container">
 <pre class="src src-sh"><code><span class="org-keyword">if</span> [ -x <span class="org-string">"${HOMEBREW_PREFIX}/bin/bat"</span> ]; <span class="org-keyword">then</span>
-    <span class="org-builtin">alias</span> <span class="org-variable-name">cat</span>=<span class="org-string">'bat --theme auto:system --theme-dark default --theme-light GitHub'</span>
-    <span class="org-builtin">alias</span> <span class="org-variable-name">less</span>=<span class="org-string">'bat --theme auto:system --theme-dark default --theme-light GitHub'</span>
+    <span class="org-builtin">alias</span> <span class="org-variable-name">cat</span>=<span class="org-string">'bat'</span>
+    <span class="org-builtin">alias</span> <span class="org-variable-name">less</span>=<span class="org-string">'bat'</span>
 <span class="org-keyword">fi</span>
 </code></pre>
 </div>
@@ -1870,8 +1870,10 @@ header-args: :mkdirp yes :tangle ~/.config/bat/config
 </span>
 <span class="org-comment-delimiter"># </span><span class="org-comment">Specify desired highlighting theme (e.g. "TwoDark"). Run `bat --list-themes`
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">for a list of all available themes
-</span><span class="org-comment-delimiter">#</span><span class="org-comment">--theme="TwoDark"
-</span>
+</span><span class="org-variable-name">--theme</span>=<span class="org-string">"auto:system"</span>
+<span class="org-variable-name">--theme-dark</span>=<span class="org-string">"gruvbox-dark"</span>
+<span class="org-variable-name">--theme-light</span>=<span class="org-string">"gruvbox-light"</span>
+
 <span class="org-comment-delimiter"># </span><span class="org-comment">Enable this to use italic text on the terminal. This is not supported on all
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">terminal emulators (like tmux, by default):
 </span><span class="org-comment-delimiter">#</span><span class="org-comment">--italic-text=always
@@ -3432,7 +3434,7 @@ k20e_load_secrets
 
 <span class="org-keyword">def</span> <span class="org-function-name">cat</span> [...<span class="org-variable-name">args</span>] {
   <span class="org-keyword">if</span> (is-installed <span class="org-string">bat</span>) {
-    ^bat --theme <span class="org-string">auto:system</span> --theme-dark <span class="org-string">default</span> --theme-light <span class="org-string">GitHub</span> <span class="org-misc-punctuation">...$</span><span class="org-variable-use">args</span>
+    ^bat <span class="org-misc-punctuation">...$</span><span class="org-variable-use">args</span>
   } <span class="org-keyword">else</span> {
     ^cat <span class="org-misc-punctuation">...$</span><span class="org-variable-use">args</span>
   }
@@ -4881,7 +4883,7 @@ Modified from <a href="https://github.com/alexpasmantier/television/blob/main/.c
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">Bulitin syntax highlighting uses the same syntax highlighting engine as bat.
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">To get a list of your currently available themes, run `bat --list-themes`
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">Note that setting the BAT_THEME environment variable will override this setting.
-</span><span class="org-variable-name">theme</span> = <span class="org-string">"TwoDark"</span>
+</span><span class="org-variable-name">theme</span> = <span class="org-string">"gruvbox-dark"</span>
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Keybindings
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">----------------------------------------------------------------------------
@@ -5053,7 +5055,7 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/bash-dotfiles.toml
 <span class="org-variable-name">command</span> = <span class="org-string">"find $HOME/.bashrc $HOME/.bashrc.d -type f | sort"</span>
 
 [<span class="org-type">preview</span>]
-<span class="org-variable-name">command</span> = <span class="org-string">"bat -n --color always --theme auto:system --theme-dark gruvbox-dark --theme-light gruvbox-light '{}'"</span>
+<span class="org-variable-name">command</span> = <span class="org-string">"bat -n --color always '{}'"</span>
 </code></pre>
 </div>
 </div>
@@ -5076,7 +5078,7 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/files.toml
 <span class="org-variable-name">command</span> = [<span class="org-string">"fd -t f"</span>, <span class="org-string">"fd -t f -H"</span>]
 
 [<span class="org-type">preview</span>]
-<span class="org-variable-name">command</span> = <span class="org-string">"bat -n --color always --theme auto:system --theme-dark gruvbox-dark --theme-light gruvbox-light '{}'"</span>
+<span class="org-variable-name">command</span> = <span class="org-string">"bat -n --color always '{}'"</span>
 
 [<span class="org-type">keybindings</span>]
 <span class="org-variable-name">shortcut</span> = <span class="org-string">"f1"</span>
@@ -5104,7 +5106,7 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/todo.toml
 <span class="org-variable-name">output</span> = <span class="org-string">"{strip_ansi|split:\\::..2}"</span>
 
 [<span class="org-type">preview</span>]
-<span class="org-variable-name">command</span> = <span class="org-string">"bat -n --color always --theme auto:system --theme-dark gruvbox-dark --theme-light gruvbox-light --highlight-line '{strip_ansi|split:\\::1}' '{strip_ansi|split:\\::0}'"</span>
+<span class="org-variable-name">command</span> = <span class="org-string">"bat -n --color always --highlight-line '{strip_ansi|split:\\::1}' '{strip_ansi|split:\\::0}'"</span>
 <span class="org-variable-name">offset</span> = <span class="org-string">"{strip_ansi|split:\\::1}"</span>
 
 [<span class="org-type">keybindings</span>]
@@ -5304,7 +5306,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-11-06 Fri 19:22</p>
+<p class="date">2026-11-06 Fri 19:24</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>

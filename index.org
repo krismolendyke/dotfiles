@@ -421,8 +421,8 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
   #+begin_src sh
     if [ -x "${HOMEBREW_PREFIX}/bin/bat" ]; then
-        alias cat='bat --theme auto:system --theme-dark default --theme-light GitHub'
-        alias less='bat --theme auto:system --theme-dark default --theme-light GitHub'
+        alias cat='bat'
+        alias less='bat'
     fi
   #+end_src
 
@@ -439,7 +439,9 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      # Specify desired highlighting theme (e.g. "TwoDark"). Run `bat --list-themes`
      # for a list of all available themes
-     #--theme="TwoDark"
+     --theme="auto:system"
+     --theme-dark="gruvbox-dark"
+     --theme-light="gruvbox-light"
 
      # Enable this to use italic text on the terminal. This is not supported on all
      # terminal emulators (like tmux, by default):
@@ -1858,7 +1860,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
      def cat [...args] {
        if (is-installed bat) {
-         ^bat --theme auto:system --theme-dark default --theme-light GitHub ...$args
+         ^bat ...$args
        } else {
          ^cat ...$args
        }
@@ -3039,7 +3041,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
      # Bulitin syntax highlighting uses the same syntax highlighting engine as bat.
      # To get a list of your currently available themes, run `bat --list-themes`
      # Note that setting the BAT_THEME environment variable will override this setting.
-     theme = "TwoDark"
+     theme = "gruvbox-dark"
 
      # Keybindings
      # ----------------------------------------------------------------------------
@@ -3196,7 +3198,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       command = "find $HOME/.bashrc $HOME/.bashrc.d -type f | sort"
 
       [preview]
-      command = "bat -n --color always --theme auto:system --theme-dark gruvbox-dark --theme-light gruvbox-light '{}'"
+      command = "bat -n --color always '{}'"
     #+end_src
 
 *** Files
@@ -3215,7 +3217,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       command = ["fd -t f", "fd -t f -H"]
 
       [preview]
-      command = "bat -n --color always --theme auto:system --theme-dark gruvbox-dark --theme-light gruvbox-light '{}'"
+      command = "bat -n --color always '{}'"
 
       [keybindings]
       shortcut = "f1"
@@ -3239,7 +3241,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
       output = "{strip_ansi|split:\\::..2}"
 
       [preview]
-      command = "bat -n --color always --theme auto:system --theme-dark gruvbox-dark --theme-light gruvbox-light --highlight-line '{strip_ansi|split:\\::1}' '{strip_ansi|split:\\::0}'"
+      command = "bat -n --color always --highlight-line '{strip_ansi|split:\\::1}' '{strip_ansi|split:\\::0}'"
       offset = "{strip_ansi|split:\\::1}"
 
       [keybindings]
