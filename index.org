@@ -189,7 +189,14 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
   #+begin_src sh
     if [ -e /opt/homebrew/bin/brew ]; then
-        eval "$(/opt/homebrew/bin/brew shellenv)"
+        _brew_cache="${XDG_CACHE_HOME:-${HOME}/.cache}/brew/shellenv.bash"
+        if [[ ! -f "${_brew_cache}" || /opt/homebrew/bin/brew -nt "${_brew_cache}" ]]; then
+            mkdir -p "${_brew_cache%/*}"
+            /opt/homebrew/bin/brew shellenv bash > "${_brew_cache}"
+        fi
+        # shellcheck source=/dev/null
+        source "${_brew_cache}"
+        unset -v _brew_cache
 
         export HOMEBREW_CASK_HOME="${HOMEBREW_PREFIX}/Caskroom"
         export HOMEBREW_CASK_OPTS=--require-sha
@@ -354,14 +361,20 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
   #+begin_src sh
     export K20E_SECRET_HOME="${K20E_BASHRC_DIR}/secret"
-    mkdir -p "${K20E_SECRET_HOME}"
+    if [ ! -d "${K20E_SECRET_HOME}" ]; then
+        mkdir -p "${K20E_SECRET_HOME}"
+        chmod 0700 "${K20E_SECRET_HOME}"
+    fi
   #+end_src
 
   Setup environment and source secrets:
 
   #+begin_src sh
     export K20E_SECRET_ENV="${K20E_SECRET_HOME}/secrets.env"
-    touch -a "${K20E_SECRET_ENV}"
+    if [ ! -f "${K20E_SECRET_ENV}" ]; then
+        touch -a "${K20E_SECRET_ENV}"
+        chmod 0600 "${K20E_SECRET_ENV}"
+    fi
 
     if [ -f "${K20E_SECRET_ENV}" ]; then
         set -a
@@ -369,13 +382,6 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
         source "${K20E_SECRET_ENV}"
         set +a
     fi
-  #+end_src
-
-  Adjust permissions.
-
-  #+begin_src sh
-    chmod 0700 "${K20E_SECRET_HOME}"
-    [ -f "${K20E_SECRET_ENV}" ] && chmod 0600 "${K20E_SECRET_ENV}"
   #+end_src
 
 * 1Password
@@ -390,7 +396,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
   #+begin_src sh
     # shellcheck source=/dev/null
-    [ -e "${HOMEBREW_PREFIX}/etc/bash_completion.d/op" ] && source "${HOMEBREW_PREFIX}/etc/bash_completion.d/op"
+    declare -F __start_op >/dev/null 2>&1 || { [ -e "${HOMEBREW_PREFIX}/etc/bash_completion.d/op" ] && source "${HOMEBREW_PREFIX}/etc/bash_completion.d/op"; }
   #+end_src
 
 * AWS CLI
@@ -464,10 +470,16 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   https://carapace.sh/ for [[*Bash][Bash]] and [[*Nushell][Nushell]] both.
 
   #+begin_src sh
-    if command -v carapace >/dev/null 2>&1; then
+    if _carapace_bin="$(command -v carapace 2>/dev/null)"; then
         export CARAPACE_BRIDGES='zsh,fish,bash'
-        # shellcheck disable=SC1090
-        source <(carapace _carapace bash)
+        _carapace_cache="${XDG_CACHE_HOME:-${HOME}/.cache}/carapace/init.bash"
+        if [[ ! -f "${_carapace_cache}" || "${_carapace_bin}" -nt "${_carapace_cache}" ]]; then
+            mkdir -p "${_carapace_cache%/*}"
+            "${_carapace_bin}" _carapace bash > "${_carapace_cache}"
+        fi
+        # shellcheck source=/dev/null
+        source "${_carapace_cache}"
+        unset -v _carapace_bin _carapace_cache
 
         # Bridge common aliases to their underlying carapace completer
         _carapace_alias_completer() {
@@ -1082,7 +1094,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   :END:
 
   #+begin_src sh
-    [[ -x "${HOMEBREW_PREFIX}/bin/go" ]] && pathmunge "$("${HOMEBREW_PREFIX}/bin/go" env GOPATH)/bin"
+    [[ -x "${HOMEBREW_PREFIX}/bin/go" ]] && pathmunge "${GOPATH:-${HOME}/go}/bin"
   #+end_src
 
 * Google Cloud SDK
@@ -1110,8 +1122,11 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
   #+begin_src sh
     alias k="kubectl"
-    # shellcheck source=/dev/null
-    [ -e "${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl" ] && source "${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl" && complete -o default -F __start_kubectl k
+    if ! command -v carapace >/dev/null 2>&1; then
+        # shellcheck source=/dev/null
+        declare -F __start_kubectl >/dev/null 2>&1 || { [ -e "${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl" ] && source "${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl"; }
+        declare -F __start_kubectl >/dev/null 2>&1 && complete -o default -F __start_kubectl k
+    fi
   #+end_src
 
   [[https://github.com/ahmetb/kubectx][kubectx]] for wrangling contexts and namespaces:
@@ -1124,8 +1139,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   Change currently selected color:
 
   #+begin_src sh
-    KUBECTX_CURRENT_FGCOLOR=$(tput setaf 2)
-    export KUBECTX_CURRENT_FGCOLOR
+    export KUBECTX_CURRENT_FGCOLOR=$'\e[32m'
   #+end_src
 
 ** TODO krew
@@ -1144,9 +1158,15 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   Enable [[https://docs.jj-vcs.dev/latest/install-and-setup/#dynamic][dynamic completions]] for things like configured `revset-aliases`, etc., and wire up =j= as an alias for =jj= (to match =g= for =git=):
 
   #+begin_src sh
-    if command -v jj >/dev/null 2>&1; then
-        # shellcheck disable=SC1090
-        source <(COMPLETE=bash jj)
+    if _jj_bin="$(command -v jj 2>/dev/null)"; then
+        _jj_cache="${XDG_CACHE_HOME:-${HOME}/.cache}/jj/init.bash"
+        if [[ ! -f "${_jj_cache}" || "${_jj_bin}" -nt "${_jj_cache}" ]]; then
+            mkdir -p "${_jj_cache%/*}"
+            COMPLETE=bash "${_jj_bin}" > "${_jj_cache}"
+        fi
+        # shellcheck source=/dev/null
+        source "${_jj_cache}"
+        unset -v _jj_bin _jj_cache
         alias j="jj"
         complete -o nospace -o bashdefault -o nosort -F _clap_complete_jj j
     fi
@@ -2195,17 +2215,10 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
   :header-args: :mkdirp yes :tangle ~/.bashrc.d/550-rust.bash
   :END:
 
-  See https://github.com/rust-lang-nursery/rustfmt#tips.
-
   #+begin_src sh
     if [ -d "${HOME}/.cargo" ]; then
         export CARGO_HOME=${HOME}/.cargo
         pathmunge "${CARGO_HOME}/bin"
-    fi
-
-    if [[ -x ${HOMEBREW_PREFIX}/bin/rustc ]]; then
-        DYLD_LIBRARY_PATH=$("${HOMEBREW_PREFIX}"/bin/rustc --print sysroot)/lib:${DYLD_LIBRARY_PATH}
-        export DYLD_LIBRARY_PATH
     fi
   #+end_src
 
@@ -2393,7 +2406,7 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
    :END:
 
    #+begin_src sh
-     if command -v starship >/dev/null 2>&1; then
+     if _starship_bin="$(command -v starship 2>/dev/null)"; then
          function k20e_starship_precmd_user_func() {
              # Immediately append commands to HISTFILE rather than waiting for logout
              # NB this does not affect the current session's history but it does mean that a login will have access to all
@@ -2406,8 +2419,16 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
 
          # Only init one time, I found issues w/ this executing multiple time, e.g., via interactive `source ~/.bashrc`
          if [[ -z "${STARSHIP_SHELL-}" ]]; then
-             eval "$(starship init bash)"
+             _starship_cache="${XDG_CACHE_HOME:-${HOME}/.cache}/starship/init.bash"
+             if [[ ! -f "${_starship_cache}" || "${_starship_bin}" -nt "${_starship_cache}" ]]; then
+                 mkdir -p "${_starship_cache%/*}"
+                 "${_starship_bin}" init bash --print-full-init > "${_starship_cache}"
+             fi
+             # shellcheck source=/dev/null
+             source "${_starship_cache}"
+             unset -v _starship_cache
          fi
+         unset -v _starship_bin
      fi
    #+end_src
 
