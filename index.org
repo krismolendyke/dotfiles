@@ -399,6 +399,66 @@ at [[https://github.com/krismolendyke/dotfiles/blob/master/index.org][index.org]
     declare -F __start_op >/dev/null 2>&1 || { [ -e "${HOMEBREW_PREFIX}/etc/bash_completion.d/op" ] && source "${HOMEBREW_PREFIX}/etc/bash_completion.d/op"; }
   #+end_src
 
+* [[https://antigravity.google/][Antigravity]]
+  :PROPERTIES:
+  :CUSTOM_ID: antigravity
+  :END:
+
+** =keybindings.json=
+   :PROPERTIES:
+   :CUSTOM_ID: antigravity-keybindings-json
+   :header-args: :mkdirp yes :tangle ~/.gemini/antigravity-cli/keybindings.json
+   :END:
+
+   Remap =agy= actions that otherwise hijack standard Readline/Emacs =ctrl+*= chords (=ctrl+g=, =ctrl+k=, =ctrl+o=, =ctrl+r=, =ctrl+v=) onto =alt+*= equivalents.
+
+   #+begin_src js
+     {
+       "cli.clear_screen": ["ctrl+l"],
+       "cli.cycle_mode": ["shift+tab"],
+       "cli.enter": ["enter"],
+       "cli.escape": ["ctrl+c", "esc"],
+       "cli.exit": ["ctrl+d"],
+       "cli.suspend": ["ctrl+z"],
+       "confirm.edit_command": ["e"],
+       "confirm.no": ["n"],
+       "confirm.yes": ["y"],
+       "edit.open_editor": ["alt+g"],
+       "edit.paste": ["alt+v"],
+       "edit.redo": ["ctrl+shift+z"],
+       "edit.undo": ["ctrl+_", "ctrl+shift+-"],
+       "edit.yank": ["ctrl+y"],
+       "item.delete": ["f4"],
+       "item.rename": ["f2"],
+       "live.mute": ["shift+f6"],
+       "live.stop": ["f7"],
+       "live.toggle": ["f6"],
+       "navigation.down": ["down"],
+       "navigation.go_to_bottom": ["ctrl+end"],
+       "navigation.go_to_top": ["ctrl+home"],
+       "navigation.half_page_down": ["shift+down"],
+       "navigation.half_page_up": ["shift+up"],
+       "navigation.left": ["left"],
+       "navigation.page_down": ["pgdown"],
+       "navigation.page_up": ["pgup"],
+       "navigation.right": ["right"],
+       "navigation.tab": ["tab"],
+       "navigation.up": ["up"],
+       "prompt.insert_newline": ["alt+enter", "ctrl+j", "shift+enter"],
+       "prompt.submit_alternate": ["alt+m"],
+       "subagent.approve_fast": ["alt+k"],
+       "subagent.jump_to_waiting": ["alt+j"],
+       "swarm.board": ["alt+s"],
+       "swarm.dismiss": ["alt+x"],
+       "view.review_artifact": ["alt+r"],
+       "view.toggle_trajectory": ["alt+o"],
+       "vim.insert.insert_newline": ["alt+enter", "ctrl+j", "enter", "shift+enter"],
+       "vim.insert.submit": ["ctrl+enter", "ctrl+s"],
+       "vim.normal.submit": ["ctrl+enter", "ctrl+s"],
+       "voice.start_dictation": ["f5"]
+     }
+   #+end_src
+
 * AWS CLI
   :PROPERTIES:
   :CUSTOM_ID: aws-cli

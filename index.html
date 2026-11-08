@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-07 Sat 07:32 -->
+<!-- 2026-11-08 Sun 10:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -1224,6 +1224,11 @@ at <a href="https://github.com/krismolendyke/dotfiles/blob/master/index.org">ind
 </li>
 <li><a href="#secrets">Secrets</a></li>
 <li><a href="#1password">1Password</a></li>
+<li><a href="#antigravity">Antigravity</a>
+<ul>
+<li><a href="#antigravity-keybindings-json"><code>keybindings.json</code></a></li>
+</ul>
+</li>
 <li><a href="#aws-cli">AWS CLI</a></li>
 <li><a href="#bat">bat</a>
 <ul>
@@ -1821,6 +1826,75 @@ Generate completion script:
 <pre class="src src-sh"><code><span class="org-comment-delimiter"># </span><span class="org-comment">shellcheck source=/dev/null
 </span><span class="org-builtin">declare</span> -F __start_op &gt;/dev/null 2&gt;&amp;1 || { [ -e <span class="org-string">"${HOMEBREW_PREFIX}/etc/bash_completion.d/op"</span> ] &amp;&amp; <span class="org-builtin">source</span> <span class="org-string">"${HOMEBREW_PREFIX}/etc/bash_completion.d/op"</span>; }
 </code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-antigravity" class="outline-2">
+<h2 id="antigravity"><a href="https://antigravity.google/">Antigravity</a></h2>
+<div class="outline-text-2" id="text-antigravity">
+<pre class="example">
+CUSTOM_ID: antigravity
+</pre>
+</div>
+<div id="outline-container-antigravity-keybindings-json" class="outline-3">
+<h3 id="antigravity-keybindings-json"><code>keybindings.json</code></h3>
+<div class="outline-text-3" id="text-antigravity-keybindings-json">
+<pre class="example">
+CUSTOM_ID: antigravity-keybindings-json
+header-args: :mkdirp yes :tangle ~/.gemini/antigravity-cli/keybindings.json
+</pre>
+
+<p>
+Remap <code>agy</code> actions that otherwise hijack standard Readline/Emacs <code>ctrl+*</code> chords (<code>ctrl+g</code>, <code>ctrl+k</code>, <code>ctrl+o</code>, <code>ctrl+r</code>, <code>ctrl+v</code>) onto <code>alt+*</code> equivalents.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><code>{
+  <span class="org-string">"cli.clear_screen"</span>: [<span class="org-string">"ctrl+l"</span>],
+  <span class="org-string">"cli.cycle_mode"</span>: [<span class="org-string">"shift+tab"</span>],
+  <span class="org-string">"cli.enter"</span>: [<span class="org-string">"enter"</span>],
+  <span class="org-string">"cli.escape"</span>: [<span class="org-string">"ctrl+c"</span>, <span class="org-string">"esc"</span>],
+  <span class="org-string">"cli.exit"</span>: [<span class="org-string">"ctrl+d"</span>],
+  <span class="org-string">"cli.suspend"</span>: [<span class="org-string">"ctrl+z"</span>],
+  <span class="org-string">"confirm.edit_command"</span>: [<span class="org-string">"e"</span>],
+  <span class="org-string">"confirm.no"</span>: [<span class="org-string">"n"</span>],
+  <span class="org-string">"confirm.yes"</span>: [<span class="org-string">"y"</span>],
+  <span class="org-string">"edit.open_editor"</span>: [<span class="org-string">"alt+g"</span>],
+  <span class="org-string">"edit.paste"</span>: [<span class="org-string">"alt+v"</span>],
+  <span class="org-string">"edit.redo"</span>: [<span class="org-string">"ctrl+shift+z"</span>],
+  <span class="org-string">"edit.undo"</span>: [<span class="org-string">"ctrl+_"</span>, <span class="org-string">"ctrl+shift+-"</span>],
+  <span class="org-string">"edit.yank"</span>: [<span class="org-string">"ctrl+y"</span>],
+  <span class="org-string">"item.delete"</span>: [<span class="org-string">"f4"</span>],
+  <span class="org-string">"item.rename"</span>: [<span class="org-string">"f2"</span>],
+  <span class="org-string">"live.mute"</span>: [<span class="org-string">"shift+f6"</span>],
+  <span class="org-string">"live.stop"</span>: [<span class="org-string">"f7"</span>],
+  <span class="org-string">"live.toggle"</span>: [<span class="org-string">"f6"</span>],
+  <span class="org-string">"navigation.down"</span>: [<span class="org-string">"down"</span>],
+  <span class="org-string">"navigation.go_to_bottom"</span>: [<span class="org-string">"ctrl+end"</span>],
+  <span class="org-string">"navigation.go_to_top"</span>: [<span class="org-string">"ctrl+home"</span>],
+  <span class="org-string">"navigation.half_page_down"</span>: [<span class="org-string">"shift+down"</span>],
+  <span class="org-string">"navigation.half_page_up"</span>: [<span class="org-string">"shift+up"</span>],
+  <span class="org-string">"navigation.left"</span>: [<span class="org-string">"left"</span>],
+  <span class="org-string">"navigation.page_down"</span>: [<span class="org-string">"pgdown"</span>],
+  <span class="org-string">"navigation.page_up"</span>: [<span class="org-string">"pgup"</span>],
+  <span class="org-string">"navigation.right"</span>: [<span class="org-string">"right"</span>],
+  <span class="org-string">"navigation.tab"</span>: [<span class="org-string">"tab"</span>],
+  <span class="org-string">"navigation.up"</span>: [<span class="org-string">"up"</span>],
+  <span class="org-string">"prompt.insert_newline"</span>: [<span class="org-string">"alt+enter"</span>, <span class="org-string">"ctrl+j"</span>, <span class="org-string">"shift+enter"</span>],
+  <span class="org-string">"prompt.submit_alternate"</span>: [<span class="org-string">"alt+m"</span>],
+  <span class="org-string">"subagent.approve_fast"</span>: [<span class="org-string">"alt+k"</span>],
+  <span class="org-string">"subagent.jump_to_waiting"</span>: [<span class="org-string">"alt+j"</span>],
+  <span class="org-string">"swarm.board"</span>: [<span class="org-string">"alt+s"</span>],
+  <span class="org-string">"swarm.dismiss"</span>: [<span class="org-string">"alt+x"</span>],
+  <span class="org-string">"view.review_artifact"</span>: [<span class="org-string">"alt+r"</span>],
+  <span class="org-string">"view.toggle_trajectory"</span>: [<span class="org-string">"alt+o"</span>],
+  <span class="org-string">"vim.insert.insert_newline"</span>: [<span class="org-string">"alt+enter"</span>, <span class="org-string">"ctrl+j"</span>, <span class="org-string">"enter"</span>, <span class="org-string">"shift+enter"</span>],
+  <span class="org-string">"vim.insert.submit"</span>: [<span class="org-string">"ctrl+enter"</span>, <span class="org-string">"ctrl+s"</span>],
+  <span class="org-string">"vim.normal.submit"</span>: [<span class="org-string">"ctrl+enter"</span>, <span class="org-string">"ctrl+s"</span>],
+  <span class="org-string">"voice.start_dictation"</span>: [<span class="org-string">"f5"</span>]
+}
+</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -5405,7 +5479,7 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-11-07 Sat 07:32</p>
+<p class="date">2026-11-08 Sun 10:28</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.10)</p>
 </div>
 </body>

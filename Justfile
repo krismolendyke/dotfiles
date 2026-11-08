@@ -13,7 +13,7 @@ tangle:
 check:
     shellcheck ~/.bash_profile ~/.bashrc ~/.bashrc.d/*.bash ~/.local/bin/k20e-skills-sync
     yamllint ~/.config/eza/theme.yml ~/Library/Preferences/glow/glow.yml ~/.config/yamllint/config
-    jq empty ~/.config/eca/config.json ~/.gemini/settings.json
+    jq empty ~/.config/eca/config.json ~/.gemini/antigravity-cli/keybindings.json ~/.gemini/settings.json
 
 # The export config in ~/.emacs.d only sets up the HTML styling, so a batch
 # Emacs also needs the packages activated and `nu-ts-mode` registered for

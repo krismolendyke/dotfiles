@@ -21,7 +21,7 @@ This repository contains literate programming dotfiles created and maintained in
 
 ## AI Agent Configurations Defined in `index.org`
 
-- **Antigravity (AGY)**: Skill distribution to `~/.gemini/config/skills/`.
+- **Antigravity (AGY)**: Configured at `~/.gemini/antigravity-cli/keybindings.json`; skill distribution to `~/.gemini/config/skills/`.
 - **ECA (Editor Code Assistant)**: Configured at `~/.config/eca/config.json` using OpenRouter and Google Gemini providers.
 - **Gemini CLI**: Configured at `~/.gemini/settings.json` and `~/.gemini/GEMINI.md`.
 - **Claude CLI**: Configured via alias in `~/.bashrc.d/111-claude.bash`.
