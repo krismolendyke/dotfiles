@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-08 Sun 10:29 -->
+<!-- 2026-11-10 Tue 07:46 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dotfiles</title>
@@ -3424,7 +3424,6 @@ header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/config.nu
 
 <span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.PATH = (
     <span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.PATH
-    | split <span class="org-string">row</span> (char <span class="org-string">esep</span>)
     | prepend <span class="org-string">'/opt/homebrew/bin'</span>
     | prepend <span class="org-string">'/opt/homebrew/sbin'</span>
     | prepend <span class="org-string">'/usr/local/bin'</span>
@@ -3446,12 +3445,7 @@ header-args: :mkdirp yes :tangle ~/Library/Application Support/nushell/config.nu
 <span class="org-keyword">def</span> --env <span class="org-function-name">k20e_load_secrets</span> [<span class="org-variable-name">file</span>?: <span class="org-type">path</span>] {
     <span class="org-keyword">let</span> <span class="org-variable-name">secrets_env</span> = (<span class="org-misc-punctuation">$</span><span class="org-variable-use">file</span> | default (<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.HOME | path <span class="org-string">join</span> <span class="org-string">".bashrc.d/secret/secrets.env"</span>))
     <span class="org-keyword">if</span> (<span class="org-misc-punctuation">$</span><span class="org-variable-use">secrets_env</span> | path <span class="org-string">exists</span>) {
-        open <span class="org-misc-punctuation">$</span><span class="org-variable-use">secrets_env</span>
-        | lines
-        | where { <span class="org-misc-punctuation">$</span><span class="org-builtin">in</span> =~ <span class="org-string">'^[A-Za-z0-9_]+='</span> }
-        | parse <span class="org-string">"{key}={value}"</span>
-        | reduce -f {} {|<span class="org-variable-name">it</span>, <span class="org-variable-name">acc</span>| <span class="org-misc-punctuation">$</span><span class="org-variable-use">acc</span> | insert <span class="org-misc-punctuation">$</span><span class="org-variable-use">it</span>.key (<span class="org-misc-punctuation">$</span><span class="org-variable-use">it</span>.value | str <span class="org-string">trim</span> -c <span class="org-string">'"'</span> | str <span class="org-string">trim</span> -c <span class="org-string">"'"</span>) }
-        | load-env
+        open <span class="org-misc-punctuation">$</span><span class="org-variable-use">secrets_env</span> | load-env
     }
 }
 
@@ -3497,7 +3491,7 @@ k20e_load_secrets
 }
 
 
-<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.buffer_editor = <span class="org-string">"emacsclient"</span>
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.buffer_editor = [<span class="org-string">"emacsclient"</span>, <span class="org-string">"+{line}:{col}"</span>, <span class="org-string">"{file}"</span>]
 
 
 <span class="org-comment"># Universal LS_COLORS palette optimized for both Light and Dark terminal backgrounds</span>
@@ -3508,7 +3502,7 @@ k20e_load_secrets
 <span class="org-comment"># Conditional aliases #</span>
 <span class="org-comment">#######################</span>
 
-<span class="org-keyword">def</span> <span class="org-function-name">cat</span> [...<span class="org-variable-name">args</span>] {
+<span class="org-keyword">def</span> --wrapped <span class="org-function-name">cat</span> [...<span class="org-variable-name">args</span>] {
   <span class="org-keyword">if</span> (is-installed <span class="org-string">bat</span>) {
     ^bat <span class="org-misc-punctuation">...$</span><span class="org-variable-use">args</span>
   } <span class="org-keyword">else</span> {
@@ -3565,7 +3559,8 @@ k20e_load_secrets
 <span class="org-comment"># Keybindings #</span>
 <span class="org-comment">###############</span>
 
-<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.keybindings = (<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.keybindings | append [
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.keybindings = (config <span class="org-string">default</span>).keybindings
+<span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.keybindings ++= [
     {
         name: <span class="org-string">emacs_cancel_abort</span>
         modifier: <span class="org-string">control</span>
@@ -3573,7 +3568,7 @@ k20e_load_secrets
         mode: [<span class="org-string">emacs</span>, <span class="org-string">vi_insert</span>, <span class="org-string">vi_normal</span>]
         event: { send: <span class="org-string">ctrlc</span> }
     }
-])
+]
 
 
 <span class="org-comment">############</span>
@@ -3659,14 +3654,12 @@ See <a href="#emacs">Emacs</a>.
 
 <div class="org-src-container">
 <pre class="src src-nu"><code><span class="org-comment"># Support opening files at a line number with the :linum suffix, mirroring k20e_ec</span>
-<span class="org-keyword">def</span> <span class="org-function-name">ec</span> [<span class="org-variable-name">file</span>?: <span class="org-type">string</span>, ...<span class="org-variable-name">rest</span>] {
-    <span class="org-keyword">if</span> (<span class="org-misc-punctuation">$</span><span class="org-variable-use">file</span> != <span class="org-constant">null</span>) and (<span class="org-misc-punctuation">$</span><span class="org-variable-use">file</span> =~ <span class="org-string">'^(.+):(\d+)(?::\d+)?$'</span>) {
-        <span class="org-keyword">let</span> <span class="org-variable-name">m</span> = (<span class="org-misc-punctuation">$</span><span class="org-variable-use">file</span> | parse -r <span class="org-string">'^(?P&lt;path&gt;.+):(?P&lt;line&gt;\d+)'</span>)
-        ^emacsclient -n <span class="org-string">$"+</span>(<span class="org-misc-punctuation">$</span><span class="org-variable-use">m</span>.0.line)<span class="org-string">"</span> <span class="org-misc-punctuation">$</span><span class="org-variable-use">m</span>.0.path <span class="org-misc-punctuation">...$</span><span class="org-variable-use">rest</span>
-    } <span class="org-keyword">else</span> <span class="org-keyword">if</span> (<span class="org-misc-punctuation">$</span><span class="org-variable-use">file</span> != <span class="org-constant">null</span>) {
-        ^emacsclient -n <span class="org-misc-punctuation">$</span><span class="org-variable-use">file</span> <span class="org-misc-punctuation">...$</span><span class="org-variable-use">rest</span>
+<span class="org-keyword">def</span> --wrapped <span class="org-function-name">ec</span> [...<span class="org-variable-name">args</span>] {
+    <span class="org-keyword">if</span> (<span class="org-misc-punctuation">$</span><span class="org-variable-use">args</span> | is-not-empty) and (<span class="org-misc-punctuation">$</span><span class="org-variable-use">args</span>.0 =~ <span class="org-string">'^(.+):(\d+)(?::\d+)?$'</span>) {
+        <span class="org-keyword">let</span> <span class="org-variable-name">m</span> = (<span class="org-misc-punctuation">$</span><span class="org-variable-use">args</span>.0 | parse -r <span class="org-string">'^(?P&lt;path&gt;.+):(?P&lt;line&gt;\d+)'</span>)
+        ^emacsclient -n <span class="org-string">$"+</span>(<span class="org-misc-punctuation">$</span><span class="org-variable-use">m</span>.0.line)<span class="org-string">"</span> <span class="org-misc-punctuation">$</span><span class="org-variable-use">m</span>.0.path ...(<span class="org-misc-punctuation">$</span><span class="org-variable-use">args</span> | skip <span class="org-number">1</span>)
     } <span class="org-keyword">else</span> {
-        ^emacsclient -n <span class="org-misc-punctuation">...$</span><span class="org-variable-use">rest</span>
+        ^emacsclient -n <span class="org-misc-punctuation">...$</span><span class="org-variable-use">args</span>
     }
 }
 </code></pre>
@@ -3687,7 +3680,7 @@ See <a href="#skills">Skills</a>.
 
 <div class="org-src-container">
 <pre class="src src-nu"><code><span class="org-comment"># Fetch latest jj skill and install everywhere</span>
-<span class="org-keyword">def</span> <span class="org-function-name">k20e_agent_skills_sync</span> [...<span class="org-variable-name">args</span>] {
+<span class="org-keyword">def</span> --wrapped <span class="org-function-name">k20e_agent_skills_sync</span> [...<span class="org-variable-name">args</span>] {
     ^k20e-skills-sync <span class="org-misc-punctuation">...$</span><span class="org-variable-use">args</span>
 }
 </code></pre>
@@ -3757,29 +3750,26 @@ See <a href="#television">Television</a>.
 }
 
 <span class="org-keyword">if</span> (which <span class="org-string">tv</span> | is-not-empty) {
-    <span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.keybindings = (
-        <span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.keybindings
-        | append [
-            <span class="org-comment"># tv_smart_autocomplete on Ctrl-T omitted so Ctrl-T transposes characters</span>
-            {
-                name: <span class="org-string">transpose_chars</span>
-                modifier: <span class="org-string">control</span>
-                keycode: <span class="org-string">char_t</span>
-                mode: [<span class="org-string">emacs</span>, <span class="org-string">vi_insert</span>]
-                event: { edit: <span class="org-string">SwapGraphemes</span> }
+    <span class="org-misc-punctuation">$</span><span class="org-constant">env</span>.config.keybindings ++= [
+        <span class="org-comment"># tv_smart_autocomplete on Ctrl-T omitted so Ctrl-T transposes characters</span>
+        {
+            name: <span class="org-string">transpose_chars</span>
+            modifier: <span class="org-string">control</span>
+            keycode: <span class="org-string">char_t</span>
+            mode: [<span class="org-string">emacs</span>, <span class="org-string">vi_insert</span>]
+            event: { edit: <span class="org-string">SwapGraphemes</span> }
+        }
+        {
+            name: <span class="org-string">tv_history</span>
+            modifier: <span class="org-string">control</span>
+            keycode: <span class="org-string">char_r</span>
+            mode: [<span class="org-string">vi_normal</span>, <span class="org-string">vi_insert</span>, <span class="org-string">emacs</span>]
+            event: {
+                send: <span class="org-string">executehostcommand</span>
+                cmd: <span class="org-string">"tv_shell_history"</span>
             }
-            {
-                name: <span class="org-string">tv_history</span>
-                modifier: <span class="org-string">control</span>
-                keycode: <span class="org-string">char_r</span>
-                mode: [<span class="org-string">vi_normal</span>, <span class="org-string">vi_insert</span>, <span class="org-string">emacs</span>]
-                event: {
-                    send: <span class="org-string">executehostcommand</span>
-                    cmd: <span class="org-string">"tv_shell_history"</span>
-                }
-            }
-        ]
-    )
+        }
+    ]
 }
 </code></pre>
 </div>
@@ -3798,7 +3788,7 @@ header-args: :mkdirp yes :tangle ~/.config/television/cable/nu-history.toml
 <span class="org-variable-name">description</span> = <span class="org-string">"A channel to select from your nu history"</span>
 
 [<span class="org-type">source</span>]
-<span class="org-variable-name">command</span> = <span class="org-string">"nu -c 'open $nu.history-path | lines | uniq | reverse | to text'"</span>
+<span class="org-variable-name">command</span> = <span class="org-string">"nu -c 'open $nu.history-path | lines | uniq --keep-last | reverse | to text'"</span>
 <span class="org-variable-name">no_sort</span> = <span class="org-keyword">true</span>
 <span class="org-variable-name">frecency</span> = <span class="org-keyword">false</span>
 </code></pre>
@@ -5479,8 +5469,8 @@ As of <span class="timestamp-wrapper"><span class="timestamp">[2025-01-12 Sun]</
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Kris Molendyke</p>
-<p class="date">2026-11-08 Sun 10:28</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.10)</p>
+<p class="date">2026-11-10 Tue 07:42</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 31.1 (<a href="https://orgmode.org">Org</a> mode 9.8.7)</p>
 </div>
 </body>
 </html>
